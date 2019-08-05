@@ -17,12 +17,12 @@
 ## File Structure
 * public
 * src
-* * components
-* * styles
-* * pages
-* * layouts
-* * media
-* * * img
-* * services
-* * index.js
-* * App.js
+  * components
+  * styles
+  * pages
+  * layouts
+  * media
+  * * img
+  * services
+  * index.js
+  * App.js
