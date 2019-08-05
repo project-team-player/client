@@ -10,7 +10,7 @@
 4. NEVER push or branch to and from `staging` and `production`.
 5. Cheers 🍕🍻🍺🍕.
 
-###Style Guide
+## Style Guide
 * Kabob Case
 * Example: example-index.js (If file is a class then: Example-index.js)
 
