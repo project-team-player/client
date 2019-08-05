@@ -10,7 +10,19 @@
 4. NEVER push or branch to and from `staging` and `production`.
 5. Cheers 🍕🍻🍺🍕.
 
+###Style Guide
+* Kabob Case
+* Example: example-index.js (If file is a class then: Example-index.js)
+
 ## File Structure
-* index.js
-* components
-* css
+* public
+* src
+* * components
+* * styles
+* * pages
+* * layouts
+* * media
+* * * img
+* * services
+* * index.js
+* * App.js
