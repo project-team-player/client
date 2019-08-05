@@ -9,3 +9,8 @@
 3. Push changes to `development` branch, this will require a reviewer to approve your commit.
 4. NEVER push or branch to and from `staging` and `production`.
 5. Cheers 🍕🍻🍺🍕.
+
+## File Structure
+* index.js
+* components
+* css
