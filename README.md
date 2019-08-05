@@ -22,7 +22,7 @@
   * pages
   * layouts
   * media
-  * * img
+   * img
   * services
   * index.js
   * App.js
