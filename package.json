@@ -1,0 +1,24 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "[Development] => [Staging] => [Production]",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slice-it/client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slice-it/client/issues"
+  },
+  "homepage": "https://github.com/slice-it/client#readme",
+  "dependencies": {
+    "create-react-app": "^3.0.1",
+    "init": "^0.1.2",
+    "npx": "^10.2.0"
+  }
+}
