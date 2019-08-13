@@ -14,11 +14,11 @@ class NavBar extends React.Component {
           <ul className="links">
             <li className="linkNames">
               {/* will be NavLinks when routes are set */}
-              <a>Games</a>
+              <a className="specificLinks">Games</a>
             </li>
             <li className="linkNames">
               {/* will be NavLinks when routes are set */}
-              <a>Leaderboard</a>
+              <a className="specificLinks">Leaderboard</a>
             </li>
             {/* will be NavLinks when routes are set */}
             <li className="loginButton">
