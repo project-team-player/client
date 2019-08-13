@@ -4,8 +4,9 @@
 [Development] => [Staging] => [Production]
 
 # Style Guide
-* Kabob Case
-* Example: example-index.js (If file is a class then: Example-index.js)
+* Pascal Case for Classes, Camel Case for others
+* Example: exampleIndex.js (Other Files)
+* Example: HomeIndex.js (Class)
 
 ## Cloning this repo
 1. Clone `https://github.com/project-team-player/client.git` into your local machine.
