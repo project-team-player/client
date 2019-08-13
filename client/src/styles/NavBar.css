@@ -1,0 +1,48 @@
+header {
+  display: flex;
+  background-color: black;
+}
+
+nav {
+  width: 100%;
+}
+
+nav ul li a {
+}
+
+.sliceLogo {
+  height: 80px;
+  width: 80px;
+  margin-left: 1rem;
+}
+
+.logo {
+  height: 100%;
+  width: 100%;
+}
+
+.links {
+  list-style: none;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  margin-right: 2rem;
+  justify-content: flex-end;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.linkNames {
+  padding-left: 1rem;
+  color: white;
+  font-size: 20px;
+}
+
+.loginButton {
+  font-size: 20px;
+  color: white;
+  margin-left: 1rem;
+  background-color: red;
+  padding: 1rem;
+  border-radius: 1rem;
+}
