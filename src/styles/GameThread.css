@@ -1,0 +1,118 @@
+.button {
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  display: block;
+  border-radius: 3px;
+}
+
+.game-thread {
+  background: var(--white);
+  margin: 0 65px;
+}
+
+.game-thread-content {
+  padding: 25px;
+}
+
+.game-thread-nav {
+  background: var(--red);
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
+  margin: 0;
+}
+
+.teams {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.team-name {
+  font-weight: 700;
+}
+
+.vs {
+  font-size: 38px;
+}
+
+.predictions {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.prediction-counter {
+  width: 50%;
+}
+
+.home-team-prediction {
+  display: inline-flex;
+  justify-content: flex-start;
+  color: var(--white);
+  padding: 7px 15px;
+  background: var(--red);
+  border-top: 1px solid var(--red);
+  border-bottom: 1px solid var(--red);
+  border-left: 1px solid var(--red);
+  border-right: none;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  width: 25%;
+}
+
+.away-team-prediction {
+  display: inline-flex;
+  justify-content: flex-end;
+  color: var(--white);
+  padding: 7px 15px;
+  background: #002243;
+  border-top: 1px solid #002243;
+  border-bottom: 1px solid #002243;
+  border-right: 1px solid #002243;
+  border-left: none;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  width: 75%;
+}
+
+.game-thread-nav-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+
+}
+
+.game-thread-nav-item {
+  color: var(--white);
+  text-align: center;
+  font-family: var(--main-text);
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.game-thread-close-btn {
+  background: none;
+  float: right;
+  cursor: pointer;
+  border: none;
+  color: var(--white);
+  display: inline-block;
+  outline: none;
+}
+
+/*
+================= Discussion container ===========
+*/
+
+.discussion-container {
+  border: 1px solid #E4E4E4;
+  border-radius: 5px;
+  padding: 15px 25px;
+  margin-top: 25px;
+}
