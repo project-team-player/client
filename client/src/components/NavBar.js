@@ -22,7 +22,7 @@ class NavBar extends React.Component {
             </li>
             {/* will be NavLinks when routes are set */}
             <li className="loginButton">
-              <a>Log in</a>
+              <a>Login</a>
             </li>
           </ul>
         </nav>
