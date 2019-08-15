@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/NavBar.css";
 import pizza from "../media/za.png";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 
 class NavBar extends React.Component {
   render() {
