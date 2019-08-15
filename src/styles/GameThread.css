@@ -4,14 +4,18 @@
   border: none;
   display: block;
   border-radius: 3px;
+  padding: 7px;
+  font-size: 15px;
+  float: right;
 }
 
 .game-thread {
   background: var(--white);
-  margin: 0 65px;
+  margin: 0 110px;
 }
 
 .game-thread-content {
+  margin-top: 25px;
   padding: 25px;
 }
 
@@ -19,7 +23,7 @@
   background: var(--red);
   display: flex;
   justify-content: space-between;
-  padding: 25px;
+  padding: 15px 25px;
   margin: 0;
 }
 
@@ -31,11 +35,13 @@
 }
 
 .team-name {
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 20px;
 }
 
 .vs {
-  font-size: 38px;
+  font-size: 50px;
+  font-weight: 100;
 }
 
 .predictions {
@@ -46,6 +52,13 @@
 
 .prediction-counter {
   width: 50%;
+}
+
+.team-text {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  align-items: center;
 }
 
 .home-team-prediction {
@@ -115,4 +128,88 @@
   border-radius: 5px;
   padding: 15px 25px;
   margin-top: 25px;
+}
+
+/*
+================= Betting section ===========
+*/
+
+/* .winner-selection {
+  text-align: center;
+} */
+
+.betting-container {
+  display: grid;
+  display: grid;
+  grid-template-columns: 1fr 1fr 3fr;
+}
+
+.bet-selector-btn {
+  background: var(--light-grey);
+  display: block;
+  margin-bottom: 7px;
+  text-align: center;
+  color: var(--white);
+  cursor: pointer;
+  padding: 5px;
+  width: 50%;
+}
+
+.bet-selector:checked + label {
+  background: var(--red);
+}
+
+.hide {
+  visibility: hidden;
+  position: absolute;
+}
+
+.input-comment-field {
+  width: 100%;
+  height: 150px;
+  outline: none;
+  resize: none;
+}
+
+.slice-allocation {
+  display: flex;
+  flex-direction: column;
+}
+
+.bet-size-slider {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin-top: 15px;
+  align-self: center;
+}
+
+.bet-size-indicator {
+  color: var(--black);
+  margin-left: 5px;
+}
+
+/*
+================= Comment section ===========
+*/
+
+.user-avatar {
+  height: 90px;
+  border-radius: 50%;
+}
+
+.comment {
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.comment-body {
+  display: inline-block;
+  margin-left: 25px;
+
+}
+
+.bet-logo {
+  max-height: 25px;
 }
