@@ -1,0 +1,13 @@
+.GamesListTitle {
+  text-align: center;
+  margin: 5rem;
+}
+
+.GamesListGrid {
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  align-items: center;
+  justify-items: center;
+  grid-gap: 2rem;
+}
