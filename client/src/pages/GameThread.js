@@ -7,7 +7,7 @@ class GameThread extends React.Component {
     return (
       <div className="weirdContainer">
         {/* <Header /> */}
-        <div className="Title">PUT GAMETHREAD HERE</div>
+        <div className="title">PUT GAMETHREAD HERE</div>
         <div className="imageContainer">
           <img src="https://miro.medium.com/max/1200/1*X4KCCUruyku7-EQnr-EFmg.jpeg" />
         </div>
