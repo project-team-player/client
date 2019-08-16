@@ -1,3 +1,5 @@
+@import './variables.css';
+
 header {
   display: flex;
   background-color: #232323;
@@ -32,7 +34,8 @@ nav {
 
 .linkNames {
   margin-left: 0rem;
-  color: #a8a8a8;
+  /* color: #a8a8a8; */
+  
   font-size: 18px;
   cursor: pointer;
   height: 100%;
@@ -47,7 +50,8 @@ nav {
   border-bottom: 1px solid transparent;
   transition: all ease-in-out 0.4s;
   text-decoration: none;
-  color: #a8a8a8;
+  /* color: #a8a8a8; */
+  color: var(--white);
 }
 
 .specificLinks:hover {
@@ -59,7 +63,8 @@ nav {
   border-bottom: 1px solid transparent;
   transition: all ease-in-out 0.4s;
   text-decoration: none;
-  color: #a8a8a8;
+  /* color: #a8a8a8; */
+  color: var(--white);
 }
 
 .loginButton {

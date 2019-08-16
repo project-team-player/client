@@ -14,6 +14,13 @@ class GameThread extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const { showModal } = this.props;
+    if (showModal) {
+      this.setState({ isVisible: true });
+    }
+  }
+
   render () {
     const { isVisible } = this.state;
     if (!isVisible) {
