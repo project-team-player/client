@@ -1,0 +1,18 @@
+.title {
+  font-size: 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.weirdContainer {
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  height: 60vh;
+}
