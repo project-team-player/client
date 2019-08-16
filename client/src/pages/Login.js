@@ -6,7 +6,7 @@ class Login extends React.Component {
     return (
       <div>
         {/* <Header /> */}
-        <div className="Title">The routes are set</div>
+        <div className="title">The routes are set</div>
         <div className="imageContainer">
           <img src="http://jonathancreamer.com/content/images/2017/01/asyncarnold.jpeg" />
         </div>
