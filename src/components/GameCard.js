@@ -8,7 +8,7 @@ import '../styles/GameCard.css';
 class GameCard extends React.Component {
   render() {
     return (
-      <div className='GameCard'>
+      <div className='GameCard' onClick={this.props.showGameThread}>
         <div className='Away'>
           <img
             className='AwayImg'
