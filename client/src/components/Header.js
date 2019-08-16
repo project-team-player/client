@@ -26,7 +26,7 @@ class Header extends React.Component {
             </li>
             {/* will be NavLinks when routes are set */}
             <li className="loginButton">
-              <NavLink to="/login" className="specificLinks">
+              <NavLink to="/login" className="specificLogin">
                 Login
               </NavLink>
             </li>
