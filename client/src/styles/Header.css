@@ -54,6 +54,14 @@ nav {
   border-bottom-color: #f9f8f7;
 }
 
+.specificLogin {
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all ease-in-out 0.4s;
+  text-decoration: none;
+  color: #a8a8a8;
+}
+
 .loginButton {
   font-size: 20px;
   color: #f9f8f7;
