@@ -1,13 +1,15 @@
 import React from "react";
-import Header from "../components/Header";
+import GameThread from '../components/GameThread';
 import "../styles/GameThread.css";
 
-class GameThread extends React.Component {
+class Games extends React.Component {
   render() {
     return (
       <div className="weirdContainer">
-        {/* <Header /> */}
-        <div className="title">PUT GAMETHREAD HERE</div>
+                <GameThread showModal={true}/>
+
+        <div className="title">PUT GAMETHREAD HERE
+        </div>
         <div className="imageContainer">
           <img src="https://miro.medium.com/max/1200/1*X4KCCUruyku7-EQnr-EFmg.jpeg" />
         </div>
@@ -16,4 +18,4 @@ class GameThread extends React.Component {
   }
 }
 
-export default GameThread;
+export default Games;
