@@ -4,6 +4,7 @@ import Games from './pages/Games';
 import Leaderboard from './pages/Leaderboard';
 import SignUp from './pages/SignupPage';
 import Header from './components/Header';
+import GamesList from './pages/GamesList';
 import './styles/main.css';
 
 class App extends React.Component {
@@ -16,6 +17,7 @@ class App extends React.Component {
             <Route path='/' exact component={Games} />
             <Route path='/leaderboard' component={Leaderboard} />
             <Route path='/login' component={SignUp} />
+            <Route path='/gameslist' component={GamesList} />
           </Switch>
         </BrowserRouter>
       </div>
