@@ -22,8 +22,8 @@ class GameThread extends React.Component {
   }
 
   render () {
-    const { isVisible } = this.state;
-    if (!isVisible) {
+    const { showModal } = this.props;
+    if (!showModal) {
       return (<></>);
     }
     return (
@@ -44,7 +44,7 @@ class GameThread extends React.Component {
           </ul>
   
           <div>
-            <button className="game-thread-close-btn">X Close</button>
+            <button className="game-thread-close-btn" onClick={this.props.closeGameThread}>X Close</button>
           </div>
        
         </nav>
