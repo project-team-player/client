@@ -41,10 +41,13 @@ class GamesList extends React.Component {
           <GameCard onClick={this.showGameThread} />
           <GameCard onClick={this.showGameThread} />
           <GameCard onClick={this.showGameThread} />
+          <GameCard onClick={this.showGameThread} />
+          <GameCard onClick={this.showGameThread} />
+          <GameCard onClick={this.showGameThread} />
         </body>
         {/* Components being maped out here 
           Map out an array of objects
-            Destructure their attributes and pass them as state
+            take out their attributes and pass them as state
             */}
       </main>
     );
