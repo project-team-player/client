@@ -32,7 +32,7 @@ class GameCard extends React.Component {
           <div className='Title'>
             <b className='TeamKey'>CHI</b>
             <b className='Versus'>VS</b>
-            <b className='TeamKey'>GB</b>
+            <b className='TeamKey'>NE</b>
           </div>
           <div className='Date'>Sun, Aug 17th 7pm PST</div>
         </div>
