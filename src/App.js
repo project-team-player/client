@@ -14,7 +14,7 @@ class App extends React.Component {
         <BrowserRouter>
           <Header />
           <Switch>
-            <Route path='/' exact component={Games} />
+            <Route path='/' exact component={SignUp} />
             <Route path='/leaderboard' component={Leaderboard} />
             <Route path='/login' component={SignUp} />
             <Route path='/gameslist' component={GamesList} />
