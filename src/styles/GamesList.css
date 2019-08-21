@@ -3,6 +3,19 @@
   margin: 2rem;
 }
 
+.WeeksButtonContainer {
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.WeeksButton {
+  height: 25px;
+  width: 75px;
+  border-radius: 5px;
+}
+
 .GamesListGrid {
   padding: 0;
   display: grid;
