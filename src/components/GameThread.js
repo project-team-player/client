@@ -2,8 +2,8 @@ import React from "react";
 import "../styles/GameThread.css";
 import BearsLogo from "../images/bears-logo.svg";
 import PatriotsLogo from "../images/patriots-logo.svg";
-import PizzaWheel from "../images/pizza-wheel.svg";
 import PizzaSlice from "../images/pizza-slice.svg";
+import TeamChoice from "./TeamChoice";
 import UserAvatar from "../images/user-avatar.jpg";
 import Slider from "./Slider";
 
@@ -11,7 +11,8 @@ class GameThread extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isVisible: false
+      isVisible: false,
+      condition: false
     };
   }
 
@@ -68,11 +69,13 @@ class GameThread extends React.Component {
           <div className="predictions">
             <h2>Who's Got Sauce?</h2>
             <div className="prediction-counter">
-              <div className="prediction home-team-prediction">
-                <span>25%</span>
+              {/* Just use template literals with the prediction value as width to change poll */}
+              <div className="home-team-prediction" style={{ width: "55%" }}>
+                <span>55%</span>
               </div>
-              <div className="prediction away-team-prediction">
-                <span>75%</span>
+              {/* Just use template literals with the prediction value as width to change poll */}
+              <div className="away-team-prediction" style={{ width: "45%" }}>
+                <span>45%</span>
               </div>
             </div>
           </div>
@@ -82,40 +85,7 @@ class GameThread extends React.Component {
             <hr />
             <form>
               <div className="betting-container">
-                <div className="winner-selection">
-                  <h3>1. Choose Winner</h3>
-                  <div>
-                    <input
-                      type="radio"
-                      name="winning-team"
-                      value="home-team"
-                      id="home-team-selector"
-                      className=" bet-selector hide"
-                      checked="checked"
-                    />
-                    <label
-                      for="home-team-selector"
-                      className="bet-selector-btn"
-                    >
-                      CHI
-                    </label>
-                  </div>
-                  <div>
-                    <input
-                      type="radio"
-                      name="winning-team"
-                      value="away-team"
-                      id="away-team-selector"
-                      className="bet-selector hide"
-                    />
-                    <label
-                      for="away-team-selector"
-                      className="bet-selector-btn"
-                    >
-                      NE
-                    </label>
-                  </div>
-                </div>
+                <TeamChoice />
 
                 <div className="slice-allocation">
                   <h3>2. Place Your Slices</h3>
