@@ -1,6 +1,7 @@
 import React from 'react';
 import GameCard from '../components/GameCard';
 import GameThread from '../components/GameThread';
+// Import Axios Library
 import axios from 'axios';
 
 // CSS
@@ -14,7 +15,40 @@ class GamesList extends React.Component {
     super(props);
     this.state = {
       showGameThread: false,
-      games: []
+      games: [
+        {
+          isFinished: false,
+          _id: '5d5ade7a89fca31ad06e8df8',
+          week: 1,
+          slug: 'GB-vs-CHI-2019-week-1',
+          awayTeam: {
+            key: 'GB',
+            awayID: '5d5325666e95508d94ecb829',
+            logo:
+              'https://upload.wikimedia.org/wikipedia/commons/5/50/Green_Bay_Packers_logo.svg',
+            name: 'Green Bay Packers',
+            primaryColor: '203731',
+            secondaryColor: 'FFB612'
+          },
+          homeTeam: {
+            key: 'CHI',
+            homeID: '5d5325666e95508d94ecb823',
+            logo:
+              'https://upload.wikimedia.org/wikipedia/commons/5/5c/Chicago_Bears_logo.svg',
+            name: 'Chicago Bears',
+            primaryColor: '0B162A',
+            secondaryColor: 'C83803'
+          },
+          awayScore: 0,
+          homeScore: 0,
+          date: '2019-09-05T00:00:00',
+          dateTime: '2019-09-05T20:20:00',
+          gameThreadReference: {
+            gameThreadID: '5d5aded03712403404f82806',
+            objectReference: '5d5aded03712403404f82806'
+          }
+        }
+      ]
     };
 
     this.showGameThread = this.showGameThread.bind(this);
@@ -31,9 +65,10 @@ class GamesList extends React.Component {
     this.setState({ showGameThread: false });
   }
 
-  getListOfGames = () => {
+  // Sets state of
+  getListOfGames = async () => {
     console.log('Getting List of Games');
-    axios
+    await axios
       .get('https://pecorina-development.herokuapp.com/games/week/1')
       .then(response => {
         this.setState({ games: response.data.gamesList });
@@ -57,14 +92,10 @@ class GamesList extends React.Component {
         </nav>
 
         <body className='GamesListGrid'>
-          {/* Components being maped out here 
-          Map out an array of objects
-            take out their attributes and pass them as state
-            */}
-          {this.state.games.map(game => {
-            `<h2>game.week</h2>`;
-          })}
-          <GameCard showGameThread={this.showGameThread} />
+          {this.state.games.map(game => (
+            <GameCard gameDetails={game} showGameThread={this.showGameThread} />
+          ))}
+          {/* <GameCard showGameThread={this.showGameThread} /> */}
         </body>
       </main>
     );
