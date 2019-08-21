@@ -7,34 +7,35 @@ import '../styles/GameCard.css';
 
 class GameCard extends React.Component {
   render() {
+    // consts here
+    const { gameDetails } = this.props;
     return (
       <div className='GameCard' onClick={this.props.showGameThread}>
-        <div className='Away'>
-          <img
-            className='AwayImg'
-            src={
-              'https://upload.wikimedia.org/wikipedia/commons/5/5c/Chicago_Bears_logo.svg'
-            }
-            alt='Logo'
-          />
+        <div
+          className='Away'
+          style={{
+            backgroundColor: '#' + gameDetails.awayTeam.primaryColor
+          }}
+        >
+          <img className='AwayImg' src={gameDetails.awayTeam.logo} alt='Logo' />
           ;
         </div>
-        <div className='Home'>
-          <img
-            className='HomeImg'
-            src={
-              'https://upload.wikimedia.org/wikipedia/en/b/b9/New_England_Patriots_logo.svg'
-            }
-            alt='Logo'
-          />
+        <div
+          className='Home'
+          style={{
+            backgroundColor: '#' + gameDetails.homeTeam.primaryColor
+          }}
+        >
+          <img className='HomeImg' src={gameDetails.homeTeam.logo} alt='Logo' />
         </div>
         <div className='GameInfo'>
           <div className='Title'>
-            <b className='TeamKey'>CHI</b>
+            <b className='TeamKey'>{gameDetails.awayTeam.key}</b>
             <b className='Versus'>VS</b>
-            <b className='TeamKey'>NE</b>
+            <b className='TeamKey'>{gameDetails.homeTeam.key}</b>
           </div>
-          <div className='Date'>Sun, Aug 17th 7pm PST</div>
+          {/* TODO: Create date parse for below Ex.2019-09-05T20:20:00 */}
+          <div className='Date'>{gameDetails.dateTime.toString()}</div>
         </div>
       </div>
     );
