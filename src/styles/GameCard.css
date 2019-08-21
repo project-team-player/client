@@ -24,7 +24,6 @@
 .Home {
   height: 100%;
   width: 100%;
-  background-color: #c60c30;
   clip-path: polygon(100% 100%, 0% 100%, 100% 0);
   position: absolute;
 }
