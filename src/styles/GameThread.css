@@ -12,6 +12,8 @@
 .game-thread {
   background: var(--white);
   margin: 0 110px;
+  width: 100%;
+  justify-self: center;
 }
 
 .game-thread-content {
@@ -95,7 +97,9 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  display: inline-block;
+  float: center;
+  width: 95%;
+  text-align: center;
 }
 
 .game-thread-nav-item {
@@ -110,12 +114,12 @@
 
 .game-thread-close-btn {
   background: none;
-  float: right;
+  float: left;
   cursor: pointer;
   border: none;
   color: var(--white);
-  display: inline-block;
   outline: none;
+  width: max-content;
 }
 
 /*

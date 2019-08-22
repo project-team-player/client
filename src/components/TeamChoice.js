@@ -24,20 +24,6 @@ class TeamChoice extends React.Component {
       <div className="selectionContainer">
         <h3>1. Choose Winner</h3>
         <button
-          name="winning-team-home"
-          value="home-team"
-          id="home-team-selector"
-          className={
-            this.state.activeName === "winning-team-home"
-              ? "bet-selector-btn toggle"
-              : "bet-selector-btn"
-          }
-          onClick={this.handleChange}
-        >
-          CHI
-        </button>
-
-        <button
           type="radio"
           name="winning-team-away"
           value="away-team"
@@ -49,7 +35,21 @@ class TeamChoice extends React.Component {
           }
           onClick={this.handleChange}
         >
-          NE
+          {this.props.gameDetails.awayTeam.key}
+        </button>
+
+        <button
+          name="winning-team-home"
+          value="home-team"
+          id="home-team-selector"
+          className={
+            this.state.activeName === "winning-team-home"
+              ? "bet-selector-btn toggle"
+              : "bet-selector-btn"
+          }
+          onClick={this.handleChange}
+        >
+          {this.props.gameDetails.homeTeam.key}
         </button>
       </div>
     );
