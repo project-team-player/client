@@ -31,7 +31,14 @@ class GameThread extends React.Component {
     return (
       <div className="game-thread">
         <nav className="game-thread-nav">
-          <div />
+          <div>
+            <button
+              className="game-thread-close-btn"
+              onClick={this.props.closeGameThread}
+            >
+              {"<<< Back to Games List"}
+            </button>
+          </div>
 
           <ul className="game-thread-nav-items">
             <li className="game-thread-nav-item">
@@ -44,26 +51,21 @@ class GameThread extends React.Component {
               <a>Standings</a>
             </li>
           </ul>
-
-          <div>
-            <button
-              className="game-thread-close-btn"
-              onClick={this.props.closeGameThread}
-            >
-              X Close
-            </button>
-          </div>
         </nav>
 
         <div className="game-thread-content">
           <div className="teams">
-            <img src={BearsLogo} />
+            <img src={this.props.gameDetails.awayTeam.logo} />
             <div className="team-text">
-              <span className="team-name">Chicago Bears</span>
+              <span className="team-name">
+                {this.props.gameDetails.awayTeam.name}
+              </span>
               <span className="vs">VS</span>
-              <span className="team-name">New England Patriots</span>
+              <span className="team-name">
+                {this.props.gameDetails.homeTeam.name}
+              </span>
             </div>
-            <img src={PatriotsLogo} />
+            <img src={this.props.gameDetails.homeTeam.logo} />
           </div>
 
           <div className="predictions">
@@ -85,7 +87,7 @@ class GameThread extends React.Component {
             <hr />
             <form>
               <div className="betting-container">
-                <TeamChoice />
+                <TeamChoice gameDetails={this.props.gameDetails} />
 
                 <div className="slice-allocation">
                   <h3>2. Place Your Slices</h3>
