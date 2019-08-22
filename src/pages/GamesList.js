@@ -1,11 +1,13 @@
 import React from "react";
 import GameCard from "../components/GameCard";
+import GameThread from "../components/GameThread";
 // import GameThread from "../components/GameThread";
 // Import Axios Library
 import axios from "axios";
 
 // CSS
 import "../styles/GamesList.css";
+import { async } from "q";
 // import { thisExpression, switchStatement } from "@babel/types";
 
 // Components
@@ -15,6 +17,7 @@ class GamesList extends React.Component {
     super(props);
     this.state = {
       showGameThread: false,
+      currentGame: {},
       games: [
         {
           isFinished: false,
@@ -51,19 +54,23 @@ class GamesList extends React.Component {
       ]
     };
 
-    // this.showGameThread = this.showGameThread.bind(this);
-    // this.closeGameThread = this.closeGameThread.bind(this);
+    this.openGameThread = this.openGameThread.bind(this);
+    this.closeGameThread = this.closeGameThread.bind(this);
   }
 
-  // showGameThread() {
-  //   console.log("hey hey");
-  //   this.setState({ showGameThread: true });
-  // }
+  openGameThread = async () => {
+    console.log("hey hey");
+    await this.setState({ showGameThread: true });
+  };
 
-  // closeGameThread() {
-  //   console.log("closing");
-  //   this.setState({ showGameThread: false });
-  // }
+  closeGameThread = async () => {
+    console.log("closing");
+    await this.setState({ showGameThread: false });
+  };
+
+  setCurrentGame = async game => {
+    await this.setState({ currentGame: game });
+  };
 
   // Sets state of
   getListOfGames = async () => {
@@ -84,23 +91,38 @@ class GamesList extends React.Component {
           closeGameThread={this.closeGameThread}
         /> */}
 
-        <h2 className="GamesListTitle">Game Threads Week 1</h2>
+        {!this.state.showGameThread ? (
+          <div>
+            <h2 className="GamesListTitle">Game Threads Week 1</h2>
 
-        <div className="WeeksButtonContainer">
-          <button className="WeeksButton" onClick={this.getListOfGames}>
-            Week 1
-          </button>
-        </div>
+            <div className="WeeksButtonContainer">
+              <button className="WeeksButton" onClick={this.getListOfGames}>
+                Week 1
+              </button>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
 
         <body className="GamesListGrid">
-          {this.state.games.map(game => (
-            <GameCard
-              gameDetails={game}
-              onClick={this.showGameThread}
-              showGameThread={this.showGameThread}
+          {!this.state.showGameThread ? (
+            this.state.games.map(game => (
+              <GameCard
+                gameDetails={game}
+                showGameThread={this.state.showGameThread}
+                openGameThread={this.openGameThread}
+                closeGameThread={this.closeGameThread}
+                setCurrentGame={this.setCurrentGame}
+              />
+            ))
+          ) : (
+            <GameThread
+              showModal={this.state.showGameThread}
+              closeGameThread={this.closeGameThread}
+              gameDetails={this.state.currentGame}
             />
-          ))}
-          {/* <GameCard showGameThread={this.showGameThread} /> */}
+          )}
         </body>
       </main>
     );
