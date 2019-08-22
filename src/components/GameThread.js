@@ -1,27 +1,52 @@
 import React from "react";
 import "../styles/GameThread.css";
-import BearsLogo from "../images/bears-logo.svg";
-import PatriotsLogo from "../images/patriots-logo.svg";
-import PizzaSlice from "../images/pizza-slice.svg";
 import TeamChoice from "./TeamChoice";
-import UserAvatar from "../images/user-avatar.jpg";
 import Slider from "./Slider";
+import axios from "axios";
+import Comments from "./Comments";
 
 class GameThread extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isVisible: false,
-      condition: false
+      condition: false,
+      currentComment: "",
+      comments: [],
+      commentOwner: "",
+      commentText: "",
+      createdBy: ""
     };
   }
 
   componentDidMount() {
     const { showModal } = this.props;
+    console.log("game thread mounting");
     if (showModal) {
       this.setState({ isVisible: true });
     }
+    this.getListOfComments();
   }
+
+  getListOfComments = async () => {
+    console.log("Getting List of Comments");
+    await axios
+      .get(
+        "https://pecorina-development.herokuapp.com/comments/all/gamethread/5d5eaf9b7547cb38d40f2662"
+      )
+      .then(response => {
+        this.setState({
+          comments: response.data.comments,
+          commentOwner: response.data.owner,
+          commentText: response.data.text,
+          createdBy: response.data.createdAt
+        });
+      });
+  };
+
+  setCurrentComment = async comment => {
+    await this.setState({ currentComment: comment });
+  };
 
   render() {
     const { showModal } = this.props;
@@ -31,7 +56,7 @@ class GameThread extends React.Component {
     return (
       <div className="game-thread">
         <nav className="game-thread-nav">
-          <div>
+          <div className="backbuttonDude">
             <button
               className="game-thread-close-btn"
               onClick={this.props.closeGameThread}
@@ -55,7 +80,13 @@ class GameThread extends React.Component {
 
         <div className="game-thread-content">
           <div className="teams">
-            <img src={this.props.gameDetails.awayTeam.logo} />
+            <div className="logoContainer">
+              <img
+                className="teamLogo"
+                src={this.props.gameDetails.awayTeam.logo}
+                alt="logo"
+              />
+            </div>
             <div className="team-text">
               <span className="team-name">
                 {this.props.gameDetails.awayTeam.name}
@@ -65,7 +96,13 @@ class GameThread extends React.Component {
                 {this.props.gameDetails.homeTeam.name}
               </span>
             </div>
-            <img src={this.props.gameDetails.homeTeam.logo} />
+            <div className="logoContainer">
+              <img
+                className="teamLogo"
+                src={this.props.gameDetails.homeTeam.logo}
+                alt="alt"
+              />
+            </div>
           </div>
 
           <div className="predictions">
@@ -112,72 +149,16 @@ class GameThread extends React.Component {
             </form>
             <h2>Discussion</h2>
             <hr />
-            <div className="comment">
-              <img className="user-avatar" src={UserAvatar} />
-              <div className="comment-body">
-                <div className="comment-details">
-                  <span className="username">ninjajon</span>
-                  <img src={PizzaSlice} />
-                  <span>5</span>
-                  <span> on</span>
-                  <img className="bet-logo" src={BearsLogo} />
-                  <span>5 minutes ago</span>
-                </div>
-                <div className="comment-text">
-                  <p>Tom Brady is going to take this one home!!!</p>
-                </div>
-              </div>
-            </div>
 
-            <div className="comment">
-              <img className="user-avatar" src={UserAvatar} />
-              <div className="comment-body">
-                <div className="comment-details">
-                  <span className="username">ninjajon</span>
-                  <img src={PizzaSlice} />
-                  <span>5</span>
-                  <span> on</span>
-                  <img className="bet-logo" src={BearsLogo} />
-                  <span>5 minutes ago</span>
-                </div>
-                <div className="comment-text">
-                  <p>Tom Brady is going to take this one home!!!</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="comment">
-              <img className="user-avatar" src={UserAvatar} />
-              <div className="comment-body">
-                <div className="comment-details">
-                  <span className="username">ninjajon</span>
-                  <img src={PizzaSlice} />
-                  <span>5</span>
-                  <span> on</span>
-                  <img className="bet-logo" src={BearsLogo} />
-                  <span>5 minutes ago</span>
-                </div>
-                <div className="comment-text">
-                  <p>Tom Brady is going to take this one home!!!</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="comment">
-              <img className="user-avatar" src={UserAvatar} />
-              <div className="comment-body">
-                <div className="comment-details">
-                  <span className="username">ninjajon</span>
-                  <span> 5</span>
-                  <img src={PizzaSlice} />
-                  <span> on</span>
-                  <img className="bet-logo" src={BearsLogo} />
-                  <span> 5 minutes ago</span>
-                </div>
-                <div className="comment-text">
-                  <p>Tom Brady is going to take this one home!!!</p>
-                </div>
-              </div>
+            <div className="comments">
+              {this.state.comments.map(comment => (
+                <Comments
+                  currentComment={comment}
+                  commentOwner={this.state.commentOwner}
+                  commentText={this.state.commentText}
+                  createdBy={this.state.createdBy}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -185,5 +166,13 @@ class GameThread extends React.Component {
     );
   }
 }
+
+// comment route
+// router.get('comments/all/gamethread/:id',
+// catchErrors(async(req, res) => {
+//   const comments = await commentController.readMany({ gameThreadReference: req.params.id });
+//   return res.status(200).json({ comments });
+// })
+// );
 
 export default GameThread;

@@ -1,13 +1,13 @@
-import React from 'react';
-import GameCard from '../components/GameCard';
-import GameThread from '../components/GameThread';
+import React from "react";
+import GameCard from "../components/GameCard";
+import GameThread from "../components/GameThread";
 // import GameThread from "../components/GameThread";
 // Import Axios Library
-import axios from 'axios';
+import axios from "axios";
 
 // CSS
-import '../styles/GamesList.css';
-import { async } from 'q';
+import "../styles/GamesList.css";
+import { async } from "q";
 // import { thisExpression, switchStatement } from "@babel/types";
 
 // Components
@@ -30,12 +30,12 @@ class GamesList extends React.Component {
   }
 
   openGameThread = async () => {
-    console.log('hey hey');
+    console.log("hey hey");
     await this.setState({ showGameThread: true });
   };
 
   closeGameThread = async () => {
-    console.log('closing');
+    console.log("closing");
     await this.setState({ showGameThread: false });
   };
 
@@ -45,9 +45,9 @@ class GamesList extends React.Component {
 
   // Sets state of
   getListOfGames = async () => {
-    console.log('Getting List of Games');
+    console.log("Getting List of Games");
     await axios
-      .get('https://pecorina-development.herokuapp.com/games/week/1')
+      .get("https://pecorina-development.herokuapp.com/games/week/1")
       .then(response => {
         this.setState({ games: response.data.gamesList });
       });
@@ -64,13 +64,13 @@ class GamesList extends React.Component {
 
         {!this.state.showGameThread ? (
           <div>
-            <h2 className='GamesListTitle'>Game Threads Week 1</h2>
+            <h2 className="GamesListTitle">Week 1 Games</h2>
           </div>
         ) : (
           <></>
         )}
 
-        <body className='GamesListGrid'>
+        <body className="GamesListGrid">
           {!this.state.showGameThread ? (
             this.state.games.map(game => (
               <GameCard
