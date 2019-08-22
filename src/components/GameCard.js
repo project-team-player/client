@@ -7,45 +7,59 @@ import "../styles/GameCard.css";
 // Components
 
 class GameCard extends React.Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      showGameThread: false
-    };
+  //   this.state = {
+  //     showGameThread: false
+  //   };
 
-    this.showGameThread = this.showGameThread.bind(this);
-    this.closeGameThread = this.closeGameThread.bind(this);
-  }
+  //   this.showGameThread = this.showGameThread.bind(this);
+  //   this.closeGameThread = this.closeGameThread.bind(this);
+  // }
 
-  showGameThread() {
-    console.log("hey hey");
-    this.setState({ showGameThread: true });
-  }
+  // showGameThread() {
+  //   console.log("opening modal");
+  //   this.setState({ showGameThread: true });
+  // }
 
-  closeGameThread() {
-    console.log("closing");
-    this.setState({ showGameThread: false });
-  }
+  // closeGameThread() {
+  //   console.log("closing modal");
+  //   this.setState({ showGameThread: false });
+  // }
 
   render() {
     // consts here
-    const { gameDetails } = this.props;
+    const {
+      gameDetails,
+      showGameThread,
+      openGameThread,
+      closeGameThread,
+      setCurrentGame
+    } = this.props;
     return (
       <div className="modal-page-container">
         <div className="thefuckingthreadcontainer">
-          {this.state.showGameThread ? (
+          {showGameThread ? (
             <GameThread
-              showModal={this.showGameThread}
-              closeGameThread={this.closeGameThread}
+              showModal={showGameThread}
+              closeGameThread={closeGameThread}
               gameDetails={gameDetails}
             />
           ) : (
             <></>
           )}
         </div>
-        {!this.state.showGameThread ? (
-          <div className="GameCard" onClick={this.showGameThread}>
+        {!showGameThread ? (
+          <div
+            className="GameCard"
+            role="button"
+            onClick={() => setCurrentGame(gameDetails).then(openGameThread)}
+            onKeyPress={event => {
+              this.handleKeyPress(event);
+              openGameThread();
+            }}
+          >
             <div
               className="Away"
               style={{
