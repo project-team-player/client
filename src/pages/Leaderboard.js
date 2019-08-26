@@ -5,7 +5,7 @@ class Leaderboard extends React.Component {
   render() {
     return (
       <div>
-        <div className="title">Leaderboard</div>
+        <div className="title">Leaderboard </div>
         <div className="imageContainer">
           <img src="https://miro.medium.com/proxy/0*oCJbV_KPLl-1yGXU." />
         </div>
