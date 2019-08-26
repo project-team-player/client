@@ -67,8 +67,8 @@ class GamesList extends React.Component {
             {/* Slices from Data in this header */}
             <h2 className=''>Slices</h2>
             <form onSubmit={this.testFunction()}>
-              <select name='cars'>
-                <option value='week 1'>week 1</option>
+              <select name='weeks'>
+                <option value='week 1' onclick={this.onSubmit}></option>
                 <option value='week 2'>week 2</option>
               </select>
               <input type='submit' />
