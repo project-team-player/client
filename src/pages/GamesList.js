@@ -1,6 +1,4 @@
 import React from 'react';
-import GameCard from '../components/GameCard';
-import GameThread from '../components/GameThread';
 // import GameThread from "../components/GameThread";
 // Import Axios Library
 import axios from 'axios';
@@ -9,6 +7,9 @@ import axios from 'axios';
 import '../styles/GamesList.css';
 
 // Components
+import GameCard from '../components/GameCard';
+import GameThread from '../components/GameThread';
+import OptionsButton from '../components/OptionsButton';
 
 class GamesList extends React.Component {
   constructor(props) {
@@ -64,6 +65,15 @@ class GamesList extends React.Component {
     console.log(this.state.totalWeeks);
   };
 
+  generateOptions = () => {
+    let optionsList = [];
+    for (let i = 1; i < this.state.totalWeeks + 1; i++) {
+      optionsList.push(<OptionsButton weekNumber={i} />);
+    }
+    return optionsList;
+  };
+
+  // Functions for options
   testFunction = e => {
     e.preventDefault();
     console.log('TEST TEST TEST TEST TEST');
@@ -81,8 +91,7 @@ class GamesList extends React.Component {
             <h2 className=''>Slices</h2>
             <form onSubmit={event => this.testFunction(event)}>
               <select id='weeks' name='weeks'>
-                <option value='week 1'>week 1</option>
-                <option value='week 2'>week 2</option>
+                {this.generateOptions()}
               </select>
               <input type='submit' />
             </form>
