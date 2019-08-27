@@ -7,8 +7,6 @@ import axios from 'axios';
 
 // CSS
 import '../styles/GamesList.css';
-import { async } from 'q';
-// import { thisExpression, switchStatement } from "@babel/types";
 
 // Components
 
@@ -18,7 +16,8 @@ class GamesList extends React.Component {
     this.state = {
       showGameThread: false,
       currentGame: {},
-      games: []
+      games: [],
+      totalWeeks: 0
     };
 
     this.openGameThread = this.openGameThread.bind(this);
@@ -27,6 +26,7 @@ class GamesList extends React.Component {
 
   componentDidMount() {
     this.getListOfGames();
+    this.getTotalWeeks();
   }
 
   openGameThread = async () => {
@@ -54,8 +54,21 @@ class GamesList extends React.Component {
     console.log(this.state.games);
   };
 
-  testFunction = () => {
+  getTotalWeeks = async () => {
+    console.log('Getting Week');
+    await axios
+      .get('https://pecorina-development.herokuapp.com/games/weekTotal/NFL')
+      .then(response => {
+        this.setState({ totalWeeks: response.data.totalWeeksNFL });
+      });
+    console.log(this.state.totalWeeks);
+  };
+
+  testFunction = e => {
+    e.preventDefault();
     console.log('TEST TEST TEST TEST TEST');
+    const test = document.getElementById('weeks').value;
+    console.log(test);
   };
 
   render() {
@@ -66,9 +79,9 @@ class GamesList extends React.Component {
             <h2 className='GamesListTitle'>Week 1 Games</h2>
             {/* Slices from Data in this header */}
             <h2 className=''>Slices</h2>
-            <form onSubmit={this.testFunction()}>
-              <select name='weeks'>
-                <option value='week 1' onclick={this.onSubmit}></option>
+            <form onSubmit={event => this.testFunction(event)}>
+              <select id='weeks' name='weeks'>
+                <option value='week 1'>week 1</option>
                 <option value='week 2'>week 2</option>
               </select>
               <input type='submit' />
