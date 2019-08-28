@@ -69,6 +69,8 @@ nav {
   text-decoration: none;
   /* color: #a8a8a8; */
   color: var(--white);
+  outline: none;
+  cursor: pointer;
 }
 
 .loginButton {
@@ -81,6 +83,7 @@ nav {
   padding-right: 0.8rem;
   border-radius: 0.3rem;
   cursor: pointer;
+  outline: none;
 }
 
 .loginButton:hover {
