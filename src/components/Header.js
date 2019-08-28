@@ -18,7 +18,7 @@ class Header extends React.Component {
         <nav>
           <ul className="links">
             <li className="linkNames">
-              <NavLink exact to="/gameslist" className="specificLinks">
+              <NavLink exact to="/" className="specificLinks">
                 Games
               </NavLink>
             </li>
