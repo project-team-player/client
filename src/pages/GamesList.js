@@ -91,12 +91,12 @@ class GamesList extends React.Component {
           </button>
         </nav>
 
-        <body className='GamesListGrid'>
+        <div className='GamesListGrid'>
           {this.state.games.map(game => (
             <GameCard gameDetails={game} showGameThread={this.showGameThread} />
           ))}
           {/* <GameCard showGameThread={this.showGameThread} /> */}
-        </body>
+        </div>
       </main>
     );
   }

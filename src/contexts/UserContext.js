@@ -9,12 +9,15 @@ const UserContext = React.createContext();
 class UserProvider extends React.Component {
   state = {
     isVisible: false,
+    loginView: false,
   }
   render() {
     return (
       <UserContext.Provider value={{ 
         state: this.state,
         showModal: () => this.setState({isVisible: true}),
+        hideModal: () => this.setState({isVisible: false}),
+        showLogin: () => this.setState({loginView: true})
       }}>
         {this.props.children}
       </UserContext.Provider>
