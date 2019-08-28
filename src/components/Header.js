@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Header.css";
-import pizza from "../media/za.png";
+import logo from "../images/slice-it-logo.svg";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from '../contexts/UserContext';
 
@@ -12,7 +12,7 @@ class Header extends React.Component {
           <header>
         <NavLink to="/" id="logo">
           <div className="sliceLogo">
-            <img className="logo" src={pizza} alt="Slice-it Logo" />
+            <img className="logo" src={logo} alt="Slice-it Logo" />
           </div>
         </NavLink>
         <nav>
@@ -28,12 +28,10 @@ class Header extends React.Component {
               </NavLink>
             </li>
             {/* will be NavLinks when routes are set */}
-            <li className="loginButton" onClick={authContext.showModal}>
-            Login
-              {/* <NavLink to="/login" className="specificLogin">
+           
+              <button className="specificLogin" onClick={authContext.showModal}>
                 Login
-              </NavLink> */}
-            </li>
+              </button>
           </ul>
         </nav>
       </header>
