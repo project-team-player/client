@@ -1,0 +1,43 @@
+.c-label {
+  display: block;
+  font: 75%/1.5 -apple-system, BlinkMacSystemFont;
+  font-weight: 600;
+  color: #606770;
+}
+
+.c-input--range {
+  appearance: none;
+  height: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  width: 100%;
+}
+
+.c-input--range:active,
+.c-input--range:focus {
+  background-color: #aac9ff;
+  outline: none;
+}
+
+.c-input--range::-webkit-slider-thumb {
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  display: block;
+  background-color: #8d949e;
+  border-radius: 100%;
+}
+
+.c-input--range:active::-webkit-slider-thumb,
+.c-input--range:focus::-webkit-slider-thumb {
+  background-color: #3578e5;
+}
+
+.mb1 {
+  margin-bottom: 2rem;
+}
+
+.wheelContainer {
+  display: flex;
+  justify-content: center;
+}

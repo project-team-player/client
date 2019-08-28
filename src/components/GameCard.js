@@ -1,42 +1,103 @@
-import React from 'react';
+import React from "react";
+import GameThread from "../components/GameThread";
 
 // CSS
-import '../styles/GameCard.css';
+import "../styles/GameCard.css";
 
 // Components
 
 class GameCard extends React.Component {
+  // constructor(props) {
+  //   super(props);
+
+  //   this.state = {
+  //     showGameThread: false
+  //   };
+
+  //   this.showGameThread = this.showGameThread.bind(this);
+  //   this.closeGameThread = this.closeGameThread.bind(this);
+  // }
+
+  // showGameThread() {
+  //   console.log("opening modal");
+  //   this.setState({ showGameThread: true });
+  // }
+
+  // closeGameThread() {
+  //   console.log("closing modal");
+  //   this.setState({ showGameThread: false });
+  // }
+
   render() {
     // consts here
-    const { gameDetails } = this.props;
+    const {
+      gameDetails,
+      showGameThread,
+      openGameThread,
+      closeGameThread,
+      setCurrentGame
+    } = this.props;
     return (
-      <div className='GameCard' onClick={this.props.showGameThread}>
-        <div
-          className='Away'
-          style={{
-            backgroundColor: '#' + gameDetails.awayTeam.primaryColor
-          }}
-        >
-          <img className='AwayImg' src={gameDetails.awayTeam.logo} alt='Logo' />
-          ;
+      <div className="modal-page-container">
+        <div className="thefuckingthreadcontainer">
+          {showGameThread ? (
+            <GameThread
+              showModal={showGameThread}
+              closeGameThread={closeGameThread}
+              gameDetails={gameDetails}
+            />
+          ) : (
+            <></>
+          )}
         </div>
-        <div
-          className='Home'
-          style={{
-            backgroundColor: '#' + gameDetails.homeTeam.primaryColor
-          }}
-        >
-          <img className='HomeImg' src={gameDetails.homeTeam.logo} alt='Logo' />
-        </div>
-        <div className='GameInfo'>
-          <div className='Title'>
-            <b className='TeamKey'>{gameDetails.awayTeam.key}</b>
-            <b className='Versus'>VS</b>
-            <b className='TeamKey'>{gameDetails.homeTeam.key}</b>
+        {!showGameThread ? (
+          <div
+            className="GameCard"
+            role="button"
+            onClick={() => setCurrentGame(gameDetails).then(openGameThread)}
+            onKeyPress={event => {
+              this.handleKeyPress(event);
+              openGameThread();
+            }}
+          >
+            <div
+              className="Away"
+              style={{
+                backgroundColor: "#" + gameDetails.awayTeam.primaryColor
+              }}
+            >
+              <img
+                className="AwayImg"
+                src={gameDetails.awayTeam.logo}
+                alt="Logo"
+              />
+              ;
+            </div>
+            <div
+              className="Home"
+              style={{
+                backgroundColor: "#" + gameDetails.homeTeam.primaryColor
+              }}
+            >
+              <img
+                className="HomeImg"
+                src={gameDetails.homeTeam.logo}
+                alt="Logo"
+              />
+            </div>
+            <div className="GameInfo">
+              <div className="Title">
+                <b className="TeamKey">{gameDetails.awayTeam.key}</b>
+                <b className="Versus">VS</b>
+                <b className="TeamKey">{gameDetails.homeTeam.key}</b>
+              </div>
+              {/* TODO: Create date parse for below Ex.2019-09-05T20:20:00 */}
+              <div className="Date">{gameDetails.dateTime.toString()}</div>
+            </div>
           </div>
-          {/* TODO: Create date parse for below Ex.2019-09-05T20:20:00 */}
-          <div className='Date'>{gameDetails.dateTime.toString()}</div>
-        </div>
+        ) : (
+          <></>
+        )}
       </div>
     );
   }

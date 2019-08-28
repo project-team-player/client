@@ -64,3 +64,13 @@
   font-size: 3rem;
   font-weight: 100;
 }
+
+.thefuckingthreadcontainer {
+  display: inline-grid;
+  width: 100%;
+  position: absolute;
+}
+
+.modal-page-container {
+  display: contents;
+}
