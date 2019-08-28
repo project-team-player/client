@@ -26,7 +26,7 @@ class GamesList extends React.Component {
   }
 
   componentDidMount() {
-    this.getListOfGames();
+    this.getListOfGames(1);
     this.getTotalWeeks();
   }
 
@@ -45,10 +45,10 @@ class GamesList extends React.Component {
   };
 
   // Sets state of
-  getListOfGames = async () => {
+  getListOfGames = async number => {
     console.log('Getting List of Games');
     await axios
-      .get('https://pecorina-development.herokuapp.com/games/week/1')
+      .get(`https://pecorina-development.herokuapp.com/games/week/${number}`)
       .then(response => {
         this.setState({ games: response.data.gamesList });
       });
@@ -74,11 +74,12 @@ class GamesList extends React.Component {
   };
 
   // Functions for options
-  testFunction = e => {
+  getGamesForWeek = e => {
     e.preventDefault();
     console.log('TEST TEST TEST TEST TEST');
-    const test = document.getElementById('weeks').value;
-    console.log(test);
+    let weekNumber = document.getElementById('weekNumber').value;
+    this.getListOfGames(parseInt(weekNumber));
+    this.forceUpdate();
   };
 
   render() {
@@ -89,7 +90,7 @@ class GamesList extends React.Component {
             <h2 className='GamesListTitle'>Week 1 Games</h2>
             {/* Slices from Data in this header */}
             <h2 className=''>Slices</h2>
-            <form onSubmit={event => this.testFunction(event)}>
+            <form onSubmit={event => this.getGamesForWeek(event)}>
               <select id='weeks' name='weeks'>
                 {this.generateOptions()}
               </select>
