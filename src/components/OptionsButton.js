@@ -8,7 +8,11 @@ class OptionsButton extends React.Component {
   render() {
     // consts here
     const { weekNumber } = this.props;
-    return <option value='weekNumber'>week {weekNumber}</option>;
+    return (
+      <option id='weekNumber' value={weekNumber}>
+        week {weekNumber}
+      </option>
+    );
   }
 }
 
