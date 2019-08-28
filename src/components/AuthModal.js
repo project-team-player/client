@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
+import { AuthContext } from '../contexts/UserContext';
 import PropTypes from 'prop-types';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { NavLink } from "react-router-dom";
 import Cookies from 'universal-cookie';
 import '../styles/AuthModal.css';
-// import { withRouter } from 'react-router-dom';
 
 const cookies = new Cookies();
-
 
 const SignupForm = ({handleSignup, showLoginForm }) => {
   return (
@@ -64,7 +63,7 @@ const SignupForm = ({handleSignup, showLoginForm }) => {
         <button className="submitButton" type="submit">
           Sign Up
         </button>
-        <span>All ready have an account? </span><a href="#" onClick={showLoginForm} className="switch-modal-link">Log In</a>
+        <span className="switch-modal-info">All ready have an account? <a href="#" onClick={showLoginForm}className="switch-modal-link">Log In</a></span>
     </form>
   )
 }
@@ -99,7 +98,7 @@ const LoginForm = ({ showSignupForm, handleLogin}) => {
       <button className="submitButton" type="submit">
         Log In
       </button>
-      <span>No account? </span><NavLink onClick={showSignupForm} className="switch-modal-link">Sign Up</NavLink>
+      <span className="switch-modal-info">No account? <NavLink onClick={showSignupForm} className="switch-modal-link">Sign Up</NavLink></span>
   </form>
   )
 }
@@ -124,6 +123,16 @@ class AuthModal extends Component {
     this.setTokenCookie = this.setTokenCookie.bind(this);
     this.showLoginForm = this.showLoginForm.bind(this);
     this.showSignupForm = this.showSignupForm.bind(this);
+    this.fireSuccessMessage = this.fireSuccessMessage.bind(this);
+  }
+
+  fireSuccessMessage(title, message) {
+    Swal.fire({
+      title: title,
+      text: message,
+      type: 'success',
+      confirmButtonText: 'Cool'
+    })
   }
 
   handleInputChange = event => {
@@ -142,13 +151,15 @@ class AuthModal extends Component {
 
   handleLogin = (e) => {
     e.preventDefault();
-
-    console.log('Logging in');
     const username = e.target.username.value;
     const password = e.target.password.value;
 
     axios.post(`${process.env.REACT_APP_PECORINA_SERVER_API}/authenticate/login`, { username, password } )
-    .then(response => this.setTokenCookie(response.data.token));
+    .then(response => {
+      this.setTokenCookie(response.data.token);
+      this.context.hideModal();
+      this.fireSuccessMessage('Success', 'You are now logged in!');
+    });
   }
 
   handleSignup = (event) => {
@@ -158,21 +169,24 @@ class AuthModal extends Component {
     const password = form.password.value;
     const passwordConfirm = form.passwordConfirm.value;
     
-    axios.post(`${process.env.REACT_APP_PECORINA_SERVER_API}/authenticate/signup`, { email, username, password, passwordConfirm }).then(response => this.setTokenCookie(response.data.token));
+    axios.post(`${process.env.REACT_APP_PECORINA_SERVER_API}/authenticate/signup`, { email, username, password, passwordConfirm }).then(response => {
+      this.setTokenCookie(response.data.token);
+      this.context.hideModal();
+      this.fireSuccessMessage('Success', 'You are now Signed up');
+    })
     event.preventDefault();
   }
 
   showSignupForm() {
-    console.log('showing signup');
-    this.setState({ showLogin: false });
+    this.context.showSignup();
   }
 
   showLoginForm() {
-    this.setState({ showLogin: true });
+    this.context.showLogin();
   }
 
   render() {
-    const { showLogin } = this.state;
+    const { loginView } = this.context.state;
     // if (showLogin) {
     //   return <LoginForm handleLogin={this.handleLogin} />
     // }
@@ -181,7 +195,7 @@ class AuthModal extends Component {
     return (
       <div className="auth-modal">
       {
-        showLogin ?
+        loginView ?
         <LoginForm handleLogin={this.handleLogin} showSignupForm={this.showSignupForm} />
         : 
         <SignupForm handleSignup={this.handleSignup} showLoginForm={this.showLoginForm}  />
@@ -190,5 +204,7 @@ class AuthModal extends Component {
     )
   }
 }
+
+AuthModal.contextType = AuthContext;
 
 export default AuthModal;
