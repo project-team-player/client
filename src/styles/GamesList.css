@@ -1,6 +1,25 @@
+.GamesListHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .GamesListTitle {
   text-align: center;
   margin: 2rem;
+}
+
+.GamesListHeaderRight {
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.changeViewButton {
+  height: 25px;
+  width: 40px;
 }
 
 .WeeksButtonContainer {

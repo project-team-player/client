@@ -16,6 +16,7 @@ class GamesList extends React.Component {
     super(props);
     this.state = {
       showGameThread: false,
+      currentWeek: String,
       currentGame: {},
       games: [],
       totalWeeks: 0
@@ -52,6 +53,7 @@ class GamesList extends React.Component {
       .then(response => {
         this.setState({ games: response.data.gamesList });
       });
+    this.setState({ currentWeek: number });
     console.log(this.state.games);
   };
 
@@ -76,26 +78,36 @@ class GamesList extends React.Component {
   // Functions for options
   getGamesForWeek = e => {
     e.preventDefault();
-    console.log('TEST TEST TEST TEST TEST');
-    let weekNumber = document.getElementById('weekNumber').value;
+    const weekNumber = document.getElementById('weekSelection').elements[
+      'weeks'
+    ].value;
     this.getListOfGames(parseInt(weekNumber));
-    this.forceUpdate();
   };
 
   render() {
     return (
       <main>
         {!this.state.showGameThread ? (
-          <div className='GameListHeader'>
-            <h2 className='GamesListTitle'>Week 1 Games</h2>
-            {/* Slices from Data in this header */}
-            <h2 className=''>Slices</h2>
-            <form onSubmit={event => this.getGamesForWeek(event)}>
-              <select id='weeks' name='weeks'>
-                {this.generateOptions()}
-              </select>
-              <input type='submit' />
-            </form>
+          <div className='GamesListHeader'>
+            <h2 className='GamesListTitle'>
+              NFL Games 2019 - Week {this.state.currentWeek}
+            </h2>
+            <div className='GamesListHeaderRight'>
+              {/* Slices from Data in this header */}
+              <p className=''>Slices</p>
+              <form id='weekSelection'>
+                <select
+                  id='weeks'
+                  onChange={event => this.getGamesForWeek(event)}
+                >
+                  {this.generateOptions()}
+                </select>
+              </form>
+              <div>
+                <button className='changeViewButton'>List</button>
+                <button className='changeViewButton'>Grid</button>
+              </div>
+            </div>
           </div>
         ) : (
           <></>
