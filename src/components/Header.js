@@ -8,7 +8,7 @@ class Header extends React.Component {
   render() {
     return (
       <AuthContext>
-        {(authContext) => (
+        {context => (
           <header>
         <NavLink to="/" id="logo">
           <div className="sliceLogo">
@@ -28,10 +28,16 @@ class Header extends React.Component {
               </NavLink>
             </li>
             {/* will be NavLinks when routes are set */}
-           
-              <button className="specificLogin" onClick={authContext.showModal}>
-                Login
+            {this.props.isLoggedIn ? 
+              <button className="specificLogin" onClick={context.logOut}>
+                Log Out
               </button>
+              :
+              <button className="specificLogin" onClick={context.showModal}>
+                Log In
+              </button>
+            }
+
           </ul>
         </nav>
       </header>
