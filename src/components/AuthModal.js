@@ -136,19 +136,18 @@ class AuthModal extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.showLoginForm = this.showLoginForm.bind(this);
     this.showSignupForm = this.showSignupForm.bind(this);
-    this.fireSuccessMessage = this.fireSuccessMessage.bind(this);
     this.validateForm = this.validateForm.bind(this);
   }
 
-  fireSuccessMessage(title, message) {
-    Swal.fire({
-      title: title,
-      text: message,
-      type: 'success',
-      showConfirmButton: false,
-    })
-    setTimeout(() => Swal.close(), 1500);
-  }
+  // fireSuccessMessage(title, message) {
+  //   Swal.fire({
+  //     title: title,
+  //     text: message,
+  //     type: 'success',
+  //     showConfirmButton: false,
+  //   })
+  //   setTimeout(() => Swal.close(), 1500);
+  // }
 
   handleInputChange = event => {
     const { value, name } = (event.target);
