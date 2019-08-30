@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="142px" height="25px" viewBox="0 0 142 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Logo desktop</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Navbar---Desktop-HD" transform="translate(-61.000000, -22.000000)">
+            <g id="Logo-desktop" transform="translate(50.000000, 15.000000)">
+                <g id="Logo" transform="translate(10.000000, 5.000000)">
+                    <g id="Pizza-slice" transform="translate(14.000000, 15.000000) rotate(-19.000000) translate(-14.000000, -15.000000) translate(4.000000, 3.000000)">
+                        <g>
+                            <path d="M9.33077854,23.5509515 L0.0614928637,2.6212887 C-0.104516777,2.24638263 0.0771616029,1.81313309 0.467306575,1.65358907 C0.476466918,1.64984308 0.48570222,1.64626866 0.495007242,1.64286784 C3.50677837,0.542117953 6.68830469,-0.00549082744 10.0395862,0 C13.3901467,0.00567628819 16.5472528,0.563609117 19.5109045,1.67383999 C19.9059667,1.82183282 20.1013724,2.24955026 19.9473567,2.62917039 C19.9447336,2.63563601 19.9420156,2.64206575 19.9392036,2.64845767 L10.7443867,23.5493183 C10.5792865,23.9246099 10.128838,24.1002347 9.73828179,23.9415873 C9.55486819,23.867083 9.40875398,23.7270168 9.33077854,23.5509515 Z" id="Triangle" fill="#F3A82E"></path>
+                            <ellipse id="Oval-Copy-5" fill="#D0021B" cx="5.29411765" cy="6.28571429" rx="2.94117647" ry="2.85714286"></ellipse>
+                            <ellipse id="Oval-Copy-6" fill="#D0021B" cx="13.5294118" cy="5.14285714" rx="2.94117647" ry="2.85714286"></ellipse>
+                            <ellipse id="Oval-Copy" fill="#D0021B" cx="10" cy="14.2857143" rx="2.94117647" ry="2.85714286"></ellipse>
+                        </g>
+                    </g>
+                    <text id="SLICE-IT" font-family="Raleway-Black, Raleway" font-size="25" font-weight="700" letter-spacing="2.26648269">
+                        <tspan x="27.8776278" y="24.067154" fill="#FFFFFF">SLICE </tspan>
+                        <tspan x="117.276524" y="24.067154" fill="#D0021B">IT</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
