@@ -23,7 +23,6 @@
 
 .game-thread {
   background: var(--white);
-  margin: 0 110px;
   width: 100%;
   justify-self: center;
   grid-column: 1/5;
