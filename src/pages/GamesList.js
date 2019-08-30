@@ -1,24 +1,25 @@
-import React from "react";
-import GameCard from "../components/GameCard";
-import GameThread from "../components/GameThread";
+import React from 'react';
 // import GameThread from "../components/GameThread";
 // Import Axios Library
-import axios from "axios";
+import axios from 'axios';
 
 // CSS
-import "../styles/GamesList.css";
-import { async } from "q";
-// import { thisExpression, switchStatement } from "@babel/types";
+import '../styles/GamesList.css';
 
 // Components
+import GameCard from '../components/GameCard';
+import GameThread from '../components/GameThread';
+import OptionsButton from '../components/OptionsButton';
 
 class GamesList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showGameThread: false,
+      currentWeek: String,
       currentGame: {},
-      games: []
+      games: [],
+      totalWeeks: 0
     };
 
     this.openGameThread = this.openGameThread.bind(this);
@@ -26,16 +27,17 @@ class GamesList extends React.Component {
   }
 
   componentDidMount() {
-    this.getListOfGames();
+    this.getListOfGames(1);
+    this.getTotalWeeks();
   }
 
   openGameThread = async () => {
-    console.log("hey hey");
+    console.log('hey hey');
     await this.setState({ showGameThread: true });
   };
 
   closeGameThread = async () => {
-    console.log("closing");
+    console.log('closing');
     await this.setState({ showGameThread: false });
   };
 
@@ -44,33 +46,77 @@ class GamesList extends React.Component {
   };
 
   // Sets state of
-  getListOfGames = async () => {
-    console.log("Getting List of Games");
+  getListOfGames = async number => {
+    console.log('Getting List of Games');
     await axios
-      .get("https://pecorina-development.herokuapp.com/games/week/1")
+      .get(`https://pecorina-development.herokuapp.com/games/week/${number}`)
       .then(response => {
         this.setState({ games: response.data.gamesList });
       });
+    this.setState({ currentWeek: number });
     console.log(this.state.games);
+  };
+
+  getTotalWeeks = async () => {
+    console.log('Getting Week');
+    await axios
+      .get('https://pecorina-development.herokuapp.com/games/weekTotal/NFL')
+      .then(response => {
+        this.setState({ totalWeeks: response.data.totalWeeksNFL });
+      });
+    console.log(this.state.totalWeeks);
+  };
+
+  generateOptions = () => {
+    let optionsList = [];
+    for (let i = 1; i < this.state.totalWeeks + 1; i++) {
+      optionsList.push(<OptionsButton weekNumber={i} />);
+    }
+    return optionsList;
+  };
+
+  // Functions for options
+  getGamesForWeek = e => {
+    e.preventDefault();
+    const weekNumber = document.getElementById('weekSelection').elements[
+      'weeks'
+    ].value;
+    this.getListOfGames(parseInt(weekNumber));
   };
 
   render() {
     return (
       <main>
-        {/* <GameThread
-          showModal={this.state.showGameThread}
-          closeGameThread={this.closeGameThread}
-        /> */}
-
         {!this.state.showGameThread ? (
-          <div>
-            <h2 className="GamesListTitle">Week 1 Games</h2>
+          <div className='gamesListHeader'>
+            <h2 className='gamesListTitle'>
+              NFL Games 2019 - Week {this.state.currentWeek}
+            </h2>
+            <div className='gamesListHeaderRight'>
+              <div className='sliceNumberHeader'>
+                <img src={require('../images/logo.svg')} alt='slice-it-logo' />
+                <p className='sliceNumber'>200</p>
+              </div>
+
+              <form id='weekSelection'>
+                <select
+                  id='weeks'
+                  onChange={event => this.getGamesForWeek(event)}
+                >
+                  {this.generateOptions()}
+                </select>
+              </form>
+              <div>
+                <button className='changeViewButton' id='listButton'></button>
+                <button className='changeViewButton' id='columnButton'></button>
+              </div>
+            </div>
           </div>
         ) : (
           <></>
         )}
 
-        <body className="GamesListGrid">
+        <body className='gamesListGrid'>
           {!this.state.showGameThread ? (
             this.state.games.map(game => (
               <GameCard

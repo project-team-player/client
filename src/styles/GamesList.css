@@ -1,26 +1,78 @@
-.GamesListTitle {
-  text-align: center;
-  margin: 2rem;
+.gamesListHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.WeeksButtonContainer {
+.gamesListTitle {
+  text-align: center;
+  padding-left: 40px;
+}
+
+.sliceNumberHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 20%;
+}
+
+.gamesListHeaderRight {
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 40px;
+}
+
+#weeks {
+  display: block;
+  font-size: 16px;
+  padding: 0rem 0rem 0rem 1rem;
+  border-radius: 10px;
+  height: 30px;
+}
+
+.changeViewButton {
+  height: 30px;
+  width: 40px;
+}
+
+.gamesListGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  align-items: center;
+  justify-items: center;
+  grid-gap: 2rem;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+#columnButton {
+  background: url(../images/column-toggle.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white;
+  border-radius: 0px 10px 10px 0px;
+}
+
+#listButton {
+  background: url(../images/list-toggle.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.weeksButtonContainer {
   height: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
 
-.WeeksButton {
+.weeksButton {
   height: 25px;
   width: 75px;
   border-radius: 5px;
-}
-
-.GamesListGrid {
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-  align-items: center;
-  justify-items: center;
-  grid-gap: 2rem;
 }
