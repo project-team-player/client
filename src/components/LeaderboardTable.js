@@ -48,10 +48,16 @@ export default function SimpleTable() {
             <TableCell align="center">Rank</TableCell>
             <TableCell align="center">Name</TableCell>
             <TableCell align="center">
-              # of Wins per Week <span role="img">🏆</span>
+              # of Wins per Week{' '}
+              <span role="img" aria-label="cup">
+                🏆
+              </span>
             </TableCell>
             <TableCell align="center">
-              <span role="img">Total Slices 🍕</span>
+              Total Slices{' '}
+              <span role="img" aria-label="pizza">
+                🍕
+              </span>
             </TableCell>
           </TableRow>
         </TableHead>

@@ -43,7 +43,10 @@ export default function FriendboardTable() {
             <TableCell align="center">Rank</TableCell>
             <TableCell align="center">Name</TableCell>
             <TableCell align="center">
-              Total Slices <span role="img">🍕</span>
+              Total Slices
+              <span role="img" aria-label="friendpizza">
+                🍕
+              </span>
             </TableCell>
           </TableRow>
         </TableHead>
