@@ -1,101 +1,139 @@
 import React from 'react';
-import GameCard from '../components/GameCard';
-import GameThread from '../components/GameThread';
+// import GameThread from "../components/GameThread";
 // Import Axios Library
 import axios from 'axios';
 
 // CSS
 import '../styles/GamesList.css';
-import { thisExpression, switchStatement } from '@babel/types';
 
 // Components
+import GameCard from '../components/GameCard';
+import GameThread from '../components/GameThread';
+import OptionsButton from '../components/OptionsButton';
 
 class GamesList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showGameThread: false,
-      games: [
-        {
-          isFinished: false,
-          _id: '5d5ade7a89fca31ad06e8df8',
-          week: 1,
-          slug: 'GB-vs-CHI-2019-week-1',
-          awayTeam: {
-            key: 'GB',
-            awayID: '5d5325666e95508d94ecb829',
-            logo:
-              'https://upload.wikimedia.org/wikipedia/commons/5/50/Green_Bay_Packers_logo.svg',
-            name: 'Green Bay Packers',
-            primaryColor: '203731',
-            secondaryColor: 'FFB612'
-          },
-          homeTeam: {
-            key: 'CHI',
-            homeID: '5d5325666e95508d94ecb823',
-            logo:
-              'https://upload.wikimedia.org/wikipedia/commons/5/5c/Chicago_Bears_logo.svg',
-            name: 'Chicago Bears',
-            primaryColor: '0B162A',
-            secondaryColor: 'C83803'
-          },
-          awayScore: 0,
-          homeScore: 0,
-          date: '2019-09-05T00:00:00',
-          dateTime: '2019-09-05T20:20:00',
-          gameThreadReference: {
-            gameThreadID: '5d5aded03712403404f82806',
-            objectReference: '5d5aded03712403404f82806'
-          }
-        }
-      ]
+      currentWeek: String,
+      currentGame: {},
+      games: [],
+      totalWeeks: 0
     };
 
-    this.showGameThread = this.showGameThread.bind(this);
+    this.openGameThread = this.openGameThread.bind(this);
     this.closeGameThread = this.closeGameThread.bind(this);
   }
 
-  showGameThread() {
-    console.log('hey hey');
-    this.setState({ showGameThread: true });
+  componentDidMount() {
+    this.getListOfGames(1);
+    this.getTotalWeeks();
   }
 
-  closeGameThread() {
+  openGameThread = async () => {
+    console.log('hey hey');
+    await this.setState({ showGameThread: true });
+  };
+
+  closeGameThread = async () => {
     console.log('closing');
-    this.setState({ showGameThread: false });
-  }
+    await this.setState({ showGameThread: false });
+  };
+
+  setCurrentGame = async game => {
+    await this.setState({ currentGame: game });
+  };
 
   // Sets state of
-  getListOfGames = async () => {
+  getListOfGames = async number => {
     console.log('Getting List of Games');
     await axios
-      .get('https://pecorina-development.herokuapp.com/games/week/1')
+      .get(`https://pecorina-development.herokuapp.com/games/week/${number}`)
       .then(response => {
         this.setState({ games: response.data.gamesList });
       });
+    this.setState({ currentWeek: number });
     console.log(this.state.games);
+  };
+
+  getTotalWeeks = async () => {
+    console.log('Getting Week');
+    await axios
+      .get('https://pecorina-development.herokuapp.com/games/weekTotal/NFL')
+      .then(response => {
+        this.setState({ totalWeeks: response.data.totalWeeksNFL });
+      });
+    console.log(this.state.totalWeeks);
+  };
+
+  generateOptions = () => {
+    let optionsList = [];
+    for (let i = 1; i < this.state.totalWeeks + 1; i++) {
+      optionsList.push(<OptionsButton weekNumber={i} />);
+    }
+    return optionsList;
+  };
+
+  // Functions for options
+  getGamesForWeek = e => {
+    e.preventDefault();
+    const weekNumber = document.getElementById('weekSelection').elements[
+      'weeks'
+    ].value;
+    this.getListOfGames(parseInt(weekNumber));
   };
 
   render() {
     return (
       <main>
-        <GameThread
-          showModal={this.state.showGameThread}
-          closeGameThread={this.closeGameThread}
-        />
-        <h2 className='GamesListTitle'>Game Threads Week 1</h2>
+        {!this.state.showGameThread ? (
+          <div className='gamesListHeader'>
+            <h2 className='gamesListTitle'>
+              NFL Games 2019 - Week {this.state.currentWeek}
+            </h2>
+            <div className='gamesListHeaderRight'>
+              <div className='sliceNumberHeader'>
+                <img src={require('../images/logo.svg')} alt='slice-it-logo' />
+                <p className='sliceNumber'>200</p>
+              </div>
 
-        <nav className='WeeksButtonContainer'>
-          <button className='WeeksButton' onClick={this.getListOfGames}>
-            Week 1
-          </button>
-        </nav>
+              <form id='weekSelection'>
+                <select
+                  id='weeks'
+                  onChange={event => this.getGamesForWeek(event)}
+                >
+                  {this.generateOptions()}
+                </select>
+              </form>
+              <div>
+                <button className='changeViewButton' id='listButton'></button>
+                <button className='changeViewButton' id='columnButton'></button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
 
-        <body className='GamesListGrid'>
-          {this.state.games.map(game => (
-            <GameCard gameDetails={game} showGameThread={this.showGameThread} />
-          ))}
-          {/* <GameCard showGameThread={this.showGameThread} /> */}
+        <body className='gamesListGrid'>
+          {!this.state.showGameThread ? (
+            this.state.games.map(game => (
+              <GameCard
+                gameDetails={game}
+                showGameThread={this.state.showGameThread}
+                openGameThread={this.openGameThread}
+                closeGameThread={this.closeGameThread}
+                setCurrentGame={this.setCurrentGame}
+              />
+            ))
+          ) : (
+            <GameThread
+              showModal={this.state.showGameThread}
+              closeGameThread={this.closeGameThread}
+              gameDetails={this.state.currentGame}
+            />
+          )}
         </body>
       </main>
     );

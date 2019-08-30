@@ -1,7 +1,8 @@
 :root {
-  --red: #D0021B;
-  --white: #F9F8F7;
-  --light-grey: #EBEBEB;
+  --red: #d0021b;
+  --white: #f9f8f7;
+  --light-grey: #ebebeb;
+  --grey: #ababab;
   --black: #232323;
-  --main-font: 'Roboto', sans-serif;
+  --main-font: "Roboto", sans-serif;
 }
