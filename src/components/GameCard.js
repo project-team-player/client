@@ -1,5 +1,6 @@
 import React from 'react';
 import GameThread from '../components/GameThread';
+import moment from 'moment';
 
 // CSS
 import '../styles/GameCard.css';
@@ -7,6 +8,9 @@ import '../styles/GameCard.css';
 // Components
 
 class GameCard extends React.Component {
+  convertDate = date => {
+    return moment(date).format('LLLL');
+  };
   render() {
     // consts here
     const {
@@ -71,7 +75,9 @@ class GameCard extends React.Component {
                 <b className='TeamKey'>{gameDetails.homeTeam.key}</b>
               </div>
               {/* TODO: Create date parse for below Ex.2019-09-05T20:20:00 */}
-              <div className='Date'>{gameDetails.dateTime.toString()}</div>
+              <div className='Date'>
+                {this.convertDate(gameDetails.dateTime.toString())}
+              </div>
             </div>
           </div>
         ) : (
