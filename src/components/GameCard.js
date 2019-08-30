@@ -9,7 +9,7 @@ import '../styles/GameCard.css';
 
 class GameCard extends React.Component {
   convertDate = date => {
-    return moment(date).format('LLLL');
+    return moment(date).format('ddd, MMM Do h:mm A');
   };
   render() {
     // consts here
@@ -76,7 +76,7 @@ class GameCard extends React.Component {
               </div>
               {/* TODO: Create date parse for below Ex.2019-09-05T20:20:00 */}
               <div className='Date'>
-                {this.convertDate(gameDetails.dateTime.toString())}
+                <span>{this.convertDate(gameDetails.dateTime.toString())}   EST</span>
               </div>
             </div>
           </div>
