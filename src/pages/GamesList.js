@@ -88,13 +88,16 @@ class GamesList extends React.Component {
     return (
       <main>
         {!this.state.showGameThread ? (
-          <div className='GamesListHeader'>
-            <h2 className='GamesListTitle'>
+          <div className='gamesListHeader'>
+            <h2 className='gamesListTitle'>
               NFL Games 2019 - Week {this.state.currentWeek}
             </h2>
-            <div className='GamesListHeaderRight'>
-              {/* Slices from Data in this header */}
-              <p className=''>Slices</p>
+            <div className='gamesListHeaderRight'>
+              <div className='sliceNumberHeader'>
+                <img src={require('../images/logo.svg')} alt='slice-it-logo' />
+                <p className='sliceNumber'>200</p>
+              </div>
+
               <form id='weekSelection'>
                 <select
                   id='weeks'
@@ -104,8 +107,8 @@ class GamesList extends React.Component {
                 </select>
               </form>
               <div>
-                <button className='changeViewButton'>List</button>
-                <button className='changeViewButton'>Grid</button>
+                <button className='changeViewButton' id='listButton'></button>
+                <button className='changeViewButton' id='columnButton'></button>
               </div>
             </div>
           </div>
@@ -113,7 +116,7 @@ class GamesList extends React.Component {
           <></>
         )}
 
-        <body className='GamesListGrid'>
+        <body className='gamesListGrid'>
           {!this.state.showGameThread ? (
             this.state.games.map(game => (
               <GameCard

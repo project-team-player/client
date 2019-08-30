@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="31px" viewBox="0 0 26 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Pizza slice</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Games" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Games-page-revisited---with-labels/tooltips-and-filter-by-view" transform="translate(-215.000000, -287.000000)">
+            <g id="Group-3" transform="translate(215.000000, 276.000000)">
+                <g id="Pizza-slice" transform="translate(0.000000, 11.000000)">
+                    <g>
+                        <path d="M11.8967426,29.6741989 L0.0784034012,3.30282376 C-0.133258891,2.83044212 0.0983810437,2.28454769 0.595815883,2.08352223 C0.60749532,2.07880229 0.619270331,2.07429852 0.631134234,2.07001348 C4.47114242,0.683068621 8.52758848,-0.00691844258 12.8004724,0 C17.0724371,0.00715212312 21.0977473,0.710147488 24.8764032,2.10903838 C25.3801075,2.29550935 25.6292498,2.83443332 25.4328798,3.3127547 C25.4295353,3.32090138 25.4260699,3.32900284 25.4224846,3.33705667 L13.6990931,29.6721411 C13.4885903,30.1450084 12.9142684,30.3662957 12.4163093,30.1664 C12.1824569,30.0725246 11.9961613,29.8960412 11.8967426,29.6741989 Z" id="Triangle" fill="#F3A82E"></path>
+                        <ellipse id="Oval-Copy-5" fill="#D0021B" cx="6.75" cy="7.92" rx="3.75" ry="3.6"></ellipse>
+                        <ellipse id="Oval-Copy-6" fill="#D0021B" cx="17.25" cy="6.48" rx="3.75" ry="3.6"></ellipse>
+                        <ellipse id="Oval-Copy" fill="#D0021B" cx="12.75" cy="18" rx="3.75" ry="3.6"></ellipse>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
