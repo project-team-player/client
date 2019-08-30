@@ -13,11 +13,6 @@
     margin-left: 3.1rem;
 }
 
-.Searchform {
-    min-width: 400px;
-    margin: auto;
-}
-
 
 .flist {
     font-family: 'Roboto', sans-serif;
@@ -31,6 +26,8 @@
 }
 
 .Searchform {
+    min-width: 400px;
+    margin: auto;
     margin-top: 2rem;
     margin-left: 2.7rem;
     display: flex;
