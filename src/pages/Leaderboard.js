@@ -1,8 +1,8 @@
-import React from 'react';
-import { AuthContext } from '../contexts/UserContext';
+import React from "react";
+import { AuthContext } from "../contexts/UserContext";
 
-import LeaderboardTable from '../components/LeaderboardTable';
-import FriendboardTable from '../components/FriendboardTable';
+import LeaderboardTable from "../components/LeaderboardTable";
+import FriendboardTable from "../components/FriendboardTable";
 
 class Leaderboard extends React.Component {
   render() {
