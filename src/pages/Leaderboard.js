@@ -1,40 +1,36 @@
-import React from "react";
-import Header from "../components/Header";
+import React from 'react';
 import { AuthContext } from '../contexts/UserContext';
 
-const TwoLevelsDeep = () => {
-  return (
-    <AuthContext>
-      {(context) => (
-        <div>
-          <div className="imageContainer">
-            <p>This stuff is rendered three levels deep</p>
-            <p>My name is {context.state.name}</p>
-            <p>My password token is {context.state.passwordToken}</p>
-          </div>
-        </div>
-          )}
-    </AuthContext>
-  )
-}
-
-const InsideLeaderboard = () => {
-  return (
-    <div>
-      <p>I'm rendered two levels deep from App.js!</p>
-      <TwoLevelsDeep />
-    </div>
-  )
-}
+import LeaderboardTable from '../components/LeaderboardTable';
+import FriendboardTable from '../components/FriendboardTable';
 
 class Leaderboard extends React.Component {
   render() {
     return (
-          <div>
-            <div className="imageContainer">
-                  <InsideLeaderboard />
+      <div>
+        <div className="top">
+          <div className="leftside">
+            <h2 className="leaderboardtext">Leaderboard - Season</h2>
+            <div className="filterbuttons">
+              <button id="season">Season</button>
+              <button id="weekly">Weekly</button>
             </div>
-          </div>  
+          </div>
+          <div className="Searchform">
+            <span className="LeaderboardSearchIcon">🔍</span>
+            <input type="text" placeholder="Search for Player" />
+          </div>
+        </div>
+        <div className="boards">
+          <div className="leader-board">
+            <LeaderboardTable />
+          </div>
+          <div className="friend-board">
+            <div className="flist">Friends</div>
+            <FriendboardTable />
+          </div>
+        </div>
+      </div>
     );
   }
 }
