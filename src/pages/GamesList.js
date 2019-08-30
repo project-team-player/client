@@ -116,9 +116,9 @@ class GamesList extends React.Component {
           <></>
         )}
 
-        <body className='gamesListGrid'>
           {!this.state.showGameThread ? (
-            this.state.games.map(game => (
+          <div className='gamesListGrid'>
+            {this.state.games.map(game => (
               <GameCard
                 gameDetails={game}
                 showGameThread={this.state.showGameThread}
@@ -126,15 +126,16 @@ class GamesList extends React.Component {
                 closeGameThread={this.closeGameThread}
                 setCurrentGame={this.setCurrentGame}
               />
-            ))
-          ) : (
+            ))}
+        </div>
+          )
+          : (
             <GameThread
               showModal={this.state.showGameThread}
               closeGameThread={this.closeGameThread}
               gameDetails={this.state.currentGame}
             />
           )}
-        </body>
       </main>
     );
   }
