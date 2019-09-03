@@ -1,8 +1,8 @@
 // Library imports here
 import React from 'react';
 import Cookies from 'universal-cookie';
+import axios from 'axios';
 const cookies = new Cookies();
-
 
 // Create global contexts
 const UserContext = React.createContext();
@@ -10,16 +10,28 @@ const UserContext = React.createContext();
 // Then create a provider Component
 class UserProvider extends React.Component {
   state = {
+    username: '',
+    email: '',
     isVisible: false,
     loginView: true,
     isLoggedIn: false,
   }
 
+  isUserLoggedIn = () => {
+    // Makes a call to backend to check if token is valid and sets isLoggedIn to true
+    const jwtCookie = cookies.get('bearerToken');
+    const token = jwtCookie.split('JWT ')[1];
+    axios({ method: 'POST', url: `${process.env.REACT_APP_PECORINA_SERVER_API}/authenticate`, headers: {authorization: `Bearer ${token}`}}).then(response => {
+      const { email, username } = this.state;
+      if (response.data.username) {
+        this.setState({ isLoggedIn: true, email, username });
+      }
+    });
+  }
+
   componentDidMount() {
-    if (cookies.get('bearerToken')) {
-      console.log('You are logged in!');
-      this.setState({isLoggedIn: true});
-    }
+    // Check if user is logged in
+    this.isUserLoggedIn();
   }
 
   render() {
@@ -36,10 +48,7 @@ class UserProvider extends React.Component {
           console.log('Logged out!');
         },
         isUserLoggedIn: () => {
-          if (cookies.get('bearerToken')) {
-            // this.setState({isLoggedIn: true});
-            return true;
-          }
+          this.isUserLoggedIn();
         },
         showModal: () => this.setState({isVisible: true}),
         hideModal: () => this.setState({isVisible: false}),

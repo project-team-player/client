@@ -139,16 +139,6 @@ class AuthModal extends Component {
     this.validateForm = this.validateForm.bind(this);
   }
 
-  // fireSuccessMessage(title, message) {
-  //   Swal.fire({
-  //     title: title,
-  //     text: message,
-  //     type: 'success',
-  //     showConfirmButton: false,
-  //   })
-  //   setTimeout(() => Swal.close(), 1500);
-  // }
-
   handleInputChange = event => {
     const { value, name } = (event.target);
     const formValues = {...this.state.formValues};
@@ -271,6 +261,7 @@ class AuthModal extends Component {
     const { loginView } = this.context.state;
     const { formValues, formErrors } = this.state;
 
+    // Conditionally renders login or signup form based on context state 
     return (
       <div className="auth-modal">
       {
