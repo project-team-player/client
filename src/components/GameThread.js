@@ -11,11 +11,11 @@ class GameThread extends React.Component {
     this.state = {
       isVisible: false,
       condition: false,
-      currentComment: "",
-      comments: [],
-      commentOwner: "",
-      commentText: "",
-      createdBy: ""
+      comments: []
+      // currentComment: "",
+      // commentOwner: "",
+      // commentText: "",
+      // createdBy: ""
     };
   }
 
@@ -67,12 +67,15 @@ class GameThread extends React.Component {
 
           <ul className="game-thread-nav-items">
             <li className="game-thread-nav-item">
+              {/* TODO: Make buttons because no href */}
               <a>Discussion</a>
             </li>
             <li className="game-thread-nav-item">
+              {/* TODO: Make buttons because no href */}
               <a>Players</a>
             </li>
             <li className="game-thread-nav-item">
+              {/* TODO: Make buttons because no href */}
               <a>Standings</a>
             </li>
           </ul>
@@ -151,14 +154,13 @@ class GameThread extends React.Component {
             <hr />
 
             <div className="comments">
-              {this.state.comments.map(comment => (
-                <Comments
-                  currentComment={comment}
-                  commentOwner={this.state.commentOwner}
-                  commentText={this.state.commentText}
-                  createdBy={this.state.createdBy}
-                />
-              ))}
+              {this.state.comments
+                .map(comment => <Comments currentComment={comment} />)
+                .filter(
+                  comment =>
+                    comment.props.currentComment.slug ===
+                    this.props.gameDetails.slug
+                )}
             </div>
           </div>
         </div>

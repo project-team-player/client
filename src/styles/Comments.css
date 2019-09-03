@@ -1,0 +1,83 @@
+.user-avatar {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.comment {
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  border-bottom: solid;
+  border-color: #ebebeb;
+}
+
+.comment-owner {
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  grid-area: name;
+}
+
+.comment-time {
+  grid-area: time;
+}
+
+.comment-avatar {
+  grid-area: avatar;
+  width: 100px;
+  height: auto;
+}
+
+.comment-body {
+  width: 88vw;
+  display: grid;
+  grid-template-columns: 10vw 80vw;
+  /* grid-template-rows: repeat(auto-fit, minmax(0.5fr, 1fr)); */
+  grid-template-areas:
+    "avatar details"
+    "avatar text";
+  padding-bottom: 1rem;
+}
+
+.comment-details {
+  display: grid;
+  grid-template-columns: 4fr 1.3fr 1.2fr;
+  grid-template-areas: "name bet time";
+  grid-area: details;
+  align-items: center;
+}
+
+.comment-text {
+  grid-area: text;
+  padding-left: 1rem;
+  white-space: normal;
+  margin-top: -1rem;
+}
+
+.betDetails {
+  width: -webkit-fill-available;
+  grid-area: bet;
+  align-items: flex-end;
+  margin-left: 1rem;
+  text-align: end;
+  margin-bottom: 1rem;
+}
+
+#bet-amount {
+  /* margin-right: 0.5rem; */
+  font-size: small;
+}
+
+#pizzaSlice {
+  margin-right: 0.3rem;
+}
+
+.spanComment {
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+}
+
+.bet-logo {
+  max-height: 25px;
+  margin-left: 0.3rem;
+}
