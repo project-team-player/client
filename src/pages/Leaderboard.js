@@ -17,7 +17,9 @@ class Leaderboard extends React.Component {
             </div>
           </div>
           <div className="Searchform">
-            <span className="LeaderboardSearchIcon">🔍</span>
+            <span className="LeaderboardSearchIcon" role="img" aria-label="glass">
+              🔍
+            </span>
             <input type="text" placeholder="Search for Player" />
           </div>
         </div>
