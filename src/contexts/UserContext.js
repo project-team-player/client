@@ -39,13 +39,18 @@ class UserProvider extends React.Component {
       <UserContext.Provider value={{ 
         state: this.state,
         logIn: (token) => {
-          cookies.set('bearerToken', token, { path: '/', });
+          if (process.env.REACT_APP_PRODUCTION) {
+            // If in production, create a more secure token
+            cookies.set('bearerToken', token, { path: '/', secure: true, httpOnly: true});
+          } else {
+            // In development
+            cookies.set('bearerToken', token, { path: '/', }); 
+          }
           this.setState({isLoggedIn: true})
         },
         logOut: () => {
           cookies.remove('bearerToken');
           this.setState({ isLoggedIn: false });
-          console.log('Logged out!');
         },
         isUserLoggedIn: () => {
           this.isUserLoggedIn();
