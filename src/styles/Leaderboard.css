@@ -1,5 +1,6 @@
 .top {
     display: flex;
+    min-width: 1100;
 }
 
 .boards {

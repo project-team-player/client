@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     overflowX: 'auto',
   },
   table: {
-    minWidth: 1200, // 700 with friendboard
+    minWidth: 700,
   },
 }));
 
@@ -25,8 +25,8 @@ function createData(rank, username, winperweek, totalslices) {
 }
 
 const rows = [
-  createData('🥇', 'Superduperkevin', 10, 12304),
-  createData('🥈', 'Jon', 9, 11342),
+  createData('🥇', 'YAH', 10, 12304),
+  createData('🥈', 'YAH', 9, 11342),
   createData('🥉', 'Balsagne', 8, 10002),
   createData('4', 'Erv', 7, 10000),
   createData('5', 'Hans', 6, 9999),
