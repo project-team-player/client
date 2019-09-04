@@ -32,12 +32,10 @@ class GamesList extends React.Component {
   }
 
   openGameThread = async () => {
-    console.log('hey hey');
     await this.setState({ showGameThread: true });
   };
 
   closeGameThread = async () => {
-    console.log('closing');
     await this.setState({ showGameThread: false });
   };
 
@@ -47,24 +45,20 @@ class GamesList extends React.Component {
 
   // Sets state of
   getListOfGames = async number => {
-    console.log('Getting List of Games');
     await axios
       .get(`https://pecorina-development.herokuapp.com/games/week/${number}`)
       .then(response => {
         this.setState({ games: response.data.gamesList });
       });
     this.setState({ currentWeek: number });
-    console.log(this.state.games);
   };
 
   getTotalWeeks = async () => {
-    console.log('Getting Week');
     await axios
       .get('https://pecorina-development.herokuapp.com/games/weekTotal/NFL')
       .then(response => {
         this.setState({ totalWeeks: response.data.totalWeeksNFL });
       });
-    console.log(this.state.totalWeeks);
   };
 
   generateOptions = () => {
