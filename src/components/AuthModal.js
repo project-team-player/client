@@ -204,9 +204,10 @@ class AuthModal extends Component {
       if (value.length < 8) {
         errorMessage = 'Password must contain at least 8 characters'
       }
-      else if (!passwordStrength.test(value)) {
-        errorMessage = 'Password needs 1 uppercase, lowercase, numeric and special character.'
-      }
+      // Might add back later for added layer of security
+      // else if (!passwordStrength.test(value)) {
+      //   errorMessage = 'Password needs 1 uppercase, lowercase, numeric and special character.'
+      // }
     }
 
     if (keyName === 'passwordConfirm') {

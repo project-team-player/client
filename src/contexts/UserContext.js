@@ -20,13 +20,15 @@ class UserProvider extends React.Component {
   isUserLoggedIn = () => {
     // Makes a call to backend to check if token is valid and sets isLoggedIn to true
     const jwtCookie = cookies.get('bearerToken');
-    const token = jwtCookie.split('JWT ')[1];
-    axios({ method: 'POST', url: `${process.env.REACT_APP_PECORINA_SERVER_API}/authenticate`, headers: {authorization: `Bearer ${token}`}}).then(response => {
-      const { email, username } = this.state;
-      if (response.data.username) {
-        this.setState({ isLoggedIn: true, email, username });
-      }
-    });
+    if (jwtCookie) {
+      const token = jwtCookie.split('JWT ')[1];
+      axios({ method: 'POST', url: `${process.env.REACT_APP_PECORINA_SERVER_API}/authenticate`, headers: {authorization: `Bearer ${token}`}}).then(response => {
+        const { email, username } = this.state;
+        if (response.data.username) {
+          this.setState({ isLoggedIn: true, email, username });
+        }
+      });
+    }  
   }
 
   componentDidMount() {
