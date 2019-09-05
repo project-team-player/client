@@ -139,16 +139,6 @@ class AuthModal extends Component {
     this.validateForm = this.validateForm.bind(this);
   }
 
-  // fireSuccessMessage(title, message) {
-  //   Swal.fire({
-  //     title: title,
-  //     text: message,
-  //     type: 'success',
-  //     showConfirmButton: false,
-  //   })
-  //   setTimeout(() => Swal.close(), 1500);
-  // }
-
   handleInputChange = event => {
     const { value, name } = (event.target);
     const formValues = {...this.state.formValues};
@@ -214,9 +204,10 @@ class AuthModal extends Component {
       if (value.length < 8) {
         errorMessage = 'Password must contain at least 8 characters'
       }
-      else if (!passwordStrength.test(value)) {
-        errorMessage = 'Password needs 1 uppercase, lowercase, numeric and special character.'
-      }
+      // Might add back later for added layer of security
+      // else if (!passwordStrength.test(value)) {
+      //   errorMessage = 'Password needs 1 uppercase, lowercase, numeric and special character.'
+      // }
     }
 
     if (keyName === 'passwordConfirm') {
@@ -271,6 +262,7 @@ class AuthModal extends Component {
     const { loginView } = this.context.state;
     const { formValues, formErrors } = this.state;
 
+    // Conditionally renders login or signup form based on context state 
     return (
       <div className="auth-modal">
       {
