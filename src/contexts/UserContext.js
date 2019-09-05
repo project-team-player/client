@@ -15,6 +15,7 @@ class UserProvider extends React.Component {
     isVisible: false,
     loginView: true,
     isLoggedIn: false,
+    token: '',
   }
 
   isUserLoggedIn = () => {
@@ -22,10 +23,10 @@ class UserProvider extends React.Component {
     const jwtCookie = cookies.get('bearerToken');
     if (jwtCookie) {
       const token = jwtCookie.split('JWT ')[1];
-      axios({ method: 'POST', url: `${process.env.REACT_APP_PECORINA_SERVER_API}/authenticate`, headers: {authorization: `Bearer ${token}`}}).then(response => {
+      axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/authenticate`, headers: {authorization: `Bearer ${token}`}}).then(response => {
         const { email, username } = this.state;
         if (response.data.username) {
-          this.setState({ isLoggedIn: true, email, username });
+          this.setState({ isLoggedIn: true, email, username, token });
         }
       });
     }  
@@ -41,7 +42,7 @@ class UserProvider extends React.Component {
       <UserContext.Provider value={{ 
         state: this.state,
         logIn: (token) => {
-          cookies.set('bearerToken', token, { path: '/', })
+          cookies.set('bearerToken', token, { path: '/' })
           // TODO: Improve cookie security
           // if (process.env.REACT_APP_PRODUCTION) {
           //   // If in production, create a more secure token
@@ -50,13 +51,13 @@ class UserProvider extends React.Component {
           //   // In development
           //   cookies.set('bearerToken', token, { path: '/', }); 
           // }
-          this.setState({isLoggedIn: true})
+          this.setState({isLoggedIn: true, token})
         },
         logOut: () => {
           cookies.remove('bearerToken');
           this.setState({ isLoggedIn: false });
         },
-        isUserLoggedIn: () => {
+        isUserLoggedIn: () => { 
           this.isUserLoggedIn();
         },
         showModal: () => this.setState({isVisible: true}),

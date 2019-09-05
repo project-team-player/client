@@ -17,6 +17,7 @@ class TeamChoice extends React.Component {
     this.setState({
       activeName
     });
+    this.props.handleBetChanges(event);
   }
 
   render() {

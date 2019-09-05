@@ -226,7 +226,7 @@ class AuthModal extends Component {
     e.preventDefault();
     const { formValues: { username, password }, formValues } = this.state;
     if (!this.anyFormErrors()) {
-      axios.post(`${process.env.REACT_APP_PECORINA_SERVER_API}/authenticate/login`, { username, password } )
+      axios.post(`${process.env.REACT_APP_SERVER_URL}/authenticate/login`, { username, password } )
       .then(response => {
       this.context.logIn(response.data.token);
       this.context.hideModal();
@@ -240,7 +240,7 @@ class AuthModal extends Component {
     const { formValues: { email, username, password, passwordConfirm }, formValues } = this.state;
     
     if (!this.anyFormErrors()) {
-      axios.post(`${process.env.REACT_APP_PECORINA_SERVER_API}/authenticate/signup`, { email, username, password, passwordConfirm }).then(response => {
+      axios.post(`${process.env.REACT_APP_SERVER_URL}/authenticate/signup`, { email, username, password, passwordConfirm }).then(response => {
         this.context.logIn(response.data.token);
         this.context.hideModal();
       })  

@@ -4,6 +4,7 @@ import TeamChoice from "./TeamChoice";
 import Slider from "./Slider";
 import axios from "axios";
 import Comments from "./Comments";
+import { AuthContext } from "../contexts/UserContext";
 
 class GameThread extends React.Component {
   constructor(props) {
@@ -11,7 +12,12 @@ class GameThread extends React.Component {
     this.state = {
       isVisible: false,
       condition: false,
-      comments: []
+      comments: [],
+      bet: {
+        winningTeam: '',
+        slices: 0,
+        comment: ''
+      }
       // currentComment: "",
       // commentOwner: "",
       // commentText: "",
@@ -32,7 +38,7 @@ class GameThread extends React.Component {
     console.log("Getting List of Comments");
     await axios
       .get(
-        "https://pecorina-development.herokuapp.com/comments/all/gamethread/5d5eaf9b7547cb38d40f2662"
+        `${process.env.REACT_APP_SERVER_URL}/comments/all/gamethread/5d5eaf9b7547cb38d40f2662`
       )
       .then(response => {
         this.setState({
@@ -47,6 +53,38 @@ class GameThread extends React.Component {
   setCurrentComment = async comment => {
     await this.setState({ currentComment: comment });
   };
+
+  handleBetChanges = (e) => {
+    const bet = {...this.state.bet};
+    const { gameDetails } = this.props;
+    switch (e.target.name) {
+      case 'winning-team-home':
+        bet.winningTeam = gameDetails.homeTeam.key;
+        break;
+      case 'winning-team-away':
+        bet.winningTeam = gameDetails.awayTeam.key;
+        break;
+      case 'pizza-slices':
+        bet.slices = e.target.value;
+        break;
+      case 'comment':
+        bet.comment = e.target.value;
+        break;
+      default:
+        break;
+    }
+    this.setState({ bet });
+    e.preventDefault();
+  }
+
+  makeGameBet = (e) => {
+    const { _id, slug } = this.props.gameDetails;
+    const { bet: { winningTeam, slices ,comment} } = this.state;
+    console.log(winningTeam, slices, comment);
+    // axios.post(`${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, { key: winningTeam, slices, comment, teamId: _id} ).then(res => console.log(res));
+    axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, headers: {authorization: `Bearer ${this.context.state.token}`}, data: { key: winningTeam, slices, comment, teamId: _id}})
+    e.preventDefault();
+  }
 
   render() {
     const { showModal } = this.props;
@@ -66,18 +104,23 @@ class GameThread extends React.Component {
           </div>
 
           <ul className="game-thread-nav-items">
+          {/* 
+          TODO: Implement tabs 
+          */}
+            {/*
             <li className="game-thread-nav-item">
-              {/* TODO: Make buttons because no href */}
+               TODO: Make buttons because no href
               <a>Discussion</a>
             </li>
             <li className="game-thread-nav-item">
-              {/* TODO: Make buttons because no href */}
+              TODO: Make buttons because no href
               <a>Players</a>
             </li>
             <li className="game-thread-nav-item">
-              {/* TODO: Make buttons because no href */}
+              TODO: Make buttons because no href
               <a>Standings</a>
             </li>
+            */}
           </ul>
         </nav>
 
@@ -125,9 +168,9 @@ class GameThread extends React.Component {
           <div className="discussion-container">
             <h2>Place Your Slices On Your Favorite Team</h2>
             <hr />
-            <form>
+            <form onSubmit={this.makeGameBet}>
               <div className="betting-container">
-                <TeamChoice gameDetails={this.props.gameDetails} />
+                <TeamChoice gameDetails={this.props.gameDetails} handleBetChanges={this.handleBetChanges} />
 
                 <div className="slice-allocation">
                   <h3>2. Place Your Slices</h3>
@@ -135,7 +178,7 @@ class GameThread extends React.Component {
                     {/* <img src={PizzaWheel} /> */}
                     {/* <input type="range" min="1" max="8" /> */}
                     {/* <span className="bet-size-indicator">8</span> */}
-                    <Slider />
+                    <Slider handleBetChanges={this.handleBetChanges}/>
                   </div>
                 </div>
 
@@ -145,6 +188,7 @@ class GameThread extends React.Component {
                     type="text"
                     name="comment"
                     className="input-comment-field"
+                    onChange={this.handleBetChanges}
                   />
                   <button className="button">Slice It</button>
                 </div>
@@ -176,5 +220,7 @@ class GameThread extends React.Component {
 //   return res.status(200).json({ comments });
 // })
 // );
+
+GameThread.contextType = AuthContext;
 
 export default GameThread;
