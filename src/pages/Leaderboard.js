@@ -10,25 +10,27 @@ class Leaderboard extends React.Component {
     super(props);
     this.state = {
       weekly: false,
+      weeklytext: 'Season',
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(weekly) {
-    this.setState({ weekly });
+  handleClick(weekly, weeklytext) {
+    this.setState({ weekly, weeklytext });
   }
+
   render() {
-    const { weekly } = this.state;
+    const { weekly, weeklytext } = this.state;
     return (
       <div>
         <div className="top">
           <div className="leftside">
-            <h2 className="leaderboardtext">Leaderboard - Season</h2>
+            <h2 className="leaderboardtext">{`Leaderboard ${weeklytext}`}</h2>
             <div className="filterbuttons">
-              <button id="season" onClick={() => this.handleClick(false)}>
+              <button id="season" onClick={() => this.handleClick(false, 'Season')}>
                 Season
               </button>
-              <button id="weekly" onClick={() => this.handleClick(true)}>
+              <button id="weekly" onClick={() => this.handleClick(true, 'Weekly')}>
                 Weekly
               </button>
             </div>
@@ -43,7 +45,6 @@ class Leaderboard extends React.Component {
         <div className="boards">
           <div className="leader-board">
             {weekly === true ? <WeeklyTable /> : <LeaderboardTable />}
-            <LeaderboardTable />
           </div>
           {/* <div className="friend-board">
             <div className="flist">Friends</div>
