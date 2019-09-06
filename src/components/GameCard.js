@@ -1,6 +1,6 @@
 import React from 'react';
 import GameThread from '../components/GameThread';
-import moment from 'moment';
+import { convertDate } from '../utils/helpers';
 
 // CSS
 import '../styles/GameCard.css';
@@ -8,9 +8,6 @@ import '../styles/GameCard.css';
 // Components
 
 class GameCard extends React.Component {
-  convertDate = date => {
-    return moment(date).format('ddd, MMM Do h:mm A');
-  };
   render() {
     // consts here
     const {
@@ -76,7 +73,7 @@ class GameCard extends React.Component {
               </div>
               {/* TODO: Create date parse for below Ex.2019-09-05T20:20:00 */}
               <div className='Date'>
-                <span>{this.convertDate(gameDetails.dateTime.toString())}   EST</span>
+                <span>{convertDate(gameDetails.dateTime.toString())}   EST</span>
               </div>
             </div>
           </div>

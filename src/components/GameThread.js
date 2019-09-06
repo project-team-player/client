@@ -6,6 +6,9 @@ import axios from "axios";
 import Comments from "./Comments";
 import { AuthContext } from "../contexts/UserContext";
 
+// helpers
+import { convertDate } from '../utils/helpers.js';
+
 class GameThread extends React.Component {
   constructor(props) {
     super(props);
@@ -78,11 +81,12 @@ class GameThread extends React.Component {
   }
 
   makeGameBet = (e) => {
-    const { _id, slug } = this.props.gameDetails;
+    // pass the following in body: { slices, comment winningTeam, dateTime }
+    // dateTime is the time of the game, used to check if game has finished
+    const { _id, slug, dateTime, gameThreadReference: { gameThreadID } } = this.props.gameDetails;
     const { bet: { winningTeam, slices ,comment} } = this.state;
-    console.log(winningTeam, slices, comment);
-    // axios.post(`${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, { key: winningTeam, slices, comment, teamId: _id} ).then(res => console.log(res));
-    axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, headers: {authorization: `Bearer ${this.context.state.token}`}, data: { key: winningTeam, slices, comment, teamId: _id}})
+    console.log(this.props.gameDetails);
+    axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, headers: {authorization: `Bearer ${this.context.state.token}`}, data: { key: winningTeam, slices, comment, dateTime, gamethreadid: gameThreadID, teamId: _id}}).then(res => console.log(res));
     e.preventDefault();
   }
 
