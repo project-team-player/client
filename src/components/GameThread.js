@@ -35,13 +35,13 @@ class GameThread extends React.Component {
       this.setState({ isVisible: true });
     }
     this.getListOfComments();
+    console.log(this.props.gameDetails);
   }
 
   getListOfComments = async () => {
-    console.log("Getting List of Comments");
     await axios
       .get(
-        `${process.env.REACT_APP_SERVER_URL}/comments/all/gamethread/5d5eaf9b7547cb38d40f2662`
+        `${process.env.REACT_APP_SERVER_URL}/comments/all/gamethread/${this.props.gameDetails.gameThreadReference.gameThreadID}`
       )
       .then(response => {
         this.setState({
@@ -83,10 +83,10 @@ class GameThread extends React.Component {
   makeGameBet = (e) => {
     // pass the following in body: { slices, comment winningTeam, dateTime }
     // dateTime is the time of the game, used to check if game has finished
-    const { _id, slug, dateTime, gameThreadReference: { gameThreadID } } = this.props.gameDetails;
+    const { _id, slug, dateTime, gameThreadReference: { objectReference } } = this.props.gameDetails;
     const { bet: { winningTeam, slices ,comment} } = this.state;
-    console.log(this.props.gameDetails);
-    axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, headers: {authorization: `Bearer ${this.context.state.token}`}, data: { key: winningTeam, slices, comment, dateTime, gamethreadid: gameThreadID, teamId: _id}}).then(res => console.log(res));
+    console.log(winningTeam, slices, comment, dateTime);
+    axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, headers: {authorization: `Bearer ${this.context.state.token}`}, data: { key: winningTeam, slices, comment, dateTime, gamethreadId: objectReference, teamId: _id}}).then(res => console.log(res));
     e.preventDefault();
   }
 
