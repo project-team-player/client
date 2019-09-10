@@ -5,6 +5,8 @@ import Slider from "./Slider";
 import axios from "axios";
 import Comments from "./Comments";
 import { AuthContext } from "../contexts/UserContext";
+import { getUserToken } from '../utils/auth';
+
 
 // helpers
 import { convertDate } from '../utils/helpers.js';
@@ -20,37 +22,71 @@ class GameThread extends React.Component {
         winningTeam: '',
         slices: 0,
         comment: ''
-      }
-      // currentComment: "",
-      // commentOwner: "",
-      // commentText: "",
-      // createdBy: ""
+      },
+      errorMessage: '',
+      disableCommenting: true
     };
   }
 
   componentDidMount() {
     const { showModal } = this.props;
-    console.log("game thread mounting");
     if (showModal) {
       this.setState({ isVisible: true });
     }
-    this.getListOfComments();
-    console.log(this.props.gameDetails);
+    this.getListOfComments().then(data => {
+      let disableCommenting = false;
+      if (this.context.state.isLoggedIn) {
+        if (this.userHasPlacedBet(data.comments)) { 
+          disableCommenting = true;
+        }
+      }
+      this.setState({
+          comments: data.comments,
+          commentOwner: data.owner,
+          commentText: data.text,
+          createdBy: data.createdAt,
+          disableCommenting
+      })
+    });
   }
 
-  getListOfComments = async () => {
-    await axios
+  componentDidUpdate() {
+    if (this.state.fetchNewComment) {
+      this.getListOfComments()
+        .then(data => {
+          this.setState({
+            comments: data.comments,
+            commentOwner: data.owner,
+            commentText: data.text,
+            createdBy: data.createdAt,
+            disableCommenting: true,
+          })
+      })
+    }
+  }
+
+  userHasPlacedBet(comments) {
+    comments.forEach(comment => {
+      comments[comment._id] = true;
+    })
+    const userComments = this.context.state.user.comments;
+
+    const userCommentsOnThread = userComments.filter(comment => {
+      if (comments[comment]) {
+        return true;
+      }
+    }).length || false;
+
+    if (userCommentsOnThread) return true;
+    return false;
+  }
+
+  getListOfComments = () => {
+    return axios
       .get(
         `${process.env.REACT_APP_SERVER_URL}/comments/all/gamethread/${this.props.gameDetails.gameThreadReference.gameThreadID}`
       )
-      .then(response => {
-        this.setState({
-          comments: response.data.comments,
-          commentOwner: response.data.owner,
-          commentText: response.data.text,
-          createdBy: response.data.createdAt
-        });
-      });
+      .then(response => response.data);
   };
 
   setCurrentComment = async comment => {
@@ -83,15 +119,20 @@ class GameThread extends React.Component {
   makeGameBet = (e) => {
     // pass the following in body: { slices, comment winningTeam, dateTime }
     // dateTime is the time of the game, used to check if game has finished
+    console.log('making game bet');
     const { _id, slug, dateTime, gameThreadReference: { objectReference } } = this.props.gameDetails;
     const { bet: { winningTeam, slices ,comment} } = this.state;
-    console.log(winningTeam, slices, comment, dateTime);
-    axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, headers: {authorization: `Bearer ${this.context.state.token}`}, data: { key: winningTeam, slices, comment, dateTime, gamethreadId: objectReference, teamId: _id}}).then(res => console.log(res));
+    axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, headers: { authorization: `Bearer ${getUserToken()}`}, data: { key: winningTeam, slices, comment, dateTime, gamethreadId: objectReference, teamId: _id}}).then(res => {
+      this.setState({ fetchNewComment: true });
+    }).catch(error => {
+      this.setState({ errorMessage: error.message })
+    });
     e.preventDefault();
   }
 
   render() {
     const { showModal } = this.props;
+    const { disableCommenting } = this.state;
     if (!showModal) {
       return <></>;
     }
@@ -170,40 +211,47 @@ class GameThread extends React.Component {
           </div>
 
           <div className="discussion-container">
-            <h2>Place Your Slices On Your Favorite Team</h2>
-            <hr />
-            <form onSubmit={this.makeGameBet}>
-              <div className="betting-container">
-                <TeamChoice gameDetails={this.props.gameDetails} handleBetChanges={this.handleBetChanges} />
+          { !disableCommenting ?
+            <>
+              <h2>Place Your Slices On Your Favorite Team</h2>
+              <hr />
+              <form onSubmit={this.makeGameBet}>
+                <div className="betting-container">
+                  <TeamChoice gameDetails={this.props.gameDetails} handleBetChanges={this.handleBetChanges} />
 
-                <div className="slice-allocation">
-                  <h3>2. Place Your Slices</h3>
-                  <div className="bet-size-slider">
-                    {/* <img src={PizzaWheel} /> */}
-                    {/* <input type="range" min="1" max="8" /> */}
-                    {/* <span className="bet-size-indicator">8</span> */}
-                    <Slider handleBetChanges={this.handleBetChanges}/>
+                  <div className="slice-allocation">
+                    <h3>2. Place Your Slices</h3>
+                    <div className="bet-size-slider">
+                      {/* <img src={PizzaWheel} /> */}
+                      {/* <input type="range" min="1" max="8" /> */}
+                      {/* <span className="bet-size-indicator">8</span> */}
+                      <Slider handleBetChanges={this.handleBetChanges}/>
+                    </div>
+                  </div>
+
+                  <div className="comment-input">
+                    <h3>3. Throw A Cheesy Comment</h3>
+                    <textarea
+                      type="text"
+                      name="comment"
+                      className="input-comment-field"
+                      onChange={this.handleBetChanges}
+                    />
+                    <button className="button">Slice It</button>
                   </div>
                 </div>
-
-                <div className="comment-input">
-                  <h3>3. Throw A Cheesy Comment</h3>
-                  <textArea
-                    type="text"
-                    name="comment"
-                    className="input-comment-field"
-                    onChange={this.handleBetChanges}
-                  />
-                  <button className="button">Slice It</button>
-                </div>
-              </div>
-            </form>
+              </form>
+            </>
+            :
+            <p>You have all ready bet pizza slices on this game. You can only bet once per game</p>
+            
+            }
             <h2>Discussion</h2>
             <hr />
 
             <div className="comments">
               {this.state.comments
-                .map(comment => <Comments currentComment={comment} />)
+                .map((comment, i) => <Comments currentComment={comment} key={i} />)
                 .filter(
                   comment =>
                     comment.props.currentComment.slug ===

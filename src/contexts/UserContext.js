@@ -1,8 +1,6 @@
 // Library imports here
 import React from 'react';
-import Cookies from 'universal-cookie';
-import axios from 'axios';
-const cookies = new Cookies();
+import { getUserToken, setUserToken, removeUserToken, authenticateUser } from '../utils/auth';
 
 // Create global contexts
 const UserContext = React.createContext();
@@ -20,15 +18,14 @@ class UserProvider extends React.Component {
 
   isUserLoggedIn = () => {
     // Makes a call to backend to check if token is valid and sets isLoggedIn to true
-    const jwtCookie = cookies.get('bearerToken');
-    if (jwtCookie) {
-      const token = jwtCookie.split('JWT ')[1];
-      axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/authenticate`, headers: {authorization: `Bearer ${token}`}}).then(response => {
-        const { email, username } = this.state;
-        if (response.data.username) {
-          this.setState({ isLoggedIn: true, email, username, token });
+    const token = getUserToken();
+    if (token) {
+     authenticateUser().then(response => {
+        const { user } = response.data;
+        if (user) {
+          this.setState({ isLoggedIn: true, user });
         }
-      });
+      })
     }  
   }
 
@@ -42,7 +39,7 @@ class UserProvider extends React.Component {
       <UserContext.Provider value={{ 
         state: this.state,
         logIn: (token) => {
-          cookies.set('bearerToken', token, { path: '/' })
+          
           // TODO: Improve cookie security
           // if (process.env.REACT_APP_PRODUCTION) {
           //   // If in production, create a more secure token
@@ -51,11 +48,12 @@ class UserProvider extends React.Component {
           //   // In development
           //   cookies.set('bearerToken', token, { path: '/', }); 
           // }
-          this.setState({isLoggedIn: true, token})
+          setUserToken(token);
+          this.setState({isLoggedIn: true})
         },
         logOut: () => {
-          cookies.remove('bearerToken');
-          this.setState({ isLoggedIn: false });
+          removeUserToken();
+          this.setState({ isLoggedIn: false, user: {} });
         },
         isUserLoggedIn: () => { 
           this.isUserLoggedIn();

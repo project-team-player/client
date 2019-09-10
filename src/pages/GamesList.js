@@ -64,7 +64,7 @@ class GamesList extends React.Component {
   generateOptions = () => {
     let optionsList = [];
     for (let i = 1; i < this.state.totalWeeks + 1; i++) {
-      optionsList.push(<OptionsButton weekNumber={i} />);
+      optionsList.push(<OptionsButton weekNumber={i} key={i} />);
     }
     return optionsList;
   };
@@ -114,6 +114,7 @@ class GamesList extends React.Component {
           <div className='gamesListGrid'>
             {this.state.games.map(game => (
               <GameCard
+                key={game._id}
                 gameDetails={game}
                 showGameThread={this.state.showGameThread}
                 openGameThread={this.openGameThread}
