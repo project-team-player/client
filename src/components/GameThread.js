@@ -20,6 +20,11 @@ class GameThread extends React.Component {
         winningTeam: '',
         slices: 0,
         comment: ''
+      },
+      //Percentages for Sauce Indicator
+      percentages: {
+        awayTeam: 0,
+        homeTeam: 0,
       }
       // currentComment: "",
       // commentOwner: "",
@@ -35,7 +40,8 @@ class GameThread extends React.Component {
       this.setState({ isVisible: true });
     }
     this.getListOfComments();
-    console.log(this.props.gameDetails);
+    console.log('Game Details', this.props.gameDetails);
+    this.getPercentage();
   }
 
   getListOfComments = async () => {
@@ -88,6 +94,21 @@ class GameThread extends React.Component {
     console.log(winningTeam, slices, comment, dateTime);
     axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, headers: {authorization: `Bearer ${this.context.state.token}`}, data: { key: winningTeam, slices, comment, dateTime, gamethreadId: objectReference, teamId: _id}}).then(res => console.log(res));
     e.preventDefault();
+  }
+
+  // Method to obtain sauce percentages
+  getPercentage = async () => {
+    await axios
+      .get(
+        `${process.env.REACT_APP_SERVER_URL}/gamethreads/${this.props.gameDetails.gameThreadReference.gameThreadID}`
+      )
+      .then((response) => {
+        this.setState({ percentages: {
+          awayTeam: response.data.percentages[this.props.gameDetails.awayTeam.key],
+          homeTeam: response.data.percentages[this.props.gameDetails.homeTeam.key]
+        }
+        });
+      });
   }
 
   render() {
@@ -159,12 +180,12 @@ class GameThread extends React.Component {
             <h2>Who's Got Sauce?</h2>
             <div className="prediction-counter">
               {/* Just use template literals with the prediction value as width to change poll */}
-              <div className="home-team-prediction" style={{ width: "55%" }}>
-                <span>55%</span>
+              <div className="away-team-prediction" style={{ width: `${this.state.percentages.awayTeam}%`, backgroundColor: `#${this.props.gameDetails.awayTeam.primaryColor}`}}>
+                <span>{this.state.percentages.awayTeam}</span>
               </div>
               {/* Just use template literals with the prediction value as width to change poll */}
-              <div className="away-team-prediction" style={{ width: "45%" }}>
-                <span>45%</span>
+              <div className="home-team-prediction" style={{ width: `${this.state.percentages.homeTeam}%`, backgroundColor: `#${this.props.gameDetails.homeTeam.primaryColor}`}}>
+                <span>{this.state.percentages.homeTeam}</span>
               </div>
             </div>
           </div>
