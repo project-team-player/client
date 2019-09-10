@@ -11,6 +11,9 @@ import GameCard from '../components/GameCard';
 import GameThread from '../components/GameThread';
 import OptionsButton from '../components/OptionsButton';
 
+// Helpers
+import { getCurrentGameWeek } from '../utils/nfl';
+
 class GamesList extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +30,7 @@ class GamesList extends React.Component {
   }
 
   componentDidMount() {
-    this.getListOfGames(1);
+    this.getListOfGames(getCurrentGameWeek());
     this.getTotalWeeks();
   }
 
@@ -63,8 +66,9 @@ class GamesList extends React.Component {
 
   generateOptions = () => {
     let optionsList = [];
+    const currentGameWeek = getCurrentGameWeek();
     for (let i = 1; i < this.state.totalWeeks + 1; i++) {
-      optionsList.push(<OptionsButton weekNumber={i} />);
+      optionsList.push(<OptionsButton weekNumber={i} key={i} isCurrentWeek={currentGameWeek === i ? true : false} />);
     }
     return optionsList;
   };
@@ -114,6 +118,7 @@ class GamesList extends React.Component {
           <div className='gamesListGrid'>
             {this.state.games.map(game => (
               <GameCard
+                key={game._id}
                 gameDetails={game}
                 showGameThread={this.state.showGameThread}
                 openGameThread={this.openGameThread}

@@ -118,11 +118,20 @@
 
 .form-error-field {
   color: var(--red);
-  font-size: 12px;
+  font-size: 14px;
   margin: 0;
   margin-top: 1rem;
   padding-left: 20px;
   padding-right: 20px;
   text-align: left;
+  min-width: 100%;
+}
+
+.login-error-message {
+  color: var(--red);
+  font-size: 14px;
+  margin: 0;
+  margin-bottom: 15px;
+  text-align: center;
   min-width: 100%;
 }
