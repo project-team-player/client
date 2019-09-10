@@ -22,7 +22,9 @@ class UserProvider extends React.Component {
     if (token) {
      authenticateUser().then(response => {
         const { user } = response.data;
+        console.log(response.data);
         if (user) {
+          console.log(user);
           this.setState({ isLoggedIn: true, user });
         } else {
           console.log('something is wrong');
