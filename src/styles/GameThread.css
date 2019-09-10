@@ -62,6 +62,8 @@
 
 .prediction-counter {
   width: 50%;
+  display: flex;
+  flex-direction: row;
 }
 
 .team-text {
@@ -71,34 +73,26 @@
   align-items: center;
 }
 
-.home-team-prediction {
-  display: inline-flex;
+.away-team-prediction {
+  display: flex;
   justify-content: flex-start;
   color: var(--white);
   padding: 7px 15px;
   background: var(--red);
-  border-top: 1px solid var(--red);
-  border-bottom: 1px solid var(--red);
-  border-left: 1px solid var(--red);
   border-right: none;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
-  width: 25%;
 }
 
-.away-team-prediction {
-  display: inline-flex;
+.home-team-prediction {
+  display: flex;
   justify-content: flex-end;
   color: var(--white);
   padding: 7px 15px;
   background: #002243;
-  border-top: 1px solid #002243;
-  border-bottom: 1px solid #002243;
-  border-right: 1px solid #002243;
   border-left: none;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
-  width: 75%;
 }
 
 .game-thread-nav-items {

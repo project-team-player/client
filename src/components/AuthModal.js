@@ -75,11 +75,12 @@ const SignupForm = ({handleSignup, showLoginForm, handleInputChange, formValues,
   )
 }
 
-const LoginForm = ({ showSignupForm, handleLogin, handleInputChange, formValues, formErrors, validateForm}) => {
+const LoginForm = ({ showSignupForm, handleLogin, handleInputChange, formValues, formErrors, validateForm, loginError}) => {
 
   return (
     <form onSubmit={handleLogin} className="auth-form">
       <h1 className="credentialTitle">Log In</h1>
+      <span className="login-error-message">{loginError && loginError}</span>
         <div class="auth-form-field">
           <input
             className="credentialInput"
@@ -128,6 +129,7 @@ class AuthModal extends Component {
         password: '',
         passwordConfirm: '',
       },
+      loginError: '',
       showLogin: false,
     };
 
@@ -230,6 +232,15 @@ class AuthModal extends Component {
       .then(response => {
       this.context.logIn(response.data.token);
       this.context.hideModal();
+    }).catch(error => {
+      console.log(error.response.status);
+      let loginError = '';
+      if (error.response.status === 500) {
+        loginError = 'We are having some issues at the moment. Please try again later or contact teamplayer4321234@gmail.com for assistance.'
+      } else {
+        loginError = 'Password or email incorrect. Please try again.'
+      }
+      this.setState({ loginError: 'Password or email incorrect. Please try again.' })
     });
     } else {
       this.validateForm(formValues);
@@ -260,7 +271,7 @@ class AuthModal extends Component {
 
   render() {
     const { loginView } = this.context.state;
-    const { formValues, formErrors } = this.state;
+    const { formValues, formErrors, loginError } = this.state;
 
     // Conditionally renders login or signup form based on context state 
     return (
@@ -274,6 +285,7 @@ class AuthModal extends Component {
           validateForm={this.validateForm}
           formValues={formValues}
           formErrors={formErrors}
+          loginError={loginError}
         />
         : 
         <SignupForm 

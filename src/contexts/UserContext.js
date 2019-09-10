@@ -24,6 +24,8 @@ class UserProvider extends React.Component {
         const { user } = response.data;
         if (user) {
           this.setState({ isLoggedIn: true, user });
+        } else {
+          console.log('something is wrong');
         }
       })
     }  
