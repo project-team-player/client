@@ -11,6 +11,9 @@ import GameCard from '../components/GameCard';
 import GameThread from '../components/GameThread';
 import OptionsButton from '../components/OptionsButton';
 
+// Helpers
+import { getCurrentGameWeek } from '../utils/nfl';
+
 class GamesList extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +30,7 @@ class GamesList extends React.Component {
   }
 
   componentDidMount() {
-    this.getListOfGames(1);
+    this.getListOfGames(getCurrentGameWeek());
     this.getTotalWeeks();
   }
 
