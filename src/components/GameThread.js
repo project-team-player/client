@@ -4,12 +4,8 @@ import TeamChoice from "./TeamChoice";
 import Slider from "./Slider";
 import axios from "axios";
 import Comments from "./Comments";
-import { AuthContext } from "../contexts/UserContext";
+import { UserContext } from "../contexts/UserContext";
 import { getUserToken } from '../utils/auth';
-
-
-// helpers
-import { convertDate } from '../utils/helpers.js';
 
 class GameThread extends React.Component {
   constructor(props) {
@@ -76,6 +72,7 @@ class GameThread extends React.Component {
       comments[comment._id] = true;
     })
     const userComments = this.context.state.user.comments;
+    console.log(userComments);
 
     const userCommentsOnThread = userComments.filter(comment => {
       if (comments[comment]) {
@@ -286,14 +283,6 @@ class GameThread extends React.Component {
   }
 }
 
-// comment route
-// router.get('comments/all/gamethread/:id',
-// catchErrors(async(req, res) => {
-//   const comments = await commentController.readMany({ gameThreadReference: req.params.id });
-//   return res.status(200).json({ comments });
-// })
-// );
-
-GameThread.contextType = AuthContext;
+GameThread.contextType = UserContext;
 
 export default GameThread;

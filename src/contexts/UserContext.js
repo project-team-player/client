@@ -3,7 +3,7 @@ import React from 'react';
 import { getUserToken, setUserToken, removeUserToken, authenticateUser } from '../utils/auth';
 
 // Create global contexts
-const UserContext = React.createContext();
+export const UserContext = React.createContext();
 
 // Then create a provider Component
 class UserProvider extends React.Component {
@@ -14,6 +14,9 @@ class UserProvider extends React.Component {
     loginView: true,
     isLoggedIn: false,
     token: '',
+    user: {
+      comments: []
+    }
   }
 
   isUserLoggedIn = () => {
@@ -22,9 +25,7 @@ class UserProvider extends React.Component {
     if (token) {
      authenticateUser().then(response => {
         const { user } = response.data;
-        console.log(response.data);
         if (user) {
-          console.log(user);
           this.setState({ isLoggedIn: true, user });
         } else {
           console.log('something is wrong');

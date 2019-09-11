@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AuthContext } from '../contexts/UserContext';
+import { UserContext } from '../contexts/UserContext';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { NavLink } from "react-router-dom";
@@ -173,13 +173,10 @@ class AuthModal extends Component {
     // Iterates over all keys and checks the whole form
     keys.forEach(keyName => {
       const value = this.state.formValues[keyName];
-      console.log(keyName);
-      console.log(value);
       let errorMessage = '';
 
     // If field is empty
     if (value.length === 0) {
-      console.log('it is nothing!');
       errorMessage = 'Field required. Do not leave empty.';
     } else {
        // EMAIL
@@ -233,7 +230,6 @@ class AuthModal extends Component {
       this.context.logIn(response.data.token);
       this.context.hideModal();
     }).catch(error => {
-      console.log(error.response.status);
       let loginError = '';
       if (error.response.status === 500) {
         loginError = 'We are having some issues at the moment. Please try again later or contact teamplayer4321234@gmail.com for assistance.'
@@ -302,6 +298,6 @@ class AuthModal extends Component {
   }
 }
 
-AuthModal.contextType = AuthContext;
+AuthModal.contextType = UserContext;
 
 export default AuthModal;
