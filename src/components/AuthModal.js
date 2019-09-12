@@ -227,7 +227,8 @@ class AuthModal extends Component {
     if (!this.anyFormErrors()) {
       axios.post(`${process.env.REACT_APP_SERVER_URL}/authenticate/login`, { username, password } )
       .then(response => {
-      this.context.logIn(response.data.token);
+        const { token, user } = response.data;
+      this.context.logIn(token, user);
       this.context.hideModal();
     }).catch(error => {
       let loginError = '';

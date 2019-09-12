@@ -29,11 +29,11 @@ class Header extends React.Component {
             </li>
             {/* will be NavLinks when routes are set */}
             {this.props.isLoggedIn ? 
-              <button className="specificLogin" onClick={context.logOut}>
+              <button className="login-button" onClick={context.logOut}>
                 Log Out
               </button>
               :
-              <button className="specificLogin" onClick={context.showModal}>
+              <button className="login-button" onClick={context.showModal}>
                 Log In
               </button>
             }
