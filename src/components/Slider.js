@@ -17,6 +17,7 @@ class Slider extends React.Component {
       pizzaSrc: pizzaWheelFormat[e.target.value].src,
       altTag: pizzaWheelFormat[e.target.value].name
     });
+    this.props.handleBetChanges(e);
   }
 
   render() {
@@ -33,6 +34,7 @@ class Slider extends React.Component {
           onChange={e => this.onUpdateSlider(e)}
           step={1}
           type="range"
+          name="pizza-slices"
           value={this.state.value}
         />
       </div>

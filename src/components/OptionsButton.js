@@ -1,19 +1,17 @@
 import React from 'react';
+import { getCurrentGameWeek } from '../utils/nfl';
 
 // CSS
 
 // Components
 
-class OptionsButton extends React.Component {
-  render() {
-    // consts here
-    const { weekNumber } = this.props;
-    return (
-      <option id='weekNumber' value={weekNumber}>
-        week {weekNumber}
-      </option>
-    );
-  }
+const OptionsButton = ({isCurrentWeek, weekNumber }) => {
+  return (
+    <option id='weekNumber' value={weekNumber} selected={isCurrentWeek}>
+      week {weekNumber}
+    </option>
+  );
 }
+
 
 export default OptionsButton;
