@@ -1,5 +1,5 @@
-import React from "react";
-import { AuthContext } from "../contexts/UserContext";
+import React from 'react';
+import { AuthContext } from '../contexts/UserContext';
 
 import LeaderboardTable from '../components/LeaderboardTable';
 // import FriendboardTable from '../components/FriendboardTable';
@@ -26,6 +26,7 @@ class Leaderboard extends React.Component {
     this.state = {
       weekly: false,
       weeklytext: 'Season',
+      query: '',
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -43,7 +44,6 @@ class Leaderboard extends React.Component {
             <h2 className="leaderboardtext">{`Leaderboard - ${weeklytext}`}</h2>
             <div id="weekform">
               <form action="/action_page.php" />
-
               <select>
                 <option value="one">1</option>
               </select>
@@ -74,12 +74,21 @@ class Leaderboard extends React.Component {
             <span className="LeaderboardSearchIcon" role="img" aria-label="glass">
               🔍
             </span>
-            <input type="text" placeholder="Search player feature currently WIP" disabled />
+            <input
+              type="text"
+              placeholder="Search player here"
+              value={this.state.query}
+              onChange={(event, index, value) => this.setState({ query: value })}
+            />
           </div>
         </div>
         <div className="boards">
           <div className="leader-board">
-            {weekly === true ? <WeeklyTable /> : <LeaderboardTable />}
+            {weekly === true ? (
+              <WeeklyTable query={this.state.query} />
+            ) : (
+              <LeaderboardTable query={this.state.query} />
+            )}
           </div>
           {/* <div className="friend-board">
             <div className="flist">Friends</div>

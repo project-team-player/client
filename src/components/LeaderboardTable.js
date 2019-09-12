@@ -42,7 +42,14 @@ export default function SimpleTable() {
 
   return (
     <Paper className={classes.root}>
-      <Table className={classes.table}>
+      <Table
+        className={classes.table}
+        // data={
+        //   this.state.query
+        //     ? this.state.data.filter(x => !x.includes(this.state.query))
+        //     : this.state.data
+        // }
+      >
         <TableHead>
           <TableRow>
             <TableCell align="center">Rank</TableCell>
