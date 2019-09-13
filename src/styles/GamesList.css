@@ -7,6 +7,8 @@
 .gamesListTitle {
   text-align: center;
   padding-left: 40px;
+  display: flex;
+  flex-direction: row;
 }
 
 .sliceNumberHeader {
@@ -31,6 +33,8 @@
   padding: 0rem 0rem 0rem 1rem;
   border-radius: 10px;
   height: 30px;
+  margin: initial;
+  background-color: #ebebeb;
 }
 
 .changeViewButton {

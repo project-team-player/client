@@ -1,5 +1,5 @@
 import React from 'react';
-import GameThread from '../components/GameThread';
+import GameThread from './GameThread';
 import { convertDate } from '../utils/helpers';
 
 // CSS
@@ -15,11 +15,11 @@ class GameCard extends React.Component {
       showGameThread,
       openGameThread,
       closeGameThread,
-      setCurrentGame
+      setCurrentGame,
     } = this.props;
     return (
-      <div className='modal-page-container'>
-        <div className='thefuckingthreadcontainer'>
+      <div className="modal-page-container">
+        <div className="thefuckingthreadcontainer">
           {showGameThread ? (
             <GameThread
               showModal={showGameThread}
@@ -32,8 +32,8 @@ class GameCard extends React.Component {
         </div>
         {!showGameThread ? (
           <div
-            className='GameCard'
-            role='button'
+            className="GameCard"
+            role="button"
             onClick={() => setCurrentGame(gameDetails).then(openGameThread)}
             onKeyPress={event => {
               this.handleKeyPress(event);
@@ -41,39 +41,30 @@ class GameCard extends React.Component {
             }}
           >
             <div
-              className='Away'
+              className="Away"
               style={{
-                backgroundColor: '#' + gameDetails.awayTeam.primaryColor
+                backgroundColor: `#${gameDetails.awayTeam.primaryColor}`,
               }}
             >
-              <img
-                className='AwayImg'
-                src={gameDetails.awayTeam.logo}
-                alt='Logo'
-              />
-              ;
+              <img className="AwayImg" src={gameDetails.awayTeam.logo} alt="Logo" />;
             </div>
             <div
-              className='Home'
+              className="Home"
               style={{
-                backgroundColor: '#' + gameDetails.homeTeam.primaryColor
+                backgroundColor: `#${gameDetails.homeTeam.primaryColor}`,
               }}
             >
-              <img
-                className='HomeImg'
-                src={gameDetails.homeTeam.logo}
-                alt='Logo'
-              />
+              <img className="HomeImg" src={gameDetails.homeTeam.logo} alt="Logo" />
             </div>
-            <div className='GameInfo'>
-              <div className='Title'>
-                <b className='TeamKey'>{gameDetails.awayTeam.key}</b>
-                <b className='Versus'>VS</b>
-                <b className='TeamKey'>{gameDetails.homeTeam.key}</b>
+            <div className="GameInfo">
+              <div className="Title">
+                <b className="TeamKey">{gameDetails.awayTeam.key}</b>
+                <b className="Versus">VS</b>
+                <b className="TeamKey">{gameDetails.homeTeam.key}</b>
               </div>
               {/* TODO: Create date parse for below Ex.2019-09-05T20:20:00 */}
-              <div className='Date'>
-                <span>{convertDate(gameDetails.dateTime.toString())}   EST</span>
+              <div className="Date">
+                <span>{convertDate(gameDetails.dateTime.toString())} EST</span>
               </div>
             </div>
           </div>
