@@ -48,7 +48,7 @@ class Leaderboard extends React.Component {
     this.setState({ weekly, weeklytext });
   }
   handleSearch(event) {
-    this.setState({ query: [...event.currentTarget.value].join('').toLowerCase() });
+    this.setState({ query: [...event.currentTarget.value].join('') });
   }
 
   render() {
