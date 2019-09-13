@@ -26,7 +26,8 @@ class GameThread extends React.Component {
       percentages: {
         awayTeam: 0,
         homeTeam: 0
-      }
+      },
+      finished: false,
     };
   }
 
@@ -36,27 +37,47 @@ class GameThread extends React.Component {
     if (showModal) {
       this.setState({ isVisible: true });
     }
-    this.getListOfComments();
-
-    let disableCommenting = false;
-    let promptUserToLogIn = false;
-    if (this.props.context.state.isLoggedIn) {
-      if (this.userHasPlacedBet(this.state.comments)) { 
-        disableCommenting = true;
-      }
-    } else if (!this.props.context.state.isLoggedIn) {
-      promptUserToLogIn = true;
-    }
-    this.setState({
-        disableCommenting,
-        promptUserToLogIn
-    })
     this.getPercentage();
+    this.getListOfComments().then(() => {
+      const gameIsFinished = () => {
+        if (Date.now() > new Date(`${this.props.gameDetails.dateTime}`)) {
+          return true
+        }
+        return false;
+      }
+  
+      if (gameIsFinished()) {
+        this.setState({ finished: true });
+      } else {
+        let disableCommenting = false;
+        let promptUserToLogIn = false;
+        if (this.props.context.state.isLoggedIn) {
+          console.log('user is logged in.....');
+          console.log(this.state.comments);
+          if (this.userHasPlacedBet(this.state.comments)) { 
+            console.log('user has placed bets');
+            disableCommenting = true;
+          }
+        } else if (!this.props.context.state.isLoggedIn) {
+          promptUserToLogIn = true;
+        }
+        this.setState({
+            disableCommenting,
+            promptUserToLogIn
+        })
+      }
+    })
+    
+
+    
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.context.state.isLoggedIn === false && this.props.context.state.isLoggedIn === true){
       this.setState({ promptUserToLogIn: false })
+      if (this.userHasPlacedBet(this.state.comments)) {
+        this.setState({ disableCommenting: true })
+      }
     }
     if (prevProps.context.state.isLoggedIn === true && this.props.context.state.isLoggedIn === false){
       this.setState({ promptUserToLogIn: true })
@@ -92,7 +113,7 @@ class GameThread extends React.Component {
   }
 
   getListOfComments = () => {
-    axios
+    return axios
       .get(
         `${process.env.REACT_APP_SERVER_URL}/comments/all/gamethread/${this.props.gameDetails.gameThreadReference.gameThreadID}`
       )
@@ -134,16 +155,21 @@ class GameThread extends React.Component {
   };
 
   makeGameBet = e => {
+    const { bet: { winningTeam, slices, comment}} = this.state;
     // pass the following in body: { slices, comment winningTeam, dateTime }
     // dateTime is the time of the game, used to check if game has finished
-    const { _id, slug, dateTime, gameThreadReference: { objectReference } } = this.props.gameDetails;
-    console.log(_id, slug, dateTime, objectReference);
-    const { bet: { winningTeam, slices ,comment} } = this.state;
-    axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, headers: { authorization: `Bearer ${getUserToken()}`}, data: { key: winningTeam, slices, comment, dateTime, gamethreadId: objectReference, teamId: _id}}).then(res => {
-      this.setState({ fetchNewComment: true });
-    }).catch(error => {
-      this.setState({ errorMessage: error.message })
-    });
+    if ( winningTeam && slices && comment) {
+      const { _id, slug, dateTime, gameThreadReference: { objectReference } } = this.props.gameDetails;
+      console.log(_id, slug, dateTime, objectReference);
+      const { bet: { winningTeam, slices ,comment} } = this.state;
+      axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, headers: { authorization: `Bearer ${getUserToken()}`}, data: { key: winningTeam, slices, comment, dateTime, gamethreadId: objectReference, teamId: _id}}).then(res => {
+        this.setState({ fetchNewComment: true });
+      }).catch(error => {
+        this.setState({ errorMessage: 'This game has either finished or you have all ready bet on it.' })
+      });
+    } else {
+      this.setState({ errorMessage: 'Please select all the options before submitting bet!'})
+    }
     e.preventDefault();
   };
 
@@ -169,7 +195,7 @@ class GameThread extends React.Component {
 
   render() {
     const { showModal } = this.props;
-    const { disableCommenting, promptUserToLogIn } = this.state;
+    const { disableCommenting, promptUserToLogIn, errorMessage, finished } = this.state;
     if (!showModal) {
       return <></>;
     }
@@ -242,7 +268,10 @@ class GameThread extends React.Component {
               <div
                 className='away-team-prediction'
                 style={{
-                  width: `${this.state.percentages.awayTeam}%`,
+                  width: 
+                    this.state.percentages.awayTeam < 1
+                      ? ``
+                      : `${this.state.percentages.awayTeam}%`,
                   backgroundColor: `#${this.props.gameDetails.awayTeam.primaryColor}`
                 }}
               >
@@ -253,9 +282,9 @@ class GameThread extends React.Component {
                   className='home-team-prediction'
                   style={{
                     width:
-                      this.state.percentages.homeTeam !== 0
-                        ? `${this.state.percentages.homeTeam}%`
-                        : '',
+                      this.state.percentages.homeTeam < 1
+                        ? ``
+                        : `${this.state.percentages.homeTeam}%`,
                     backgroundColor: `#${this.props.gameDetails.homeTeam.primaryColor}`
                   }}
                 >
@@ -291,6 +320,9 @@ class GameThread extends React.Component {
                         className="input-comment-field"
                         onChange={this.handleBetChanges}
                       />
+                      {
+                        errorMessage && <p className="bet-error-message">{errorMessage}</p>
+                      }
                       <button className="button">Slice It</button>
                     </div>
                   </div>
@@ -305,10 +337,13 @@ class GameThread extends React.Component {
                 </>
               }
                 {
-                  disableCommenting && !promptUserToLogIn &&
+                  disableCommenting && !promptUserToLogIn && !finished &&
                   <p>You have allready bet pizza slices on this game. You can only bet once per game</p>
                 }
-              
+                {
+                  finished &&
+                  <p>This game has finished. Please bet on another game.</p>
+                }
               <h2>Discussion</h2>
               <hr />
 
