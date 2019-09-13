@@ -22,7 +22,7 @@ class GamesList extends React.Component {
       currentWeek: String,
       currentGame: {},
       games: [],
-      totalWeeks: 0,
+      totalWeeks: 0
     };
 
     this.openGameThread = this.openGameThread.bind(this);
@@ -82,7 +82,8 @@ class GamesList extends React.Component {
   // Functions for options
   getGamesForWeek = e => {
     e.preventDefault();
-    const weekNumber = document.getElementById('weekSelection').elements.weeks.value;
+    const weekNumber = document.getElementById('weekSelection').elements.weeks
+      .value;
     this.getListOfGames(parseInt(weekNumber));
   };
 
@@ -90,22 +91,27 @@ class GamesList extends React.Component {
     return (
       <main>
         {!this.state.showGameThread ? (
-          <div className="gamesListHeader">
-            <h2 className="gamesListTitle">NFL Games 2019 - Week {this.state.currentWeek}</h2>
-            <div className="gamesListHeaderRight">
-              <div className="sliceNumberHeader">
-                <img src={require('../images/logo.svg')} alt="slice-it-logo" />
-                <p className="sliceNumber">200</p>
-              </div>
-
-              <form id="weekSelection">
-                <select id="weeks" onChange={event => this.getGamesForWeek(event)}>
+          <div className='gamesListHeader'>
+            <h2 className='gamesListTitle'>
+              NFL Games 2019 -{' '}
+              <form id='weekSelection'>
+                <select
+                  id='weeks'
+                  onChange={event => this.getGamesForWeek(event)}
+                >
                   {this.generateOptions()}
                 </select>
               </form>
+            </h2>
+            <div className='gamesListHeaderRight'>
+              <div className='sliceNumberHeader'>
+                <img src={require('../images/logo.svg')} alt='slice-it-logo' />
+                <p className='sliceNumber'>200</p>
+              </div>
+
               <div>
-                <button className="changeViewButton" id="listButton" />
-                <button className="changeViewButton" id="columnButton" />
+                <button className='changeViewButton' id='listButton' />
+                <button className='changeViewButton' id='columnButton' />
               </div>
             </div>
           </div>
@@ -114,7 +120,7 @@ class GamesList extends React.Component {
         )}
 
         {!this.state.showGameThread ? (
-          <div className="gamesListGrid">
+          <div className='gamesListGrid'>
             {this.state.games.map(game => (
               <GameCard
                 key={game._id}

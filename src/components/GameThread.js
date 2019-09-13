@@ -17,15 +17,15 @@ class GameThread extends React.Component {
       bet: {
         winningTeam: '',
         slices: 0,
-        comment: '',
+        comment: ''
       },
       errorMessage: '',
       disableCommenting: true,
       // Percentages for Sauce Indicator
       percentages: {
         awayTeam: 0,
-        homeTeam: 0,
-      },
+        homeTeam: 0
+      }
     };
   }
 
@@ -46,7 +46,7 @@ class GameThread extends React.Component {
         commentOwner: data.owner,
         commentText: data.text,
         createdBy: data.createdAt,
-        disableCommenting,
+        disableCommenting
       });
     });
     this.getPercentage();
@@ -60,7 +60,7 @@ class GameThread extends React.Component {
           commentOwner: data.owner,
           commentText: data.text,
           createdBy: data.createdAt,
-          disableCommenting: true,
+          disableCommenting: true
         });
       });
     }
@@ -87,9 +87,7 @@ class GameThread extends React.Component {
   getListOfComments = () =>
     axios
       .get(
-        `${process.env.REACT_APP_SERVER_URL}/comments/all/gamethread/${
-          this.props.gameDetails.gameThreadReference.gameThreadID
-        }`
+        `${process.env.REACT_APP_SERVER_URL}/comments/all/gamethread/${this.props.gameDetails.gameThreadReference.gameThreadID}`
       )
       .then(response => response.data);
 
@@ -128,10 +126,10 @@ class GameThread extends React.Component {
       _id,
       slug,
       dateTime,
-      gameThreadReference: { objectReference },
+      gameThreadReference: { objectReference }
     } = this.props.gameDetails;
     const {
-      bet: { winningTeam, slices, comment },
+      bet: { winningTeam, slices, comment }
     } = this.state;
     axios({
       method: 'POST',
@@ -143,8 +141,8 @@ class GameThread extends React.Component {
         comment,
         dateTime,
         gamethreadId: objectReference,
-        teamId: _id,
-      },
+        teamId: _id
+      }
     })
       .then(res => {
         this.setState({ fetchNewComment: true });
@@ -159,16 +157,18 @@ class GameThread extends React.Component {
   getPercentage = async () => {
     await axios
       .get(
-        `${process.env.REACT_APP_SERVER_URL}/gamethreads/${
-          this.props.gameDetails.gameThreadReference.gameThreadID
-        }`
+        `${process.env.REACT_APP_SERVER_URL}/gamethreads/${this.props.gameDetails.gameThreadReference.gameThreadID}`
       )
       .then(response => {
         this.setState({
           percentages: {
-            awayTeam: response.data.percentages[this.props.gameDetails.awayTeam.key],
-            homeTeam: response.data.percentages[this.props.gameDetails.homeTeam.key],
-          },
+            awayTeam: response.data.percentages[
+              this.props.gameDetails.awayTeam.key
+            ].toFixed(2),
+            homeTeam: response.data.percentages[
+              this.props.gameDetails.homeTeam.key
+            ].toFixed(2)
+          }
         });
       });
   };
@@ -180,15 +180,18 @@ class GameThread extends React.Component {
       return <></>;
     }
     return (
-      <div className="game-thread">
-        <nav className="game-thread-nav">
-          <div className="backbuttonDude">
-            <button className="game-thread-close-btn" onClick={this.props.closeGameThread}>
+      <div className='game-thread'>
+        <nav className='game-thread-nav'>
+          <div className='backbuttonDude'>
+            <button
+              className='game-thread-close-btn'
+              onClick={this.props.closeGameThread}
+            >
               {'<<< Back to Games List'}
             </button>
           </div>
 
-          <ul className="game-thread-nav-items">
+          <ul className='game-thread-nav-items'>
             {/* 
           TODO: Implement tabs 
           */}
@@ -209,43 +212,55 @@ class GameThread extends React.Component {
           </ul>
         </nav>
 
-        <div className="game-thread-content">
-          <div className="teams">
-            <div className="logoContainer">
-              <img className="teamLogo" src={this.props.gameDetails.awayTeam.logo} alt="logo" />
+        <div className='game-thread-content'>
+          <div className='teams'>
+            <div className='logoContainer'>
+              <img
+                className='teamLogo'
+                src={this.props.gameDetails.awayTeam.logo}
+                alt='logo'
+              />
             </div>
-            <div className="team-text">
-              <span className="team-name">{this.props.gameDetails.awayTeam.name}</span>
-              <span className="vs">VS</span>
-              <span className="team-name">{this.props.gameDetails.homeTeam.name}</span>
+            <div className='team-text'>
+              <span className='team-name'>
+                {this.props.gameDetails.awayTeam.name}
+              </span>
+              <span className='vs'>VS</span>
+              <span className='team-name'>
+                {this.props.gameDetails.homeTeam.name}
+              </span>
             </div>
-            <div className="logoContainer">
-              <img className="teamLogo" src={this.props.gameDetails.homeTeam.logo} alt="alt" />
+            <div className='logoContainer'>
+              <img
+                className='teamLogo'
+                src={this.props.gameDetails.homeTeam.logo}
+                alt='alt'
+              />
             </div>
           </div>
 
-          <div className="predictions">
+          <div className='predictions'>
             <h2>Who's Got Sauce?</h2>
-            <div className="prediction-counter">
+            <div className='prediction-counter'>
               {/* Just use template literals with the prediction value as width to change poll */}
               <div
-                className="away-team-prediction"
+                className='away-team-prediction'
                 style={{
                   width: `${this.state.percentages.awayTeam}%`,
-                  backgroundColor: `#${this.props.gameDetails.awayTeam.primaryColor}`,
+                  backgroundColor: `#${this.props.gameDetails.awayTeam.primaryColor}`
                 }}
               >
                 <span>{this.state.percentages.awayTeam}%</span>
               </div>
               {/* Just use template literals with the prediction value as width to change poll */}
               <div
-                className="home-team-prediction"
+                className='home-team-prediction'
                 style={{
                   width:
                     this.state.percentages.homeTeam !== 0
                       ? `${this.state.percentages.homeTeam}%`
                       : '',
-                  backgroundColor: `#${this.props.gameDetails.homeTeam.primaryColor}`,
+                  backgroundColor: `#${this.props.gameDetails.homeTeam.primaryColor}`
                 }}
               >
                 <span>{this.state.percentages.homeTeam}%</span>
@@ -253,21 +268,21 @@ class GameThread extends React.Component {
             </div>
           </div>
 
-          <div className="discussion-container">
+          <div className='discussion-container'>
             {!disableCommenting ? (
               <>
                 <h2>Place Your Slices On Your Favorite Team</h2>
                 <hr />
                 <form onSubmit={this.makeGameBet}>
-                  <div className="betting-container">
+                  <div className='betting-container'>
                     <TeamChoice
                       gameDetails={this.props.gameDetails}
                       handleBetChanges={this.handleBetChanges}
                     />
 
-                    <div className="slice-allocation">
+                    <div className='slice-allocation'>
                       <h3>2. Place Your Slices</h3>
-                      <div className="bet-size-slider">
+                      <div className='bet-size-slider'>
                         {/* <img src={PizzaWheel} /> */}
                         {/* <input type="range" min="1" max="8" /> */}
                         {/* <span className="bet-size-indicator">8</span> */}
@@ -275,32 +290,37 @@ class GameThread extends React.Component {
                       </div>
                     </div>
 
-                    <div className="comment-input">
+                    <div className='comment-input'>
                       <h3>3. Throw A Cheesy Comment</h3>
                       <textarea
-                        type="text"
-                        name="comment"
-                        className="input-comment-field"
+                        type='text'
+                        name='comment'
+                        className='input-comment-field'
                         onChange={this.handleBetChanges}
                       />
-                      <button className="button">Slice It</button>
+                      <button className='button'>Slice It</button>
                     </div>
                   </div>
                 </form>
               </>
             ) : (
               <p>
-                You have all ready bet pizza slices on this game. You can only bet once per game
+                You have all ready bet pizza slices on this game. You can only
+                bet once per game
               </p>
             )}
             <h2>Discussion</h2>
             <hr />
 
-            <div className="comments">
+            <div className='comments'>
               {this.state.comments
-                .map((comment, i) => <Comments currentComment={comment} key={i} />)
+                .map((comment, i) => (
+                  <Comments currentComment={comment} key={i} />
+                ))
                 .filter(
-                  comment => comment.props.currentComment.slug === this.props.gameDetails.slug
+                  comment =>
+                    comment.props.currentComment.slug ===
+                    this.props.gameDetails.slug
                 )}
             </div>
           </div>
