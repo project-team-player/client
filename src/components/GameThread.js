@@ -36,48 +36,49 @@ class GameThread extends React.Component {
     if (showModal) {
       this.setState({ isVisible: true });
     }
-    this.getListOfComments().then(data => {
-      let disableCommenting = false;
-      let promptUserToLogIn = false;
-      if (this.context.state.isLoggedIn) {
-        if (this.userHasPlacedBet(data.comments)) { 
-          disableCommenting = true;
-        }
-      } else {
-        promptUserToLogIn = true;
+    this.getListOfComments();
+
+    let disableCommenting = false;
+    let promptUserToLogIn = false;
+    if (this.props.context.state.isLoggedIn) {
+      if (this.userHasPlacedBet(this.state.comments)) { 
+        disableCommenting = true;
       }
-      this.setState({
-          comments: data.comments,
-          commentOwner: data.owner,
-          commentText: data.text,
-          createdBy: data.createdAt,
-          disableCommenting,
-          promptUserToLogIn
-      })
-    });
+    } else if (!this.props.context.state.isLoggedIn) {
+      promptUserToLogIn = true;
+    }
+    this.setState({
+        disableCommenting,
+        promptUserToLogIn
+    })
     this.getPercentage();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    if (prevProps.context.state.isLoggedIn === false && this.props.context.state.isLoggedIn === true){
+      this.setState({ promptUserToLogIn: false })
+    }
+    if (prevProps.context.state.isLoggedIn === true && this.props.context.state.isLoggedIn === false){
+      this.setState({ promptUserToLogIn: true })
+    }
     if (this.state.fetchNewComment) {
-      this.getListOfComments()
-        .then(data => {
-          this.setState({
-            comments: data.comments,
-            commentOwner: data.owner,
-            commentText: data.text,
-            createdBy: data.createdAt,
-            disableCommenting: true,
-          })
+      this.getListOfComments();
+      this.setState({
+        disableCommenting: true,
+        fetchNewComment: false,
       })
     }
   }
 
   userHasPlacedBet(comments) {
+    const { user } = this.props.context.state;
     comments.forEach(comment => {
       comments[comment._id] = true;
     })
-    const userComments = this.context.state.user.comments;
+    let userComments = [];
+    if (user) {
+      userComments = user.comments;
+    } 
 
     const userCommentsOnThread = userComments.filter(comment => {
       if (comments[comment]) {
@@ -90,11 +91,19 @@ class GameThread extends React.Component {
   }
 
   getListOfComments = () => {
-    return axios
+    console.log(this.props.gameDetails.gameThreadReference.gameThreadID);
+    axios
       .get(
         `${process.env.REACT_APP_SERVER_URL}/comments/all/gamethread/${this.props.gameDetails.gameThreadReference.gameThreadID}`
       )
-      .then(response => response.data);
+      .then(response => {
+        this.setState({
+          comments: response.data.comments,
+          commentOwner: response.data.owner,
+          commentText: response.data.text,
+          createdBy: response.data.createdAt
+      })
+      });
   };
 
   setCurrentComment = async comment => {
@@ -128,6 +137,7 @@ class GameThread extends React.Component {
     // pass the following in body: { slices, comment winningTeam, dateTime }
     // dateTime is the time of the game, used to check if game has finished
     const { _id, slug, dateTime, gameThreadReference: { objectReference } } = this.props.gameDetails;
+    console.log(_id, slug, dateTime, objectReference);
     const { bet: { winningTeam, slices ,comment} } = this.state;
     axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, headers: { authorization: `Bearer ${getUserToken()}`}, data: { key: winningTeam, slices, comment, dateTime, gamethreadId: objectReference, teamId: _id}}).then(res => {
       this.setState({ fetchNewComment: true });
@@ -160,7 +170,7 @@ class GameThread extends React.Component {
     }
     return (
       <UserContext.Consumer>  
-      {({ showModal }) =>
+      {(context) => (
         <div className="game-thread">
           <nav className="game-thread-nav">
             <div className="backbuttonDude">
@@ -225,11 +235,11 @@ class GameThread extends React.Component {
               <div className="prediction-counter">
                 {/* Just use template literals with the prediction value as width to change poll */}
                 <div className="away-team-prediction" style={{ width: `${this.state.percentages.awayTeam}%`, backgroundColor: `#${this.props.gameDetails.awayTeam.primaryColor}`}}>
-                  <span>{this.state.percentages.awayTeam}%</span>
+                  <span>{Math.trunc(this.state.percentages.awayTeam)}%</span>
                 </div>
                 {/* Just use template literals with the prediction value as width to change poll */}
                 <div className="home-team-prediction" style={{ width: this.state.percentages.homeTeam !== 0 ? `${this.state.percentages.homeTeam}%` : '', backgroundColor: `#${this.props.gameDetails.homeTeam.primaryColor}`}}>
-                  <span>{this.state.percentages.homeTeam}%</span>
+                  <span>{Math.trunc(this.state.percentages.homeTeam)}%</span>
                 </div>
               </div>
             </div>
@@ -268,10 +278,10 @@ class GameThread extends React.Component {
               </>
               }
               {
-                promptUserToLogIn && !disableCommenting &&
+                promptUserToLogIn &&
                 <>
                   <span className="login-text">Please log in  to join the conversation</span>
-                  <button class="login-button" onClick={showModal}>Log in</button>
+                  <button className="login-button" onClick={context.showModal}>Log in</button>
                 </>
               }
                 {
@@ -295,7 +305,7 @@ class GameThread extends React.Component {
             </div>
           </div>
         </div>
-      }
+      )}
       </UserContext.Consumer>
     );
   }
@@ -303,4 +313,10 @@ class GameThread extends React.Component {
 
 GameThread.contextType = UserContext;
 
-export default GameThread;
+export default props => (
+  <UserContext.Consumer>
+    {context => <GameThread {...props} context={context} />}
+  </UserContext.Consumer>
+);
+
+// export default GameThread;

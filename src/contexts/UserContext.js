@@ -8,6 +8,7 @@ export const UserContext = React.createContext();
 // Then create a provider Component
 class UserProvider extends React.Component {
   state = {
+    horse: 'Horse!',
     isVisible: false,
     loginView: true,
     isLoggedIn: false,
