@@ -8,12 +8,10 @@ export const UserContext = React.createContext();
 // Then create a provider Component
 class UserProvider extends React.Component {
   state = {
-    username: '',
-    email: '',
+    horse: 'Horse!',
     isVisible: false,
     loginView: true,
     isLoggedIn: false,
-    token: '',
     user: {
       comments: []
     }
@@ -43,7 +41,7 @@ class UserProvider extends React.Component {
     return (
       <UserContext.Provider value={{ 
         state: this.state,
-        logIn: (token) => {
+        logIn: (token, user) => {
           
           // TODO: Improve cookie security
           // if (process.env.REACT_APP_PRODUCTION) {
@@ -54,11 +52,11 @@ class UserProvider extends React.Component {
           //   cookies.set('bearerToken', token, { path: '/', }); 
           // }
           setUserToken(token);
-          this.setState({isLoggedIn: true})
+          this.setState({isLoggedIn: true, user})
         },
         logOut: () => {
           removeUserToken();
-          this.setState({ isLoggedIn: false, user: {} });
+          this.setState({ isLoggedIn: false, user: { comments: [] } });
         },
         isUserLoggedIn: () => { 
           this.isUserLoggedIn();

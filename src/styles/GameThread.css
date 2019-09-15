@@ -227,3 +227,10 @@
 /*
 ================= Comment section ===========
 */
+
+.bet-error-message {
+  display: block;
+  color: var(--red);
+  text-align: right;
+}
+

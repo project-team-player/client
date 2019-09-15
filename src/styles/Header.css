@@ -57,22 +57,6 @@ nav {
   border-bottom-color: #f9f8f7;
 }
 
-.specificLogin {
-  background: var(--red);
-  text-decoration: none;
-  /* border-bottom: 1px solid transparent; */
-  border: none;
-  padding: 8px;
-  font-size: 18px;
-  border-radius: 4px;
-  transition: all ease-in-out 0.4s;
-  text-decoration: none;
-  /* color: #a8a8a8; */
-  color: var(--white);
-  outline: none;
-  cursor: pointer;
-}
-
 .loginButton {
   font-size: 20px;
   color: #f9f8f7;
