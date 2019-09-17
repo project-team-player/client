@@ -4,7 +4,6 @@ import '../styles/Leaderboard.css';
 
 class LeaderboardTable extends Component {
   renderTableData() {
-    console.log(this.props.users);
     const filteredUsers = this.props.users.filter(user => user.name.includes(this.props.query));
     return filteredUsers.map((user, index) => {
       const { name, wins, pizzaSlicesTotal } = user; // destructuring

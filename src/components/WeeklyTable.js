@@ -4,7 +4,8 @@ import '../styles/Leaderboard.css';
 
 class WeeklyTable extends Component {
   renderTableData() {
-    return this.props.users.map((user, index) => {
+    const filteredUsers = this.props.users.filter(user => user.name.includes(this.props.query));
+    return filteredUsers.map((user, index) => {
       const { name, wins, pizzaSlicesWeekly } = user; // destructuring
       return (
         <tr>
@@ -35,6 +36,7 @@ class WeeklyTable extends Component {
 
 WeeklyTable.propTypes = {
   users: PropTypes.object,
+  query: PropTypes.string,
 };
 
 export default WeeklyTable;

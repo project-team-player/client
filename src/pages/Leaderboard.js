@@ -101,7 +101,7 @@ class Leaderboard extends React.Component {
         </div>
         <div className="boards">
           {weekly === true ? (
-            <WeeklyTable users={this.state.users} />
+            <WeeklyTable users={this.state.users} query={this.state.query} />
           ) : (
             <LeaderboardTable users={this.state.users} query={this.state.query} />
           )}
