@@ -49,7 +49,7 @@ class GamesList extends React.Component {
   // Sets state of
   getListOfGames = async number => {
     await axios
-      .get(`https://pecorina-development.herokuapp.com/games/week/${number}`)
+      .get(`${process.env.REACT_APP_SERVER_URL}/games/week/${number}`)
       .then(response => {
         this.setState({ games: response.data.gamesList });
       });
@@ -58,7 +58,7 @@ class GamesList extends React.Component {
 
   getTotalWeeks = async () => {
     await axios
-      .get('https://pecorina-development.herokuapp.com/games/weekTotal/NFL')
+      .get(`${process.env.REACT_APP_SERVER_URL}/games/weekTotal/NFL`)
       .then(response => {
         this.setState({ totalWeeks: response.data.totalWeeksNFL });
       });

@@ -35,7 +35,7 @@ class Leaderboard extends React.Component {
 
   componentDidMount() {
     axios
-      .get('https://pecorina-development.herokuapp.com/users/leaderboard/global')
+      .get(`${process.env.REACT_APP_SERVER_URL}/users/leaderboard/global`)
       .then(response => {
         this.setState({ users: response.data.users });
       })
