@@ -81,3 +81,9 @@
   max-height: 25px;
   margin-left: 0.3rem;
 }
+
+.reply-container{
+  margin-left: 5vh;
+  background-color: grey;
+  border-radius: 2rem;
+}

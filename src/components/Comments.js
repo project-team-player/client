@@ -3,12 +3,15 @@ import PizzaSlice from "../images/pizza-slice.svg";
 import BearsLogo from "../images/bears-logo.svg";
 import UserAvatar from "../images/user-avatar.jpg";
 import "../styles/Comments.css";
+import Reply from "./Reply.js";
 
 class Comments extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      replies: []
+    };
   }
 
   render() {
@@ -37,6 +40,10 @@ class Comments extends React.Component {
           <div className="comment-text">
             <p>{this.props.currentComment.text}</p>
           </div>
+        </div>
+        <div className='reply-container'>
+          {this.props.currentComment.replies
+          .map((reply, i) => <Reply currentReply={reply} key={i} />)}
         </div>
       </div>
     );
