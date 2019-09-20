@@ -15,6 +15,10 @@ class Comments extends React.Component {
     };
   }
 
+  componentWillMount() {
+    this.setState({ replies: this.props.currentComment.replies });
+  }
+
   render() {
     const {postReplyHandler} = this.props;
     return (
@@ -44,7 +48,7 @@ class Comments extends React.Component {
           </div>
         </div>
         <div className='reply-container'>
-          {this.props.currentComment.replies
+          {this.state.replies
           .map((reply, i) => <Reply currentReply={reply} key={i} />)}
         </div>
         <form className='reply-input-container'>

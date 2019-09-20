@@ -14,7 +14,6 @@ class Reply extends React.Component {
   render() {
     return (
       <div className="reply">
-          {console.log(this.props.currentReply)}
           <div className="reply-body">
           <div className="reply-avatar">
             <img className="user-avatar" src={this.props.currentReply.gravatar} alt="profilepic" />

@@ -206,7 +206,6 @@ class GameThread extends React.Component {
 
     .then(response => {
       console.log(response);
-      this.forceUpdate();
     });
   }
 
