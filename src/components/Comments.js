@@ -45,6 +45,10 @@ class Comments extends React.Component {
           {this.props.currentComment.replies
           .map((reply, i) => <Reply currentReply={reply} key={i} />)}
         </div>
+        <form className='reply-input-container'>
+          <textarea rows='6' cols='203' className='reply-input' type="text" name="reply-text"></textarea>
+          <input type="button" onclick="myFunction()" value="Submit"></input>
+        </form>
       </div>
     );
   }
