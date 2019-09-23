@@ -1,10 +1,10 @@
-import React from "react";
-import { AuthContext } from "../contexts/UserContext";
-
+import React from 'react';
+import axios from 'axios';
+import { AuthContext } from '../contexts/UserContext';
 import LeaderboardTable from '../components/LeaderboardTable';
-// import FriendboardTable from '../components/FriendboardTable';
 import WeeklyTable from '../components/WeeklyTable';
 import '../styles/Leaderboard.css';
+import { thisExpression } from '@babel/types';
 
 function formLoader() {
   const x = document.getElementById('weekform');
@@ -24,14 +24,31 @@ class Leaderboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      users: [],
       weekly: false,
-      weeklytext: 'Season',
+      weeklytext: '2019 Season',
+      query: '',
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+  }
+
+  componentDidMount() {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/users/leaderboard/global`)
+      .then(response => {
+        this.setState({ users: response.data.users });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   handleClick(weekly, weeklytext) {
     this.setState({ weekly, weeklytext });
+  }
+  handleSearch(event) {
+    this.setState({ query: [...event.currentTarget.value].join('') });
   }
 
   render() {
@@ -40,12 +57,12 @@ class Leaderboard extends React.Component {
       <div>
         <div className="top">
           <div className="leftside">
-            <h2 className="leaderboardtext">{`Leaderboard - ${weeklytext}`}</h2>
+            <h2 className="leaderboardtext">{`${weeklytext}`}</h2>
             <div id="weekform">
               <form action="/action_page.php" />
-
               <select>
                 <option value="one">1</option>
+                <option value="two">2</option>
               </select>
             </div>
 
@@ -53,7 +70,7 @@ class Leaderboard extends React.Component {
               <button
                 id="season"
                 onClick={() => {
-                  this.handleClick(false, 'Season');
+                  this.handleClick(false, '2019 Season');
                   formCloser();
                 }}
               >
@@ -74,17 +91,20 @@ class Leaderboard extends React.Component {
             <span className="LeaderboardSearchIcon" role="img" aria-label="glass">
               🔍
             </span>
-            <input type="text" placeholder="Search player feature currently WIP" disabled />
+            <input
+              type="search"
+              placeholder="Search players here"
+              value={this.state.query}
+              onChange={this.handleSearch}
+            />
           </div>
         </div>
         <div className="boards">
-          <div className="leader-board">
-            {weekly === true ? <WeeklyTable /> : <LeaderboardTable />}
-          </div>
-          {/* <div className="friend-board">
-            <div className="flist">Friends</div>
-            <FriendboardTable />
-          </div> */}
+          {weekly === true ? (
+            <WeeklyTable users={this.state.users} />
+          ) : (
+            <LeaderboardTable users={this.state.users} query={this.state.query} />
+          )}
         </div>
       </div>
     );

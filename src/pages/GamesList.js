@@ -49,7 +49,7 @@ class GamesList extends React.Component {
   // Sets state of
   getListOfGames = async number => {
     await axios
-      .get(`https://pecorina-development.herokuapp.com/games/week/${number}`)
+      .get(`${process.env.REACT_APP_SERVER_URL}/games/week/${number}`)
       .then(response => {
         this.setState({ games: response.data.gamesList });
       });
@@ -58,17 +58,23 @@ class GamesList extends React.Component {
 
   getTotalWeeks = async () => {
     await axios
-      .get('https://pecorina-development.herokuapp.com/games/weekTotal/NFL')
+      .get(`${process.env.REACT_APP_SERVER_URL}/games/weekTotal/NFL`)
       .then(response => {
         this.setState({ totalWeeks: response.data.totalWeeksNFL });
       });
   };
 
   generateOptions = () => {
-    let optionsList = [];
+    const optionsList = [];
     const currentGameWeek = getCurrentGameWeek();
     for (let i = 1; i < this.state.totalWeeks + 1; i++) {
-      optionsList.push(<OptionsButton weekNumber={i} key={i} isCurrentWeek={currentGameWeek === i ? true : false} />);
+      optionsList.push(
+        <OptionsButton
+          weekNumber={i}
+          key={i}
+          isCurrentWeek={currentGameWeek === i}
+        />
+      );
     }
     return optionsList;
   };
@@ -76,9 +82,8 @@ class GamesList extends React.Component {
   // Functions for options
   getGamesForWeek = e => {
     e.preventDefault();
-    const weekNumber = document.getElementById('weekSelection').elements[
-      'weeks'
-    ].value;
+    const weekNumber = document.getElementById('weekSelection').elements.weeks
+      .value;
     this.getListOfGames(parseInt(weekNumber));
   };
 
@@ -88,14 +93,7 @@ class GamesList extends React.Component {
         {!this.state.showGameThread ? (
           <div className='gamesListHeader'>
             <h2 className='gamesListTitle'>
-              NFL Games 2019 - Week {this.state.currentWeek}
-            </h2>
-            <div className='gamesListHeaderRight'>
-              <div className='sliceNumberHeader'>
-                <img src={require('../images/logo.svg')} alt='slice-it-logo' />
-                <p className='sliceNumber'>200</p>
-              </div>
-
+              NFL Games 2019 -{' '}
               <form id='weekSelection'>
                 <select
                   id='weeks'
@@ -104,9 +102,16 @@ class GamesList extends React.Component {
                   {this.generateOptions()}
                 </select>
               </form>
+            </h2>
+            <div className='gamesListHeaderRight'>
+              <div className='sliceNumberHeader'>
+                <img src={require('../images/logo.svg')} alt='slice-it-logo' />
+                <p className='sliceNumber'>200</p>
+              </div>
+
               <div>
-                <button className='changeViewButton' id='listButton'></button>
-                <button className='changeViewButton' id='columnButton'></button>
+                <button className='changeViewButton' id='listButton' />
+                <button className='changeViewButton' id='columnButton' />
               </div>
             </div>
           </div>
@@ -114,7 +119,7 @@ class GamesList extends React.Component {
           <></>
         )}
 
-          {!this.state.showGameThread ? (
+        {!this.state.showGameThread ? (
           <div className='gamesListGrid'>
             {this.state.games.map(game => (
               <GameCard
@@ -126,15 +131,14 @@ class GamesList extends React.Component {
                 setCurrentGame={this.setCurrentGame}
               />
             ))}
-        </div>
-          )
-          : (
-            <GameThread
-              showModal={this.state.showGameThread}
-              closeGameThread={this.closeGameThread}
-              gameDetails={this.state.currentGame}
-            />
-          )}
+          </div>
+        ) : (
+          <GameThread
+            showModal={this.state.showGameThread}
+            closeGameThread={this.closeGameThread}
+            gameDetails={this.state.currentGame}
+          />
+        )}
       </main>
     );
   }

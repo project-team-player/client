@@ -2,12 +2,12 @@ import React from "react";
 import "../styles/Header.css";
 import logo from "../images/slice-it-logo.svg";
 import { NavLink } from "react-router-dom";
-import { AuthContext } from '../contexts/UserContext';
+import { UserContext } from '../contexts/UserContext';
 
 class Header extends React.Component {
   render() {
     return (
-      <AuthContext>
+      <UserContext.Consumer>
         {context => (
           <header>
         <NavLink to="/" id="logo">
@@ -28,12 +28,12 @@ class Header extends React.Component {
               </NavLink>
             </li>
             {/* will be NavLinks when routes are set */}
-            {this.props.isLoggedIn ? 
-              <button className="specificLogin" onClick={context.logOut}>
+            {context.state.isLoggedIn ? 
+              <button className="login-button" onClick={context.logOut}>
                 Log Out
               </button>
               :
-              <button className="specificLogin" onClick={context.showModal}>
+              <button className="login-button" onClick={context.showModal}>
                 Log In
               </button>
             }
@@ -42,7 +42,7 @@ class Header extends React.Component {
         </nav>
       </header>
         )}
-      </AuthContext>
+      </UserContext.Consumer>
     );
   }
 }

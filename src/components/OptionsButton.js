@@ -5,13 +5,12 @@ import { getCurrentGameWeek } from '../utils/nfl';
 
 // Components
 
-const OptionsButton = ({isCurrentWeek, weekNumber }) => {
+const OptionsButton = ({ isCurrentWeek, weekNumber }) => {
   return (
     <option id='weekNumber' value={weekNumber} selected={isCurrentWeek}>
-      week {weekNumber}
+      Week {weekNumber}
     </option>
   );
-}
-
+};
 
 export default OptionsButton;
