@@ -199,13 +199,14 @@ class GameThread extends React.Component {
     const username = this.props.context.state.user.name;
     const gravatar = "https://gravatar.com/avatar/f6a0a196d76723567618b367b80d8375?s=200";
 
-    axios({ method: 'PATCH', url: `${process.env.REACT_APP_SERVER_URL}/comments/reply/${commentId}`, 
+     axios({ method: 'PATCH', url: `${process.env.REACT_APP_SERVER_URL}/comments/reply/${commentId}`, 
       headers: { authorization: `Bearer ${getUserToken()}`},
       data: { username, gravatar, text }
     })
 
     .then(response => {
-      console.log(response);
+      this.getListOfComments();
+
     });
   }
 
@@ -365,7 +366,7 @@ class GameThread extends React.Component {
 
               <div className="comments">
                 {this.state.comments
-                  .map((comment, i) => <Comments currentComment={comment} key={i} postReplyHandler={this.postReply} />)
+                  .map((comment, i) => <Comments currentComment={comment} key={i} postReplyHandler={this.postReply} replies={comment.replies} />)
                   .filter(
                     comment =>
                       comment.props.currentComment.slug ===

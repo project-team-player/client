@@ -19,6 +19,12 @@ class Comments extends React.Component {
     this.setState({ replies: this.props.currentComment.replies });
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.replies !== this.props.replies){
+      this.setState({ replies: this.props.currentComment.replies });
+    }
+  }
+
   render() {
     const {postReplyHandler} = this.props;
     return (
@@ -53,7 +59,10 @@ class Comments extends React.Component {
         </div>
         <form className='reply-input-container'>
           <textarea rows='6' cols='20' id='reply-input-text'  className='reply-input' type="text" name="reply-text"></textarea>
-          <input type="button" onClick={ () => postReplyHandler(document.getElementById('reply-input-text').value, this.props.currentComment._id) } value="Submit"></input>
+          <input type="button" onClick={ async () => 
+            {
+              await postReplyHandler(document.getElementById('reply-input-text').value, this.props.currentComment._id);
+            } } value="Submit"></input>
         </form>
       </div>
     );
