@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 // import GameThread from "../components/GameThread";
 // Import Axios Library
-import axios from 'axios';
+import axios from "axios";
 
 // CSS
-import '../styles/GamesList.css';
+import "../styles/GamesList.css";
 
 // Components
-import GameCard from '../components/GameCard';
-import GameThread from '../components/GameThread';
-import OptionsButton from '../components/OptionsButton';
+import GameCard from "../components/GameCard";
+import GameThread from "../components/GameThread";
+import OptionsButton from "../components/OptionsButton";
 
 // Helpers
-import { getCurrentGameWeek } from '../utils/nfl';
+import { getCurrentGameWeek } from "../utils/nfl";
 
 class GamesList extends React.Component {
   constructor(props) {
@@ -82,7 +82,7 @@ class GamesList extends React.Component {
   // Functions for options
   getGamesForWeek = e => {
     e.preventDefault();
-    const weekNumber = document.getElementById('weekSelection').elements.weeks
+    const weekNumber = document.getElementById("weekSelection").elements.weeks
       .value;
     this.getListOfGames(parseInt(weekNumber));
   };
@@ -91,27 +91,24 @@ class GamesList extends React.Component {
     return (
       <main>
         {!this.state.showGameThread ? (
-          <div className='gamesListHeader'>
-            <h2 className='gamesListTitle'>
-              NFL Games 2019 -{' '}
-              <form id='weekSelection'>
+          <div className="gamesListHeader">
+            <h2 className="gamesListTitle">
+              NFL Games 2019 -{" "}
+              <form id="weekSelection">
                 <select
-                  id='weeks'
+                  id="weeks"
                   onChange={event => this.getGamesForWeek(event)}
                 >
                   {this.generateOptions()}
                 </select>
               </form>
             </h2>
-            <div className='gamesListHeaderRight'>
-              <div className='sliceNumberHeader'>
-                <img src={require('../images/logo.svg')} alt='slice-it-logo' />
-                <p className='sliceNumber'>200</p>
-              </div>
+            <div className="gamesListHeaderRight">
+              <div className="sliceNumberHeader"></div>
 
               <div>
-                <button className='changeViewButton' id='listButton' />
-                <button className='changeViewButton' id='columnButton' />
+                <button className="changeViewButton" id="listButton" />
+                <button className="changeViewButton" id="columnButton" />
               </div>
             </div>
           </div>
@@ -120,7 +117,7 @@ class GamesList extends React.Component {
         )}
 
         {!this.state.showGameThread ? (
-          <div className='gamesListGrid'>
+          <div className="gamesListGrid">
             {this.state.games.map(game => (
               <GameCard
                 key={game._id}
