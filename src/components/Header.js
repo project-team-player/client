@@ -40,7 +40,10 @@ class Header extends React.Component {
                         alt="slice-it-logo"
                       />
                       <span className="slices">
-                        {context.state.user.pizzaSlicesWeekly}
+                        {this.props.context.state.user.pizzaSlicesWeekly}
+                        {console.log(
+                          this.props.context.state.user.pizzaSlicesWeekly
+                        )}
                       </span>
                     </div>
                   </div>
