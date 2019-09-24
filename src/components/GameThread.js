@@ -4,6 +4,7 @@ import axios from 'axios';
 import TeamChoice from './TeamChoice';
 import Slider from './Slider';
 import Comments from './Comments';
+import BetForm from './BetForm';
 import { UserContext } from '../contexts/UserContext';
 import { getUserToken } from '../utils/auth';
 
@@ -310,40 +311,16 @@ class GameThread extends React.Component {
               </div>
             </div>
 
+            <BetForm 
+              makeGameBet={this.makeGameBet} 
+              gameDetails={this.props.gameDetails}
+              handleBetChanges={this.handleBetChanges}
+              />
+
             <div className="discussion-container">
             { !disableCommenting && !promptUserToLogIn &&
               <>
                 <h2>Place Your Slices On Your Favorite Team</h2>
-                <hr />
-                <form onSubmit={this.makeGameBet}>
-                  <div className="betting-container">
-                    <TeamChoice gameDetails={this.props.gameDetails} handleBetChanges={this.handleBetChanges} />
-
-                    <div className="slice-allocation">
-                      <h3>2. Place Your Slices</h3>
-                      <div className="bet-size-slider">
-                        {/* <img src={PizzaWheel} /> */}
-                        {/* <input type="range" min="1" max="8" /> */}
-                        {/* <span className="bet-size-indicator">8</span> */}
-                        <Slider handleBetChanges={this.handleBetChanges}/>
-                      </div>
-                    </div>
-
-                    <div className="comment-input">
-                      <h3>3. Throw A Cheesy Comment</h3>
-                      <textarea
-                        type="text"
-                        name="comment"
-                        className="input-comment-field"
-                        onChange={this.handleBetChanges}
-                      />
-                      {
-                        errorMessage && <p className="bet-error-message">{errorMessage}</p>
-                      }
-                      <button className="button">Slice It</button>
-                    </div>
-                  </div>
-                </form>
               </>
               }
               {
