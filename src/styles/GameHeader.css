@@ -1,0 +1,50 @@
+.gameDate {
+  text-align: center;
+  font-weight: 400;
+}
+
+.gameScore {
+  font-family: var(--main-font);
+  font-weight: 100;
+  text-align: center;
+  font-size: 50px;
+}
+
+.teamName {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.away {
+ margin-left: 15px;
+}
+
+.home {
+  margin-right: 15px;
+}
+
+.teamText {
+  font-weight: 200;
+}
+
+.teams {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.vs {
+  font-size: 40px;
+  font-weight: 100;
+}
+
+.teamLogo {
+  height: 100%;
+  width: 100%;
+}
+
+.teamContainer {
+  display: flex;
+  align-items: center;
+}

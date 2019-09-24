@@ -6,6 +6,7 @@ import Slider from './Slider';
 import Comments from './Comments';
 import { UserContext } from '../contexts/UserContext';
 import { getUserToken } from '../utils/auth';
+import GameHeader from '../components/GameHeader'
 
 class GameThread extends React.Component {
   constructor(props) {
@@ -220,6 +221,7 @@ class GameThread extends React.Component {
       <UserContext.Consumer>
       {context => (
         <div className="game-thread">
+          
           <nav className="game-thread-nav">
             <div className="backbuttonDude">
               <button
@@ -252,32 +254,7 @@ class GameThread extends React.Component {
           </nav>
 
         <div className='game-thread-content'>
-          <div className='teams'>
-            <div className='logoContainer'>
-              <img
-                className='teamLogo'
-                src={this.props.gameDetails.awayTeam.logo}
-                alt='logo'
-              />
-            </div>
-            <div className='team-text'>
-              <span className='team-name'>
-                {this.props.gameDetails.awayTeam.name}
-              </span>
-              <span className='vs'>VS</span>
-              <span className='team-name'>
-                {this.props.gameDetails.homeTeam.name}
-              </span>
-            </div>
-            <div className='logoContainer'>
-              <img
-                className='teamLogo'
-                src={this.props.gameDetails.homeTeam.logo}
-                alt='alt'
-              />
-            </div>
-            </div>
-
+          <GameHeader gameDetails={this.props.gameDetails} />   
           <div className='predictions'>
             <h2>Who's Got Sauce?</h2>
             <div className='prediction-counter'>

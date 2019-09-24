@@ -13,15 +13,9 @@
   font-size: 150%;
 }
 
-/* #pizzaSlice {
-  margin-left: 0.7rem;
-} */
-
 .game-thread {
   background: var(--white);
   width: 100%;
-  justify-self: center;
-  grid-column: 1/5;
 }
 
 .game-thread-content {
@@ -35,23 +29,6 @@
   justify-content: space-between;
   padding: 15px 25px;
   margin: 0;
-}
-
-.teams {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.team-name {
-  font-weight: 600;
-  font-size: 20px;
-}
-
-.vs {
-  font-size: 50px;
-  font-weight: 100;
 }
 
 .predictions {
@@ -113,11 +90,6 @@
 .logoContainer {
   width: 175px;
   height: 115px;
-}
-
-.teamLogo {
-  height: 100%;
-  width: 100%;
 }
 
 #timeAgo {
