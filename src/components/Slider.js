@@ -22,12 +22,16 @@ class Slider extends React.Component {
 
   render() {
     return (
-      <div className="mb1">
+      <div className="betContainer">
         <div className="wheelContainer">
           <img src={this.state.pizzaSrc} alt={this.state.name} />
         </div>
-        <label className="c-label">{this.state.value}</label>
-        <input
+        <div className="buttonContainer">
+          <button className='betButton'>-</button>
+          <label className='betButton' id='betIndicator'>{this.state.value}</label>
+          <button className='betButton'>+</button>
+        </div>
+        {/* <input
           className="c-input--range"
           list="tickmarks"
           max={8}
@@ -36,7 +40,7 @@ class Slider extends React.Component {
           type="range"
           name="pizza-slices"
           value={this.state.value}
-        />
+        /> */}
       </div>
     );
   }

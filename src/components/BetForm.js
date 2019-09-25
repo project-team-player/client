@@ -21,10 +21,9 @@ class Comments extends React.Component {
           <h2>Make A Bet</h2>
             <form onSubmit={makeGameBet}>
                   <div className="betting-container">
-                    <TeamChoice gameDetails={gameDetails} handleBetChanges={handleBetChanges} />
 
                     <div className="slice-allocation">
-                      <h3>2. Place Your Slices</h3>
+
                       <div className="bet-size-slider">
                         {/* <img src={PizzaWheel} /> */}
                         {/* <input type="range" min="1" max="8" /> */}
@@ -32,6 +31,8 @@ class Comments extends React.Component {
                         <Slider handleBetChanges={handleBetChanges}/>
                       </div>
                     </div>
+
+                    <TeamChoice gameDetails={gameDetails} handleBetChanges={handleBetChanges} />
 
                     <div className="comment-input">
                       <h3>3. Throw A Cheesy Comment</h3>

@@ -33,11 +33,30 @@
   background-color: #3578e5;
 }
 
-.mb1 {
+.betContainer {
   margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
 }
 
 .wheelContainer {
   display: flex;
   justify-content: center;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.betButton{
+  height: 2rem;
+  width: 2rem;
+}
+
+#betIndicator{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
