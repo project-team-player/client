@@ -34,9 +34,11 @@
 }
 
 .betContainer {
-  margin-bottom: 2rem;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .wheelContainer {
@@ -47,16 +49,28 @@
 .buttonContainer {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  height: 4rem;
+  width: 10rem;
+  padding: 1rem 1rem 1rem 1rem;
+  background: var(--red);
+  border-radius: 1rem;
 }
 
-.betButton{
+.betButton {
   height: 2rem;
   width: 2rem;
+  background: var(--red);
+  border: none;
+  color: white;
+  font-size: 25px;
 }
 
-#betIndicator{
+#betIndicator {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: white;
+  color: black;
 }
