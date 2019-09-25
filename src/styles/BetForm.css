@@ -1,0 +1,8 @@
+.bettingContainer {
+  display: grid;
+  grid-template-columns: 1.2fr 1.5fr 2fr;
+}
+
+.verticalLine {
+  border-right: solid white 5px;
+}
