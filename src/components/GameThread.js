@@ -163,6 +163,7 @@ class GameThread extends React.Component {
       console.log(_id, slug, dateTime, objectReference);
       const { bet: { winningTeam, slices ,comment} } = this.state;
       axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, headers: { authorization: `Bearer ${getUserToken()}`}, data: { key: winningTeam, slices, comment, dateTime, gamethreadId: objectReference, teamId: _id}}).then(res => {
+        this.props.context.updateUserSlices(slices);
         this.setState({ fetchNewComment: true });
       }).catch(error => {
         this.setState({ errorMessage: 'This game has either finished or you have all ready bet on it.' })
