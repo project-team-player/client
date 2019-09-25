@@ -1,0 +1,6 @@
+.selectionContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 5rem;
+}

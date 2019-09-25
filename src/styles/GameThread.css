@@ -213,11 +213,6 @@
   width: 80%;
 }
 
-.selectionContainer {
-  display: flex;
-  flex-direction: column;
-}
-
 /*
 ================= Comment section ===========
 */

@@ -21,7 +21,6 @@ class Comments extends React.Component {
         <form onSubmit={makeGameBet}>
           <div className='bettingContainer'>
             <Slider handleBetChanges={handleBetChanges} />
-            <div className='verticalLine'></div>
             <TeamChoice
               gameDetails={gameDetails}
               handleBetChanges={handleBetChanges}
