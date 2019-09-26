@@ -1,8 +1,8 @@
-import React from "react";
-import PizzaSlice from "../images/pizza-slice.svg";
-import BearsLogo from "../images/bears-logo.svg";
-import UserAvatar from "../images/user-avatar.jpg";
-import "../styles/Reply.css";
+import React from 'react';
+import PizzaSlice from '../images/pizza-slice.svg';
+import BearsLogo from '../images/bears-logo.svg';
+import UserAvatar from '../images/user-avatar.svg';
+import '../styles/Reply.css';
 
 class Reply extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Reply extends React.Component {
   render() {
     return (
       <div className="reply">
-          <div className="reply-body">
+        <div className="reply-body">
           <div className="reply-avatar">
             <img className="user-avatar" src={this.props.currentReply.gravatar} alt="profilepic" />
           </div>

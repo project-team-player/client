@@ -3,8 +3,6 @@ import '../styles/UserPredictions.css';
 
 const UserPredictions = ({ percentages, gameDetails }) => (
   <div className="predictions card">
-    {console.log(gameDetails)}
-
     <h2 className="predictionsTitle">Who's Got Sauce?</h2>
 
     <div className="pie">

@@ -36,10 +36,10 @@ class Leaderboard extends React.Component {
   componentDidMount() {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/users/leaderboard/global`)
-      .then(response => {
+      .then((response) => {
         this.setState({ users: response.data.users });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -47,6 +47,7 @@ class Leaderboard extends React.Component {
   handleClick(weekly, weeklytext) {
     this.setState({ weekly, weeklytext });
   }
+
   handleSearch(event) {
     this.setState({ query: [...event.currentTarget.value].join('') });
   }

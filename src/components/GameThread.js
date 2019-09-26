@@ -54,10 +54,7 @@ class GameThread extends React.Component {
         let disableCommenting = false;
         let promptUserToLogIn = false;
         if (this.props.context.state.isLoggedIn) {
-          console.log('user is logged in.....');
-          console.log(this.state.comments);
           if (this.userHasPlacedBet(this.state.comments)) { 
-            console.log('user has placed bets');
             disableCommenting = true;
           }
         } else if (!this.props.context.state.isLoggedIn) {
@@ -162,7 +159,6 @@ class GameThread extends React.Component {
     // dateTime is the time of the game, used to check if game has finished
     if ( winningTeam && slices && comment) {
       const { _id, slug, dateTime, gameThreadReference: { objectReference } } = this.props.gameDetails;
-      console.log(_id, slug, dateTime, objectReference);
       const { bet: { winningTeam, slices ,comment} } = this.state;
       axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, headers: { authorization: `Bearer ${getUserToken()}`}, data: { key: winningTeam, slices, comment, dateTime, gamethreadId: objectReference, teamId: _id}}).then(res => {
         this.setState({ fetchNewComment: true });
@@ -197,7 +193,6 @@ class GameThread extends React.Component {
 
   // Method to post replies
   postReply = (text, commentId) => {
-    console.log(commentId);
     const username = this.props.context.state.user.name;
     const gravatar = "https://gravatar.com/avatar/f6a0a196d76723567618b367b80d8375?s=200";
 
@@ -213,11 +208,13 @@ class GameThread extends React.Component {
   }
 
   render() {
-    const { showModal } = this.props;
+    const { showModal, gameDetails } = this.props;
     const { disableCommenting, promptUserToLogIn, errorMessage, finished } = this.state;
     if (!showModal) {
       return <></>;
     }
+
+    console.log(this.props.gameDetails);
     return (
       <UserContext.Consumer>
       {context => (
@@ -315,7 +312,7 @@ class GameThread extends React.Component {
 
                     <div className="comments">
                       {this.state.comments
-                        .map((comment, i) => <Comments currentComment={comment} key={i} postReplyHandler={this.postReply} replies={comment.replies} />)
+                        .map((comment, i) => <Comments currentComment={comment} gameDetails={gameDetails} key={i} postReplyHandler={this.postReply} replies={comment.replies} />)
                         .filter(
                           comment =>
                             comment.props.currentComment.slug ===
