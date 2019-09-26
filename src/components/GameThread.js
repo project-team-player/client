@@ -7,6 +7,7 @@ import Comments from './Comments';
 import { UserContext } from '../contexts/UserContext';
 import { getUserToken } from '../utils/auth';
 import GameHeader from '../components/GameHeader'
+import UserPredictions from './UserPredictions';
 
 class GameThread extends React.Component {
   constructor(props) {
@@ -220,138 +221,117 @@ class GameThread extends React.Component {
     return (
       <UserContext.Consumer>
       {context => (
-        <div className="game-thread">
+        <div className="gameThreadContainer clickableBackground" onClick={this.props.closeGameThread}>
+          <div className="game-thread">
           
-          <nav className="game-thread-nav">
-            <div className="backbuttonDude">
-              <button
-                className="game-thread-close-btn"
-                onClick={this.props.closeGameThread}
-              >
-                {"<<< Back to Games List"}
-              </button>
-            </div>
-
-            <ul className="game-thread-nav-items">
-            {/* 
-            TODO: Implement tabs 
-            */}
-              {/*
-              <li className="game-thread-nav-item">
-                TODO: Make buttons because no href
-                <a>Discussion</a>
-              </li>
-              <li className="game-thread-nav-item">
-                TODO: Make buttons because no href
-                <a>Players</a>
-              </li>
-              <li className="game-thread-nav-item">
-                TODO: Make buttons because no href
-                <a>Standings</a>
-              </li>
-              */}
-            </ul>
-          </nav>
-
-        <div className='game-thread-content'>
-          <GameHeader gameDetails={this.props.gameDetails} />   
-          <div className='predictions'>
-            <h2>Who's Got Sauce?</h2>
-            <div className='prediction-counter'>
-              {/* Just use template literals with the prediction value as width to change poll */}
-              <div
-                className='away-team-prediction'
-                style={{
-                  width: 
-                    this.state.percentages.awayTeam < 1
-                      ? ``
-                      : `${this.state.percentages.awayTeam}%`,
-                  backgroundColor: `#${this.props.gameDetails.awayTeam.primaryColor}`
-                }}
-              >
-                <span>{this.state.percentages.awayTeam}%</span>
-              </div>
-               {/* Just use template literals with the prediction value as width to change poll */}
-                <div
-                  className='home-team-prediction'
-                  style={{
-                    width:
-                      this.state.percentages.homeTeam < 1
-                        ? ``
-                        : `${this.state.percentages.homeTeam}%`,
-                    backgroundColor: `#${this.props.gameDetails.homeTeam.primaryColor}`
-                  }}
+            <nav className="game-thread-nav">
+              <div className="backbuttonDude">
+                <button
+                  className="game-thread-close-btn"
+                  onClick={this.props.closeGameThread}
                 >
-                  <span>{this.state.percentages.homeTeam}%</span>
-                </div>
+                  {"<<< Back to Games List"}
+                </button>
               </div>
-            </div>
 
-            <div className="discussion-container">
-            { !disableCommenting && !promptUserToLogIn &&
-              <>
-                <h2>Place Your Slices On Your Favorite Team</h2>
-                <hr />
-                <form onSubmit={this.makeGameBet}>
-                  <div className="betting-container">
-                    <TeamChoice gameDetails={this.props.gameDetails} handleBetChanges={this.handleBetChanges} />
+              <ul className="game-thread-nav-items">
+              {/* 
+              TODO: Implement tabs 
+              */}
+                {/*
+                <li className="game-thread-nav-item">
+                  TODO: Make buttons because no href
+                  <a>Discussion</a>
+                </li>
+                <li className="game-thread-nav-item">
+                  TODO: Make buttons because no href
+                  <a>Players</a>
+                </li>
+                <li className="game-thread-nav-item">
+                  TODO: Make buttons because no href
+                  <a>Standings</a>
+                </li>
+                */}
+              </ul>
+            </nav>
 
-                    <div className="slice-allocation">
-                      <h3>2. Place Your Slices</h3>
-                      <div className="bet-size-slider">
-                        {/* <img src={PizzaWheel} /> */}
-                        {/* <input type="range" min="1" max="8" /> */}
-                        {/* <span className="bet-size-indicator">8</span> */}
-                        <Slider handleBetChanges={this.handleBetChanges}/>
-                      </div>
-                    </div>
+            <div className='game-thread-content'>
 
-                    <div className="comment-input">
-                      <h3>3. Throw A Cheesy Comment</h3>
-                      <textarea
-                        type="text"
-                        name="comment"
-                        className="input-comment-field"
-                        onChange={this.handleBetChanges}
-                      />
+              <section className='game-thread-main'>
+                <GameHeader gameDetails={this.props.gameDetails} />   
+                <div className="discussion-container card">
+                  { !disableCommenting && !promptUserToLogIn &&
+                    <>
+                      <h2>Place Your Slices On Your Favorite Team</h2>
+                      <hr />
+                      <form onSubmit={this.makeGameBet}>
+                        <div className="betting-container">
+                          <TeamChoice gameDetails={this.props.gameDetails} handleBetChanges={this.handleBetChanges} />
+
+                          <div className="slice-allocation">
+                            <h3>2. Place Your Slices</h3>
+                            <div className="bet-size-slider">
+                              {/* <img src={PizzaWheel} /> */}
+                              {/* <input type="range" min="1" max="8" /> */}
+                              {/* <span className="bet-size-indicator">8</span> */}
+                              <Slider handleBetChanges={this.handleBetChanges}/>
+                            </div>
+                          </div>
+
+                          <div className="comment-input">
+                            <h3>3. Throw A Cheesy Comment</h3>
+                            <textarea
+                              type="text"
+                              name="comment"
+                              className="input-comment-field"
+                              onChange={this.handleBetChanges}
+                            />
+                            {
+                              errorMessage && <p className="bet-error-message">{errorMessage}</p>
+                            }
+                            <button className="button">Slice It</button>
+                          </div>
+                        </div>
+                      </form>
+                    </>
+                    }
+                    {
+                      promptUserToLogIn &&
+                      <>
+                        <span className="login-text">Please log in  to join the conversation</span>
+                        <button className="login-button" onClick={context.showModal}>Log in</button>
+                      </>
+                    }
                       {
-                        errorMessage && <p className="bet-error-message">{errorMessage}</p>
+                        disableCommenting && !promptUserToLogIn && !finished &&
+                        <p>You have allready bet pizza slices on this game. You can only bet once per game</p>
                       }
-                      <button className="button">Slice It</button>
+                      {
+                        finished &&
+                        <p>This game has finished. Please bet on another game.</p>
+                      }
+                    <h2>Discussion</h2>
+                    <hr />
+
+                    <div className="comments">
+                      {this.state.comments
+                        .map((comment, i) => <Comments currentComment={comment} key={i} postReplyHandler={this.postReply} replies={comment.replies} />)
+                        .filter(
+                          comment =>
+                            comment.props.currentComment.slug ===
+                            this.props.gameDetails.slug
+                        )}
                     </div>
                   </div>
-                </form>
-              </>
-              }
-              {
-                promptUserToLogIn &&
-                <>
-                  <span className="login-text">Please log in  to join the conversation</span>
-                  <button className="login-button" onClick={context.showModal}>Log in</button>
-                </>
-              }
-                {
-                  disableCommenting && !promptUserToLogIn && !finished &&
-                  <p>You have allready bet pizza slices on this game. You can only bet once per game</p>
-                }
-                {
-                  finished &&
-                  <p>This game has finished. Please bet on another game.</p>
-                }
-              <h2>Discussion</h2>
-              <hr />
+              </section>
 
-              <div className="comments">
-                {this.state.comments
-                  .map((comment, i) => <Comments currentComment={comment} key={i} postReplyHandler={this.postReply} replies={comment.replies} />)
-                  .filter(
-                    comment =>
-                      comment.props.currentComment.slug ===
-                      this.props.gameDetails.slug
-                  )}
-              </div>
+              <aside className="game-thread-aside">
+                <UserPredictions gameDetails={this.props.gameDetails} percentages={this.state.percentages} />
+              </aside>
+
             </div>
           </div>
+          {/* <div className="clickableBackground" onClick={this.props.closeGameThread}/> */}
         </div>
       )}
       </UserContext.Consumer>

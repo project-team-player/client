@@ -1,26 +1,37 @@
+.gameHeader {
+  padding: 25px;
+}
+
+.logoContainer {
+  height: 70px;
+}
+
 .gameDate {
   text-align: center;
   font-weight: 400;
+  margin-top: 0;
 }
 
 .gameScore {
   font-family: var(--main-font);
   font-weight: 100;
   text-align: center;
-  font-size: 50px;
+  font-size: 40px;
 }
 
 .teamName {
   font-weight: 600;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .away {
  margin-left: 15px;
+ text-align: left;
 }
 
 .home {
   margin-right: 15px;
+  text-align: right;
 }
 
 .teamText {
@@ -35,13 +46,12 @@
 }
 
 .vs {
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 100;
 }
 
 .teamLogo {
   height: 100%;
-  width: 100%;
 }
 
 .teamContainer {

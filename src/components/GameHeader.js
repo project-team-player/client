@@ -6,7 +6,7 @@ import { convertToDate } from '../utils/helpers';
 const GameHeader = ({ gameDetails }) => {
   console.log('Here it comes:', gameDetails);
   return (
-    <div>
+    <div className="gameHeader card">
       <h3 className="gameDate">{convertToDate(gameDetails.dateTime, 'est')}</h3>
       <div className="teams">
         <div className="teamContainer">

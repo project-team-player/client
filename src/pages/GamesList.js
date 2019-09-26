@@ -128,11 +128,13 @@ class GamesList extends React.Component {
             ))}
           </div>
         ) : (
+          <>
           <GameThread
             showModal={this.state.showGameThread}
             closeGameThread={this.closeGameThread}
             gameDetails={this.state.currentGame}
           />
+          </>
         )}
       </main>
     );

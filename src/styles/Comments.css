@@ -29,9 +29,9 @@
 }
 
 .comment-body {
-  width: 88vw;
+  /* width: 88vw; */
   display: grid;
-  grid-template-columns: 10vw 80vw;
+  /* grid-template-columns: 10vw 80vw; */
   /* grid-template-rows: repeat(auto-fit, minmax(0.5fr, 1fr)); */
   grid-template-areas:
     "avatar details"

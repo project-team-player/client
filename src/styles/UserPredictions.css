@@ -1,0 +1,96 @@
+.predictions {
+  padding: 25px;
+}
+
+.predictionsTitle {
+  margin-top: 0;
+}
+
+.pie {
+  position: relative;
+  overflow: hidden;
+  width: 80%;
+  border-radius: 100%;
+  /* background: violet; */
+}
+
+.pie:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+
+.pie-segment {
+  height: 100%;
+  position: absolute;
+  transform: translate(0, -50%) rotate(90deg) rotate(calc(var(--offset, 0) / 100 * 360deg));
+  transform-origin: 50% 100%;
+  width: 100%;
+}
+
+.pie-segment:after, .pie-segment:before {
+  content: '';
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.pie-segment:before {
+  --degrees: calc((var(--percent, 45) / 100) * 360);
+  background: var(--teamColor);
+  transform: translate(0, 100%) rotate(calc(var(--degrees, 50) * 1deg));
+  transform-origin: 50% 0;
+}
+
+.pie-segment:after {
+  background: var(--teamColor);
+  opacity: var(--over50, 0);
+}
+
+.teamPercentages {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.teamColorBlock {
+  padding: 7px;
+  border-radius: 3px;
+  background: var(--teamColor, var(--black));
+  font-family: var(--main-font);
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.awayTeamPercentage {
+  display: flex;
+}
+
+.homeTeamPercentage {
+  display: flex;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  margin: 0 15px;
+  background: var(--black);
+  border-radius: 100%;
+}
+
+.awayTeamName {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.homeTeamName {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  margin-left: 5px;
+}

@@ -1,3 +1,15 @@
+.clickableBackground {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  background: #5c5c5c;
+  width: 100%;
+  z-index: 1;
+  height: 100%;
+}
+
 .gameListContainer {
   padding: 0 40px;
 }
