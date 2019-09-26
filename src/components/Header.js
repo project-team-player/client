@@ -3,6 +3,8 @@ import "../styles/Header.css";
 import logo from "../images/slice-it-logo.svg";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
+import PizzaSlice from "../images/logo.svg"
+
 
 class Header extends React.Component {
   render() {
@@ -36,14 +38,11 @@ class Header extends React.Component {
                     <div className="pizzaContainer">
                       <img
                         className="pizzalogo"
-                        src={require("../images/logo.svg")}
+                        src={PizzaSlice}
                         alt="slice-it-logo"
                       />
                       <span className="slices">
                         {this.props.context.state.user.pizzaSlicesWeekly}
-                        {console.log(
-                          this.props.context.state.user.pizzaSlicesWeekly
-                        )}
                       </span>
                     </div>
                   </div>
