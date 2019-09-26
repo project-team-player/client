@@ -221,7 +221,7 @@ class GameThread extends React.Component {
     return (
       <UserContext.Consumer>
       {context => (
-        <div className="gameThreadContainer clickableBackground" onClick={this.props.closeGameThread}>
+        <div className="gameThreadContainer">
           <div className="game-thread">
           
             <nav className="game-thread-nav">
@@ -331,7 +331,7 @@ class GameThread extends React.Component {
 
             </div>
           </div>
-          {/* <div className="clickableBackground" onClick={this.props.closeGameThread}/> */}
+          <div className="clickableBackground" onClick={this.props.closeGameThread}/>
         </div>
       )}
       </UserContext.Consumer>

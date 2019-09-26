@@ -10,14 +10,15 @@
   height: 100%;
 }
 
-.gameListContainer {
+/* .gameListContainer {
   padding: 0 40px;
-}
+} */
 
 .gamesListHeader {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 0 40px;
 }
 
 .gamesListTitle {
@@ -62,6 +63,7 @@
   align-items: center;
   justify-items: center;
   grid-gap: 2rem;
+  padding: 0 40px;
 }
 
 #columnButton {
