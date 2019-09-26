@@ -1,6 +1,7 @@
 // Library imports here
 import React from 'react';
 import { getUserToken, setUserToken, removeUserToken, authenticateUser } from '../utils/auth';
+import PropTypes from 'prop-types';
 
 // Create global contexts
 export const UserContext = React.createContext();
@@ -8,7 +9,6 @@ export const UserContext = React.createContext();
 // Then create a provider Component
 class UserProvider extends React.Component {
   state = {
-    horse: 'Horse!',
     isVisible: false,
     loginView: true,
     isLoggedIn: false,
@@ -65,12 +65,42 @@ class UserProvider extends React.Component {
         hideModal: () => this.setState({isVisible: false}),
         showLogin: () => this.setState({loginView: true}),
         showSignup: () => this.setState({loginView: false}),
+        
+        /**
+         * Adds or removes slices from user
+         * @param  {number} sliceAmount The amount of slices to remove or add
+         * @param  {string} operator Enter '+' for adding, and '-' for removing slices
+         * @return {Void} 
+         */
+        updateUserSlices: (sliceAmount, operator = '-') => {
+          // Get current user state
+          const user = {...this.state.user};
+
+          // Add or subtract slices from user based on operator param
+          switch (operator) {
+            case '+':
+              user.pizzaSlicesWeekly += parseInt(sliceAmount);
+              break;
+            case '-':
+              user.pizzaSlicesWeekly -= parseInt(sliceAmount);
+              break;
+            default:
+              break;
+          }
+          
+          // Update user with new slice count
+          this.setState({user})
+        }
 
       }}>
         {this.props.children}
       </UserContext.Provider>
     )
   }
+}
+
+UserProvider.propTypes = {
+  user: PropTypes.object,
 }
 
 const AuthContext = UserContext.Consumer;
