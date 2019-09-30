@@ -4,7 +4,9 @@ import '../styles/Leaderboard.css';
 
 class LeaderboardTable extends Component {
   renderTableData() {
-    const filteredUsers = this.props.users.filter(user => user.name.includes(this.props.query));
+    const filteredUsers = this.props.users.filter(user =>
+      user.name.toLowerCase().includes(this.props.query.toLowerCase())
+    );
     return filteredUsers.map((user, index) => {
       const { name, wins, pizzaSlicesTotal } = user; // destructuring
       return (
@@ -12,7 +14,7 @@ class LeaderboardTable extends Component {
           <td className="index">{index}</td>
           <td className="table-items">{name}</td>
           <td className="table-items">{wins}</td>
-          <td>{pizzaSlicesTotal}</td>
+          <td className="table-items">{pizzaSlicesTotal}</td>
         </tr>
       );
     });

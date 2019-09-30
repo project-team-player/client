@@ -5,11 +5,13 @@ import axios from 'axios';
 
 // CSS
 import '../styles/GamesList.css';
+import '../styles/Leaderboard.css';
 
 // Components
 import GameCard from '../components/GameCard';
 import GameThread from '../components/GameThread';
 import OptionsButton from '../components/OptionsButton';
+// import WeekInputForm from '../components/WeekInputForm';
 
 // Helpers
 import { getCurrentGameWeek } from '../utils/nfl';
@@ -22,7 +24,7 @@ class GamesList extends React.Component {
       currentWeek: String,
       currentGame: {},
       games: [],
-      totalWeeks: 0
+      totalWeeks: 0,
     };
 
     this.openGameThread = this.openGameThread.bind(this);
@@ -69,11 +71,7 @@ class GamesList extends React.Component {
     const currentGameWeek = getCurrentGameWeek();
     for (let i = 1; i < this.state.totalWeeks + 1; i++) {
       optionsList.push(
-        <OptionsButton
-          weekNumber={i}
-          key={i}
-          isCurrentWeek={currentGameWeek === i}
-        />
+        <OptionsButton weekNumber={i} key={i} isCurrentWeek={currentGameWeek === i} />
       );
     }
     return optionsList;
@@ -82,8 +80,7 @@ class GamesList extends React.Component {
   // Functions for options
   getGamesForWeek = e => {
     e.preventDefault();
-    const weekNumber = document.getElementById('weekSelection').elements.weeks
-      .value;
+    const weekNumber = document.getElementById('weekSelection').elements.weeks.value;
     this.getListOfGames(parseInt(weekNumber));
   };
 
@@ -91,27 +88,24 @@ class GamesList extends React.Component {
     return (
       <main>
         {!this.state.showGameThread ? (
-          <div className='gamesListHeader'>
-            <h2 className='gamesListTitle'>
-              NFL Games 2019 -{' '}
-              <form id='weekSelection'>
-                <select
-                  id='weeks'
-                  onChange={event => this.getGamesForWeek(event)}
-                >
+          <div className="gamesListHeader">
+            <div className="gamesListTitle">
+              <h2>NFL Games 2019 -</h2>
+              <form id="weekSelection">
+                <select id="weeks" onChange={event => this.getGamesForWeek(event)}>
                   {this.generateOptions()}
                 </select>
               </form>
-            </h2>
-            <div className='gamesListHeaderRight'>
-              <div className='sliceNumberHeader'>
-                <img src={require('../images/logo.svg')} alt='slice-it-logo' />
-                <p className='sliceNumber'>200</p>
+            </div>
+            <div className="gamesListHeaderRight">
+              <div className="sliceNumberHeader">
+                <img src={require('../images/logo.svg')} alt="slice-it-logo" />
+                <p className="sliceNumber">200</p>
               </div>
 
               <div>
-                <button className='changeViewButton' id='listButton' />
-                <button className='changeViewButton' id='columnButton' />
+                <button className="changeViewButton" id="listButton" />
+                <button className="changeViewButton" id="columnButton" />
               </div>
             </div>
           </div>
@@ -120,7 +114,7 @@ class GamesList extends React.Component {
         )}
 
         {!this.state.showGameThread ? (
-          <div className='gamesListGrid'>
+          <div className="gamesListGrid">
             {this.state.games.map(game => (
               <GameCard
                 key={game._id}

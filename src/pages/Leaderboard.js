@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { AuthContext } from '../contexts/UserContext';
+import WeekInputForm from '../components/WeekInputForm';
 import LeaderboardTable from '../components/LeaderboardTable';
 import WeeklyTable from '../components/WeeklyTable';
 import '../styles/Leaderboard.css';
@@ -58,14 +59,7 @@ class Leaderboard extends React.Component {
         <div className="top">
           <div className="leftside">
             <h2 className="leaderboardtext">{`${weeklytext}`}</h2>
-            <div id="weekform">
-              <form action="/action_page.php" />
-              <select>
-                <option value="one">1</option>
-                <option value="two">2</option>
-              </select>
-            </div>
-
+            <WeekInputForm />
             <div className="filterbuttons">
               <button
                 id="season"
