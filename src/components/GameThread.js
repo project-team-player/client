@@ -26,8 +26,8 @@ class GameThread extends React.Component {
       promptUserToLogIn: false,
       //Percentages for Sauce Indicator
       percentages: {
-        awayTeam: 0,
-        homeTeam: 0
+        awayTeam: 50.00,
+        homeTeam: 50.00
       },
       finished: false,
     };

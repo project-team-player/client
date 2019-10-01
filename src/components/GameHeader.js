@@ -7,7 +7,7 @@ const GameHeader = ({ gameDetails }) => (
   <div className="gameHeader card">
     <h3 className="gameDate">{convertToDate(gameDetails.dateTime, 'est')}</h3>
     <div className="teams">
-      <div className="teamContainer">
+      <div className="team-container team-container-away">
         <div className="logoContainer">
           <img
             className="teamLogo"
@@ -22,12 +22,11 @@ const GameHeader = ({ gameDetails }) => (
 
       </div>
 
-      <div className="teamText">
-        <span className="vs">AT</span>
+      <div className="vs-container">
+        <span className="vs-text">AT</span>
       </div>
 
-
-      <div className="teamContainer">
+      <div className="team-container team-container-home">
         <span className="teamName home">
           {gameDetails.homeTeam.name}
         </span>
@@ -41,7 +40,7 @@ const GameHeader = ({ gameDetails }) => (
       </div>
     </div>
 
-    <div className="gameScore">0 : 0</div>
+    <div className="game-score-container"><span className="game-score">0 : 0</span></div>
   </div>
 );
 

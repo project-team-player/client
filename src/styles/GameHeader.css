@@ -3,7 +3,9 @@
 }
 
 .logoContainer {
-  height: 70px;
+  display: flex;
+  align-items: center;
+  width: 30%;
 }
 
 .gameDate {
@@ -12,11 +14,15 @@
   margin-top: 0;
 }
 
-.gameScore {
+.game-score-container {
   font-family: var(--main-font);
   font-weight: 100;
   text-align: center;
   font-size: 40px;
+}
+
+.game-score {
+  text-align: center;
 }
 
 .teamName {
@@ -41,20 +47,34 @@
 .teams {
   width: 100%;
   display: flex;
-  justify-content: space-around;
   align-items: center;
 }
 
-.vs {
+.vs-container {
+  display: flex;
+  flex: .3;
+  justify-content: center;
+}
+
+.vs-text {
   font-size: 30px;
   font-weight: 100;
 }
 
 .teamLogo {
-  height: 100%;
+  width: 100%;
 }
 
-.teamContainer {
+.team-container {
   display: flex;
+  flex: 1;
   align-items: center;
+}
+
+.team-container-away {
+  justify-content: flex-start;
+}
+
+.team-container-home {
+  justify-content: flex-end;
 }
