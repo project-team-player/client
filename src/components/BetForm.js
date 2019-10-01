@@ -20,22 +20,25 @@ class Comments extends React.Component {
         <h2>Make A Bet</h2>
         <form onSubmit={makeGameBet}>
           <div className='bettingContainer'>
-            <Slider handleBetChanges={handleBetChanges} />
-            <TeamChoice
-              gameDetails={gameDetails}
-              handleBetChanges={handleBetChanges}
-            />
-
-            <div className='comment-input'>
-              <h3>3. Throw A Cheesy Comment</h3>
-              <textarea
-                type='text'
-                name='comment'
-                className='input-comment-field'
-                onChange={handleBetChanges}
+            <div className='betTopContainer'>
+              <Slider handleBetChanges={handleBetChanges} />
+              <TeamChoice
+                gameDetails={gameDetails}
+                handleBetChanges={handleBetChanges}
               />
+            </div>
+            <div className='betBottomContainer'>
+              <div className='comment-input'>
+                <h3>3. Throw A Cheesy Comment</h3>
+                <textarea
+                  type='text'
+                  name='comment'
+                  className='input-comment-field'
+                  onChange={handleBetChanges}
+                />
 
-              <button className='button'>Slice It</button>
+                <button className='button'>Slice It</button>
+              </div>
             </div>
           </div>
         </form>
