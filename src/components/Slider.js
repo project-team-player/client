@@ -20,6 +20,28 @@ class Slider extends React.Component {
     this.props.handleBetChanges(e);
   }
 
+  minusAction = () => {
+    if(this.state.value === 0) {
+      alert('Bet is already at 0!');
+    }
+    else {
+      let tempValue = this.state.value;
+      tempValue--;
+      this.setState({ value: tempValue });
+    }
+  }
+
+  plusAction = () => {
+    if(this.state.value === 8) {
+      alert('Bet is already at 8!');
+    }
+    else {
+      let tempValue = this.state.value;
+      tempValue++;
+      this.setState({ value: tempValue });
+    }
+  }
+
   render() {
     return (
       <div className="betContainer">
@@ -27,20 +49,10 @@ class Slider extends React.Component {
           <img src={this.state.pizzaSrc} alt={this.state.name} />
         </div>
         <div className="buttonContainer">
-          <button className='betButton'>-</button>
+          <button className='betButton'onClick={this.minusAction}>-</button>
           <label className='betButton' id='betIndicator'>{this.state.value}</label>
-          <button className='betButton'>+</button>
+          <button className='betButton' onClick={this.plusAction}>+</button>
         </div>
-        {/* <input
-          className="c-input--range"
-          list="tickmarks"
-          max={8}
-          onChange={e => this.onUpdateSlider(e)}
-          step={1}
-          type="range"
-          name="pizza-slices"
-          value={this.state.value}
-        /> */}
       </div>
     );
   }

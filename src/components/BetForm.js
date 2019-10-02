@@ -2,7 +2,8 @@ import React from 'react';
 import Slider from './Slider';
 import TeamChoice from './TeamChoice';
 import '../styles/BetForm.css';
-class Comments extends React.Component {
+
+class BetForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -27,19 +28,7 @@ class Comments extends React.Component {
                 handleBetChanges={handleBetChanges}
               />
             </div>
-            <div className='betBottomContainer'>
-              <div className='comment-input'>
-                <h3>3. Throw A Cheesy Comment</h3>
-                <textarea
-                  type='text'
-                  name='comment'
-                  className='input-comment-field'
-                  onChange={handleBetChanges}
-                />
-
-                <button className='button'>Slice It</button>
-              </div>
-            </div>
+              <button className='button'>Slice It</button>
           </div>
         </form>
         <hr />
@@ -48,4 +37,4 @@ class Comments extends React.Component {
   }
 }
 
-export default Comments;
+export default BetForm;

@@ -5,6 +5,7 @@ import TeamChoice from './TeamChoice';
 import Slider from './Slider';
 import Comments from './Comments';
 import BetForm from './BetForm';
+import CommentForm from './CommentForm';
 import { UserContext } from '../contexts/UserContext';
 import { getUserToken } from '../utils/auth';
 
@@ -339,6 +340,7 @@ class GameThread extends React.Component {
                   <p>This game has finished. Please bet on another game.</p>
                 }
               <h2>Discussion</h2>
+              <CommentForm/>
               <hr />
 
               <div className="comments">
