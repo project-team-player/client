@@ -1,19 +1,21 @@
 import React from 'react';
 import PizzaSlice from '../images/pizza-slice.svg';
-import BearsLogo from '../images/bears-logo.svg';
 import UserAvatar from '../images/user-avatar.svg';
 import Arrow from '../images/arrow.svg';
 import '../styles/Comments.css';
 import Reply from './Reply.js';
 
 
-class Comments extends React.Component {
+class Comment extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       replies: [],
+      showReplies: false,
     };
+
+    this.toggleReplies = this.toggleReplies.bind(this);
   }
 
   componentWillMount() {
@@ -26,12 +28,16 @@ class Comments extends React.Component {
     }
   }
 
+  toggleReplies() {
+    this.setState(prevState => ({ showReplies: !prevState.showReplies }));
+  }
+
   render() {
+    console.log(this.state.currentComment);
     const {
       postReplyHandler, currentComment, gameDetails, gameDetails: { awayTeam: { key: awayTeam }, homeTeam: { key: homeTeam } }, currentComment: { betReference: { slicesBet: betSize, key: betTeam } },
     } = this.props;
-    console.log(this.props.gameDetails);
-    // console.log(betTeam, betSize);
+    const { replies, showReplies } = this.state;
     return (
       <div className="comment-container">
         <div className="comment-card">
@@ -43,15 +49,13 @@ class Comments extends React.Component {
               </span>
             </div>
 
-            <div className="comment-bet">
-              <span>
-                <img className="coment-pizza-icon" id="pizzaSlice" src={PizzaSlice} alt="pizza slice" />
+            <div className="comment-bet" style={{ background: `#${betTeam === awayTeam ? gameDetails.awayTeam.primaryColor : gameDetails.homeTeam.primaryColor}` }}>
+              <span className="comment-bet-size">
+                <img className="comment-pizza-icon" id="pizzaSlice" src={PizzaSlice} alt="pizza slice" />
                 {betSize}
               </span>
               <img className="comment-arrow-icon" src={Arrow} alt="Arrow icon" />
-              <span>
-                <img className="comment-user-avatar" src={betTeam === awayTeam ? gameDetails.awayTeam.logo : gameDetails.homeTeam.logo} alt="logo of the team user bet on" />
-              </span>
+              <img className="comment-bet-team-icon" src={betTeam === awayTeam ? gameDetails.awayTeam.logo : gameDetails.homeTeam.logo} alt="logo of the team user bet on" />
             </div>
           </div>
           <div className="comment-body">
@@ -59,38 +63,26 @@ class Comments extends React.Component {
               {currentComment.text}
             </p>
           </div>
-
-
-          {/* <div className="comment-body">
-            <div className="comment-avatar">
-              <img className="user-avatar" src={UserAvatar} alt="profilepic" />
-            </div>
-            <div className="comment-details">
-              <div className="comment-owner">
-                <span className="username">
-                  {this.props.currentComment.owner}
-                </span>
-              </div>
-              <div className="betDetails">
-                <span id="bet-amount">5</span>
-                <img id="pizzaSlice" src={PizzaSlice} alt="pizza slice" />
-                <span className="spanComment">on</span>
-                <img className="bet-logo" src={BearsLogo} alt="bet logo" />
-              </div>
-              <div className="comment-time">
-                <span id="timeAgo">5 minutes ago</span>
-              </div>
-            </div>
-            <div className="comment-text">
-              <p>{this.props.currentComment.text}</p>
-            </div>
-          </div> */}
+          <div className="comment-footer">
+            <span className="comment-time-ago">4 seconds ago</span>
+            <button type="button" className="comment-reply-button">Reply</button>
+          </div>
         </div>
-        <div className="reply-container">
-          {this.state.replies
-            .map((reply, i) => <Reply currentReply={reply} key={i} />)}
+        {replies.length > 0
+        && (
+        <div className="comment-under-section">
+          <button type="button" className="comment-replies-toggle" onClick={this.toggleReplies}>
+            {replies.length}
+            {' '}
+replies
+          </button>
         </div>
-        {/* <form className="reply-input-container">
+        )
+        }
+        {showReplies
+        && replies.map((reply, i) => <Reply currentReply={reply} key={i} gameDetails={gameDetails} />)
+        }
+        <form className="reply-input-container">
           <textarea rows="6" cols="20" id="reply-input-text" className="reply-input" type="text" name="reply-text" />
           <input
             type="button"
@@ -99,10 +91,10 @@ class Comments extends React.Component {
             }}
             value="Submit"
           />
-        </form> */}
+        </form>
       </div>
     );
   }
 }
 
-export default Comments;
+export default Comment;

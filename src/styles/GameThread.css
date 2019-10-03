@@ -9,10 +9,6 @@
   float: right;
 }
 
-.username {
-  font-size: 150%;
-}
-
 .gameThreadContainer {
   position: relative;
   padding: 0 40px;
@@ -215,3 +211,10 @@
   text-align: right;
 }
 
+.login-request {
+  background: none;
+  color: blue;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+}

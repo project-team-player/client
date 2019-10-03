@@ -3,7 +3,7 @@ import '../styles/GameThread.css';
 import axios from 'axios';
 import TeamChoice from './TeamChoice';
 import Slider from './Slider';
-import Comments from './Comments';
+import Comment from './Comment';
 import { UserContext } from '../contexts/UserContext';
 import { getUserToken } from '../utils/auth';
 import GameHeader from '../components/GameHeader'
@@ -214,7 +214,7 @@ class GameThread extends React.Component {
       return <></>;
     }
 
-    console.log(this.props.gameDetails);
+    console.log(this.state.comments);
     return (
       <UserContext.Consumer>
       {context => (
@@ -257,6 +257,7 @@ class GameThread extends React.Component {
               <section className='game-thread-main'>
                 <GameHeader gameDetails={this.props.gameDetails} />   
                 <div className="discussion-container card">
+                <h2>Trash talk</h2>
                   { !disableCommenting && !promptUserToLogIn &&
                     <>
                       <h2>Place Your Slices On Your Favorite Team</h2>
@@ -295,8 +296,8 @@ class GameThread extends React.Component {
                     {
                       promptUserToLogIn &&
                       <>
-                        <span className="login-text">Please log in  to join the conversation</span>
-                        <button className="login-button" onClick={context.showModal}>Log in</button>
+                        <span className="login-text">Please log in to join the conversation  <a className="login-request" onClick={context.showModal}>Log in</a></span>
+                       
                       </>
                     }
                       {
@@ -307,17 +308,12 @@ class GameThread extends React.Component {
                         finished &&
                         <p>This game has finished. Please bet on another game.</p>
                       }
-                    <h2>Discussion</h2>
                     <hr />
 
                     <div className="comments">
                       {this.state.comments
-                        .map((comment, i) => <Comments currentComment={comment} gameDetails={gameDetails} key={i} postReplyHandler={this.postReply} replies={comment.replies} />)
-                        .filter(
-                          comment =>
-                            comment.props.currentComment.slug ===
-                            this.props.gameDetails.slug
-                        )}
+                        .map((comment, i) => <Comment currentComment={comment} gameDetails={gameDetails} key={i} postReplyHandler={this.postReply} replies={comment.replies} />)
+                        }
                     </div>
                   </div>
               </section>
