@@ -54,8 +54,7 @@
 .comment-card {
   flex-direction: column;
   align-items: center;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 20px;
   border-bottom: solid;
   border-color: #ebebeb;
   box-shadow: 0px 2px 5px 0px rgba(35, 35, 35, 0.5); 
@@ -143,10 +142,33 @@
 }
 
 .comment-replies-toggle {
+  color: blue;
   background: none;
   border: none;
   outline: none;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
+  margin-top: 5px;
+}
+
+/* ============= reply input form ============= */
+.reply-input-container {
+  width: 100%;
+  box-shadow: 0px 2px 5px 0px rgba(35, 35, 35, 0.5);
+  padding: 15px;
+}
+
+.reply-input-header {
+  height: 35px;
+}
+
+.reply-input-text {
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 16px;
+  height: 50px;
 }

@@ -12,12 +12,14 @@
 .gameThreadContainer {
   position: relative;
   padding: 0 40px;
+  min-height: 100%;
 }
 
 .game-thread {
   background: #EAEAEA;
   position: relative;
   z-index: 2;
+  min-height: 100vh;
 }
 
 .card {
@@ -102,6 +104,10 @@
   align-self: flex-end;
   justify-content: flex-end;
   width: 79%;
+}
+
+#fadeable-section {
+  height: 100%;
 }
 
 .game-thread-nav-item {

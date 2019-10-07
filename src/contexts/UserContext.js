@@ -8,8 +8,8 @@ export const UserContext = React.createContext();
 // Then create a provider Component
 class UserProvider extends React.Component {
   state = {
-    horse: 'Horse!',
-    isVisible: false,
+    showAuthModal: false,
+    modalLoginMessage: '',
     loginView: true,
     isLoggedIn: false,
     user: {
@@ -61,8 +61,10 @@ class UserProvider extends React.Component {
         isUserLoggedIn: () => { 
           this.isUserLoggedIn();
         },
-        showModal: () => this.setState({isVisible: true}),
-        hideModal: () => this.setState({isVisible: false}),
+        showModal: (message) => {
+          this.setState({showAuthModal: true, modalLoginMessage: message.length ? message : ''})
+        } ,
+        hideModal: () => this.setState({showAuthModal: false, modalLoginMessage: ''}),
         showLogin: () => this.setState({loginView: true}),
         showSignup: () => this.setState({loginView: false}),
 

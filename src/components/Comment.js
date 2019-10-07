@@ -4,6 +4,9 @@ import UserAvatar from '../images/user-avatar.svg';
 import Arrow from '../images/arrow.svg';
 import '../styles/Comments.css';
 import Reply from './Reply.js';
+import { UserContext } from '../contexts/UserContext';
+import { getUserToken } from '../utils/auth';
+import axios from 'axios'
 
 
 class Comment extends React.Component {
@@ -12,10 +15,14 @@ class Comment extends React.Component {
 
     this.state = {
       replies: [],
+      replyText: '',
       showReplies: false,
+      showReplyInputField: false,
     };
+    this.replyField = React.createRef();
 
     this.toggleReplies = this.toggleReplies.bind(this);
+    this.toggleReplyInputField = this.toggleReplyInputField.bind(this);
   }
 
   componentWillMount() {
@@ -32,43 +39,77 @@ class Comment extends React.Component {
     this.setState(prevState => ({ showReplies: !prevState.showReplies }));
   }
 
-  render() {
-    console.log(this.state.currentComment);
-    const {
-      postReplyHandler, currentComment, gameDetails, gameDetails: { awayTeam: { key: awayTeam }, homeTeam: { key: homeTeam } }, currentComment: { betReference: { slicesBet: betSize, key: betTeam } },
-    } = this.props;
-    const { replies, showReplies } = this.state;
-    return (
-      <div className="comment-container">
-        <div className="comment-card">
-          <div className="comment-header">
-            <div className="comment-user-info">
-              <img className="comment-user-avatar" src={UserAvatar} alt="profilepic" />
-              <span className="username">
-                {this.props.currentComment.owner}
-              </span>
-            </div>
+  toggleReplyInputField = () => {
+    if (this.props.context.state.isLoggedIn) {
+      this.setState(prevState => ({ showReplyInputField: !prevState.showReplyInputField }), () => {
+        if (this.state.showReplyInputField) {
+          this.replyField.current.focus();
+        }
+      });
+    } else {
+      this.props.context.showModal('Please log in to reply');
+    }
+  }
 
-            <div className="comment-bet" style={{ background: `#${betTeam === awayTeam ? gameDetails.awayTeam.primaryColor : gameDetails.homeTeam.primaryColor}` }}>
-              <span className="comment-bet-size">
-                <img className="comment-pizza-icon" id="pizzaSlice" src={PizzaSlice} alt="pizza slice" />
-                {betSize}
-              </span>
-              <img className="comment-arrow-icon" src={Arrow} alt="Arrow icon" />
-              <img className="comment-bet-team-icon" src={betTeam === awayTeam ? gameDetails.awayTeam.logo : gameDetails.homeTeam.logo} alt="logo of the team user bet on" />
+  updateReplyText = (e) => {
+    this.setState({replyText: e.target.value})
+  }
+
+  replyToComment = (commentId) => {
+    const username = this.props.context.state.user.name;
+    const { replyText } = this.state;
+    // const gravatar = "https://gravatar.com/avatar/f6a0a196d76723567618b367b80d8375?s=200";
+
+     axios({ method: 'PATCH', url: `${process.env.REACT_APP_SERVER_URL}/comments/reply/${commentId}`, 
+      headers: { authorization: `Bearer ${getUserToken()}`},
+      data: { username, text: replyText }
+    })
+    .then(response => {
+      this.props.getUpdatedComments();
+      this.setState({replyText: '', showReplyInputField: false, showReplies: true})
+    });
+  }
+
+  render() {
+    const {
+      postReplyHandler, context, currentComment, gameDetails, gameDetails: { awayTeam: { key: awayTeam }, homeTeam: { key: homeTeam } },
+    } = this.props;
+    const { replies, showReplies, showReplyInputField } = this.state;
+    const { isLoggedIn } = context.state;
+    console.log(isLoggedIn);
+    return (
+      <UserContext.Consumer>
+        {context => (
+          <div className="comment-container">
+            <div className="comment-card">
+              <div className="comment-header">
+                <div className="comment-user-info">
+                  <img className="comment-user-avatar" src={UserAvatar} alt="profilepic" />
+                  <span className="username">
+                    {this.props.currentComment.owner}
+                  </span>
+                </div>
+
+                {/* <div className="comment-bet" style={{ background: `#${betTeam === awayTeam ? gameDetails.awayTeam.primaryColor : gameDetails.homeTeam.primaryColor}` }}>
+                  <span className="comment-bet-size">
+                    <img className="comment-pizza-icon" id="pizzaSlice" src={PizzaSlice} alt="pizza slice" />
+                    8
+                  </span>
+                  <img className="comment-arrow-icon" src={Arrow} alt="Arrow icon" />
+                  <img className="comment-bet-team-icon" src={betTeam === awayTeam ? gameDetails.awayTeam.logo : gameDetails.homeTeam.logo} alt="logo of the team user bet on" />
+                </div> */}
+              </div>
+              <div className="comment-body">
+                <p className="comment-text">
+                  {currentComment.text}
+                </p>
+              </div>
+              <div className="comment-footer">
+                <span className="comment-time-ago">4 seconds ago</span>
+                <button type="button" className="comment-reply-button" onClick={this.toggleReplyInputField}>Reply</button>
+              </div>
             </div>
-          </div>
-          <div className="comment-body">
-            <p className="comment-text">
-              {currentComment.text}
-            </p>
-          </div>
-          <div className="comment-footer">
-            <span className="comment-time-ago">4 seconds ago</span>
-            <button type="button" className="comment-reply-button">Reply</button>
-          </div>
-        </div>
-        {replies.length > 0
+            {replies.length > 0
         && (
         <div className="comment-under-section">
           <button type="button" className="comment-replies-toggle" onClick={this.toggleReplies}>
@@ -79,22 +120,36 @@ replies
         </div>
         )
         }
-        {showReplies
+            {showReplyInputField
+          && (
+          <div className="reply-input-container card">
+            <div className="reply-input-header">
+              <img className="comment-user-avatar" src={UserAvatar} alt="profilepic" />
+            </div>
+            <form className="">
+              <textarea rows="6" cols="20" id="reply-input-text" className="reply-input-text" type="text" name="reply-text" ref={this.replyField} value={this.state.replyText} onChange={this.updateReplyText} />
+              <button
+                type="button"
+                onClick={() => this.replyToComment(currentComment._id)}
+                className="reply-submit-button"
+              >Reply</button>
+            </form>
+          </div>
+
+          )
+        }
+            {showReplies
         && replies.map((reply, i) => <Reply currentReply={reply} key={i} gameDetails={gameDetails} />)
         }
-        <form className="reply-input-container">
-          <textarea rows="6" cols="20" id="reply-input-text" className="reply-input" type="text" name="reply-text" />
-          <input
-            type="button"
-            onClick={async () => {
-              await postReplyHandler(document.getElementById('reply-input-text').value, this.props.currentComment._id);
-            }}
-            value="Submit"
-          />
-        </form>
-      </div>
+          </div>
+        )}
+      </UserContext.Consumer>
     );
   }
 }
 
-export default Comment;
+export default props => (
+  <UserContext.Consumer>
+    {context => <Comment {...props} context={context} />}
+  </UserContext.Consumer>
+);

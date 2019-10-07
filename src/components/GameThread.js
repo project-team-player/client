@@ -8,6 +8,7 @@ import { UserContext } from '../contexts/UserContext';
 import { getUserToken } from '../utils/auth';
 import GameHeader from '../components/GameHeader'
 import UserPredictions from './UserPredictions';
+import CommentInput from './CommentInput';
 
 class GameThread extends React.Component {
   constructor(props) {
@@ -191,30 +192,12 @@ class GameThread extends React.Component {
       });
   };
 
-  // Method to post replies
-  postReply = (text, commentId) => {
-    const username = this.props.context.state.user.name;
-    const gravatar = "https://gravatar.com/avatar/f6a0a196d76723567618b367b80d8375?s=200";
-
-     axios({ method: 'PATCH', url: `${process.env.REACT_APP_SERVER_URL}/comments/reply/${commentId}`, 
-      headers: { authorization: `Bearer ${getUserToken()}`},
-      data: { username, gravatar, text }
-    })
-
-    .then(response => {
-      this.getListOfComments();
-
-    });
-  }
-
   render() {
     const { showModal, gameDetails } = this.props;
     const { disableCommenting, promptUserToLogIn, errorMessage, finished } = this.state;
     if (!showModal) {
       return <></>;
     }
-
-    console.log(this.state.comments);
     return (
       <UserContext.Consumer>
       {context => (
@@ -293,26 +276,28 @@ class GameThread extends React.Component {
                       </form>
                     </>
                     }
-                    {
+                    {/* {
                       promptUserToLogIn &&
                       <>
                         <span className="login-text">Please log in to join the conversation  <a className="login-request" onClick={context.showModal}>Log in</a></span>
                        
                       </>
+                    } */}
+                    {
+                      disableCommenting && !promptUserToLogIn && !finished &&
+                      <p>You have allready bet pizza slices on this game. You can only bet once per game</p>
                     }
-                      {
-                        disableCommenting && !promptUserToLogIn && !finished &&
-                        <p>You have allready bet pizza slices on this game. You can only bet once per game</p>
-                      }
-                      {
-                        finished &&
-                        <p>This game has finished. Please bet on another game.</p>
-                      }
-                    <hr />
+                    {
+                      finished &&
+                      <p>This game has finished. Please bet on another game.</p>
+                    }
+                    <CommentInput gamethreadSlug={gameDetails.slug} gamethreadId={gameDetails.gameThreadReference.gameThreadID}
+                    fetchNewComments={this.getListOfComments}
+                     />
 
                     <div className="comments">
                       {this.state.comments
-                        .map((comment, i) => <Comment currentComment={comment} gameDetails={gameDetails} key={i} postReplyHandler={this.postReply} replies={comment.replies} />)
+                        .map((comment, i) => <Comment currentComment={comment} gameDetails={gameDetails} key={i} postReplyHandler={this.postReply} replies={comment.replies} getUpdatedComments={this.getListOfComments} />)
                         }
                     </div>
                   </div>

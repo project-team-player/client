@@ -28,14 +28,14 @@ class Reply extends React.Component {
                 </span>
               </div>
 
-              <div className="comment-bet" style={{ background: 'purple' }}>
+              {/* <div className="comment-bet" style={{ background: 'purple' }}>
                 <span className="comment-bet-size">
                   <img className="comment-pizza-icon" id="pizzaSlice" src={PizzaSlice} alt="pizza slice" />
                 8
                 </span>
                 <img className="comment-arrow-icon" src={Arrow} alt="Arrow icon" />
                 <img className="comment-bet-team-icon" src={gameDetails.awayTeam.logo} alt="logo of the team user bet on" />
-              </div>
+              </div> */}
             </div>
             <div className="comment-body">
               <p className="comment-text">

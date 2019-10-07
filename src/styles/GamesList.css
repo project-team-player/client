@@ -10,9 +10,9 @@
   height: 100%;
 }
 
-/* .gameListContainer {
-  padding: 0 40px;
-} */
+.gameListContainer {
+  height: 100%;
+}
 
 .gamesListHeader {
   display: flex;
