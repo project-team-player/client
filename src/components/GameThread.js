@@ -163,6 +163,7 @@ class GameThread extends React.Component {
       console.log(_id, slug, dateTime, objectReference);
       const { bet: { winningTeam, slices ,comment} } = this.state;
       axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, headers: { authorization: `Bearer ${getUserToken()}`}, data: { key: winningTeam, slices, comment, dateTime, gamethreadId: objectReference, teamId: _id}}).then(res => {
+        this.props.context.updateUserSlices(slices);
         this.setState({ fetchNewComment: true });
       }).catch(error => {
         this.setState({ errorMessage: 'This game has either finished or you have all ready bet on it.' })
@@ -192,6 +193,23 @@ class GameThread extends React.Component {
         });
       });
   };
+
+  // Method to post replies
+  postReply = (text, commentId) => {
+    console.log(commentId);
+    const username = this.props.context.state.user.name;
+    const gravatar = "https://gravatar.com/avatar/f6a0a196d76723567618b367b80d8375?s=200";
+
+     axios({ method: 'PATCH', url: `${process.env.REACT_APP_SERVER_URL}/comments/reply/${commentId}`, 
+      headers: { authorization: `Bearer ${getUserToken()}`},
+      data: { username, gravatar, text }
+    })
+
+    .then(response => {
+      this.getListOfComments();
+
+    });
+  }
 
   render() {
     const { showModal } = this.props;
@@ -349,7 +367,7 @@ class GameThread extends React.Component {
 
               <div className="comments">
                 {this.state.comments
-                  .map((comment, i) => <Comments currentComment={comment} key={i} />)
+                  .map((comment, i) => <Comments currentComment={comment} key={i} postReplyHandler={this.postReply} replies={comment.replies} />)
                   .filter(
                     comment =>
                       comment.props.currentComment.slug ===

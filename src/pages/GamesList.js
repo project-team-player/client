@@ -5,13 +5,11 @@ import axios from 'axios';
 
 // CSS
 import '../styles/GamesList.css';
-import '../styles/Leaderboard.css';
 
 // Components
 import GameCard from '../components/GameCard';
 import GameThread from '../components/GameThread';
 import OptionsButton from '../components/OptionsButton';
-// import WeekInputForm from '../components/WeekInputForm';
 
 // Helpers
 import { getCurrentGameWeek } from '../utils/nfl';
@@ -50,20 +48,16 @@ class GamesList extends React.Component {
 
   // Sets state of
   getListOfGames = async number => {
-    await axios
-      .get(`https://pecorina-development.herokuapp.com/games/week/${number}`)
-      .then(response => {
-        this.setState({ games: response.data.gamesList });
-      });
+    await axios.get(`${process.env.REACT_APP_SERVER_URL}/games/week/${number}`).then(response => {
+      this.setState({ games: response.data.gamesList });
+    });
     this.setState({ currentWeek: number });
   };
 
   getTotalWeeks = async () => {
-    await axios
-      .get('https://pecorina-development.herokuapp.com/games/weekTotal/NFL')
-      .then(response => {
-        this.setState({ totalWeeks: response.data.totalWeeksNFL });
-      });
+    await axios.get(`${process.env.REACT_APP_SERVER_URL}/games/weekTotal/NFL`).then(response => {
+      this.setState({ totalWeeks: response.data.totalWeeksNFL });
+    });
   };
 
   generateOptions = () => {
