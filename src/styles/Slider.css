@@ -34,13 +34,12 @@
 }
 
 .betContainer {
-    border-right: solid white 5px;
-    height: fit-content;
-    display: flex;
-    flex-direction: row;
-    width: 25%;
-    align-items: center;
-    justify-content: space-around;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  width: 25%;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .wheelContainer {

@@ -23,12 +23,14 @@ class BetForm extends React.Component {
           <div className='bettingContainer'>
             <div className='betTopContainer'>
               <Slider handleBetChanges={handleBetChanges} />
+              <div className='divider'></div>
               <TeamChoice
                 gameDetails={gameDetails}
                 handleBetChanges={handleBetChanges}
               />
+              <div className='divider'></div>
+              <button className='betFormButton'>Slice It</button>
             </div>
-              <button className='button'>Slice It</button>
           </div>
         </form>
         <hr />

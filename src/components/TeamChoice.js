@@ -1,5 +1,7 @@
 import React from 'react';
 import '../styles/TeamChoice.css';
+import '../styles/GameThread.css';
+
 class TeamChoice extends React.Component {
   constructor(props) {
     super(props);
@@ -39,8 +41,12 @@ class TeamChoice extends React.Component {
         </button>
 
         <button
+          type='radio'
+          name='team-tie'
+          value='tie-team'
+          id='tie-team-selector'
           className={
-            this.state.activeName === 'winning-team-away'
+            this.state.activeName === 'team-tie'
               ? 'bet-selector-btn toggle'
               : 'bet-selector-btn'
           }
@@ -49,6 +55,7 @@ class TeamChoice extends React.Component {
         </button>
 
         <button
+          type='radio'
           name='winning-team-home'
           value='home-team'
           id='home-team-selector'

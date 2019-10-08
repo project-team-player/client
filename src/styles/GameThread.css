@@ -1,14 +1,3 @@
-.button {
-  background: var(--red);
-  color: var(--white);
-  border: none;
-  display: block;
-  border-radius: 3px;
-  padding: 7px;
-  font-size: 15px;
-  float: right;
-}
-
 .username {
   font-size: 150%;
 }
@@ -169,6 +158,7 @@
 
 .bet-selector-btn:focus {
   outline: 0;
+  background: var(--red);
 }
 
 .toggle {
