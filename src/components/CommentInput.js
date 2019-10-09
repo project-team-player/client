@@ -35,6 +35,10 @@ const CommentInput = ({context, gamethreadSlug, gamethreadId, fetchNewComments})
     setShowTextInput(false)
   }
 
+  const scrollToBottom = () => {
+    window.scrollTop = window.scrollHeight;
+  }
+
   const submitComment = async (e) => {
     try {
       // Don't allow empty comments
@@ -47,7 +51,7 @@ const CommentInput = ({context, gamethreadSlug, gamethreadId, fetchNewComments})
       fetchNewComments();
       setCommentText('');
       setShowTextInput(false);
-
+      // document.removeEventListener('mousedown', handleClick);
     } catch (error) {
       if (error instanceof ValidationError) {
         setValidationError(error.message)

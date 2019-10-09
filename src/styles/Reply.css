@@ -5,7 +5,15 @@
   } */
 
   .reply-container{
-    margin-left: 50px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .reply-horizontal-line {
+    border-top: 1px solid black;
+    height: 50%;
+    align-self: flex-end;
   }
   
   .reply {

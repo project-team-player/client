@@ -17,6 +17,7 @@ class Reply extends React.Component {
     const { gameDetails, currentReply } = this.props;
     return (
       <div className="reply-container">
+        <div className="reply-horizontal-line"></div>
         <div className="comment-container">
           <div className="comment-card">
             <div className="comment-header">

@@ -41,8 +41,7 @@ class UserProvider extends React.Component {
     return (
       <UserContext.Provider value={{ 
         state: this.state,
-        logIn: (token, user) => {
-          
+        logIn: (token, user) => {      
           // TODO: Improve cookie security
           // if (process.env.REACT_APP_PRODUCTION) {
           //   // If in production, create a more secure token

@@ -276,13 +276,13 @@ class GameThread extends React.Component {
                       </form>
                     </>
                     }
-                    {/* {
+                    {
                       promptUserToLogIn &&
                       <>
-                        <span className="login-text">Please log in to join the conversation  <a className="login-request" onClick={context.showModal}>Log in</a></span>
+                        <span className="login-text">Please log in to make a bet  <a className="login-request" onClick={context.showModal}>Log in</a></span>
                        
                       </>
-                    } */}
+                    }
                     {
                       disableCommenting && !promptUserToLogIn && !finished &&
                       <p>You have allready bet pizza slices on this game. You can only bet once per game</p>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PizzaSlice from '../images/pizza-slice.svg';
 import UserAvatar from '../images/user-avatar.svg';
-import Arrow from '../images/arrow.svg';
+import replyIcon from '../images/reply.svg';
 import '../styles/Comments.css';
 import Reply from './Reply.js';
 import { UserContext } from '../contexts/UserContext';
@@ -20,9 +20,9 @@ class Comment extends React.Component {
       showReplyInputField: false,
     };
     this.replyField = React.createRef();
+    this.replyInputContainer = React.createRef();
 
     this.toggleReplies = this.toggleReplies.bind(this);
-    this.toggleReplyInputField = this.toggleReplyInputField.bind(this);
   }
 
   componentWillMount() {
@@ -39,16 +39,28 @@ class Comment extends React.Component {
     this.setState(prevState => ({ showReplies: !prevState.showReplies }));
   }
 
-  toggleReplyInputField = () => {
+  showReplyInputField = () => {
     if (this.props.context.state.isLoggedIn) {
+      if (this.state.showReplyInputField) {
+        document.removeEventListener('mousedown', this.closeReplyInputField);
+      }
       this.setState(prevState => ({ showReplyInputField: !prevState.showReplyInputField }), () => {
         if (this.state.showReplyInputField) {
           this.replyField.current.focus();
+          document.addEventListener('mousedown', this.closeReplyInputField);
         }
       });
     } else {
       this.props.context.showModal('Please log in to reply');
     }
+  }
+
+  closeReplyInputField = (e) => {
+    if (this.replyInputContainer.current.contains(e.target) || e.target.classList.contains('comment-reply-button')) {
+      return; 
+    }
+    
+    this.setState({ showReplyInputField: false }, () => document.removeEventListener('mousedown', this.closeReplyInputField));
   }
 
   updateReplyText = (e) => {
@@ -67,6 +79,7 @@ class Comment extends React.Component {
     .then(response => {
       this.props.getUpdatedComments();
       this.setState({replyText: '', showReplyInputField: false, showReplies: true})
+      document.removeEventListener('mousedown', this.closeReplyInputField);
     });
   }
 
@@ -106,7 +119,9 @@ class Comment extends React.Component {
               </div>
               <div className="comment-footer">
                 <span className="comment-time-ago">4 seconds ago</span>
-                <button type="button" className="comment-reply-button" onClick={this.toggleReplyInputField}>Reply</button>
+                <div className="comment-reply-button-container">
+                  <button type="button" className="comment-reply-button" onClick={this.showReplyInputField}><img src={replyIcon} className="comment-reply-icon"/>Reply</button>
+                </div>
               </div>
             </div>
             {replies.length > 0
@@ -122,24 +137,31 @@ replies
         }
             {showReplyInputField
           && (
-          <div className="reply-input-container card">
+          <div className="reply-input-container card" ref={this.replyInputContainer}>
             <div className="reply-input-header">
               <img className="comment-user-avatar" src={UserAvatar} alt="profilepic" />
+              {context.state.user.username}
             </div>
             <form className="">
               <textarea rows="6" cols="20" id="reply-input-text" className="reply-input-text" type="text" name="reply-text" ref={this.replyField} value={this.state.replyText} onChange={this.updateReplyText} />
-              <button
-                type="button"
-                onClick={() => this.replyToComment(currentComment._id)}
-                className="reply-submit-button"
-              >Reply</button>
+              <div className="reply-input-footer">
+                <button
+                  type="button"
+                  onClick={() => this.replyToComment(currentComment._id)}
+                  className="reply-submit-button"
+                >Reply</button>
+              </div>
             </form>
           </div>
 
           )
         }
             {showReplies
-        && replies.map((reply, i) => <Reply currentReply={reply} key={i} gameDetails={gameDetails} />)
+        && 
+        <div className="comment-replies-container">
+        {replies.map((reply, i) => <Reply currentReply={reply} key={i} gameDetails={gameDetails} />)
+        }
+        </div>
         }
           </div>
         )}
