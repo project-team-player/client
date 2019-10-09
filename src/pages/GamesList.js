@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 // import GameThread from "../components/GameThread";
 // Import Axios Library
-import axios from "axios";
+import axios from 'axios';
 
 // CSS
-import "../styles/GamesList.css";
+import '../styles/GamesList.css';
 
 // Components
-import GameCard from "../components/GameCard";
-import GameThread from "../components/GameThread";
-import OptionsButton from "../components/OptionsButton";
+import GameCard from '../components/GameCard';
+import GameThread from '../components/GameThread';
+import OptionsButton from '../components/OptionsButton';
 
 // Helpers
-import { getCurrentGameWeek } from "../utils/nfl";
+import { getCurrentGameWeek } from '../utils/nfl';
 
 class GamesList extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class GamesList extends React.Component {
       currentWeek: String,
       currentGame: {},
       games: [],
-      totalWeeks: 0
+      totalWeeks: 0,
     };
 
     this.openGameThread = this.openGameThread.bind(this);
@@ -48,20 +48,16 @@ class GamesList extends React.Component {
 
   // Sets state of
   getListOfGames = async number => {
-    await axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/games/week/${number}`)
-      .then(response => {
-        this.setState({ games: response.data.gamesList });
-      });
+    await axios.get(`${process.env.REACT_APP_SERVER_URL}/games/week/${number}`).then(response => {
+      this.setState({ games: response.data.gamesList });
+    });
     this.setState({ currentWeek: number });
   };
 
   getTotalWeeks = async () => {
-    await axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/games/weekTotal/NFL`)
-      .then(response => {
-        this.setState({ totalWeeks: response.data.totalWeeksNFL });
-      });
+    await axios.get(`${process.env.REACT_APP_SERVER_URL}/games/weekTotal/NFL`).then(response => {
+      this.setState({ totalWeeks: response.data.totalWeeksNFL });
+    });
   };
 
   generateOptions = () => {
@@ -69,11 +65,7 @@ class GamesList extends React.Component {
     const currentGameWeek = getCurrentGameWeek();
     for (let i = 1; i < this.state.totalWeeks + 1; i++) {
       optionsList.push(
-        <OptionsButton
-          weekNumber={i}
-          key={i}
-          isCurrentWeek={currentGameWeek === i}
-        />
+        <OptionsButton weekNumber={i} key={i} isCurrentWeek={currentGameWeek === i} />
       );
     }
     return optionsList;
@@ -82,8 +74,7 @@ class GamesList extends React.Component {
   // Functions for options
   getGamesForWeek = e => {
     e.preventDefault();
-    const weekNumber = document.getElementById("weekSelection").elements.weeks
-      .value;
+    const weekNumber = document.getElementById('weekSelection').elements.weeks.value;
     this.getListOfGames(parseInt(weekNumber));
   };
 
@@ -92,19 +83,19 @@ class GamesList extends React.Component {
       <main>
         {!this.state.showGameThread ? (
           <div className="gamesListHeader">
-            <h2 className="gamesListTitle">
-              NFL Games 2019 -{" "}
+            <div className="gamesListTitle">
+              <h2>NFL Games 2019 -</h2>
               <form id="weekSelection">
-                <select
-                  id="weeks"
-                  onChange={event => this.getGamesForWeek(event)}
-                >
+                <select id="weeks" onChange={event => this.getGamesForWeek(event)}>
                   {this.generateOptions()}
                 </select>
               </form>
-            </h2>
+            </div>
             <div className="gamesListHeaderRight">
-              <div className="sliceNumberHeader"></div>
+              <div className="sliceNumberHeader">
+                <img src={require('../images/logo.svg')} alt="slice-it-logo" />
+                <p className="sliceNumber">200</p>
+              </div>
 
               <div>
                 <button className="changeViewButton" id="listButton" />

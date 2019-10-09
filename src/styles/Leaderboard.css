@@ -138,6 +138,7 @@ select {
 
 #season:hover,
 #weekly:hover {
+    /* box-shadow: 1px 1px 5px; */
     background-color: var(--red);
     color: white;
 }
