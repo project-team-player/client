@@ -1,11 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import { AuthContext } from '../contexts/UserContext';
 import WeekInputForm from '../components/WeekInputForm';
 import LeaderboardTable from '../components/LeaderboardTable';
 import WeeklyTable from '../components/WeeklyTable';
 import '../styles/Leaderboard.css';
-import { thisExpression } from '@babel/types';
 
 function formLoader() {
   const x = document.getElementById('weekform');
