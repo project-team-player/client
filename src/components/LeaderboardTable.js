@@ -28,7 +28,9 @@ class LeaderboardTable extends Component {
     return (
       <div className="leader-table">
         <table id="users">
-          <tr className="table-header">{this.renderTableHeader()}</tr>
+          <tbody>
+            <tr className="table-header">{this.renderTableHeader()}</tr>
+          </tbody>
           <tbody className="table-items">{this.renderTableData()}</tbody>
         </table>
       </div>

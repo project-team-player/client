@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import WeekInputForm from '../components/WeekInputForm';
+import { getCurrentGameWeek } from '../utils/nfl';
 import LeaderboardTable from '../components/LeaderboardTable';
 import WeeklyTable from '../components/WeeklyTable';
 import '../styles/Leaderboard.css';
@@ -23,6 +23,7 @@ class Leaderboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      week: '',
       users: [],
       weekly: false,
       weeklytext: '2019 Season',
@@ -33,6 +34,7 @@ class Leaderboard extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({ week: getCurrentGameWeek() });
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/users/leaderboard/global`)
       .then(response => {
@@ -57,7 +59,14 @@ class Leaderboard extends React.Component {
         <div className="top">
           <div className="leftside">
             <h2 className="leaderboardtext">{`${weeklytext}`}</h2>
-            <WeekInputForm />
+            <div id="weekform">
+              <form />
+              <select onChange={e => this.setState({ week: e.target.value })}>
+                <option>4</option>
+                <option>5</option>
+                <option selected>6</option>
+              </select>
+            </div>
             <div className="filterbuttons">
               <button
                 id="season"
@@ -93,7 +102,7 @@ class Leaderboard extends React.Component {
         </div>
         <div className="boards">
           {weekly === true ? (
-            <WeeklyTable users={this.state.users} query={this.state.query} />
+            <WeeklyTable query={this.state.query} week={this.state.week} />
           ) : (
             <LeaderboardTable users={this.state.users} query={this.state.query} />
           )}
@@ -102,5 +111,12 @@ class Leaderboard extends React.Component {
     );
   }
 }
+
+// Leaderboard.propTypes = {
+//   week: PropTypes.number,
+//   // users: PropTypes.array,
+//   // value: PropTypes.number,
+//   // query: PropTypes.string,
+// };
 
 export default Leaderboard;
