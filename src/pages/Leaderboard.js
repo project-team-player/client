@@ -1,10 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import { AuthContext } from '../contexts/UserContext';
+import { getCurrentGameWeek } from '../utils/nfl';
 import LeaderboardTable from '../components/LeaderboardTable';
 import WeeklyTable from '../components/WeeklyTable';
 import '../styles/Leaderboard.css';
-import { thisExpression } from '@babel/types';
 
 function formLoader() {
   const x = document.getElementById('weekform');
@@ -24,16 +23,18 @@ class Leaderboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      week: '',
       users: [],
       weekly: false,
       weeklytext: '2019 Season',
       query: '',
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSwitch = this.handleSwitch.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
+    this.setState({ week: getCurrentGameWeek() });
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/users/leaderboard/global`)
       .then((response) => {
@@ -44,7 +45,7 @@ class Leaderboard extends React.Component {
       });
   }
 
-  handleClick(weekly, weeklytext) {
+  handleSwitch(weekly, weeklytext) {
     this.setState({ weekly, weeklytext });
   }
 
@@ -60,18 +61,21 @@ class Leaderboard extends React.Component {
           <div className="leftside">
             <h2 className="leaderboardtext">{`${weeklytext}`}</h2>
             <div id="weekform">
-              <form action="/action_page.php" />
-              <select>
-                <option value="one">1</option>
-                <option value="two">2</option>
+              <form />
+              <select onChange={e => this.setState({ week: e.target.value })}>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option selected>Current</option>
               </select>
             </div>
-
             <div className="filterbuttons">
               <button
                 id="season"
                 onClick={() => {
-                  this.handleClick(false, '2019 Season');
+                  this.handleSwitch(false, '2019 Season');
                   formCloser();
                 }}
               >
@@ -80,7 +84,7 @@ class Leaderboard extends React.Component {
               <button
                 id="weekly"
                 onClick={() => {
-                  this.handleClick(true, 'Week');
+                  this.handleSwitch(true, 'Week');
                   formLoader();
                 }}
               >
@@ -102,7 +106,7 @@ class Leaderboard extends React.Component {
         </div>
         <div className="boards">
           {weekly === true ? (
-            <WeeklyTable users={this.state.users} />
+            <WeeklyTable query={this.state.query} week={this.state.week} />
           ) : (
             <LeaderboardTable users={this.state.users} query={this.state.query} />
           )}

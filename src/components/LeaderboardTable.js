@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import '../styles/Leaderboard.css';
 
 class LeaderboardTable extends Component {
   renderTableData() {
-    const filteredUsers = this.props.users.filter(user => user.name.includes(this.props.query));
+    const filteredUsers = this.props.users.filter(user =>
+      user.name.toLowerCase().includes(this.props.query.toLowerCase())
+    );
     return filteredUsers.map((user, index) => {
       const { name, wins, pizzaSlicesTotal } = user; // destructuring
       return (
         <tr>
-          <td className="index">{index}</td>
+          <td className="index">{index + 1}</td>
           <td className="table-items">{name}</td>
           <td className="table-items">{wins}</td>
-          <td>{pizzaSlicesTotal}</td>
+          <td className="table-items">{pizzaSlicesTotal}</td>
         </tr>
       );
     });
@@ -27,7 +29,9 @@ class LeaderboardTable extends Component {
     return (
       <div className="leader-table">
         <table id="users">
-          <tr className="table-header">{this.renderTableHeader()}</tr>
+          <tbody>
+            <tr className="table-header">{this.renderTableHeader()}</tr>
+          </tbody>
           <tbody className="table-items">{this.renderTableData()}</tbody>
         </table>
       </div>

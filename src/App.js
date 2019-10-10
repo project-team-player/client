@@ -1,25 +1,25 @@
 // Libraries imports here
-import React, { useState, useContext } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React, { useState, useContext } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // import react contexts
-import { UserProvider, AuthContext, UserContext } from './contexts/UserContext';
+import { UserProvider, AuthContext, UserContext } from "./contexts/UserContext";
 
 // Page Imports Here
-import Leaderboard from './pages/Leaderboard';
+import Leaderboard from "./pages/Leaderboard";
 // import SignUp from './pages/SignupPage';
 
 // Component Imports Here
-import Header from './components/Header';
-import GamesList from './pages/GamesList';
+import Header from "./components/Header";
+import GamesList from "./pages/GamesList";
 
 // CSS Imports Here
-import './styles/main.css';
-import AuthModal from './components/AuthModal';
+import "./styles/main.css";
+import AuthModal from "./components/AuthModal";
 
 const App = () => {
   return (
-    <div className='container'>
+    <div className="container">
       <BrowserRouter>
         <UserProvider>
           <UserContext.Consumer>
@@ -45,8 +45,6 @@ const App = () => {
       </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
-
-
