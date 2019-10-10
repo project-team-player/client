@@ -18,6 +18,7 @@ class Comment extends React.Component {
       replyText: '',
       showReplies: false,
       showReplyInputField: false,
+      lastReplyHeight: 0,
     };
     this.replyField = React.createRef();
     this.replyInputContainer = React.createRef();
@@ -81,6 +82,11 @@ class Comment extends React.Component {
       this.setState({replyText: '', showReplyInputField: false, showReplies: true})
       document.removeEventListener('mousedown', this.closeReplyInputField);
     });
+  }
+
+  adjustReplyLineHeight = (height) => {
+    console.log('setting last reply height');
+    this.setState({ lastReplyHeight: height });
   }
 
   render() {
@@ -158,8 +164,8 @@ replies
         }
             {showReplies
         && 
-        <div className="comment-replies-container">
-        {replies.map((reply, i) => <Reply currentReply={reply} key={i} gameDetails={gameDetails} />)
+        <div className="comment-replies-container" style={{ '--last-reply-height': this.state.lastReplyHeight }}>
+        {replies.map((reply, i) =>  <Reply currentReply={reply} key={i} gameDetails={gameDetails} isLastReply={i === replies.length - 1 ? true : false} adjustReplyLineHeight={this.adjustReplyLineHeight} />)
         }
         </div>
         }

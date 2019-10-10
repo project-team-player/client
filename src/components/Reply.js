@@ -11,21 +11,29 @@ class Reply extends React.Component {
     super(props);
 
     this.state = {};
+    this.replyContainer = React.createRef(); 
+  }
+
+  componentDidMount() {
+    if (this.props.isLastReply) {
+      const replyContainerHeight = this.replyContainer.current.offsetHeight;
+      this.props.adjustReplyLineHeight(replyContainerHeight / 2)
+    }
   }
 
   render() {
     const { gameDetails, currentReply } = this.props;
+    console.log(currentReply);
     return (
-      <div className="reply-container">
+      <div className="reply-container" ref={this.replyContainer}>
         <div className="reply-horizontal-line"></div>
         <div className="comment-container">
-          <div className="comment-card">
+          <div className="reply-card">
             <div className="comment-header">
               <div className="comment-user-info">
                 <img className="comment-user-avatar" src={UserAvatar} alt="profilepic" />
                 <span className="username">
-                  {/* {this.props.currentComment.owner} */}
-                hanshank
+                  {currentReply.username}
                 </span>
               </div>
 

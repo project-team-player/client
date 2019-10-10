@@ -104,10 +104,10 @@ class GamesList extends React.Component {
               </form>
             </h2>
             <div className='gamesListHeaderRight'>
-              <div>
+              {/* <div>
                 <button className='changeViewButton' id='listButton' />
                 <button className='changeViewButton' id='columnButton' />
-              </div>
+              </div> */}
             </div>
           </div>
         ) : (

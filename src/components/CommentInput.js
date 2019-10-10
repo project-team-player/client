@@ -8,7 +8,6 @@ import { ValidationError } from '../utils/error-handler';
 
 
 const CommentInput = ({context, gamethreadSlug, gamethreadId, fetchNewComments}) => {
-  console.log(gamethreadSlug, gamethreadId);
   const commentFormContainer = useRef();
   const commentInputField = useRef();
   const [showTextInput, setShowTextInput] = useState(false);

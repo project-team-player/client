@@ -35,6 +35,7 @@ class GameThread extends React.Component {
   }
 
   componentDidMount() {
+    // GET gamethread/:id
     // TODO: Fix error, where the user can't see comments when logging out and logging back in.
     const { showModal } = this.props;
     if (showModal) {

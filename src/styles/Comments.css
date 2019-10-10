@@ -85,12 +85,9 @@
   align-items: center;
 }
 
-/* .comment-text {
-  grid-area: text;
-  padding-left: 1rem;
-  white-space: normal;
-  margin-top: -1rem;
-} */
+.comment-text {
+  word-break: break-all;
+}
 
 .betDetails {
   width: -webkit-fill-available;
@@ -163,8 +160,17 @@
 }
 
 .comment-replies-container {
-  border-left: 1px solid rgba(102, 102, 102, 0.39);
   margin-left: 20px;
+  position: relative;
+}
+
+.comment-replies-container:before {
+  position: absolute;
+  content: "";
+  height: calc(100% - var(--last-reply-height) * 1px);
+  border-left: 1px solid rgba(102, 102, 102, 0.39);
+  top: 0;
+  left: 0;
 }
 
 .comment-container {

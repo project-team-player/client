@@ -120,6 +120,10 @@
   margin-right: 25px;
 }
 
+.game-thread-main {
+  min-width: 0;
+}
+
 .game-thread-close-btn {
   background: none;
   float: left;
