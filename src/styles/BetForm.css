@@ -1,0 +1,38 @@
+.bettingContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.betForm {
+  padding: 15px 25px;
+  margin-top: 15px;
+}
+
+.betTopContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2rem 2rem 2rem 2rem;
+  background-color: var(--black);
+}
+
+.betFormButton {
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  border-radius: 3px;
+  font-size: 15px;
+  width: 20%;
+  height: 3rem;
+  margin-top: 1rem;
+}
+
+.divider {
+  background-color: white;
+  width: 0.3%;
+}
+
+.verticalLine {
+  border-right: solid white 5px;
+}

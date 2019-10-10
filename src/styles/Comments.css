@@ -1,15 +1,64 @@
-.user-avatar {
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 35px;
 }
 
-.comment {
+.comment-bet {
+  border-radius: 3px;
+  height: 80%;
+  background: purple;
+  color: var(--white);
+  padding: 4px;
+  justify-self: flex-end;
+  display: flex;
+  align-items: center;
+}
+
+.comment-bet-size {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.comment-user-info {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.comment-user-avatar {
+  height: 100%;
+  margin-right: 10px;
+}
+
+.username {
+  font-size: 19px;
+}
+
+.comment-bet-team-icon {
+  height: 100%;
+}
+
+.comment-pizza-icon {
+  height: 100%
+}
+
+.comment-arrow-icon {
+  height: 12px;
+  margin: 0 3px;
+}
+
+.comment-card {
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
   border-bottom: solid;
   border-color: #ebebeb;
+  box-shadow: 0px 2px 5px 0px rgba(35, 35, 35, 0.5); 
+  padding: 15px;
 }
 
 .comment-owner {
@@ -28,17 +77,6 @@
   height: auto;
 }
 
-.comment-body {
-  width: 88vw;
-  display: grid;
-  grid-template-columns: 10vw 80vw;
-  /* grid-template-rows: repeat(auto-fit, minmax(0.5fr, 1fr)); */
-  grid-template-areas:
-    "avatar details"
-    "avatar text";
-  padding-bottom: 1rem;
-}
-
 .comment-details {
   display: grid;
   grid-template-columns: 4fr 1.3fr 1.2fr;
@@ -48,10 +86,7 @@
 }
 
 .comment-text {
-  grid-area: text;
-  padding-left: 1rem;
-  white-space: normal;
-  margin-top: -1rem;
+  word-break: break-all;
 }
 
 .betDetails {
@@ -82,7 +117,102 @@
   margin-left: 0.3rem;
 }
 
-.reply-container{
-  margin-left: 5vh;
-  background-color: rgb(216, 216, 216);
+/* ============ Comment Footer =========== */
+
+.comment-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-time-ago {
+  font-weight: 300;
+  font-size: 12px;
+}
+
+.comment-reply-button-container {
+  display: flex;
+  align-items: center;
+}
+
+.comment-reply-button {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.comment-reply-icon {
+  height: 12px;
+  margin-right: 2px;
+}
+
+.comment-replies-toggle {
+  color: blue;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.comment-replies-container {
+  margin-left: 20px;
+  position: relative;
+}
+
+.comment-replies-container:before {
+  position: absolute;
+  content: "";
+  height: calc(100% - var(--last-reply-height) * 1px);
+  border-left: 1px solid rgba(102, 102, 102, 0.39);
+  top: 0;
+  left: 0;
+}
+
+.comment-container {
+  width: 100%;
+}
+
+/* ============= reply input form ============= */
+.reply-input-container {
+  width: 100%;
+  box-shadow: 0px 2px 5px 0px rgba(35, 35, 35, 0.5);
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.reply-input-header {
+  height: 35px;
+  display: flex;
+  align-items: center;
+}
+
+.reply-submit-button {
+  background: var(--red);
+  color: white;
+  border: none;
+  font-weight: 500;
+  padding: 5px;
+  border-radius: 4px;
+  align-self: flex-start;
+}
+
+.reply-input-footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.reply-input-text {
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 16px;
+  height: 50px;
+  padding: 15px 0;
 }

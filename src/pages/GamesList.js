@@ -80,7 +80,7 @@ class GamesList extends React.Component {
 
   render() {
     return (
-      <main>
+      <main className="gameListContainer">
         {!this.state.showGameThread ? (
           <div className="gamesListHeader">
             <div className="gamesListTitle">
@@ -91,7 +91,7 @@ class GamesList extends React.Component {
                 </select>
               </form>
             </div>
-            <div className="gamesListHeaderRight">
+            {/* <div className="gamesListHeaderRight">
               <div className="sliceNumberHeader">
                 <img src={require('../images/logo.svg')} alt="slice-it-logo" />
                 <p className="sliceNumber">200</p>
@@ -101,7 +101,7 @@ class GamesList extends React.Component {
                 <button className="changeViewButton" id="listButton" />
                 <button className="changeViewButton" id="columnButton" />
               </div>
-            </div>
+            </div> */}
           </div>
         ) : (
           <></>
@@ -121,11 +121,13 @@ class GamesList extends React.Component {
             ))}
           </div>
         ) : (
+          <>
           <GameThread
             showModal={this.state.showGameThread}
             closeGameThread={this.closeGameThread}
             gameDetails={this.state.currentGame}
           />
+          </>
         )}
       </main>
     );

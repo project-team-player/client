@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export const convertDate = date => {
-  return moment(date).format('ddd, MMM Do h:mm A');
+export const convertToDate = (dateTime, timeZone) => {
+  const date = moment(dateTime.toString()).format('ddd, MMM Do h:mm A');
+  return `${date} ${timeZone ? timeZone.toUpperCase() : ''}`;
 };
-
