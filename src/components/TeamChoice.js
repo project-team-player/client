@@ -1,4 +1,6 @@
-import React from "react";
+import React from 'react';
+import '../styles/TeamChoice.css';
+import '../styles/GameThread.css';
 
 class TeamChoice extends React.Component {
   constructor(props) {
@@ -22,17 +24,16 @@ class TeamChoice extends React.Component {
 
   render() {
     return (
-      <div className="selectionContainer">
-        <h3>1. Choose Winner</h3>
+      <div className='selectionContainer'>
         <button
-          type="radio"
-          name="winning-team-away"
-          value="away-team"
-          id="away-team-selector"
+          type='radio'
+          name='winning-team-away'
+          value='away-team'
+          id='away-team-selector'
           className={
-            this.state.activeName === "winning-team-away"
-              ? "bet-selector-btn toggle"
-              : "bet-selector-btn"
+            this.state.activeName === 'winning-team-away'
+              ? 'bet-selector-btn toggle'
+              : 'bet-selector-btn'
           }
           onClick={this.handleChange}
         >
@@ -40,13 +41,14 @@ class TeamChoice extends React.Component {
         </button>
 
         <button
-          name="winning-team-home"
-          value="home-team"
-          id="home-team-selector"
+          type='radio'
+          name='winning-team-home'
+          value='home-team'
+          id='home-team-selector'
           className={
-            this.state.activeName === "winning-team-home"
-              ? "bet-selector-btn toggle"
-              : "bet-selector-btn"
+            this.state.activeName === 'winning-team-home'
+              ? 'bet-selector-btn toggle'
+              : 'bet-selector-btn'
           }
           onClick={this.handleChange}
         >

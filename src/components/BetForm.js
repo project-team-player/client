@@ -22,7 +22,7 @@ class BetForm extends React.Component {
       handleSliceChanges
     } = this.props;
     return (
-      <div className='betForm'>
+      <div className='betForm card'>
         <h2>Make A Bet</h2>
         
           <div className='bettingContainer'>
@@ -42,7 +42,6 @@ class BetForm extends React.Component {
               </button>
             </div>
           </div>
-        <hr />
       </div>
     );
   }

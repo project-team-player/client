@@ -4,7 +4,9 @@ import axios from 'axios';
 import TeamChoice from './TeamChoice';
 import Slider from './Slider';
 import Comment from './Comment';
+// import Comments from './Comments';
 import BetForm from './BetForm';
+import CommentForm from './CommentForm';
 import { UserContext } from '../contexts/UserContext';
 import { getUserToken } from '../utils/auth';
 import GameHeader from '../components/GameHeader'
@@ -31,7 +33,7 @@ class GameThread extends React.Component {
         awayTeam: 50.00,
         homeTeam: 50.00
       },
-      finished: false,
+      finished: false
     };
   }
 
@@ -46,11 +48,11 @@ class GameThread extends React.Component {
     this.getListOfComments().then(() => {
       const gameIsFinished = () => {
         if (Date.now() > new Date(`${this.props.gameDetails.dateTime}`)) {
-          return true
+          return true;
         }
         return false;
-      }
-  
+      };
+
       if (gameIsFinished()) {
         this.setState({ finished: true });
       } else {
@@ -64,32 +66,35 @@ class GameThread extends React.Component {
           promptUserToLogIn = true;
         }
         this.setState({
-            disableCommenting,
-            promptUserToLogIn
-        })
+          disableCommenting,
+          promptUserToLogIn
+        });
       }
-    })
-    
-
-    
+    });
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.context.state.isLoggedIn === false && this.props.context.state.isLoggedIn === true){
-      this.setState({ promptUserToLogIn: false })
+    if (
+      prevProps.context.state.isLoggedIn === false &&
+      this.props.context.state.isLoggedIn === true
+    ) {
+      this.setState({ promptUserToLogIn: false });
       if (this.userHasPlacedBet(this.state.comments)) {
-        this.setState({ disableCommenting: true })
+        this.setState({ disableCommenting: true });
       }
     }
-    if (prevProps.context.state.isLoggedIn === true && this.props.context.state.isLoggedIn === false){
-      this.setState({ promptUserToLogIn: true })
+    if (
+      prevProps.context.state.isLoggedIn === true &&
+      this.props.context.state.isLoggedIn === false
+    ) {
+      this.setState({ promptUserToLogIn: true });
     }
     if (this.state.fetchNewComment) {
       this.getListOfComments();
       this.setState({
         disableCommenting: true,
-        fetchNewComment: false,
-      })
+        fetchNewComment: false
+      });
     }
   }
 
@@ -97,11 +102,11 @@ class GameThread extends React.Component {
     const { user } = this.props.context.state;
     comments.forEach(comment => {
       comments[comment._id] = true;
-    })
+    });
     let userComments = [];
     if (user) {
       userComments = user.comments;
-    } 
+    }
 
     const userCommentsOnThread =
       userComments.filter(comment => {
@@ -125,12 +130,19 @@ class GameThread extends React.Component {
           commentOwner: response.data.owner,
           commentText: response.data.text,
           createdBy: response.data.createdAt
-      })
+        });
       });
   };
 
   setCurrentComment = async comment => {
     await this.setState({ currentComment: comment });
+  };
+
+  handleSliceChanges = sliceValue => {
+    const bet = { ...this.state.bet };
+    bet.slices = sliceValue;
+    this.setState({ bet });
+    console.log('bet set');
   };
 
   handleBetChanges = e => {
@@ -143,9 +155,10 @@ class GameThread extends React.Component {
       case 'winning-team-away':
         bet.winningTeam = gameDetails.awayTeam.key;
         break;
-      case 'pizza-slices':
-        bet.slices = e.target.value;
-        break;
+      //** Seperate function created for slices being bet refer to handleSliceChanges */
+      // case 'pizza-slices':
+      //   bet.slices = e.target.value;
+      //   break;
       case 'comment':
         bet.comment = e.target.value;
         break;
@@ -157,21 +170,50 @@ class GameThread extends React.Component {
   };
 
   makeGameBet = e => {
-    const { bet: { winningTeam, slices, comment}} = this.state;
+    const {
+      bet: { winningTeam, slices }
+    } = this.state;
     // pass the following in body: { slices, comment winningTeam, dateTime }
     // dateTime is the time of the game, used to check if game has finished
-    if ( winningTeam && slices && comment) {
-      const { _id, slug, dateTime, gameThreadReference: { objectReference } } = this.props.gameDetails;
-      const { bet: { winningTeam, slices ,comment} } = this.state;
-      axios({ method: 'POST', url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`, headers: { authorization: `Bearer ${getUserToken()}`}, data: { key: winningTeam, slices, comment, dateTime, gamethreadId: objectReference, teamId: _id}}).then(res => {
-        this.setState({ fetchNewComment: true });
-      }).catch(error => {
-        this.setState({ errorMessage: 'This game has either finished or you have all ready bet on it.' })
-      });
+    if (winningTeam && slices) {
+      const {
+        _id,
+        slug,
+        dateTime,
+        gameThreadReference: { objectReference }
+      } = this.props.gameDetails;
+      console.log(_id, slug, dateTime, objectReference);
+      const {
+        bet: { winningTeam, slices }
+      } = this.state;
+      axios({
+        method: 'POST',
+        url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`,
+        headers: { authorization: `Bearer ${getUserToken()}` },
+        data: {
+          key: winningTeam,
+          slices,
+          dateTime,
+          gamethreadId: objectReference,
+          teamId: _id
+        }
+      })
+        .then(res => {
+          this.setState({ fetchNewComment: true });
+        })
+        .catch(error => {
+          this.setState({
+            errorMessage:
+              'This game has either finished or you have already betted on it.'
+          });
+          alert(this.state.errorMessage);
+        });
     } else {
-      this.setState({ errorMessage: 'Please select all the options before submitting bet!'})
+      this.setState({
+        errorMessage: 'Please select all the options before submitting bet!'
+      });
     }
-    e.preventDefault();
+    // e.preventDefault();
   };
 
   // Method to obtain sauce percentages
@@ -194,9 +236,31 @@ class GameThread extends React.Component {
       });
   };
 
+  // Method to post replies
+  postReply = (text, commentId) => {
+    console.log(commentId);
+    const username = this.props.context.state.user.name;
+    const gravatar =
+      'https://gravatar.com/avatar/f6a0a196d76723567618b367b80d8375?s=200';
+
+    axios({
+      method: 'PATCH',
+      url: `${process.env.REACT_APP_SERVER_URL}/comments/reply/${commentId}`,
+      headers: { authorization: `Bearer ${getUserToken()}` },
+      data: { username, gravatar, text }
+    }).then(response => {
+      this.getListOfComments();
+    });
+  };
+
   render() {
     const { showModal, gameDetails } = this.props;
-    const { disableCommenting, promptUserToLogIn, errorMessage, finished } = this.state;
+    const {
+      disableCommenting,
+      promptUserToLogIn,
+      errorMessage,
+      finished
+    } = this.state;
     if (!showModal) {
       return <></>;
     }
@@ -245,6 +309,7 @@ class GameThread extends React.Component {
                 makeGameBet={this.makeGameBet} 
                 gameDetails={this.props.gameDetails}
                 handleBetChanges={this.handleBetChanges}
+                handleSliceChanges={this.handleSliceChanges}
                 /> 
                 <div className="discussion-container card">
                 <h2>Trash talk</h2>

@@ -33,11 +33,45 @@
   background-color: #3578e5;
 }
 
-.mb1 {
-  margin-bottom: 2rem;
+.betContainer {
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  width: 25%;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .wheelContainer {
   display: flex;
   justify-content: center;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 4rem;
+  width: 10rem;
+  padding: 1rem 1rem 1rem 1rem;
+  background: var(--red);
+  border-radius: 1rem;
+}
+
+.betButton {
+  height: 2rem;
+  width: 2rem;
+  background: var(--red);
+  border: none;
+  color: white;
+  font-size: 25px;
+}
+
+#betIndicator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: black;
 }
