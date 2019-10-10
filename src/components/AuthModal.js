@@ -108,7 +108,7 @@ const LoginForm = ({ showSignupForm, handleLogin, handleInputChange, formValues,
       <button className="submitButton" type="submit">
         Log In
       </button>
-      <span className="switch-modal-info">No account? <NavLink onClick={showSignupForm} className="switch-modal-link">Sign Up</NavLink></span>
+      <span className="switch-modal-info">No account? <span onClick={showSignupForm} className="switch-modal-link">Sign Up</span></span>
   </form>
   )
 }
@@ -273,6 +273,7 @@ class AuthModal extends Component {
 
   render() {
     const { context } = this.props;
+    console.log(context);
     const { loginView } = this.props.context.state;
     const { formValues, formErrors, loginError } = this.state;
 
