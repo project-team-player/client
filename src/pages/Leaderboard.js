@@ -29,7 +29,7 @@ class Leaderboard extends React.Component {
       weeklytext: '2019 Season',
       query: '',
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSwitch = this.handleSwitch.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
 
@@ -45,7 +45,7 @@ class Leaderboard extends React.Component {
       });
   }
 
-  handleClick(weekly, weeklytext) {
+  handleSwitch(weekly, weeklytext) {
     this.setState({ weekly, weeklytext });
   }
   handleSearch(event) {
@@ -62,16 +62,19 @@ class Leaderboard extends React.Component {
             <div id="weekform">
               <form />
               <select onChange={e => this.setState({ week: e.target.value })}>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
                 <option>4</option>
                 <option>5</option>
-                <option selected>6</option>
+                <option selected>Current</option>
               </select>
             </div>
             <div className="filterbuttons">
               <button
                 id="season"
                 onClick={() => {
-                  this.handleClick(false, '2019 Season');
+                  this.handleSwitch(false, '2019 Season');
                   formCloser();
                 }}
               >
@@ -80,7 +83,7 @@ class Leaderboard extends React.Component {
               <button
                 id="weekly"
                 onClick={() => {
-                  this.handleClick(true, 'Week');
+                  this.handleSwitch(true, 'Week');
                   formLoader();
                 }}
               >
@@ -111,12 +114,5 @@ class Leaderboard extends React.Component {
     );
   }
 }
-
-// Leaderboard.propTypes = {
-//   week: PropTypes.number,
-//   // users: PropTypes.array,
-//   // value: PropTypes.number,
-//   // query: PropTypes.string,
-// };
 
 export default Leaderboard;

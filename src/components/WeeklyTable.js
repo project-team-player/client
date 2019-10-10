@@ -11,7 +11,6 @@ class WeeklyTable extends Component {
     };
   }
   componentDidMount() {
-    // this.setState({ week: this.props.week });
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/users/leaderboard/week/${this.props.week}`)
       .then(response => {
@@ -20,7 +19,6 @@ class WeeklyTable extends Component {
       .catch(error => {
         console.log(error);
       });
-    // console.log(this.props.week);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -36,34 +34,25 @@ class WeeklyTable extends Component {
         });
     }
   }
-  // componentWillUnmount() {
-  //   this.state.week = this.state.week.destroy();
-  // }
   renderTableData() {
-    // const weekIndicator = `slicesWeek${this.state.week}`;
-    console.log('weekly rendered');
+    const slicesForWeek = `slicesWeek${this.props.week}`;
     const filteredUsers = this.state.users.filter(user => user.name.includes(this.props.query));
+    console.log('FILTERED USERS', filteredUsers);
     return filteredUsers.map((user, index) => {
-      const { name, slicesWeek5, pizzaSlicesWeekly } = user; // destructuring
+      const { name, pizzaSlicesWeekly } = user; // destructuring // {user[slicesForWeek]}
       return (
         <tr>
           <td className="index">{index + 1}</td>
           <td className="table-items">{name}</td>
           {/* <td className="table-items">{wins}</td> */}
-          <td className="table-items">{slicesWeek5}</td>
+          <td className="table-items">{user[slicesForWeek]}</td>
           <td>{pizzaSlicesWeekly}</td>
         </tr>
       );
     });
   }
   renderTableHeader() {
-    const header = [
-      'Rank 🏅',
-      'Username 👻',
-      // '# of Wins per Week 🏆',
-      'Slices Won 🎉',
-      'Slices Left 🍕',
-    ];
+    const header = ['Rank 🏅', 'Username 👻', 'Slices Won 🎉', 'Slices Left 🍕'];
     return header.map((key, index) => <th key={index}>{key}</th>);
   }
 
