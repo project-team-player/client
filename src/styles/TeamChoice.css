@@ -1,7 +1,7 @@
 .selectionContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   height: 3rem;
   width: 50%;
   margin-top: 1rem;

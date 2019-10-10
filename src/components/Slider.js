@@ -10,7 +10,8 @@ class Slider extends React.Component {
       pizzaSrc: pizzaWheelFormat[0].src
     };
   }
-
+  
+  //**Used updatePizzaCounter instead of this because switched from slider to button increments */
   // onUpdateSlider(e) {
   //   this.setState({
   //     value: e.target.value,
@@ -20,14 +21,17 @@ class Slider extends React.Component {
   //   this.props.handleBetChanges(e);
   // }
 
+  //**Used to update the pizza counter and render it */
   updatePizzaCounter(value) {
     this.setState({
       value: value,
       pizzaSrc: pizzaWheelFormat[value].src,
       altTag: pizzaWheelFormat[value].name
     });
+    this.props.handleSliceChanges(value);
   }
 
+  //**Decreases pizza counter by 1 */
   minusAction = () => {
     if (this.state.value === 0) {
       alert('Bet is already at 0!');
@@ -38,6 +42,7 @@ class Slider extends React.Component {
     }
   };
 
+  //**Increases pizza counter by 1 */
   plusAction = () => {
     if (this.state.value === 8) {
       alert('Bet is already at 8!');

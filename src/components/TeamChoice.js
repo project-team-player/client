@@ -42,20 +42,6 @@ class TeamChoice extends React.Component {
 
         <button
           type='radio'
-          name='team-tie'
-          value='tie-team'
-          id='tie-team-selector'
-          className={
-            this.state.activeName === 'team-tie'
-              ? 'bet-selector-btn toggle'
-              : 'bet-selector-btn'
-          }
-        >
-          TIE
-        </button>
-
-        <button
-          type='radio'
           name='winning-team-home'
           value='home-team'
           id='home-team-selector'

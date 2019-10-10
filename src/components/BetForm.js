@@ -15,24 +15,33 @@ class BetForm extends React.Component {
   }
 
   render() {
-    const { makeGameBet, gameDetails, handleBetChanges } = this.props;
+    const {
+      makeGameBet,
+      gameDetails,
+      handleBetChanges,
+      handleSliceChanges
+    } = this.props;
     return (
       <div className='betForm'>
         <h2>Make A Bet</h2>
-        <form onSubmit={makeGameBet}>
+        
           <div className='bettingContainer'>
             <div className='betTopContainer'>
-              <Slider handleBetChanges={handleBetChanges} />
+              <Slider
+                handleBetChanges={handleBetChanges}
+                handleSliceChanges={handleSliceChanges}
+              />
               <div className='divider'></div>
               <TeamChoice
                 gameDetails={gameDetails}
                 handleBetChanges={handleBetChanges}
               />
               <div className='divider'></div>
-              <button className='betFormButton'>Slice It</button>
+              <button className='betFormButton' onClick={()=>makeGameBet()}>
+                Slice It
+              </button>
             </div>
           </div>
-        </form>
         <hr />
       </div>
     );

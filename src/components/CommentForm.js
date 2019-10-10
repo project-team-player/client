@@ -1,6 +1,4 @@
 import React from 'react';
-import Slider from './Slider';
-import TeamChoice from './TeamChoice';
 import '../styles/BetForm.css';
 
 class CommentForm extends React.Component {
