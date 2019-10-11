@@ -19,6 +19,7 @@ class LeaderboardTable extends Component {
       );
     });
   }
+
   renderTableHeader() {
     const header = ['Rank 🏅', 'Username 👻', '# of Wins per Week 🏆', 'Total Slices 🍕'];
     return header.map((key, index) => <th key={index}>{key}</th>);

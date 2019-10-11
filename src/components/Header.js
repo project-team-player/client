@@ -42,7 +42,7 @@ class Header extends React.Component {
                         alt="slice-it-logo"
                       />
                       <span className="slices">
-                        {this.props.context.state.user.pizzaSlicesWeekly}
+                        {context.state.user.pizzaSlicesWeekly}
                       </span>
                     </div>
                   </div>

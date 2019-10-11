@@ -1,6 +1,6 @@
 import React from 'react';
 import GameThread from './GameThread';
-import { convertDate } from '../utils/helpers';
+import { convertToDate } from '../utils/helpers';
 
 // CSS
 import '../styles/GameCard.css';
@@ -35,7 +35,7 @@ class GameCard extends React.Component {
             className="GameCard"
             role="button"
             onClick={() => setCurrentGame(gameDetails).then(openGameThread)}
-            onKeyPress={event => {
+            onKeyPress={(event) => {
               this.handleKeyPress(event);
               openGameThread();
             }}
@@ -46,7 +46,8 @@ class GameCard extends React.Component {
                 backgroundColor: `#${gameDetails.awayTeam.primaryColor}`,
               }}
             >
-              <img className="AwayImg" src={gameDetails.awayTeam.logo} alt="Logo" />;
+              <img className="AwayImg" src={gameDetails.awayTeam.logo} alt="Logo" />
+;
             </div>
             <div
               className="Home"
@@ -64,7 +65,9 @@ class GameCard extends React.Component {
               </div>
               {/* TODO: Create date parse for below Ex.2019-09-05T20:20:00 */}
               <div className="Date">
-                <span>{convertDate(gameDetails.dateTime.toString())} EST</span>
+                <span>
+                  {convertToDate(gameDetails.dateTime, 'est')}
+                </span>
               </div>
             </div>
           </div>

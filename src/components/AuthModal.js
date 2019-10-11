@@ -75,11 +75,15 @@ const SignupForm = ({handleSignup, showLoginForm, handleInputChange, formValues,
   )
 }
 
-const LoginForm = ({ showSignupForm, handleLogin, handleInputChange, formValues, formErrors, validateForm, loginError}) => {
+const LoginForm = ({ showSignupForm, handleLogin, handleInputChange, formValues, formErrors, validateForm, loginError, context}) => {
 
   return (
     <form onSubmit={handleLogin} className="auth-form">
       <h1 className="credentialTitle">Log In</h1>
+      {
+        context.state.modalLoginMessage &&
+        <p className="login-message">{context.state.modalLoginMessage}</p>
+      }
       <span className="login-error-message">{loginError && loginError}</span>
         <div class="auth-form-field">
           <input
@@ -104,7 +108,7 @@ const LoginForm = ({ showSignupForm, handleLogin, handleInputChange, formValues,
       <button className="submitButton" type="submit">
         Log In
       </button>
-      <span className="switch-modal-info">No account? <NavLink onClick={showSignupForm} className="switch-modal-link">Sign Up</NavLink></span>
+      <span className="switch-modal-info">No account? <span onClick={showSignupForm} className="switch-modal-link">Sign Up</span></span>
   </form>
   )
 }
@@ -228,8 +232,8 @@ class AuthModal extends Component {
       axios.post(`${process.env.REACT_APP_SERVER_URL}/authenticate/login`, { username, password } )
       .then(response => {
         const { token, user } = response.data;
-      this.context.logIn(token, user);
-      this.context.hideModal();
+      this.props.context.logIn(token, user);
+      this.props.context.hideModal();
     }).catch(error => {
       let loginError = '';
       if (error.response.status === 500) {
@@ -249,8 +253,9 @@ class AuthModal extends Component {
     
     if (!this.anyFormErrors()) {
       axios.post(`${process.env.REACT_APP_SERVER_URL}/authenticate/signup`, { email, username, password, passwordConfirm }).then(response => {
-        this.context.logIn(response.data.token);
-        this.context.hideModal();
+        const { token, user } = response.data;
+        this.props.context.logIn(token, user);
+        this.props.context.hideModal();
       })  
     } else {
       this.validateForm(formValues);
@@ -259,15 +264,17 @@ class AuthModal extends Component {
   }
 
   showSignupForm() {
-    this.context.showSignup();
+    this.props.context.showSignup();
   }
 
   showLoginForm() {
-    this.context.showLogin();
+    this.props.context.showLogin();
   }
 
   render() {
-    const { loginView } = this.context.state;
+    const { context } = this.props;
+    console.log(context);
+    const { loginView } = this.props.context.state;
     const { formValues, formErrors, loginError } = this.state;
 
     // Conditionally renders login or signup form based on context state 
@@ -283,6 +290,7 @@ class AuthModal extends Component {
           formValues={formValues}
           formErrors={formErrors}
           loginError={loginError}
+          context={context}
         />
         : 
         <SignupForm 
@@ -299,6 +307,8 @@ class AuthModal extends Component {
   }
 }
 
-AuthModal.contextType = UserContext;
-
-export default AuthModal;
+export default props => (
+  <UserContext.Consumer>
+    {context => <AuthModal {...props} context={context} />}
+  </UserContext.Consumer>
+);
