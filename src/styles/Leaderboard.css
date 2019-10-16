@@ -14,9 +14,9 @@
 }
 
 .Searchform {
-    max-width: 600px;
+    max-width: 800px;
     margin: auto;
-    margin-top: 2rem;
+    margin-top: 1rem;
     display: flex;
     border: none;
     border: 2px;
@@ -27,7 +27,7 @@
 }
 
 #weekform {
-    margin-top: 2rem;
+    margin-top: 1rem;
     display: none;
 }
 
@@ -51,7 +51,7 @@ select {
 .table-header {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .index {
@@ -97,7 +97,7 @@ select {
     border: 1px solid #ddd;
     border-radius: 4px;
     width: 93vw;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 #users td,
@@ -120,7 +120,7 @@ select {
 #season,
 #weekly {
     padding: 0.5rem 2rem 0.5rem 2rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-left: 3.85rem;
     font-size: 1rem;
     border: none;
@@ -191,7 +191,7 @@ input[type=search] {
 }
 
 .leaderboardtext {
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 @media only screen and (max-width: 1150px) {
