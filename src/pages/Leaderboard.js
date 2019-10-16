@@ -19,6 +19,26 @@ function formCloser() {
   x.style.display = 'none';
 }
 
+function activeSetter() {
+  if (document.getElementById('season')) {
+    const activeButton = document.getElementById('season')
+    activeButton.style='color:white; background-color: red';
+    document.getElementById('weekly').style='color: black; background-color: white';
+  }
+ 
+}
+
+function activeSetter2() {
+  if (document.getElementById('weekly')) {
+    const activeButton = document.getElementById('weekly');
+    activeButton.style='color:white; background-color:red';
+    document.getElementById('season').style='color: black; background-color: white';
+
+  }
+}
+// background-color: var(--red);
+//     color: white;
+
 class Leaderboard extends React.Component {
   constructor(props) {
     super(props);
@@ -56,7 +76,7 @@ class Leaderboard extends React.Component {
   render() {
     const { weekly, weeklytext } = this.state;
     return (
-      <div>
+      <div className="page">
         <div className="top">
           <div className="leftside">
             <h2 className="leaderboardtext">{`${weeklytext}`}</h2>
@@ -73,10 +93,12 @@ class Leaderboard extends React.Component {
             </div>
             <div className="filterbuttons">
               <button
+                class="btn active"
                 id="season"
                 onClick={() => {
                   this.handleSwitch(false, '2019 NFL Season');
                   formCloser();
+                  activeSetter();
                 }}
               >
                 Season
@@ -86,6 +108,7 @@ class Leaderboard extends React.Component {
                 onClick={() => {
                   this.handleSwitch(true, 'Week');
                   formLoader();
+                  activeSetter2();
                 }}
               >
                 Weekly

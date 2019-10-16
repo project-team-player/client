@@ -1,6 +1,7 @@
 .top {
     display: flex;
-    min-width: 1100;
+    /* min-width: 1100; */
+    margin: auto;
 }
 
 .boards {
@@ -13,8 +14,11 @@
     margin: auto;
 }
 
+
+
 .Searchform {
-    max-width: 800px;
+    min-width: 200px;
+    /* max-width: 800px; */
     margin: auto;
     margin-top: 1rem;
     display: flex;
@@ -165,7 +169,7 @@ h2 {
 input[type=search] {
     padding: 10px;
     justify-content: center;
-    width: 20rem;
+    width: 16rem;
     border-style: none;
     background: transparent;
 }
