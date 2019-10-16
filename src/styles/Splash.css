@@ -20,9 +20,83 @@
   background-color: rgba(100%, 100%, 100%, 0.9);
 }
 
+#fullHomeList {
+  list-style: none;
+  padding-inline-start: 0;
+  font-size: 30px;
+  margin-bottom: 0.5rem;
+  font-family: "Roboto", sans-serif;
+}
+
+.listText {
+  margin-top: 0;
+  margin-left: 0.5rem;
+  margin-bottom: 0;
+}
+
+.runOn {
+  margin-top: 0.2rem;
+  margin-bottom: 0;
+}
+
 .homeList {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  font-size: 19px;
+  display: flex;
+  align-items: baseline;
+}
+
+.homeListRunOn {
+  margin-bottom: 2rem;
+  font-size: 19px;
+  display: flex;
+  align-items: stretch;
+}
+
+.numberList {
+  background: var(--black);
+  border-radius: 100%;
+
+  color: white;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  text-align: center;
+  display: inline-block;
+}
+
+/* .homeList:before {
+  margin-right: 10px;
+  content: counter(item);
+  background: var(--black);
+  border-radius: 100%;
+  color: white;
+  width: 1.2em;
+  padding: 0.5rem;
+  text-align: center;
+  display: inline-block;
+} */
+
+#joinCommunity {
+  text-align: center;
+}
+
+#buttonContainer {
+  width: 100%;
+  justify-content: center;
+  display: flex;
 }
 
 #signUpButton {
+  background-color: var(--red);
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  color: var(--white);
+  border: none;
+  border-radius: 3px;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 2.5rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 17.5px;
 }

@@ -14,17 +14,29 @@ class Splash extends React.Component {
         <div className="firstSplash">
           <img src={fball} id="mainSplash" />
           <div className="infoBox">
-            <h1>Join the Community</h1>
-            <ol>
-              <li className="homeList">Sign up and create an account.</li>
+            <h1 id="joinCommunity">Join the Community</h1>
+            <ol id="fullHomeList">
               <li className="homeList">
-                Recieve weekly pizza slices and use them to bet on NFL games.
+                <div className="numberList">1</div>
+                <p className="listText">Sign up and create an account.</p>
+              </li>
+              <li className="homeListRunOn">
+                <div className="numberList">2</div>
+                <p className="listText">
+                  Recieve weekly pizza slices and
+                  <p className="runOn">use them to bet on NFL games.</p>
+                </p>
               </li>
               <li className="homeList">
-                Trash talk with other slice it users!
+                <div className="numberList">3</div>
+                <p className="listText">
+                  Trash talk with other slice it users!
+                </p>
               </li>
-              <button id="signUpButton">Sign up</button>
             </ol>
+            <div id="buttonContainer">
+              <button id="signUpButton">Sign up</button>
+            </div>
           </div>
         </div>
       </div>
