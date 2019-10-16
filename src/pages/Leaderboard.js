@@ -22,7 +22,7 @@ function formCloser() {
 function activeSetter() {
   if (document.getElementById('season')) {
     const activeButton = document.getElementById('season')
-    activeButton.style='color:white; background-color: red';
+    activeButton.style='color:white; background-color: rgb(208,2,27)';
     document.getElementById('weekly').style='color: black; background-color: white';
   }
  
@@ -31,7 +31,7 @@ function activeSetter() {
 function activeSetter2() {
   if (document.getElementById('weekly')) {
     const activeButton = document.getElementById('weekly');
-    activeButton.style='color:white; background-color:red';
+    activeButton.style='color:white; background-color:rgb(208,2,27)';
     document.getElementById('season').style='color: black; background-color: white';
 
   }
