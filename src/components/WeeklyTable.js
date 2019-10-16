@@ -23,7 +23,6 @@ class WeeklyTable extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.week !== prevProps.week) {
-      console.log('Getting data');
       axios
         .get(`${process.env.REACT_APP_SERVER_URL}/users/leaderboard/week/${this.props.week}`)
         .then(response => {

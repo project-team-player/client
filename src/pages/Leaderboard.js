@@ -26,7 +26,7 @@ class Leaderboard extends React.Component {
       week: '',
       users: [],
       weekly: false,
-      weeklytext: '2019 Season',
+      weeklytext: '2019 NFL Season',
       query: '',
     };
     this.handleSwitch = this.handleSwitch.bind(this);
@@ -75,7 +75,7 @@ class Leaderboard extends React.Component {
               <button
                 id="season"
                 onClick={() => {
-                  this.handleSwitch(false, '2019 Season');
+                  this.handleSwitch(false, '2019 NFL Season');
                   formCloser();
                 }}
               >
