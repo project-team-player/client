@@ -9,7 +9,7 @@
 
 .leftside {
     display: flex;
-    min-width: 400px;
+    /* min-width: 400px; */
     margin: auto;
 }
 
