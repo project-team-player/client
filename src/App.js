@@ -7,6 +7,7 @@ import { UserProvider, AuthContext, UserContext } from "./contexts/UserContext";
 
 // Page Imports Here
 import Leaderboard from "./pages/Leaderboard";
+import Splash from "./pages/Splash";
 // import SignUp from './pages/SignupPage';
 
 // Component Imports Here
@@ -23,23 +24,42 @@ const App = () => {
       <BrowserRouter>
         <UserProvider>
           <UserContext.Consumer>
-          {context => (
-            <>
-          <Header/> 
-          <div className="page-content">
-            {context.state.showAuthModal && <AuthModal loginView={context.state.showLogin} formMessage={context.state.loginModalMessage} />}
-            <div className={`${context.state.showAuthModal ? 'faded' : ''}`} id="fadeable-section" onClick={context.state.showAuthModal ? context.hideModal : false}>
-              <Switch>
-                <Route path='/' exact component={GamesList} />
-                <Route path='/leaderboard' component={Leaderboard} />
-                <Route path='/login' render={(props) => <AuthModal modal={false} />} showLogin={true} />
-                <Route path='/signup' render={(props) => <AuthModal modal={false} />} 
-                showLogin={true} />
-              </Switch>
-            </div>
-          </div>
-          </>
-          )}
+            {context => (
+              <>
+                <Header />
+                <div className="page-content">
+                  {context.state.showAuthModal && (
+                    <AuthModal
+                      loginView={context.state.showLogin}
+                      formMessage={context.state.loginModalMessage}
+                    />
+                  )}
+                  <div
+                    className={`${context.state.showAuthModal ? "faded" : ""}`}
+                    id="fadeable-section"
+                    onClick={
+                      context.state.showAuthModal ? context.hideModal : false
+                    }
+                  >
+                    <Switch>
+                      <Route path="/" exact component={Splash} />
+                      <Route path="/games" exact component={GamesList} />
+                      <Route path="/leaderboard" component={Leaderboard} />
+                      <Route
+                        path="/login"
+                        render={props => <AuthModal modal={false} />}
+                        showLogin={true}
+                      />
+                      <Route
+                        path="/signup"
+                        render={props => <AuthModal modal={false} />}
+                        showLogin={true}
+                      />
+                    </Switch>
+                  </div>
+                </div>
+              </>
+            )}
           </UserContext.Consumer>
         </UserProvider>
       </BrowserRouter>
