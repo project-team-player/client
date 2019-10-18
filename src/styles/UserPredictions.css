@@ -74,50 +74,6 @@
   animation: rotateHome 1s forwards;
 }
 
-.pie-seg {
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: red;
-  transform-origin: 50% 0;
-  transform: translate(50%, 0);
-}
-
-
-.pie-segment {
-  --a: calc(var(--over50, 0) * -100%);
-  --b: calc((1 + var(--over50, 0)) * 100%);
-  height: 100%;
-  position: absolute;
-  transform: translate(0, -50%) rotate(90deg) rotate(calc(var(--offset, 0) / 100 * 360deg));
-  transform-origin: 50% 100%;
-  width: 100%;
-  /* clip-path: polygon(var(--a) var(--a), var(--b) var(--a), var(--b) var(--b), var(--a) var(--b));
-  -webkit-clip-path: polygon(var(--a) var(--a), var(--b) var(--a), var(--b) var(--b), var(--a) var(--b)); */
-}
-
-
-.pie-segment:after, .pie-segment:before {
-  background: var(--teamColor);
-  content: '';
-  height: 100%;
-  position: absolute;
-  width: 100%;
-  transition: transform 1s;
-  overflow: hidden;
-}
-
-.pie-segment:before {
-  --degrees: calc((var(--percent, 45) / 100) * 360);
-  transform: translate(0, 100%) rotate(calc(var(--degrees, 50) * 1deg));
-  transform-origin: 50% 0;
-}
-
-.pie-segment:after {
-  opacity: var(--over50, 0);
-}
-
 .teamPercentages {
   display: flex;
   align-items: center;

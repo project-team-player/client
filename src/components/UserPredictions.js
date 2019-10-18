@@ -11,26 +11,20 @@ const UserPredictions = ({ percentages, gameDetails }) => {
 
 
   useEffect(() => {
-    console.log('I ran and updated');
     setAwayPercentage(percentages.awayTeam);
     setHomePercentage(percentages.homeTeam);
     setWinByPercentage(getWinByPercentage());
     setWinningTeamColor(calculateWinningTeamColor());
     if (winByPercentage !== 50) {
-      console.log('The winning side is winning by', winByPercentage, '%');
     }
   });
 
   const calculateWinningTeamColor = () => {
-    console.log('calculating winning team where the away team has', awayPercentage, 'And the home team has', homePercentage);
     if (awayPercentage > homePercentage) {
-      console.log('away wins');
       return `#${gameDetails.awayTeam.primaryColor}`;
     } else if (homePercentage > awayPercentage) {
-      console.log('home wins');
       return `#${gameDetails.homeTeam.primaryColor}`;
     } else {
-      console.log('Its a tie');
       return `#${gameDetails.awayTeam.primaryColor}`;
     }
   }
