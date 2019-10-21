@@ -57,6 +57,8 @@ class Splash extends React.Component {
         </div>
         <div className="secondSplash">
           <img id="bottomSplash" src={secondFball} />
+          <div id="overlayAbout" />
+
           <div id="aboutContainer">
             <h1 id="aboutHeader">How to Score</h1>
             <div id="aboutLandingContainer">
