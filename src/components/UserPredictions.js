@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/UserPredictions.css';
 
+/**
+ * 
+ * @param {object} percentages How many percent of users voted on each team
+ * @param {object} gameDetails Game specific information like teams, scores etc. 
+ */
 const UserPredictions = ({ percentages, gameDetails }) => {
+  // See React docs on hooks if this looks unfamiliar https://reactjs.org/docs/hooks-intro.html  
   const [awayPercentage, setAwayPercentage] = useState(50.00);
   const [homePercentage, setHomePercentage] = useState(50.00);
   const [winningTeamColor, setWinningTeamColor] = useState('');
@@ -9,17 +15,21 @@ const UserPredictions = ({ percentages, gameDetails }) => {
   const [homeAnimation, startHomeAnimation] = useState(false);
   const [awayAnimation, startAwayAnimation] = useState(false);
 
-
+  /**
+   * In this case UseEffect works similar to ComponentDidMount and ComponentDidUpdate
+   */
   useEffect(() => {
     setAwayPercentage(percentages.awayTeam);
     setHomePercentage(percentages.homeTeam);
     setWinByPercentage(getWinByPercentage());
-    setWinningTeamColor(calculateWinningTeamColor());
-    if (winByPercentage !== 50) {
-    }
+    setWinningTeamColor(getWinningTeamColor());
   });
 
-  const calculateWinningTeamColor = () => {
+  /**
+   * Gets the winning team color 
+   * @returns {string} winning team primary color code in hexformat
+   */
+  const getWinningTeamColor = () => {
     if (awayPercentage > homePercentage) {
       return `#${gameDetails.awayTeam.primaryColor}`;
     } else if (homePercentage > awayPercentage) {
@@ -29,18 +39,22 @@ const UserPredictions = ({ percentages, gameDetails }) => {
     }
   }
 
+  /**
+   * Get how many percentage the winning team is winning by as a number
+   * @returns {number} win-by percentage
+   */ 
   const getWinByPercentage = () => {
-    let losingPercent = 0;
+    let winPercent = 0;
     if (awayPercentage > homePercentage) {
-      losingPercent = awayPercentage - homePercentage;
+      winPercent = awayPercentage - homePercentage;
       startAwayAnimation(true);
     } else if (homePercentage > awayPercentage) {
-      losingPercent = homePercentage - awayPercentage;
+      winPercent = homePercentage - awayPercentage;
       startHomeAnimation(true);
     } else {
-      losingPercent = 50;      
+      winPercent = 50;      
     }
-    return losingPercent;
+    return winPercent;
   }
 
   return (
