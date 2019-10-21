@@ -154,10 +154,10 @@
   grid-template-columns: 1.2fr 1.5fr 2fr;
 }
 
-.bet-selector-btn:focus {
+/* .bet-selector-btn:focus {
   outline: 0;
   background: var(--red);
-}
+} */
 
 .toggle {
   background: var(--red);

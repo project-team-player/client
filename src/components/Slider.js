@@ -59,16 +59,18 @@ class Slider extends React.Component {
         <div className='wheelContainer'>
           <img src={this.state.pizzaSrc} alt={this.state.name} />
         </div>
-        <div className='buttonContainer'>
-          <button className='betButton' onClick={this.minusAction}>
-            -
-          </button>
-          <label className='betButton' id='betIndicator'>
-            {this.state.value}
-          </label>
-          <button className='betButton' onClick={this.plusAction}>
-            +
-          </button>
+        <div className='button-container'>
+          <div className="button-container-inner">
+            <button className='betButton' onClick={this.minusAction}>
+              -
+            </button>
+            <label className='betButton' id='betIndicator'>
+              {this.state.value}
+            </label>
+            <button className='betButton' onClick={this.plusAction}>
+              +
+            </button>
+          </div>
         </div>
       </div>
     );

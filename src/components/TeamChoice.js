@@ -32,7 +32,7 @@ class TeamChoice extends React.Component {
           id='away-team-selector'
           className={
             this.state.activeName === 'winning-team-away'
-              ? 'bet-selector-btn toggle'
+              ? 'bet-selector-btn active-btn'
               : 'bet-selector-btn'
           }
           onClick={this.handleChange}
@@ -47,7 +47,7 @@ class TeamChoice extends React.Component {
           id='home-team-selector'
           className={
             this.state.activeName === 'winning-team-home'
-              ? 'bet-selector-btn toggle'
+              ? 'bet-selector-btn active-btn'
               : 'bet-selector-btn'
           }
           onClick={this.handleChange}

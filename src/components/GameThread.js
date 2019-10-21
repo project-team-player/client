@@ -1,12 +1,9 @@
 import React from 'react';
 import '../styles/GameThread.css';
 import axios from 'axios';
-import TeamChoice from './TeamChoice';
-import Slider from './Slider';
 import Comment from './Comment';
 // import Comments from './Comments';
 import BetForm from './BetForm';
-import CommentForm from './CommentForm';
 import { UserContext } from '../contexts/UserContext';
 import { getUserToken } from '../utils/auth';
 import GameHeader from '../components/GameHeader'
@@ -33,68 +30,70 @@ class GameThread extends React.Component {
         awayTeam: 50.00,
         homeTeam: 50.00
       },
-      finished: false
+      gameHasFinished: false,
+      userDidBet: false,
+      userBet: '',
     };
   }
 
-  componentDidMount() {
-    // GET gamethread/:id
-    // TODO: Fix error, where the user can't see comments when logging out and logging back in.
-    const { showModal } = this.props;
-    if (showModal) {
-      this.setState({ isVisible: true });
-    }
-    this.getPercentage();
-    this.getListOfComments().then(() => {
-      const gameIsFinished = () => {
-        if (Date.now() > new Date(`${this.props.gameDetails.dateTime}`)) {
-          return true;
-        }
-        return false;
-      };
-
-      if (gameIsFinished()) {
-        this.setState({ finished: true });
-      } else {
-        let disableCommenting = false;
-        let promptUserToLogIn = false;
-        if (this.props.context.state.isLoggedIn) {
-          if (this.userHasPlacedBet(this.state.comments)) { 
-            disableCommenting = true;
-          }
-        } else if (!this.props.context.state.isLoggedIn) {
-          promptUserToLogIn = true;
-        }
-        this.setState({
-          disableCommenting,
-          promptUserToLogIn
-        });
+  componentDidMount = async () => {
+    try {
+      const { showModal } = this.props;
+      if (showModal) {
+        this.setState({ isVisible: true });
       }
-    });
+      // API call to get gamethread data like comments, bets etc.
+      const gameThreadRequest = await axios.get(`${process.env.REACT_APP_SERVER_URL}/gamethreads/${this.props.gameDetails.gameThreadReference.gameThreadID}`)
+      const { gamethread, percentages } = gameThreadRequest.data;
+      const { comments, bets, dateTime } = gamethread;
+
+      let userDidBet = false;
+      let userBet = {}
+
+      
+      // check if user is logged in
+      if (this.props.context.state.isLoggedIn) {
+        const bet = this.getUserBet(bets).bet;
+        if (bet) { 
+          userBet = bet; 
+          userDidBet = true;
+        }
+      } 
+
+      this.setState({ comments, bets, userDidBet, userBet,
+        percentages: { 
+          awayTeam: percentages[this.props.gameDetails.awayTeam.key].toFixed(2), 
+          homeTeam: percentages[this.props.gameDetails.homeTeam.key].toFixed(2),
+        },
+        gameHasFinished: new Date(dateTime) < Date.now(),
+      })
+    } catch (error) {
+      // TODO: Replace with proper error handling
+      console.error(error)
+    }
   }
 
   componentDidUpdate(prevProps) {
-    if (
-      prevProps.context.state.isLoggedIn === false &&
-      this.props.context.state.isLoggedIn === true
-    ) {
-      this.setState({ promptUserToLogIn: false });
-      if (this.userHasPlacedBet(this.state.comments)) {
-        this.setState({ disableCommenting: true });
-      }
-    }
-    if (
-      prevProps.context.state.isLoggedIn === true &&
-      this.props.context.state.isLoggedIn === false
-    ) {
-      this.setState({ promptUserToLogIn: true });
-    }
     if (this.state.fetchNewComment) {
       this.getListOfComments();
       this.setState({
-        disableCommenting: true,
         fetchNewComment: false
       });
+    }
+  }
+
+  getUserBet = (bets = this.state.bets) => {
+   const userBets = this.props.context.state.user.bets;
+   let bet = {};
+   if (userBets.some(userBet => {
+    if (bets.includes(userBet._id)) {
+      bet = userBet; 
+      return true;
+    }
+    })) {
+      return { bet}
+    } else {
+      return { bet: false }
     }
   }
 
@@ -127,9 +126,6 @@ class GameThread extends React.Component {
       .then(response => {
         this.setState({
           comments: response.data.comments,
-          commentOwner: response.data.owner,
-          commentText: response.data.text,
-          createdBy: response.data.createdAt
         });
       });
   };
@@ -196,9 +192,6 @@ class GameThread extends React.Component {
           teamId: _id
         }
       })
-        .then(res => {
-          this.setState({ fetchNewComment: true });
-        })
         .catch(error => {
           this.setState({
             errorMessage:
@@ -211,7 +204,6 @@ class GameThread extends React.Component {
         errorMessage: 'Please select all the options before submitting bet!'
       });
     }
-    // e.preventDefault();
   };
 
   // Method to obtain sauce percentages
@@ -256,7 +248,10 @@ class GameThread extends React.Component {
       disableCommenting,
       promptUserToLogIn,
       errorMessage,
-      finished
+      finished,
+      userDidBet,
+      userBet,
+      gameHasFinished,
     } = this.state;
     if (!showModal) {
       return <></>;
@@ -307,24 +302,12 @@ class GameThread extends React.Component {
                 gameDetails={this.props.gameDetails}
                 handleBetChanges={this.handleBetChanges}
                 handleSliceChanges={this.handleSliceChanges}
+                userDidBet={userDidBet}
+                userBet={userBet}
+                gameHasFinished={gameHasFinished}
                 /> 
                 <div className="discussion-container card">
                 <h2>Trash talk</h2>
-                    {
-                      promptUserToLogIn &&
-                      <>
-                        <span className="login-text">Please log in to make a bet  <a className="login-request" onClick={context.showModal}>Log in</a></span>
-                       
-                      </>
-                    }
-                    {
-                      disableCommenting && !promptUserToLogIn && !finished &&
-                      <p>You have allready bet pizza slices on this game. You can only bet once per game</p>
-                    }
-                    {
-                      finished &&
-                      <p>This game has finished. Please bet on another game.</p>
-                    }
                     <CommentInput gamethreadSlug={gameDetails.slug} gamethreadId={gameDetails.gameThreadReference.gameThreadID}
                     fetchNewComments={this.getListOfComments}
                      />
