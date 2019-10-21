@@ -11,7 +11,11 @@
   overflow: hidden;
   width: 80%;
   border-radius: 100%;
-  background: black;
+  background: var(--away-color);
+  background-image:
+    linear-gradient(to right, transparent 50%, var(--home-color) 0);
+  color: transparent;
+  text-align: center;
 }
 
 .pie:after {
@@ -20,38 +24,54 @@
   padding-bottom: 100%;
 }
 
+@keyframes rotateHome {
+  to { 
+    transform: rotate(calc(var(--win-by-percentage) / 2 / 100 * 360deg)); 
+    /* transform: rotate(180deg); */
+  }
+}
+@keyframes rotateAway {
+  from {
+    transform: rotate(180deg);
+  }
+  to { 
+    /* transform: rotate(calc(180 - var(--win-by-percentage) / 100 * 1deg));  */
+    transform: rotate(calc(180deg - var(--win-by-percentage) / 2 / 100 * 360deg ));
+  }
+}
+@keyframes bg {
+  50% { background: #655; }
+}
 
-.pie-segment {
-  --a: calc(var(--over50, 0) * -100%);
-  --b: calc((1 + var(--over50, 0)) * 100%);
-  height: 100%;
+
+.animated-pie-away::before {
+  content: "";
   position: absolute;
-  transform: translate(0, -50%) rotate(90deg) rotate(calc(var(--offset, 0) / 100 * 360deg));
-  transform-origin: 50% 100%;
-  width: 100%;
-  clip-path: polygon(var(--a) var(--a), var(--b) var(--a), var(--b) var(--b), var(--a) var(--b));
-  -webkit-clip-path: polygon(var(--a) var(--a), var(--b) var(--a), var(--b) var(--b), var(--a) var(--b));
-  transition: transform 1s;
+  top: 0; left: 50%;
+  width: 50%; height: 100%;
+  border-radius: 0 100% 100% 0 / 50%;
+  /* Inherit for away team, and --home-team for when home team has more than 50% */
+  /* Can use .25 turn which is equal to 90 deg or 25% of pie chart */
+  background-color: var(--winning-team-color);
+  transform-origin: left;
+  /* animation: spin 1s linear forwards; */
+  /* transform: rotate(calc(var(--losing-team-percent) * 0.01turn)); */
+  animation: rotateAway 1s forwards;
 }
 
-
-.pie-segment:after, .pie-segment:before {
-  background: var(--teamColor);
-  content: '';
-  height: 100%;
+.animated-pie-home::before {
+  content: "";
   position: absolute;
-  width: 100%;
-  transition: transform 1s;
-}
-
-.pie-segment:before {
-  --degrees: calc((var(--percent, 45) / 100) * 360);
-  transform: translate(0, 100%) rotate(calc(var(--degrees, 50) * 1deg));
-  transform-origin: 50% 0;
-}
-
-.pie-segment:after {
-  opacity: var(--over50, 0);
+  top: 0; left: 50%;
+  width: 50%; height: 100%;
+  border-radius: 0 100% 100% 0 / 50%;
+  /* Inherit for away team, and --home-team for when home team has more than 50% */
+  /* Can use .25 turn which is equal to 90 deg or 25% of pie chart */
+  background-color: var(--winning-team-color);
+  transform-origin: left;
+  /* animation: spin 1s linear forwards; */
+  /* transform: rotate(calc(var(--losing-team-percent) * 0.01turn)); */
+  animation: rotateHome 1s forwards;
 }
 
 .teamPercentages {

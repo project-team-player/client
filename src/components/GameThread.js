@@ -142,7 +142,6 @@ class GameThread extends React.Component {
     const bet = { ...this.state.bet };
     bet.slices = sliceValue;
     this.setState({ bet });
-    console.log('bet set');
   };
 
   handleBetChanges = e => {
@@ -182,7 +181,6 @@ class GameThread extends React.Component {
         dateTime,
         gameThreadReference: { objectReference }
       } = this.props.gameDetails;
-      console.log(_id, slug, dateTime, objectReference);
       const {
         bet: { winningTeam, slices }
       } = this.state;
@@ -238,7 +236,6 @@ class GameThread extends React.Component {
 
   // Method to post replies
   postReply = (text, commentId) => {
-    console.log(commentId);
     const username = this.props.context.state.user.name;
     const gravatar =
       'https://gravatar.com/avatar/f6a0a196d76723567618b367b80d8375?s=200';
