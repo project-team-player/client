@@ -3,6 +3,9 @@ import axios from "axios";
 import fball from "../images/main-bg.jpg";
 import box from "../images/Divider_background.svg";
 import secondFball from "../images/bottom-bg.jpg";
+import pizzaSlice from "../images/pizza-slice.svg";
+import doubleSlice from "../images/double-slice.svg";
+import rainCloud from "../images/pizza-cloud.svg";
 import "../styles/Splash.css";
 
 class Splash extends React.Component {
@@ -54,6 +57,42 @@ class Splash extends React.Component {
         </div>
         <div className="secondSplash">
           <img id="bottomSplash" src={secondFball} />
+          <div id="aboutContainer">
+            <h1 id="aboutHeader">How to Score</h1>
+            <div id="aboutLandingContainer">
+              <section className="aboutLanding">
+                <p className="aboutTitle">
+                  <img className="aboutIcon" src={pizzaSlice} />
+                  Bet Slices
+                </p>
+                <div className="aboutWords">
+                  Log in or create an account in order to bet up to 8 slices of
+                  pizza on a game inside any game thread.
+                </div>
+              </section>
+              <section className="aboutLanding">
+                <p className="aboutTitle">
+                  <img className="aboutIcon" src={doubleSlice} />
+                  Win Slices
+                </p>
+                <div className="aboutWords">
+                  When the game has ended, we’ll calculate how many pizza slices
+                  you’ve won. If you win, we’ll double the slices you bet.
+                </div>
+              </section>
+              <section className="aboutLanding">
+                <p className="aboutTitle">
+                  <img className="aboutIcon" src={rainCloud} />
+                  Make it Rain!
+                </p>
+                <div className="aboutWords">
+                  After each week, we multiply your winnings according to our
+                  multiplier bonus system. The more correct bets, the more pizza
+                  you’ll win!
+                </div>
+              </section>
+            </div>
+          </div>
         </div>
       </div>
     );
