@@ -43,7 +43,14 @@ class Splash extends React.Component {
         </div>
         <div id="blackboxSplash">
           <img id="blackboxDivider" src={box} />
-          <div className="gameSquare">CHECKOUT THESE GAMES</div>
+          <div id="gameSquaresContainer">
+            <h1 id="gameSquareTitle">CHECKOUT THESE GAMES</h1>
+            <div id="squareContainer">
+              <div className="gameSquare"></div>
+              <div className="gameSquare"></div>
+              <div className="gameSquare"></div>
+            </div>
+          </div>
         </div>
         <div className="secondSplash">
           <img id="bottomSplash" src={secondFball} />
