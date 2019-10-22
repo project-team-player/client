@@ -35,6 +35,7 @@ class GameThread extends React.Component {
     };
   }
 
+  // Using async to wait for api call to finish.
   componentDidMount = async () => {
     try {
       const { showModal } = this.props;
@@ -48,17 +49,20 @@ class GameThread extends React.Component {
 
       let userDidBet = false;
       let userBet = {}
-
       
       // check if user is logged in
       if (this.props.context.state.isLoggedIn) {
+        // Check if user has bet on current game
         const bet = this.getUserBet(bets).bet;
+
+        // If user has bet on current game, add bet in state 
         if (bet) { 
           userBet = bet; 
           userDidBet = true;
         }
       } 
 
+      // Set state based on data from api call, like comments, bets etc.
       this.setState({ comments, bets, userDidBet, userBet,
         percentages: { 
           awayTeam: percentages[this.props.gameDetails.awayTeam.key].toFixed(2), 
@@ -68,18 +72,21 @@ class GameThread extends React.Component {
       })
     } catch (error) {
       // TODO: Replace with proper error handling
-      console.error(error)
     }
   }
 
   componentDidUpdate(prevProps) {
     const { bets } = this.state;
+
+    // When user adds new comment, get new comments from server and rerender list of comments
     if (this.state.fetchNewComment) {
       this.getListOfComments();
       this.setState({
         fetchNewComment: false
       });
     }
+    
+    // If the user logs out and logs in with another user right away, make sure to clear old user bet.
     if (prevProps.context.state.user.name !== this.props.context.state.user.name) {
       let userDidBet = false;
       let userBet = {}
@@ -103,6 +110,11 @@ class GameThread extends React.Component {
     }
   }
 
+  /**
+   * Compares all current user bets with the ones on the current game thread to check if the user has previously made a bet on the gamethread. 
+   * @param {array} bets defaults to the array of bets in state.
+   * @returns {Object} The property bet will either contain the user bet for current game thread, or false, to indicate no bet on the thread. 
+   */
   getUserBet = (bets = this.state.bets) => {
    const userBets = this.props.context.state.user.bets;
    let bet = {};
@@ -118,27 +130,7 @@ class GameThread extends React.Component {
     }
   }
 
-  userHasPlacedBet(comments) {
-    const { user } = this.props.context.state;
-    comments.forEach(comment => {
-      comments[comment._id] = true;
-    });
-    let userComments = [];
-    if (user) {
-      userComments = user.comments;
-    }
-
-    const userCommentsOnThread =
-      userComments.filter(comment => {
-        if (comments[comment]) {
-          return true;
-        }
-      }).length || false;
-
-    if (userCommentsOnThread) return true;
-    return false;
-  }
-
+  // Gets all comments for current game thread from API and updates comments in state.
   getListOfComments = () => {
     return axios
       .get(
@@ -185,22 +177,21 @@ class GameThread extends React.Component {
     e.preventDefault();
   };
 
-  makeGameBet = e => {
+  /**
+   * Commits user bet to API and sets user bet in both the User Context and local state. It also sets an appropriate error message that the Bet Form component uses to display any missing data when making a bet.
+   * @returns {Undefined}  
+   */
+  makeGameBet = () => {
     const {
       bet: { winningTeam, slices }
     } = this.state;
     // pass the following in body: { slices, comment winningTeam, dateTime }
     // dateTime is the time of the game, used to check if game has finished
     if (winningTeam && slices && this.props.context.state.user.pizzaSlicesWeekly - slices >= 0) {
-      const {
-        _id,
-        slug,
-        dateTime,
-        gameThreadReference: { objectReference }
-      } = this.props.gameDetails;
-      const {
-        bet: { winningTeam, slices }
-      } = this.state;
+      const {_id, slug, dateTime, gameThreadReference: { objectReference } } = this.props.gameDetails; 
+      const { bet: { winningTeam, slices } } = this.state;
+
+      // Api POST call to create a new bet
       axios({
         method: 'POST',
         url: `${process.env.REACT_APP_SERVER_URL}/bets/gamethread/${slug}`,
@@ -215,18 +206,23 @@ class GameThread extends React.Component {
       })
       .then((res) => {
         const { _id, slicesBet, key} = res.data.bet;
+        // Sets state with the bet made by the user
         this.setState({ userDidBet: true, userBet: { slicesBet, key }, betErrorMessage: '' });
+
+        // Updates the user context to reflect loss of pizza slices
         this.props.context.updateUserSlices(slices);
+        
+        // Adds the new bet to the other user bets made by user in User Context. Is used to disable further betting etc.
         this.props.context.addUserBet({_id, key, slicesBet});
       })
       .catch(error => {
-        console.log(error);
         this.setState({
           betErrorMessage:
-            'This game has either finished or you have already betted on it.'
+            'Something is not working like it should. Please contact us at teamplayer4321234@gmail.com for assistance.'
         });
       });
     } else {
+      // Display a relevant error message to the user based on their bet form input.
       let betErrorMessage = '';
       if (this.props.context.state.user.pizzaSlicesWeekly === 0) {
         betErrorMessage = "You're out of pizza slices. Hang on for a fresh batch next week!"

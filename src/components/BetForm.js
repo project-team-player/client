@@ -5,6 +5,7 @@ import '../styles/BetForm.css';
 import PizzaSlice from '../images/pizza-slice.svg';
 import { UserContext } from '../contexts/UserContext';
 
+// Indicates how many slices the user has bet on the current game, or let's the user know if the game has finished.
 const BetIndicator = ({ bet, gameHasFinished }) => {
   return (
     <div className="bet-message-container">
