@@ -18,6 +18,7 @@ class Splash extends React.Component {
     super(props);
     this.state = {
       currentWeek: String,
+      currentGame: {},
       games: []
     };
   }
@@ -25,6 +26,18 @@ class Splash extends React.Component {
   componentDidMount() {
     this.getListOfGames(getCurrentGameWeek());
   }
+
+  openGameThread = async () => {
+    await this.setState({ showGameThread: true });
+  };
+
+  closeGameThread = async () => {
+    await this.setState({ showGameThread: false });
+  };
+
+  setCurrentGame = async game => {
+    await this.setState({ currentGame: game });
+  };
 
   // Sets state of
   getListOfGames = async number => {
@@ -70,14 +83,35 @@ class Splash extends React.Component {
             <h1 id="gameSquareTitle">Follow the Action</h1>
             <div id="squareContainer">
               <div className="gameSquare">
-                {/* <GameCard
-                  key={this.state.games[0]._id}
-                  gameDetails={this.state.games[0]}
-                /> */}
-                {console.log(this.state.games[0])}
+                {this.state.games[0] ? (
+                  <GameCard
+                    key={this.state.games[0]._id}
+                    gameDetails={this.state.games[0]}
+                  />
+                ) : (
+                  <div></div>
+                )}
               </div>
-              <div className="gameSquare"></div>
-              <div className="gameSquare"></div>
+              <div className="gameSquare">
+                {this.state.games[1] ? (
+                  <GameCard
+                    key={this.state.games[1]._id}
+                    gameDetails={this.state.games[1]}
+                  />
+                ) : (
+                  <div></div>
+                )}
+              </div>
+              <div className="gameSquare">
+                {this.state.games[2] ? (
+                  <GameCard
+                    key={this.state.games[2]._id}
+                    gameDetails={this.state.games[2]}
+                  />
+                ) : (
+                  <div></div>
+                )}
+              </div>
             </div>
             <p id="smallSlice">
               Slice It users are betting on games and trash talking other fans

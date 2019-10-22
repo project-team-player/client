@@ -98,7 +98,7 @@
 #blackboxSplash {
   width: 100%;
   margin-top: -14rem;
-  height: 65vh;
+  height: 75vh;
   z-index: 1;
   background-image: url("../images/Divider_background.svg");
   background-repeat: no-repeat;
@@ -155,10 +155,8 @@
 }
 
 .gameSquare {
-  padding: 5rem;
-  background-color: var(--white);
-  width: 15vw;
-  height: 25vh;
+  width: 12.5vw;
+  height: 35vh;
   cursor: pointer;
 }
 
