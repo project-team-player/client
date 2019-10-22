@@ -1,8 +1,6 @@
 import React from 'react';
-import PizzaSlice from '../images/pizza-slice.svg';
-import BearsLogo from '../images/bears-logo.svg';
+import { timeAgo } from '../utils/time';
 import UserAvatar from '../images/user-avatar.svg';
-import Arrow from '../images/arrow.svg';
 import '../styles/Reply.css';
 import '../styles/Comments.css';
 
@@ -50,6 +48,9 @@ class Reply extends React.Component {
               <p className="comment-text">
                 {currentReply.text}
               </p>
+            </div>
+            <div className="comment-footer">
+              <span className="comment-time-ago">{timeAgo(currentReply.createdAt)} ago</span>
             </div>
           </div>
         </div>
