@@ -148,16 +148,21 @@
   width: 100%;
 }
 
-#smallSlice {
+#smallSliceContainer {
+  display: flex;
+  justify-content: center;
   width: 100%;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+#smallSlice {
   color: var(--white);
   font-size: 20px;
-  text-align: center;
-  margin-top: 2rem;
 }
 
 .gameSquare {
-  width: 12.5vw;
+  width: 15.5vw;
   height: 35vh;
   cursor: pointer;
 }
@@ -249,5 +254,37 @@
   .gameSquare {
     width: 18.5vw;
     height: 37vh;
+  }
+}
+
+@media all and (max-width: 2075px) {
+  #blackboxSplash {
+    margin-bottom: -10rem;
+  }
+
+  .gameSquare {
+    width: 18.5vw;
+    height: 35vh;
+  }
+}
+
+@media all and (max-width: 2000px) {
+  #gamesListButtonContainer {
+    margin-top: 1rem;
+  }
+  .gameSquare {
+    width: 18.5vw;
+    height: 35vh;
+  }
+
+  #gameSquareTitle {
+    margin-top: 6rem;
+  }
+}
+
+@media all and (max-width: 1750px) {
+  .gameSquare {
+    width: 18.5vw;
+    height: 30vh;
   }
 }

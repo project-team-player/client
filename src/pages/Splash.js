@@ -120,11 +120,13 @@ class Splash extends React.Component {
                 )}
               </div>
             </div>
-            <p id="smallSlice">
-              Slice It users are betting on games and trash talking other fans
-              right now in the game threads. Submit your own bets and get in on
-              the trash talk!
-            </p>
+            <div id="smallSliceContainer">
+              <p id="smallSlice">
+                Slice It users are betting on games and trash talking other fans
+                right now in the game threads. Submit your own bets and get in
+                on the trash talk!
+              </p>
+            </div>
             <div id="gamesListButtonContainer">
               <NavLink id="gamesListButton" to="/games">
                 See all games
