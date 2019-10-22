@@ -24,7 +24,7 @@
 
 .card {
   background: var(--white);
-  /* padding: 50px; */
+  border-radius: 3px;
 }
 
 .game-thread-content {
@@ -39,7 +39,7 @@
   background: var(--red);
   display: flex;
   justify-content: space-between;
-  padding: 15px 25px;
+  padding: 10px 15px;
   margin: 0;
 }
 
@@ -132,6 +132,7 @@
   color: var(--white);
   outline: none;
   width: max-content;
+  font-size: 15px;
 }
 
 /*
@@ -154,10 +155,10 @@
   grid-template-columns: 1.2fr 1.5fr 2fr;
 }
 
-.bet-selector-btn:focus {
+/* .bet-selector-btn:focus {
   outline: 0;
   background: var(--red);
-}
+} */
 
 .toggle {
   background: var(--red);
@@ -194,7 +195,6 @@
 .bet-error-message {
   display: block;
   color: var(--red);
-  text-align: right;
 }
 
 .login-request {

@@ -31,3 +31,8 @@ body {
   outline: none;
   cursor: pointer;
 }
+
+.action-link {
+  color: blue;
+  cursor: pointer;
+}

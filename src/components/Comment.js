@@ -95,7 +95,6 @@ class Comment extends React.Component {
     } = this.props;
     const { replies, showReplies, showReplyInputField } = this.state;
     const { isLoggedIn } = context.state;
-    console.log(isLoggedIn);
     return (
       <UserContext.Consumer>
         {context => (
