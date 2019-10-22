@@ -6,7 +6,6 @@ import PizzaSlice from '../images/pizza-slice.svg';
 import { UserContext } from '../contexts/UserContext';
 
 const BetIndicator = ({ bet, gameHasFinished }) => {
-  console.log('has the game truly finished?', gameHasFinished);
   return (
     <div className="bet-message-container">
     {
@@ -26,13 +25,10 @@ class BetForm extends React.Component {
     this.state = {};
   }
 
-  makeGameBet() {
-    console.log('Game Bet Made');
-  }
-
   render() {
     const {
       makeGameBet,
+      errorMessage,
       gameDetails,
       handleBetChanges,
       handleSliceChanges,
@@ -41,7 +37,6 @@ class BetForm extends React.Component {
       gameHasFinished,
       context: { state: { isLoggedIn }, showModal },
     } = this.props;
-    console.log('Has the game ended?', gameHasFinished);
     return (
       <div className='betForm card'>
           {
@@ -50,7 +45,7 @@ class BetForm extends React.Component {
           :
           <>
             <h2>Bet slices on your winner</h2>
-            {!isLoggedIn && <p>Please <span onClick={() => showModal('Please login to make a bet.')} className="action-link">login</span> to make a bet</p>}
+            { errorMessage && <p className="bet-error-message">{errorMessage}</p> }
             <div className='bettingContainer'>
               <div className='betTopContainer'>
                 <Slider

@@ -1,6 +1,7 @@
 import React from 'react';
 import pizzaWheelFormat from '../data/pizzaWheelFormat';
 import '../styles/Slider.css';
+import { UserContext } from '../contexts/UserContext';
 
 class Slider extends React.Component {
   constructor() {
@@ -33,27 +34,32 @@ class Slider extends React.Component {
 
   //**Decreases pizza counter by 1 */
   minusAction = () => {
-    if (this.state.value === 0) {
-      alert('Bet is already at 0!');
-    } else {
-      let tempValue = this.state.value;
-      tempValue--;
-      this.updatePizzaCounter(tempValue);
-    }
+    // if (this.state.value === 0) {
+    //   alert('Bet is already at 0!');
+    // } else {
+      if (this.state.value !== 0) {
+        let tempValue = this.state.value;
+        tempValue--;
+        this.updatePizzaCounter(tempValue);
+      }
+    // }
   };
 
   //**Increases pizza counter by 1 */
   plusAction = () => {
-    if (this.state.value === 8) {
-      alert('Bet is already at 8!');
-    } else {
-      let tempValue = this.state.value;
-      tempValue++;
-      this.updatePizzaCounter(tempValue);
-    }
+    // if (this.state.value === 8) {
+    //   alert('Bet is already at 8!');
+    // } else {
+      if (this.state.value !== 8) {
+        let tempValue = this.state.value;
+        tempValue++;
+        this.updatePizzaCounter(tempValue);
+      }
+    // }
   };
 
   render() {
+    const { context: { state: { isLoggedIn }, showModal } } = this.props;
     return (
       <div className='betContainer'>
         <div className='wheelContainer'>
@@ -61,13 +67,14 @@ class Slider extends React.Component {
         </div>
         <div className='button-container'>
           <div className="button-container-inner">
-            <button className='betButton' onClick={this.minusAction}>
+            <button className='betButton' onClick={ () => isLoggedIn ? this.minusAction() : showModal('Please login to make a bet') }>
               -
             </button>
             <label className='betButton' id='betIndicator'>
               {this.state.value}
             </label>
-            <button className='betButton' onClick={this.plusAction}>
+            <button className='betButton' onClick={() => isLoggedIn ? this.plusAction() : showModal('Please login to make a bet') }
+            >
               +
             </button>
           </div>
@@ -77,4 +84,8 @@ class Slider extends React.Component {
   }
 }
 
-export default Slider;
+export default props => (
+  <UserContext.Consumer>
+    {context => <Slider {...props} context={context} />}
+  </UserContext.Consumer>
+);

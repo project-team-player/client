@@ -2,7 +2,6 @@ import React from 'react';
 import '../styles/GameThread.css';
 import axios from 'axios';
 import Comment from './Comment';
-// import Comments from './Comments';
 import BetForm from './BetForm';
 import { UserContext } from '../contexts/UserContext';
 import { getUserToken } from '../utils/auth';
@@ -22,7 +21,7 @@ class GameThread extends React.Component {
         slices: 0,
         comment: ''
       },
-      errorMessage: '',
+      betErrorMessage: '',
       disableCommenting: true,
       promptUserToLogIn: false,
       //Percentages for Sauce Indicator
@@ -74,11 +73,33 @@ class GameThread extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    const { bets } = this.state;
     if (this.state.fetchNewComment) {
       this.getListOfComments();
       this.setState({
         fetchNewComment: false
       });
+    }
+    if (prevProps.context.state.user.name !== this.props.context.state.user.name) {
+      let userDidBet = false;
+      let userBet = {}
+
+      // check if user is logged in
+      if (this.props.context.state.isLoggedIn) {
+        const bet = this.getUserBet(bets).bet;
+        if (bet) { 
+          userBet = bet; 
+          userDidBet = true;
+        }
+        this.setState({ userDidBet, userBet })
+      } 
+    }
+
+    // If a user logs out, make sure to remove any logged in user bets in order to display bet form
+    if (prevProps.context.state.user.name && !this.props.context.state.user.name) {
+      let userDidBet = false;
+      let userBet = {}
+      this.setState({ userDidBet, userBet })
     }
   }
 
@@ -170,7 +191,7 @@ class GameThread extends React.Component {
     } = this.state;
     // pass the following in body: { slices, comment winningTeam, dateTime }
     // dateTime is the time of the game, used to check if game has finished
-    if (winningTeam && slices) {
+    if (winningTeam && slices && this.props.context.state.user.pizzaSlicesWeekly - slices >= 0) {
       const {
         _id,
         slug,
@@ -193,20 +214,35 @@ class GameThread extends React.Component {
         }
       })
       .then((res) => {
-        console.log(res.data);
-        this.setState({ userDidBet: true, userBet: { slicesBet: slices, key: winningTeam } });
+        const { _id, slicesBet, key} = res.data.bet;
+        this.setState({ userDidBet: true, userBet: { slicesBet, key }, betErrorMessage: '' });
         this.props.context.updateUserSlices(slices);
+        this.props.context.addUserBet({_id, key, slicesBet});
       })
-        .catch(error => {
-          this.setState({
-            errorMessage:
-              'This game has either finished or you have already betted on it.'
-          });
-          alert(this.state.errorMessage);
+      .catch(error => {
+        console.log(error);
+        this.setState({
+          betErrorMessage:
+            'This game has either finished or you have already betted on it.'
         });
+      });
     } else {
+      let betErrorMessage = '';
+      if (this.props.context.state.user.pizzaSlicesWeekly === 0) {
+        betErrorMessage = "You're out of pizza slices. Hang on for a fresh batch next week!"
+      } else if (this.props.context.state.user.pizzaSlicesWeekly - slices < 0) {
+        betErrorMessage = "You don't have enough slices for this bet."
+      } else if (!slices && !winningTeam ) {
+        betErrorMessage = "Please select amount of slices and a winning team."
+      } else if (!slices) {
+        betErrorMessage = 'Please select amount of slices above 0 to bet on this game.'
+      } else if (!winningTeam) {
+        betErrorMessage = 'Please select a winning team for this game.'
+      } else {
+        betErrorMessage = 'Something is not working like it should. Please contact us at teamplayer4321234@gmail.com for assistance.'
+      }
       this.setState({
-        errorMessage: 'Please select all the options before submitting bet!'
+        betErrorMessage
       });
     }
   };
@@ -252,7 +288,7 @@ class GameThread extends React.Component {
     const {
       disableCommenting,
       promptUserToLogIn,
-      errorMessage,
+      betErrorMessage,
       finished,
       userDidBet,
       userBet,
@@ -273,7 +309,7 @@ class GameThread extends React.Component {
                   className="game-thread-close-btn"
                   onClick={this.props.closeGameThread}
                 >
-                  {"<<< Back to Games List"}
+                  <strong>&larr;</strong> Back to Games
                 </button>
               </div>
 
@@ -310,6 +346,7 @@ class GameThread extends React.Component {
                 userDidBet={userDidBet}
                 userBet={userBet}
                 gameHasFinished={gameHasFinished}
+                errorMessage={betErrorMessage}
                 /> 
                 <div className="discussion-container card">
                 <h2>Trash talk</h2>
