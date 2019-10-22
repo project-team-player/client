@@ -7,6 +7,7 @@ import pizzaSlice from "../images/pizza-slice.svg";
 import doubleSlice from "../images/double-slice.svg";
 import rainCloud from "../images/pizza-cloud.svg";
 import "../styles/Splash.css";
+import GameCard from "../components/GameCard";
 import { NavLink } from "react-router-dom";
 
 // Helpers
@@ -68,7 +69,13 @@ class Splash extends React.Component {
           <div id="gameSquaresContainer">
             <h1 id="gameSquareTitle">Follow the Action</h1>
             <div id="squareContainer">
-              <div className="gameSquare"></div>
+              <div className="gameSquare">
+                {/* <GameCard
+                  key={this.state.games[0]._id}
+                  gameDetails={this.state.games[0]}
+                /> */}
+                {console.log(this.state.games[0])}
+              </div>
               <div className="gameSquare"></div>
               <div className="gameSquare"></div>
             </div>
@@ -81,18 +88,10 @@ class Splash extends React.Component {
               <NavLink id="gamesListButton" to="/games">
                 See all games
               </NavLink>
-              {/* <button id="gamesListButton">See all games</button> */}
             </div>
           </div>
         </div>
-        {/* <div id="divider">
-          <img src={secondFball}  id="triangle" />
-          <div id="squareContainer">
-            <div className="gameSquare"></div>
-            <div className="gameSquare"></div>
-            <div className="gameSquare"></div>
-          </div>
-        </div> */}
+
         <div className="secondSplash">
           <div id="aboutContainer">
             <h1 id="aboutHeader">How to Score</h1>
