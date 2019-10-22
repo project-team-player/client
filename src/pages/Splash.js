@@ -8,6 +8,7 @@ import doubleSlice from "../images/double-slice.svg";
 import rainCloud from "../images/pizza-cloud.svg";
 import "../styles/Splash.css";
 import GameCard from "../components/GameCard";
+import { UserContext } from "../contexts/UserContext";
 import { NavLink } from "react-router-dom";
 
 // Helpers
@@ -74,7 +75,12 @@ class Splash extends React.Component {
               </li>
             </ol>
             <div id="buttonContainer">
-              <button id="signUpButton">Sign up</button>
+              <button
+                id="signUpButton"
+                onClick={() => this.props.context.showModal("", false)}
+              >
+                Sign up
+              </button>
             </div>
           </div>
         </div>
@@ -97,6 +103,7 @@ class Splash extends React.Component {
                   <GameCard
                     key={this.state.games[1]._id}
                     gameDetails={this.state.games[1]}
+                    linkToModal={false}
                   />
                 ) : (
                   <div></div>
@@ -169,4 +176,8 @@ class Splash extends React.Component {
   }
 }
 
-export default Splash;
+export default props => (
+  <UserContext.Consumer>
+    {context => <Splash {...props} context={context} />}
+  </UserContext.Consumer>
+);
