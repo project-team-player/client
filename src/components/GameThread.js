@@ -192,6 +192,11 @@ class GameThread extends React.Component {
           teamId: _id
         }
       })
+      .then((res) => {
+        console.log(res.data);
+        this.setState({ userDidBet: true, userBet: { slicesBet: slices, key: winningTeam } });
+        this.props.context.updateUserSlices(slices);
+      })
         .catch(error => {
           this.setState({
             errorMessage:

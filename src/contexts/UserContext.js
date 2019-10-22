@@ -92,6 +92,10 @@ class UserProvider extends React.Component {
           
           // Update user with new slice count
           this.setState({user})
+        },
+
+        addUserBet: () => {
+          
         }
 
       }}>

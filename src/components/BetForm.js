@@ -50,7 +50,7 @@ class BetForm extends React.Component {
           :
           <>
             <h2>Bet slices on your winner</h2>
-
+            {!isLoggedIn && <p>Please <span onClick={() => showModal('Please login to make a bet.')} className="action-link">login</span> to make a bet</p>}
             <div className='bettingContainer'>
               <div className='betTopContainer'>
                 <Slider
