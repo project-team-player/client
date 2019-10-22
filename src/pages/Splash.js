@@ -7,17 +7,38 @@ import pizzaSlice from "../images/pizza-slice.svg";
 import doubleSlice from "../images/double-slice.svg";
 import rainCloud from "../images/pizza-cloud.svg";
 import "../styles/Splash.css";
+import { NavLink } from "react-router-dom";
+
+// Helpers
+import { getCurrentGameWeek } from "../utils/nfl";
 
 class Splash extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      currentWeek: String,
+      games: []
+    };
   }
+
+  componentDidMount() {
+    this.getListOfGames(getCurrentGameWeek());
+  }
+
+  // Sets state of
+  getListOfGames = async number => {
+    await axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/games/week/${number}`)
+      .then(response => {
+        this.setState({ games: response.data.gamesList });
+      });
+    this.setState({ currentWeek: number });
+  };
+
   render() {
     return (
       <div className="splashContainer">
         <div className="firstSplash">
-          <img src={fball} id="mainSplash" />
           <div className="infoBox">
             <h1 id="joinCommunity">Join the Community</h1>
             <ol id="fullHomeList">
@@ -25,11 +46,10 @@ class Splash extends React.Component {
                 <div className="numberList">1</div>
                 <p className="listText">Sign up and create an account.</p>
               </li>
-              <li className="homeListRunOn">
+              <li className="homeList">
                 <div className="numberList">2</div>
                 <p className="listText">
-                  Recieve weekly pizza slices and
-                  <p className="runOn">use them to bet on NFL games.</p>
+                  Recieve weekly pizza slices and use them to bet on NFL games.
                 </p>
               </li>
               <li className="homeList">
@@ -45,20 +65,35 @@ class Splash extends React.Component {
           </div>
         </div>
         <div id="blackboxSplash">
-          <img id="blackboxDivider" src={box} />
           <div id="gameSquaresContainer">
-            <h1 id="gameSquareTitle">CHECKOUT THESE GAMES</h1>
+            <h1 id="gameSquareTitle">Follow the Action</h1>
             <div id="squareContainer">
               <div className="gameSquare"></div>
               <div className="gameSquare"></div>
               <div className="gameSquare"></div>
             </div>
+            <p id="smallSlice">
+              Slice It users are betting on games and trash talking other fans
+              right now in the game threads. Submit your own bets and get in on
+              the trash talk!
+            </p>
+            <div id="gamesListButtonContainer">
+              <NavLink id="gamesListButton" to="/games">
+                See all games
+              </NavLink>
+              {/* <button id="gamesListButton">See all games</button> */}
+            </div>
           </div>
         </div>
+        {/* <div id="divider">
+          <img src={secondFball}  id="triangle" />
+          <div id="squareContainer">
+            <div className="gameSquare"></div>
+            <div className="gameSquare"></div>
+            <div className="gameSquare"></div>
+          </div>
+        </div> */}
         <div className="secondSplash">
-          <img id="bottomSplash" src={secondFball} />
-          <div id="overlayAbout" />
-
           <div id="aboutContainer">
             <h1 id="aboutHeader">How to Score</h1>
             <div id="aboutLandingContainer">

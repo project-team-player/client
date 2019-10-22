@@ -1,6 +1,15 @@
+.splashContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
 .firstSplash {
   width: 100%;
-  height: 60vh;
+  height: 95vh;
+  background-image: url("../images/main-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #mainSplash {
@@ -14,8 +23,8 @@
   margin-top: 4rem;
   margin-left: 4rem;
   top: 0;
-  width: 32%;
-  height: 70%;
+  width: 30vw;
+  height: 60vh;
   padding: 1rem;
   background-color: rgba(100%, 100%, 100%, 0.9);
 }
@@ -26,6 +35,7 @@
   font-size: 30px;
   margin-bottom: 0.5rem;
   font-family: "Roboto", sans-serif;
+  margin-left: 1rem;
 }
 
 .listText {
@@ -46,18 +56,11 @@
   align-items: baseline;
 }
 
-.homeListRunOn {
-  margin-bottom: 2rem;
-  font-size: 19px;
-  display: flex;
-  align-items: stretch;
-}
-
 .numberList {
   background: var(--black);
   border-radius: 100%;
 
-  color: white;
+  color: var(--white);
   width: 2.5rem;
   height: 2.5rem;
   padding-top: 0.5rem;
@@ -66,20 +69,10 @@
   display: inline-block;
 }
 
-/* .homeList:before {
-  margin-right: 10px;
-  content: counter(item);
-  background: var(--black);
-  border-radius: 100%;
-  color: white;
-  width: 1.2em;
-  padding: 0.5rem;
-  text-align: center;
-  display: inline-block;
-} */
-
 #joinCommunity {
   text-align: center;
+  font-size: 40px;
+  font-weight: bold;
 }
 
 #buttonContainer {
@@ -90,7 +83,7 @@
 
 #signUpButton {
   background-color: var(--red);
-  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  padding: 1rem 2.5rem 1rem 2.5rem;
   color: var(--white);
   border: none;
   border-radius: 3px;
@@ -98,42 +91,42 @@
   bottom: 0;
   margin-bottom: 2.5rem;
   font-family: "Roboto", sans-serif;
-  font-size: 17.5px;
+  font-size: 20px;
 }
 
 #blackboxSplash {
   width: 100%;
-}
-
-#blackboxDivider {
-  width: 100%;
-  position: absolute;
-  left: -1px;
-  top: 30rem;
+  margin-top: -14rem;
+  height: 65vh;
   z-index: 1;
+  background-image: url("../images/Divider_background.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .secondSplash {
-  width: 100%;
-  position: absolute;
-  z-index: 0;
-  bottom: 0;
-  top: 50rem;
+  height: 100vh;
+  background-image: url("../images/bottom-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
-#bottomSplash {
+.secondSplash::after {
+  content: "";
+  display: block;
+  top: 0;
+  left: 0;
+  height: 100%;
   width: 100%;
-  height: 130vh;
-  position: absolute;
-  z-index: 0;
-  bottom: 0;
-  top: 5rem;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 #overlayAbout {
   width: 100%;
-  height: 130vh;
-  position: absolute;
+  height: 100vh;
+
   z-index: 1;
   bottom: 0;
   top: 5rem;
@@ -143,48 +136,73 @@
 #gameSquareTitle {
   color: white;
   text-align: center;
+  margin-top: 8rem;
+  font-size: 40px;
 }
 
 #gameSquaresContainer {
-  position: absolute;
-  top: 35rem;
   z-index: 2;
   width: 100%;
+}
+
+#smallSlice {
+  width: 100%;
+  color: var(--white);
+  font-size: 20px;
+  text-align: center;
+  margin-top: 2rem;
 }
 
 .gameSquare {
   padding: 5rem;
   background-color: var(--white);
   width: 15vw;
+  height: 25vh;
+  cursor: pointer;
 }
 
 #squareContainer {
   display: flex;
   justify-content: space-evenly;
-  margin-top: 3rem;
+  padding-top: 1rem;
+}
+
+#gamesListButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+#gamesListButton {
+  outline: none;
+  background-color: transparent;
+  border: solid;
+  border-color: var(--grey);
+  color: var(--white);
+  padding: 1rem 2rem 1rem 2rem;
+  text-decoration: none;
+  font-size: 20px;
 }
 
 #aboutLandingContainer {
   display: flex;
-  position: absolute;
-  top: 8rem;
+  margin-top: 1rem;
   justify-content: space-evenly;
   width: 100%;
 }
 
 #aboutContainer {
-  display: flex;
   position: absolute;
-  top: 17.5rem;
+  margin-top: 2rem;
   justify-content: space-evenly;
   width: 100%;
-  z-index: 2;
 }
 
 #aboutHeader {
   color: var(--white);
   font-size: 40px;
   font-family: "Roboto", sans-serif;
+  text-align: center;
 }
 
 .aboutLanding {
@@ -194,7 +212,8 @@
   word-wrap: break-word;
   font-family: "Roboto", sans-serif;
   font-size: 20px;
-  /* height: 20rem; */
+  font-weight: bold;
+  height: 30vh;
 }
 
 .aboutTitle {
@@ -209,6 +228,7 @@
   align-items: center;
   justify-content: center;
   font-size: 23px;
+  font-weight: bold;
 }
 
 .aboutWords {
