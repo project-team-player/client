@@ -98,6 +98,8 @@
 #blackboxSplash {
   width: 100%;
   margin-top: -14rem;
+  margin-bottom: -5rem;
+  position: relative;
   height: 75vh;
   z-index: 1;
   background-image: url("../images/Divider_background.svg");
@@ -192,7 +194,7 @@
 
 #aboutContainer {
   position: absolute;
-  margin-top: 2rem;
+  margin-top: 8rem;
   justify-content: space-evenly;
   width: 100%;
 }
@@ -241,4 +243,11 @@
 
 .aboutIcon {
   margin-right: 0.5rem;
+}
+
+@media all and (max-width: 2217px) {
+  .gameSquare {
+    width: 18.5vw;
+    height: 37vh;
+  }
 }
