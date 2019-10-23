@@ -62,12 +62,12 @@ class GameCard extends React.Component {
               <div className="Title">
               <div className="team-and-score">
                 <b className="TeamKey">{gameDetails.awayTeam.key}</b>
-                <span className="game-card-score-indicator">{homeScore}</span>
+                <span className="game-card-score-indicator">{awayScore}</span>
               </div>
-                <b className="Versus">VS</b>
+                <b className="Versus">AT</b>
                 <div className="team-and-score">
                   <b className="TeamKey">{gameDetails.homeTeam.key}</b>
-                  <span className="game-card-score-indicator">{awayScore}</span>
+                  <span className="game-card-score-indicator">{homeScore}</span>
                 </div>
               </div>
               {/* TODO: Create date parse for below Ex.2019-09-05T20:20:00 */}

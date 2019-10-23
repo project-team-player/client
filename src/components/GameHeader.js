@@ -40,7 +40,7 @@ const GameHeader = ({ gameDetails, gameDetails: { awayScore, homeScore} }) => (
       </div>
     </div>
 
-    <div className="game-score-container"><span className="game-score">{homeScore} : {awayScore}</span></div>
+    <div className="game-score-container"><span className="game-score">{awayScore} : {homeScore}</span></div>
   </div>
 );
 
