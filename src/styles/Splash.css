@@ -139,7 +139,7 @@
 #gameSquareTitle {
   color: white;
   text-align: center;
-  margin-top: 8rem;
+  margin-top: 7rem;
   font-size: 40px;
 }
 
@@ -152,8 +152,8 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-left: 3rem;
-  margin-right: 3rem;
+  padding-right: 5rem;
+  padding-left: 5rem;
 }
 
 #smallSlice {
@@ -163,7 +163,7 @@
 
 .gameSquare {
   width: 15.5vw;
-  height: 35vh;
+  height: 40vh;
   cursor: pointer;
 }
 
