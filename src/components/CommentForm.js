@@ -8,10 +8,6 @@ class CommentForm extends React.Component {
     this.state = {};
   }
 
-  makeGameBet() {
-    console.log('Comments Initiated');
-  }
-
   render() {
     const { } = this.props;
     return (
