@@ -50,6 +50,7 @@ class GamesList extends React.Component {
   getListOfGames = async number => {
     await axios.get(`${process.env.REACT_APP_SERVER_URL}/games/week/${number}`).then(response => {
       this.setState({ games: response.data.gamesList });
+      console.log(response.data);
     });
     this.setState({ currentWeek: number });
   };
