@@ -94,11 +94,12 @@
   font-size: 20px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
+  transition: all 1s;
 }
 
 #signUpButton:hover {
   background-color: rgba(177, 2, 22, 1);
-  transition: 1s;
+  transition: all 1s;
 }
 
 #blackboxSplash {
@@ -197,6 +198,7 @@
   text-decoration: none;
   font-size: 20px;
   cursor: button;
+  transition: all 1s;
 }
 
 #aboutLandingContainer {
@@ -266,7 +268,7 @@
   background-color: var(--white);
   color: var(--black);
   border: none;
-  transition: 0.5s;
+  transition: all 1s;
 }
 
 @media all and (max-width: 2217px) {
