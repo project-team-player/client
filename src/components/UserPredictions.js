@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import PieChart from './PieChart';
 import '../styles/UserPredictions.css';
 
 /**
@@ -19,6 +20,7 @@ const UserPredictions = ({ percentages, gameDetails }) => {
    * In this case UseEffect works similar to ComponentDidMount and ComponentDidUpdate
    */
   useEffect(() => {
+    console.log(gameDetails);
     setAwayPercentage(percentages.awayTeam);
     setHomePercentage(percentages.homeTeam);
     setWinByPercentage(getWinByPercentage());
@@ -61,8 +63,12 @@ const UserPredictions = ({ percentages, gameDetails }) => {
     <div className="predictions card">
       <h2 className="predictionsTitle">Who's Got Sauce?</h2>
 
-      <div className={`pie ${homeAnimation ? 'animated-pie-home' : ''} ${awayAnimation ? 'animated-pie-away' : ''}`} style={{ '--away-color': `#${gameDetails.awayTeam.primaryColor}`, '--home-color': `#${gameDetails.homeTeam.primaryColor}`, '--winning-team-color': winningTeamColor, '--win-by-percentage': winByPercentage }}>
-      </div>
+      <PieChart 
+        homePercentage={homePercentage} 
+        homeColor={`#${gameDetails.homeTeam.primaryColor}`} 
+        awayColor={`#${gameDetails.awayTeam.primaryColor}`}
+        width='80%'
+      />
 
       <div className="teamPercentages">
         <div className="awayTeamPercentage">
@@ -87,5 +93,7 @@ const UserPredictions = ({ percentages, gameDetails }) => {
     </div>
   );
 };
+
+
 
 export default UserPredictions;

@@ -47,13 +47,15 @@ class GameThread extends React.Component {
       const { gamethread, percentages } = gameThreadRequest.data;
       const { comments, bets, dateTime } = gamethread;
 
+      const betsWithKeys = this.getBetsObjWithKeys(bets);
+
       let userDidBet = false;
       let userBet = {}
       
       // check if user is logged in
       if (this.props.context.state.isLoggedIn) {
         // Check if user has bet on current game
-        const bet = this.getUserBet(bets).bet;
+        const bet = this.getUserBet(betsWithKeys).bet;
 
         // If user has bet on current game, add bet in state 
         if (bet) { 
@@ -63,7 +65,7 @@ class GameThread extends React.Component {
       } 
 
       // Set state based on data from api call, like comments, bets etc.
-      this.setState({ comments, bets, userDidBet, userBet,
+      this.setState({ comments, userDidBet, userBet, bets: betsWithKeys,
         percentages: { 
           awayTeam: percentages[this.props.gameDetails.awayTeam.key].toFixed(2), 
           homeTeam: percentages[this.props.gameDetails.homeTeam.key].toFixed(2),
@@ -84,6 +86,11 @@ class GameThread extends React.Component {
       this.setState({
         fetchNewComment: false
       });
+    }
+
+    // Get percentages
+    if (this.state.fetchPercentages) {
+      this.getPercentages();
     }
     
     // If the user logs out and logs in with another user right away, make sure to clear old user bet.
@@ -111,20 +118,30 @@ class GameThread extends React.Component {
   }
 
   /**
+   * Gets a bet related to a user and sets username as key
+   * @param {Array} Bets An array of user bets related to gamethread
+   * @returns {Object} An object with the bet information
+   */
+  getBetsObjWithKeys = (bets) => {
+
+    const userBets = bets.reduce((obj, item) => {
+      obj[item.owner.name] = item
+      return obj
+    }, {})
+
+    return userBets;
+  }
+
+  /**
    * Compares all current user bets with the ones on the current game thread to check if the user has previously made a bet on the gamethread. 
    * @param {array} bets defaults to the array of bets in state.
    * @returns {Object} The property bet will either contain the user bet for current game thread, or false, to indicate no bet on the thread. 
    */
   getUserBet = (bets = this.state.bets) => {
-   const userBets = this.props.context.state.user.bets;
-   let bet = {};
-   if (userBets.some(userBet => {
-    if (bets.includes(userBet._id)) {
-      bet = userBet; 
-      return true;
-    }
-    })) {
-      return { bet}
+    const { name: username } = this.props.context.state.user;
+    
+    if (bets[username]) {
+      return { bet: bets[username] }
     } else {
       return { bet: false }
     }
@@ -206,6 +223,8 @@ class GameThread extends React.Component {
       })
       .then((res) => {
         const { _id, slicesBet, key} = res.data.bet;
+        const { addUserBet, updateUserSlices, state: { user: { name: username } } } = this.props.context;
+        const bets = {...this.state.bets};
         // Sets state with the bet made by the user
         this.setState({ userDidBet: true, userBet: { slicesBet, key }, betErrorMessage: '' });
 
@@ -214,6 +233,10 @@ class GameThread extends React.Component {
         
         // Adds the new bet to the other user bets made by user in User Context. Is used to disable further betting etc.
         this.props.context.addUserBet({_id, key, slicesBet});
+
+        // Adds the new bet to the bets in state and recalculate user percentages
+        bets[username] = {_id, key, slicesBet};
+        this.setState({ bets, fetchPercentages: true })
       })
       .catch(error => {
         this.setState({
@@ -243,25 +266,26 @@ class GameThread extends React.Component {
     }
   };
 
-  // Method to obtain sauce percentages
-  getPercentage = async () => {
-    await axios
-      .get(
-        `${process.env.REACT_APP_SERVER_URL}/gamethreads/${this.props.gameDetails.gameThreadReference.gameThreadID}`
-      )
-      .then(response => {
-        this.setState({
-          percentages: {
-            awayTeam: response.data.percentages[
-              this.props.gameDetails.awayTeam.key
-            ].toFixed(2),
-            homeTeam: response.data.percentages[
-              this.props.gameDetails.homeTeam.key
-            ].toFixed(2)
-          }
+    // Method to obtain percentages for pie chart
+    getPercentages = async () => {
+      await axios
+        .get(
+          `${process.env.REACT_APP_SERVER_URL}/gamethreads/${this.props.gameDetails.gameThreadReference.gameThreadID}`
+        )
+        .then(response => {
+          this.setState({
+            percentages: {
+              awayTeam: response.data.percentages[
+                this.props.gameDetails.awayTeam.key
+              ].toFixed(2),
+              homeTeam: response.data.percentages[
+                this.props.gameDetails.homeTeam.key
+              ].toFixed(2)
+            },
+            fetchPercentages: false,
+          });
         });
-      });
-  };
+    };
 
   // Method to post replies
   postReply = (text, commentId) => {
@@ -282,10 +306,8 @@ class GameThread extends React.Component {
   render() {
     const { showModal, gameDetails } = this.props;
     const {
-      disableCommenting,
-      promptUserToLogIn,
       betErrorMessage,
-      finished,
+      bets,
       userDidBet,
       userBet,
       gameHasFinished,
@@ -347,12 +369,12 @@ class GameThread extends React.Component {
                 <div className="discussion-container card">
                 <h2>Trash talk</h2>
                     <CommentInput gamethreadSlug={gameDetails.slug} gamethreadId={gameDetails.gameThreadReference.gameThreadID}
-                    fetchNewComments={this.getListOfComments}
+                    fetchNewComments={() => this.setState({fetchNewComment: true})}
                      />
 
                     <div className="comments">
                       {this.state.comments
-                        .map((comment, i) => <Comment currentComment={comment} gameDetails={gameDetails} key={i} postReplyHandler={this.postReply} replies={comment.replies} getUpdatedComments={this.getListOfComments} />)
+                        .map((comment, i) => <Comment currentComment={comment} gameDetails={gameDetails} key={i} postReplyHandler={this.postReply} replies={comment.replies} getUpdatedComments={this.getListOfComments} gameThreadBets={bets}/>)
                         }
                     </div>
                   </div>

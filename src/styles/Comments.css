@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 35px;
+  height: 25px;
 }
 
 .comment-bet {
@@ -35,7 +35,8 @@
 }
 
 .username {
-  font-size: 19px;
+  font-size: 15px;
+  font-weight: 300;
 }
 
 .comment-bet-team-icon {
@@ -215,4 +216,35 @@
   font-size: 16px;
   height: 50px;
   padding: 15px 0;
+}
+
+/* =========== User Bet ============== */
+.comment-user-bet-container {
+  position: relative;
+  height: 100%;
+  color: var(--white);
+  z-index: 1;
+  border-radius: 3px;
+  background-color: var(--comment-bet-background);
+}
+
+.comment-user-bet-items {
+display: flex;
+align-items: center;
+height: inherit;
+padding: 5px 10px;
+font-size: 15px;
+}
+
+.comment-user-bet-pizza-slice {
+  height: inherit;
+  margin-right: 1px;
+}
+
+.comment-user-bet-logo {
+  height: inherit;
+}
+
+.comment-user-bet-arrow {
+  margin: 0 2px;
 }

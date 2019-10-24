@@ -39,6 +39,7 @@
     transform: rotate(calc(180deg - var(--win-by-percentage) / 2 / 100 * 360deg ));
   }
 }
+
 @keyframes bg {
   50% { background: #655; }
 }
@@ -72,6 +73,42 @@
   /* animation: spin 1s linear forwards; */
   /* transform: rotate(calc(var(--losing-team-percent) * 0.01turn)); */
   animation: rotateHome 1s forwards;
+}
+
+@keyframes animateAdditionalAwayGain {
+  from {
+    transform: rotate(calc(180deg - var(--win-by-percentage) / 2 / 100 * 360deg ));
+  }
+  to {
+    /* Dynamically add  */
+    transform: rotate(90deg); 
+    /* transform: rotate(180deg); */
+  }
+}
+
+@keyframes animateAdditionalHomeGain {
+  from {
+    transform: rotate(calc(180deg - var(--win-by-percentage) / 2 / 100 * 360deg ));
+  }
+  to {
+    /* Dynamically add  */
+    transform: rotate(250deg); 
+    /* transform: rotate(180deg); */
+  }
+}
+
+.animate-away-gain::before {
+  content: "";
+  position: absolute;
+
+  animation: animateAdditionalAwayGain 1s forwards;
+}
+
+.animate-home-gain::before {
+  content: "";
+  position: absolute;
+
+  animation: animateAdditionalHomeGain 1s forwards;
 }
 
 .teamPercentages {
@@ -119,4 +156,38 @@
   font-weight: 500;
   align-items: center;
   margin-left: 5px;
+}
+
+
+/* SVG Pie Chart */
+@keyframes fillup {
+  to { stroke-dasharray: 158 158; }
+}
+
+/* .pie-chart-container {
+  width: 100%;
+}
+
+.pie-chart-container::after {
+  padding-bottom: 100%;
+} */
+
+
+
+circle {
+  /* stroke: #655; */
+  /* stroke-width: 32; */
+  /* stroke-dasharray: 50 100; */
+  /* animation: fillup 5s linear infinite; */
+  transition: stroke-dasharray 1s;
+}
+
+ /* 0 158 means home team 0% */
+ /* 101 158 means home team 100% */
+.animate-circle {
+  stroke-dasharray: 101 158;
+}
+
+.animate-other {
+  stroke-dasharray: 0 158;
 }
