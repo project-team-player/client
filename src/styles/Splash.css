@@ -288,3 +288,50 @@
     height: 30vh;
   }
 }
+
+@media all and (max-width: 1460px) {
+  #blackboxSplash {
+    margin-top: -7rem;
+    height: 100vh;
+    margin-bottom: -5rem;
+  }
+
+  #gameSquareTitle {
+    margin-top: 3.5rem;
+  }
+
+  .infoBox {
+    width: 35vw;
+    height: 65vh;
+    margin-top: 3rem;
+  }
+
+  #joinCommunity {
+    margin-top: 0;
+  }
+
+  #signUpButton {
+    margin-bottom: 1rem;
+  }
+
+  #fullHomeList {
+    margin-top: -0.5rem;
+  }
+
+  .gameSquare {
+    width: 17.5vw;
+    height: 45vh;
+  }
+
+  #squareContainer {
+    padding-top: 0;
+  }
+
+  #aboutContainer {
+    margin-top: 5rem;
+  }
+
+  .aboutLanding {
+    height: 45vh;
+  }
+}
