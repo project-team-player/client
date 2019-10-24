@@ -224,9 +224,9 @@ input[type=search] {
     }
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (min-width: 700px) {
     #season {
-        margin-left: 10vw;
+        margin-left: 5vw;
     }
 }
 
