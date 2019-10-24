@@ -61,9 +61,9 @@ class UserProvider extends React.Component {
         isUserLoggedIn: () => { 
           this.isUserLoggedIn();
         },
-        showModal: (message) => {
-          this.setState({showAuthModal: true, modalLoginMessage: message.length ? message : ''})
-        } ,
+        showModal: (message = '', login = true) => {
+          this.setState({showAuthModal: true, loginView: login, modalLoginMessage: message.length ? message : ''})
+        },
         hideModal: () => this.setState({showAuthModal: false, modalLoginMessage: ''}),
         showLogin: () => this.setState({loginView: true}),
         showSignup: () => this.setState({loginView: false}),
@@ -75,6 +75,7 @@ class UserProvider extends React.Component {
          * @return {Void} 
          */
         updateUserSlices: (sliceAmount, operator = '-') => {
+          console.log('updating user slices')
           // Get current user state
           const user = {...this.state.user};
 
@@ -92,6 +93,14 @@ class UserProvider extends React.Component {
           
           // Update user with new slice count
           this.setState({user})
+        },
+        /**
+        * @param {object} newBet 
+        */
+        addUserBet: (newBet) => {
+          const user = {...this.state.user};
+          user.bets.push(newBet);
+          this.setState({ user });
         }
 
       }}>

@@ -16,7 +16,6 @@
 .c-input--range:active,
 .c-input--range:focus {
   background-color: #aac9ff;
-  outline: none;
 }
 
 .c-input--range::-webkit-slider-thumb {
@@ -47,24 +46,31 @@
   justify-content: center;
 }
 
-.buttonContainer {
+.button-container {
+  border-radius: 3px;
+  padding: 2px 0;
+  background: var(--black);
+  margin-left: 15px;
+  height: 40px;
+}
+
+.button-container-inner {
   display: flex;
+  height: 100%;
   flex-direction: row;
   justify-content: space-between;
-  height: 4rem;
-  width: 10rem;
-  padding: 1rem 1rem 1rem 1rem;
-  background: var(--red);
-  border-radius: 1rem;
+  align-items: center;
 }
 
 .betButton {
-  height: 2rem;
-  width: 2rem;
-  background: var(--red);
+  height: 100%;
+  width: 40px;
   border: none;
   color: white;
-  font-size: 25px;
+  background: none;
+  font-size: 15px;
+  font-family: var(--main-font);
+  cursor: pointer;
 }
 
 #betIndicator {

@@ -6,6 +6,7 @@ import '../styles/Comments.css';
 import Reply from './Reply.js';
 import { UserContext } from '../contexts/UserContext';
 import { getUserToken } from '../utils/auth';
+import { timeAgo } from '../utils/time';
 import axios from 'axios'
 
 
@@ -95,7 +96,6 @@ class Comment extends React.Component {
     } = this.props;
     const { replies, showReplies, showReplyInputField } = this.state;
     const { isLoggedIn } = context.state;
-    console.log(isLoggedIn);
     return (
       <UserContext.Consumer>
         {context => (
@@ -124,7 +124,7 @@ class Comment extends React.Component {
                 </p>
               </div>
               <div className="comment-footer">
-                <span className="comment-time-ago">4 seconds ago</span>
+                <span className="comment-time-ago">{timeAgo(currentComment.createdAt)} ago</span>
                 <div className="comment-reply-button-container">
                   <button type="button" className="comment-reply-button" onClick={this.showReplyInputField}><img src={replyIcon} className="comment-reply-icon"/>Reply</button>
                 </div>

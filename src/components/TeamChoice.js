@@ -1,6 +1,8 @@
 import React from 'react';
 import '../styles/TeamChoice.css';
 import '../styles/GameThread.css';
+import { UserContext } from '../contexts/UserContext';
+
 
 class TeamChoice extends React.Component {
   constructor(props) {
@@ -23,6 +25,8 @@ class TeamChoice extends React.Component {
   }
 
   render() {
+    const { context: { state: { isLoggedIn }, showModal } } = this.props;
+
     return (
       <div className='selectionContainer'>
         <button
@@ -32,10 +36,10 @@ class TeamChoice extends React.Component {
           id='away-team-selector'
           className={
             this.state.activeName === 'winning-team-away'
-              ? 'bet-selector-btn toggle'
+              ? 'bet-selector-btn active-btn'
               : 'bet-selector-btn'
           }
-          onClick={this.handleChange}
+          onClick={(e) => isLoggedIn ? this.handleChange(e) : showModal('Please login to make a bet') }
         >
           {this.props.gameDetails.awayTeam.key}
         </button>
@@ -47,10 +51,10 @@ class TeamChoice extends React.Component {
           id='home-team-selector'
           className={
             this.state.activeName === 'winning-team-home'
-              ? 'bet-selector-btn toggle'
+              ? 'bet-selector-btn active-btn'
               : 'bet-selector-btn'
           }
-          onClick={this.handleChange}
+          onClick={(e) => isLoggedIn ? this.handleChange(e) : showModal('Please login to make a bet') }
         >
           {this.props.gameDetails.homeTeam.key}
         </button>
@@ -59,4 +63,8 @@ class TeamChoice extends React.Component {
   }
 }
 
-export default TeamChoice;
+export default props => (
+  <UserContext.Consumer>
+    {context => <TeamChoice {...props} context={context} />}
+  </UserContext.Consumer>
+);

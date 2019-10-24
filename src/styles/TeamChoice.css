@@ -1,20 +1,30 @@
 .selectionContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  height: 3rem;
+  justify-content: space-between;
+  height: 40px;
   width: 50%;
-  margin-top: 1rem;
+}
+
+.bet-selector-btn:nth-child(2) {
+  margin-left: 15px;
 }
 
 .bet-selector-btn {
-  background: var(--white);
   display: block;
   color: var(--black);
   cursor: pointer;
-  padding: 10px;
-  width: 30%;
+  width: 50%;
   border: none;
   border-radius: 5px;
+  background: var(--white);
+  border: 1px solid var(--black);
   text-shadow: 0.5px 0.5px var(--black);
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.active-btn {
+  background: var(--black);
+  color: var(--white);
 }
