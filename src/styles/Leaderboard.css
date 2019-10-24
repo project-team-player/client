@@ -210,8 +210,8 @@ input[type=search] {
 
 
 @media only screen and (max-width: 1000px) {
-    .filteredbuttons {
-        margin: 0;
+    .filterbuttons {
+        margin-left: 0;
     }
 
     .top {
@@ -221,5 +221,51 @@ input[type=search] {
     #season,
     #weekly {
         padding: 0.5rem 1rem 0.5rem 1rem;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #season {
+        margin-left: 10vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .leaderboardtext {
+        width: auto;
+        margin-left: 4vw;
+    }
+
+    #weekform {
+        margin-left: 3vw;
+        margin-top: 3vw;
+    }
+
+    #season {
+        margin-left: 18vw;
+        margin-top: 0;
+    }
+
+    #weekly {
+        margin-top: 2vw;
+        margin-bottom: 3vw;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    .Searchform {
+        width: 60vw;
+        margin: auto;
+    }
+
+    #users td,
+    users th {
+        padding: 0;
+    }
+
+    .leftside {
+        width: 500px;
     }
 }
