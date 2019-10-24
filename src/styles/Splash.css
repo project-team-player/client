@@ -93,6 +93,12 @@
   font-family: "Roboto", sans-serif;
   font-size: 20px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+#signUpButton:hover {
+  background-color: rgba(177, 2, 22, 1);
+  transition: 1s;
 }
 
 #blackboxSplash {
@@ -100,7 +106,7 @@
   margin-top: -14rem;
   margin-bottom: -5rem;
   position: relative;
-  height: 75vh;
+  height: 100vh;
   z-index: 1;
   background-image: url("../images/Divider_background.svg");
   background-repeat: no-repeat;
@@ -152,19 +158,21 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  padding-right: 5rem;
-  padding-left: 5rem;
+  padding-right: 25rem;
+  padding-left: 25rem;
 }
 
 #smallSlice {
   color: var(--white);
   font-size: 20px;
+  text-align: center;
+  line-height: 2rem;
 }
 
 .gameSquare {
   width: 15.5vw;
   height: 40vh;
-  cursor: pointer;
+  cursor: default;
 }
 
 #squareContainer {
@@ -188,6 +196,7 @@
   padding: 1rem 2rem 1rem 2rem;
   text-decoration: none;
   font-size: 20px;
+  cursor: button;
 }
 
 #aboutLandingContainer {
@@ -209,7 +218,7 @@
   font-size: 40px;
   font-family: "Roboto", sans-serif;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 }
 
 .aboutLanding {
@@ -250,6 +259,14 @@
 
 .aboutIcon {
   margin-right: 0.5rem;
+  height: 100%;
+}
+
+#gamesListButton:hover {
+  background-color: var(--white);
+  color: var(--black);
+  border: none;
+  transition: 0.5s;
 }
 
 @media all and (max-width: 2217px) {
@@ -291,12 +308,12 @@
   }
 
   #blackboxSplash {
-    height: 90vh;
-    margin-top: -7.5rem;
+    height: 100vh;
+    margin-top: -8.5rem;
   }
 
   #gameSquareTitle {
-    margin-top: 6rem;
+    margin-top: 5rem;
     margin-bottom: 2rem;
   }
 

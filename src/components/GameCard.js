@@ -16,7 +16,8 @@ class GameCard extends React.Component {
       openGameThread,
       closeGameThread,
       setCurrentGame,
-      linkToModal
+      linkToModal,
+      isALink
     } = this.props;
     return (
       <div className="modal-page-container">
@@ -42,6 +43,7 @@ class GameCard extends React.Component {
               this.handleKeyPress(event);
               openGameThread();
             }}
+            style={{ cursor: isALink ? "pointer" : "default" }}
           >
             <div
               className="Away"

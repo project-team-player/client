@@ -130,6 +130,7 @@ class GamesList extends React.Component {
                 closeGameThread={this.closeGameThread}
                 setCurrentGame={this.setCurrentGame}
                 linkToModal={true}
+                isALink={true}
               />
             ))}
           </div>

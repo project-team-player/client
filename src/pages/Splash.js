@@ -114,6 +114,7 @@ class Splash extends React.Component {
                   <GameCard
                     key={this.state.games[2]._id}
                     gameDetails={this.state.games[2]}
+                    isALink={false}
                   />
                 ) : (
                   <div></div>
