@@ -53,7 +53,7 @@
 .homeList {
   margin-bottom: 2rem;
   font-size: 20px;
-  align-items: baseline;
+  align-items: center;
   display: grid;
   grid-template-columns: 9% 81%;
 }
@@ -289,8 +289,8 @@
 
 @media all and (max-width: 1750px) {
   .gameSquare {
-    width: 17.5vw;
-    height: 40vh;
+    width: 22.5vw;
+    height: 40.5vh;
   }
 
   #blackboxSplash {
@@ -299,7 +299,14 @@
   }
 
   #gameSquareTitle {
-    margin-top: 5rem;
+    margin-top: 8rem;
+    margin-bottom: 2rem;
+  }
+
+  .infoBox {
+    height: 41vh;
+    margin-top: 7.5rem;
+    margin-left: 6.5rem;
   }
 }
 
@@ -315,7 +322,7 @@
   }
 
   .infoBox {
-    width: 35vw;
+    width: 32.5vw;
     height: 65vh;
     margin-top: 3rem;
   }
@@ -347,5 +354,91 @@
 
   .aboutLanding {
     height: 45vh;
+  }
+}
+
+@media all and (max-width: 1240px) {
+  .homeList {
+    margin-bottom: 1rem;
+    grid-template-columns: 10% 82%;
+  }
+
+  .infoBox {
+    width: 35vw;
+    height: 67.5vh;
+    margin-top: 2rem;
+  }
+
+  #signUpButton {
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  }
+
+  .homeList {
+    margin-bottom: 1.5rem;
+  }
+
+  #smallSliceContainer {
+    padding-right: 10rem;
+    padding-left: 10rem;
+  }
+
+  #gameSquareTitle {
+    font-size: 30px;
+  }
+
+  .gameSquare {
+    width: 16.5vw;
+    height: 40vh;
+  }
+
+  #gamesListButtonContainer {
+    margin-top: 0rem;
+  }
+
+  #gamesListButton {
+    padding: 1rem 1.5rem 1rem 1.5rem;
+  }
+}
+
+@media all and (max-width: 1130px) {
+  .infoBox {
+    width: 40vw;
+  }
+}
+
+@media all and (max-width: 1000px) {
+  .gameSquare {
+    width: 21vw;
+    height: 38vh;
+  }
+
+  #gameSquareTitle {
+    margin-top: 4.5rem;
+  }
+
+  #aboutContainer {
+    margin-top: 2rem;
+  }
+
+  .aboutLanding {
+    width: 30%;
+    height: 52vh;
+  }
+}
+
+@media all and (max-width: 990px) {
+  .infoBox {
+    width: 50vw;
+  }
+}
+
+@media all and (max-width: 990px) {
+  #joinCommunity {
+    font-size: 30px;
+    margin-bottom: 1.5rem;
+  }
+
+  .homeList {
+    grid-template-columns: 11% 85%;
   }
 }
