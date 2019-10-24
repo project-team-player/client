@@ -404,6 +404,36 @@
   .infoBox {
     width: 40vw;
   }
+
+  #joinCommunity {
+    font-size: 30px;
+  }
+
+  .gameSquare {
+    width: 16.5vw;
+    height: 37vh;
+  }
+
+  #smallSlice {
+    margin-top: 0;
+  }
+
+  #gameSquareTitle {
+    margin-bottom: 1rem;
+  }
+
+  #aboutHeader {
+    margin-top: 0;
+  }
+
+  #aboutContainer {
+    margin-top: 4rem;
+  }
+
+  .aboutLanding {
+    height: 65vh;
+    width: 27.5vw;
+  }
 }
 
 @media all and (max-width: 1000px) {
@@ -430,9 +460,6 @@
   .infoBox {
     width: 50vw;
   }
-}
-
-@media all and (max-width: 990px) {
   #joinCommunity {
     font-size: 30px;
     margin-bottom: 1.5rem;
@@ -440,5 +467,11 @@
 
   .homeList {
     grid-template-columns: 11% 85%;
+  }
+}
+
+@media all and (max-width: 770px) {
+  .infoBox {
+    margin-left: 3.5rem;
   }
 }
