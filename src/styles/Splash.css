@@ -24,7 +24,6 @@
   margin-left: 4rem;
   top: 0;
   width: 30vw;
-  height: 60vh;
   padding: 1rem;
   background-color: rgba(100%, 100%, 100%, 0.9);
   border-radius: 3px;
@@ -220,7 +219,7 @@
   word-wrap: break-word;
   font-family: "Roboto", sans-serif;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 500;
   border-radius: 3px;
 }
 
@@ -313,13 +312,13 @@
 
 @media all and (max-width: 1460px) {
   #blackboxSplash {
-    margin-top: -7rem;
+    margin-top: -10rem;
     height: 100vh;
-    margin-bottom: -5rem;
+    margin-bottom: -8rem;
   }
 
   #gameSquareTitle {
-    margin-top: 3.5rem;
+    margin-top: 7.5rem;
   }
 
   .infoBox {
@@ -327,20 +326,12 @@
     margin-top: 3rem;
   }
 
-  #joinCommunity {
-    margin-top: 0;
-  }
-
   #signUpButton {
     margin-bottom: 1rem;
   }
 
-  #fullHomeList {
-    margin-top: -0.5rem;
-  }
-
   .gameSquare {
-    width: 17.5vw;
+    width: 24.5vw;
     height: 45vh;
   }
 
