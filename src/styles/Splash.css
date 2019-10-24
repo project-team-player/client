@@ -340,7 +340,7 @@
 
   .infoBox {
     width: 32.5vw;
-    margin-top: 3rem;
+    margin-top: 6rem;
   }
 
   #signUpButton {
@@ -348,8 +348,8 @@
   }
 
   .gameSquare {
-    width: 24.5vw;
-    height: 45vh;
+    width: 23.5vw;
+    height: 39vh;
   }
 
   #squareContainer {
