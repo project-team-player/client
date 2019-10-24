@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '../styles/GameHeader.css';
 import { convertToDate } from '../utils/helpers';
 
-const GameHeader = ({ gameDetails }) => (
+const GameHeader = ({ gameDetails, gameDetails: { awayScore, homeScore} }) => (
   <div className="gameHeader card">
     <h3 className="gameDate">{convertToDate(gameDetails.dateTime, 'est')}</h3>
     <div className="teams">
@@ -40,7 +40,7 @@ const GameHeader = ({ gameDetails }) => (
       </div>
     </div>
 
-    <div className="game-score-container"><span className="game-score">0 : 0</span></div>
+    <div className="game-score-container"><span className="game-score">{awayScore} : {homeScore}</span></div>
   </div>
 );
 

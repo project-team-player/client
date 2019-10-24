@@ -19,6 +19,7 @@ class GameCard extends React.Component {
       linkToModal,
       isALink
     } = this.props;
+    const { awayScore, homeScore } = gameDetails;
     return (
       <div className="modal-page-container">
         <div className="thefuckingthreadcontainer">
@@ -72,12 +73,18 @@ class GameCard extends React.Component {
             </div>
             <div className="GameInfo">
               <div className="Title">
-                <b className="TeamKey">{gameDetails.awayTeam.key}</b>
-                <b className="Versus">VS</b>
-                <b className="TeamKey">{gameDetails.homeTeam.key}</b>
+                <div className="team-and-score">
+                  <b className="TeamKey">{gameDetails.awayTeam.key}</b>
+                  <span className="game-card-score-indicator">{awayScore}</span>
+                </div>
+                <b className="Versus">AT</b>
+                <div className="team-and-score">
+                  <b className="TeamKey">{gameDetails.homeTeam.key}</b>
+                  <span className="game-card-score-indicator">{homeScore}</span>
+                </div>
               </div>
               {/* TODO: Create date parse for below Ex.2019-09-05T20:20:00 */}
-              <div className="Date">
+              <div className="date">
                 <span>{convertToDate(gameDetails.dateTime, "est")}</span>
               </div>
             </div>

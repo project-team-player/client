@@ -6,7 +6,32 @@ import '../styles/Comments.css';
 import Reply from './Reply.js';
 import { UserContext } from '../contexts/UserContext';
 import { getUserToken } from '../utils/auth';
+import { timeAgo } from '../utils/time';
 import axios from 'axios'
+
+export const CommentHeader = ({currentComment, userBet, awayColor, homeColor, awayTeamKey, awayLogo, homeLogo}) => {
+
+  return (
+    <div className="comment-header">
+    <div className="comment-user-info">
+      <img className="comment-user-avatar" src={UserAvatar} alt="profilepic" />
+      <span className="username">
+        {currentComment.owner || currentComment.username }
+      </span>
+    </div>
+      { userBet && 
+        <div className="comment-user-bet-container" style={{ '--comment-bet-background': userBet.key === awayTeamKey ? `#${awayColor}` : `#${homeColor}` }}>
+          <span className="comment-user-bet-items">
+            <img src={PizzaSlice} className="comment-user-bet-pizza-slice"  />
+            <span className="comment-user-bet-size">{userBet.slicesBet}</span>
+            <span className="comment-user-bet-arrow">&rarr;</span> 
+            <span className="comment-user-bet-team">{userBet.key}</span>
+            </span>
+        </div>
+      }
+    </div>  
+  )
+}
 
 
 class Comment extends React.Component {
@@ -85,46 +110,25 @@ class Comment extends React.Component {
   }
 
   adjustReplyLineHeight = (height) => {
-    console.log('setting last reply height');
     this.setState({ lastReplyHeight: height });
   }
 
   render() {
-    const {
-      postReplyHandler, context, currentComment, gameDetails, gameDetails: { awayTeam: { key: awayTeam }, homeTeam: { key: homeTeam } },
-    } = this.props;
+    const { currentComment, gameDetails, gameDetails: { awayTeam: {logo: awayLogo, key: awayTeamKey, primaryColor: awayColor }, homeTeam: { logo: homeLogo, primaryColor: homeColor } }, gameThreadBets } = this.props;
     const { replies, showReplies, showReplyInputField } = this.state;
-    const { isLoggedIn } = context.state;
-    console.log(isLoggedIn);
     return (
       <UserContext.Consumer>
         {context => (
           <div className="comment-container">
             <div className="comment-card">
-              <div className="comment-header">
-                <div className="comment-user-info">
-                  <img className="comment-user-avatar" src={UserAvatar} alt="profilepic" />
-                  <span className="username">
-                    {this.props.currentComment.owner}
-                  </span>
-                </div>
-
-                {/* <div className="comment-bet" style={{ background: `#${betTeam === awayTeam ? gameDetails.awayTeam.primaryColor : gameDetails.homeTeam.primaryColor}` }}>
-                  <span className="comment-bet-size">
-                    <img className="comment-pizza-icon" id="pizzaSlice" src={PizzaSlice} alt="pizza slice" />
-                    8
-                  </span>
-                  <img className="comment-arrow-icon" src={Arrow} alt="Arrow icon" />
-                  <img className="comment-bet-team-icon" src={betTeam === awayTeam ? gameDetails.awayTeam.logo : gameDetails.homeTeam.logo} alt="logo of the team user bet on" />
-                </div> */}
-              </div>
+              <CommentHeader currentComment={currentComment} awayColor={awayColor} homeColor={homeColor} awayTeamKey={awayTeamKey} userBet={gameThreadBets[currentComment.owner]} awayLogo={awayLogo} homeLogo={homeLogo} />
               <div className="comment-body">
                 <p className="comment-text">
                   {currentComment.text}
                 </p>
               </div>
               <div className="comment-footer">
-                <span className="comment-time-ago">4 seconds ago</span>
+                <span className="comment-time-ago">{timeAgo(currentComment.createdAt)} ago</span>
                 <div className="comment-reply-button-container">
                   <button type="button" className="comment-reply-button" onClick={this.showReplyInputField}><img src={replyIcon} className="comment-reply-icon"/>Reply</button>
                 </div>
@@ -165,7 +169,22 @@ replies
             {showReplies
         && 
         <div className="comment-replies-container" style={{ '--last-reply-height': this.state.lastReplyHeight }}>
-        {replies.map((reply, i) =>  <Reply currentReply={reply} key={i} gameDetails={gameDetails} isLastReply={i === replies.length - 1 ? true : false} adjustReplyLineHeight={this.adjustReplyLineHeight} />)
+        {replies.map((reply, i) => 
+          <Reply 
+          userBet={gameThreadBets[reply.username]}
+          currentReply={reply} 
+          key={i} 
+          gameDetails={gameDetails} 
+          isLastReply={i === replies.length - 1 ? true : false} 
+          adjustReplyLineHeight={this.adjustReplyLineHeight} 
+          currentComment={reply} 
+          awayColor={awayColor} 
+          homeColor={homeColor} 
+          awayTeamKey={awayTeamKey} 
+          gameThreadBets
+          awayLogo={awayLogo} 
+          homeLogo={homeLogo}
+          />)
         }
         </div>
         }

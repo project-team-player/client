@@ -70,7 +70,7 @@ class UserProvider extends React.Component {
           showModal: (message = "", login = true) => {
             this.setState({
               showAuthModal: true,
-              loginView: false,
+              loginView: login,
               modalLoginMessage: message.length ? message : ""
             });
           },
@@ -86,6 +86,7 @@ class UserProvider extends React.Component {
            * @return {Void}
            */
           updateUserSlices: (sliceAmount, operator = "-") => {
+            console.log("updating user slices");
             // Get current user state
             const user = { ...this.state.user };
 
@@ -102,6 +103,14 @@ class UserProvider extends React.Component {
             }
 
             // Update user with new slice count
+            this.setState({ user });
+          },
+          /**
+           * @param {object} newBet
+           */
+          addUserBet: newBet => {
+            const user = { ...this.state.user };
+            user.bets.push(newBet);
             this.setState({ user });
           }
         }}

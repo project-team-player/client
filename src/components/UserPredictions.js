@@ -1,46 +1,87 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import PieChart from './PieChart';
 import '../styles/UserPredictions.css';
 
+/**
+ * 
+ * @param {object} percentages How many percent of users voted on each team
+ * @param {object} gameDetails Game specific information like teams, scores etc. 
+ */
 const UserPredictions = ({ percentages, gameDetails }) => {
-  const [awayPercentage, setAwayPercentage] = useState(50);
-  const [homePercentage, setHomePercentage] = useState(50);
+  // See React docs on hooks if this looks unfamiliar https://reactjs.org/docs/hooks-intro.html  
+  const [awayPercentage, setAwayPercentage] = useState(50.00);
+  const [homePercentage, setHomePercentage] = useState(50.00);
+  const [winningTeamColor, setWinningTeamColor] = useState('');
+  const [winByPercentage, setWinByPercentage] = useState(50);
+  const [homeAnimation, startHomeAnimation] = useState(false);
+  const [awayAnimation, startAwayAnimation] = useState(false);
 
+  /**
+   * In this case UseEffect works similar to ComponentDidMount and ComponentDidUpdate
+   */
   useEffect(() => {
+    console.log(gameDetails);
     setAwayPercentage(percentages.awayTeam);
     setHomePercentage(percentages.homeTeam);
+    setWinByPercentage(getWinByPercentage());
+    setWinningTeamColor(getWinningTeamColor());
   });
+
+  /**
+   * Gets the winning team color 
+   * @returns {string} winning team primary color code in hexformat
+   */
+  const getWinningTeamColor = () => {
+    if (awayPercentage > homePercentage) {
+      return `#${gameDetails.awayTeam.primaryColor}`;
+    } else if (homePercentage > awayPercentage) {
+      return `#${gameDetails.homeTeam.primaryColor}`;
+    } else {
+      return `#${gameDetails.awayTeam.primaryColor}`;
+    }
+  }
+
+  /**
+   * Get how many percentage the winning team is winning by as a number
+   * @returns {number} win-by percentage
+   */ 
+  const getWinByPercentage = () => {
+    let winPercent = 0;
+    if (awayPercentage > homePercentage) {
+      winPercent = awayPercentage - homePercentage;
+      startAwayAnimation(true);
+    } else if (homePercentage > awayPercentage) {
+      winPercent = homePercentage - awayPercentage;
+      startHomeAnimation(true);
+    } else {
+      winPercent = 50;      
+    }
+    return winPercent;
+  }
 
   return (
     <div className="predictions card">
       <h2 className="predictionsTitle">Who's Got Sauce?</h2>
 
-      <div className="pie">
-        <div
-          className="pie-segment"
-          style={{
-            '--offset': `${homePercentage}`, '--percent': `${awayPercentage}`, '--over50': `${awayPercentage > 50 ? 1 : 0}`, '--teamColor': `#${gameDetails.awayTeam.primaryColor}`,
-          }}
-        />
-        <div
-          className="pie-segment"
-          style={{
-            '--offset': 0, '--percent': `${homePercentage}`, '--over50': `${homePercentage > 50 ? 1 : 0}`, '--teamColor': `#${gameDetails.homeTeam.primaryColor}`,
-          }}
-        />
-      </div>
+      <PieChart 
+        homePercentage={homePercentage} 
+        homeColor={`#${gameDetails.homeTeam.primaryColor}`} 
+        awayColor={`#${gameDetails.awayTeam.primaryColor}`}
+        width='80%'
+      />
 
       <div className="teamPercentages">
         <div className="awayTeamPercentage">
           <span className="awayTeamName">{gameDetails.awayTeam.key}</span>
           <div className="teamColorBlock" style={{ '--teamColor': `#${gameDetails.awayTeam.primaryColor}` }}>
-            {percentages.awayTeam}
+            {parseFloat(percentages.awayTeam).toFixed(2)}
 %
           </div>
         </div>
         <span className="dot" />
         <div className="homeTeamPercentage">
           <div className="teamColorBlock" style={{ '--teamColor': `#${gameDetails.homeTeam.primaryColor}` }}>
-            {percentages.homeTeam}
+            {parseFloat(percentages.homeTeam).toFixed(2)}
 %
           </div>
           <span className="homeTeamName">{gameDetails.homeTeam.key}</span>
@@ -52,5 +93,7 @@ const UserPredictions = ({ percentages, gameDetails }) => {
     </div>
   );
 };
+
+
 
 export default UserPredictions;

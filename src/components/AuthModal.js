@@ -273,7 +273,6 @@ class AuthModal extends Component {
 
   render() {
     const { context } = this.props;
-    console.log(context);
     const { loginView } = this.props.context.state;
     const { formValues, formErrors, loginError } = this.state;
 
