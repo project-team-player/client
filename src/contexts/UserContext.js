@@ -1,7 +1,12 @@
 // Library imports here
-import React from 'react';
-import { getUserToken, setUserToken, removeUserToken, authenticateUser } from '../utils/auth';
-import PropTypes from 'prop-types';
+import React from "react";
+import {
+  getUserToken,
+  setUserToken,
+  removeUserToken,
+  authenticateUser
+} from "../utils/auth";
+import PropTypes from "prop-types";
 
 // Create global contexts
 export const UserContext = React.createContext();
@@ -10,28 +15,28 @@ export const UserContext = React.createContext();
 class UserProvider extends React.Component {
   state = {
     showAuthModal: false,
-    modalLoginMessage: '',
+    modalLoginMessage: "",
     loginView: true,
     isLoggedIn: false,
     user: {
       comments: []
     }
-  }
+  };
 
   isUserLoggedIn = () => {
     // Makes a call to backend to check if token is valid and sets isLoggedIn to true
     const token = getUserToken();
     if (token) {
-     authenticateUser().then(response => {
+      authenticateUser().then(response => {
         const { user } = response.data;
         if (user) {
           this.setState({ isLoggedIn: true, user });
         } else {
-          console.log('something is wrong');
+          console.log("something is wrong");
         }
-      })
-    }  
-  }
+      });
+    }
+  };
 
   componentDidMount() {
     // Check if user is logged in
@@ -40,83 +45,86 @@ class UserProvider extends React.Component {
 
   render() {
     return (
-      <UserContext.Provider value={{ 
-        state: this.state,
-        logIn: (token, user) => {      
-          // TODO: Improve cookie security
-          // if (process.env.REACT_APP_PRODUCTION) {
-          //   // If in production, create a more secure token
-          //   cookies.set('bearerToken', token, { path: '/', secure: true, httpOnly: true});
-          // } else {
-          //   // In development
-          //   cookies.set('bearerToken', token, { path: '/', }); 
-          // }
-          setUserToken(token);
-          this.setState({isLoggedIn: true, user})
-        },
-        logOut: () => {
-          removeUserToken();
-          this.setState({ isLoggedIn: false, user: { comments: [] } });
-        },
-        isUserLoggedIn: () => { 
-          this.isUserLoggedIn();
-        },
-        showModal: (message = '', login = true) => {
-          this.setState({showAuthModal: true, loginView: login, modalLoginMessage: message.length ? message : ''})
-        },
-        hideModal: () => this.setState({showAuthModal: false, modalLoginMessage: ''}),
-        showLogin: () => this.setState({loginView: true}),
-        showSignup: () => this.setState({loginView: false}),
-        
-        /**
-         * Adds or removes slices from user
-         * @param  {number} sliceAmount The amount of slices to remove or add
-         * @param  {string} operator Enter '+' for adding, and '-' for removing slices
-         * @return {Void} 
-         */
-        updateUserSlices: (sliceAmount, operator = '-') => {
-          console.log('updating user slices')
-          // Get current user state
-          const user = {...this.state.user};
+      <UserContext.Provider
+        value={{
+          state: this.state,
+          logIn: (token, user) => {
+            // TODO: Improve cookie security
+            // if (process.env.REACT_APP_PRODUCTION) {
+            //   // If in production, create a more secure token
+            //   cookies.set('bearerToken', token, { path: '/', secure: true, httpOnly: true});
+            // } else {
+            //   // In development
+            //   cookies.set('bearerToken', token, { path: '/', });
+            // }
+            setUserToken(token);
+            this.setState({ isLoggedIn: true, user });
+          },
+          logOut: () => {
+            removeUserToken();
+            this.setState({ isLoggedIn: false, user: { comments: [] } });
+          },
+          isUserLoggedIn: () => {
+            this.isUserLoggedIn();
+          },
+          showModal: (message = "", login = true) => {
+            this.setState({
+              showAuthModal: true,
+              loginView: login,
+              modalLoginMessage: message.length ? message : ""
+            });
+          },
+          hideModal: () =>
+            this.setState({ showAuthModal: false, modalLoginMessage: "" }),
+          showLogin: () => this.setState({ loginView: true }),
+          showSignup: () => this.setState({ loginView: false }),
 
-          // Add or subtract slices from user based on operator param
-          switch (operator) {
-            case '+':
-              user.pizzaSlicesWeekly += parseInt(sliceAmount);
-              break;
-            case '-':
-              user.pizzaSlicesWeekly -= parseInt(sliceAmount);
-              break;
-            default:
-              break;
+          /**
+           * Adds or removes slices from user
+           * @param  {number} sliceAmount The amount of slices to remove or add
+           * @param  {string} operator Enter '+' for adding, and '-' for removing slices
+           * @return {Void}
+           */
+          updateUserSlices: (sliceAmount, operator = "-") => {
+            console.log("updating user slices");
+            // Get current user state
+            const user = { ...this.state.user };
+
+            // Add or subtract slices from user based on operator param
+            switch (operator) {
+              case "+":
+                user.pizzaSlicesWeekly += parseInt(sliceAmount);
+                break;
+              case "-":
+                user.pizzaSlicesWeekly -= parseInt(sliceAmount);
+                break;
+              default:
+                break;
+            }
+
+            // Update user with new slice count
+            this.setState({ user });
+          },
+          /**
+           * @param {object} newBet
+           */
+          addUserBet: newBet => {
+            const user = { ...this.state.user };
+            user.bets.push(newBet);
+            this.setState({ user });
           }
-          
-          // Update user with new slice count
-          this.setState({user})
-        },
-        /**
-        * @param {object} newBet 
-        */
-        addUserBet: (newBet) => {
-          const user = {...this.state.user};
-          user.bets.push(newBet);
-          this.setState({ user });
-        }
-
-      }}>
+        }}
+      >
         {this.props.children}
       </UserContext.Provider>
-    )
+    );
   }
 }
 
 UserProvider.propTypes = {
-  user: PropTypes.object,
-}
+  user: PropTypes.object
+};
 
 const AuthContext = UserContext.Consumer;
 
-export {
-  AuthContext,
-  UserProvider
-}
+export { AuthContext, UserProvider };

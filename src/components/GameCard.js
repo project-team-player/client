@@ -1,9 +1,9 @@
-import React from 'react';
-import GameThread from './GameThread';
-import { convertToDate } from '../utils/helpers';
+import React from "react";
+import GameThread from "./GameThread";
+import { convertToDate } from "../utils/helpers";
 
 // CSS
-import '../styles/GameCard.css';
+import "../styles/GameCard.css";
 
 // Components
 
@@ -16,6 +16,8 @@ class GameCard extends React.Component {
       openGameThread,
       closeGameThread,
       setCurrentGame,
+      linkToModal,
+      isALink
     } = this.props;
     const { awayScore, homeScore } = gameDetails;
     return (
@@ -35,35 +37,46 @@ class GameCard extends React.Component {
           <div
             className="GameCard"
             role="button"
-            onClick={() => setCurrentGame(gameDetails).then(openGameThread)}
-            onKeyPress={(event) => {
+            onClick={() =>
+              linkToModal && setCurrentGame(gameDetails).then(openGameThread)
+            }
+            onKeyPress={event => {
               this.handleKeyPress(event);
               openGameThread();
             }}
+            style={{ cursor: isALink ? "pointer" : "default" }}
           >
             <div
               className="Away"
               style={{
-                backgroundColor: `#${gameDetails.awayTeam.primaryColor}`,
+                backgroundColor: `#${gameDetails.awayTeam.primaryColor}`
               }}
             >
-              <img className="AwayImg" src={gameDetails.awayTeam.logo} alt="Logo" />
-;
+              <img
+                className="AwayImg"
+                src={gameDetails.awayTeam.logo}
+                alt="Logo"
+              />
+              ;
             </div>
             <div
               className="Home"
               style={{
-                backgroundColor: `#${gameDetails.homeTeam.primaryColor}`,
+                backgroundColor: `#${gameDetails.homeTeam.primaryColor}`
               }}
             >
-              <img className="HomeImg" src={gameDetails.homeTeam.logo} alt="Logo" />
+              <img
+                className="HomeImg"
+                src={gameDetails.homeTeam.logo}
+                alt="Logo"
+              />
             </div>
             <div className="GameInfo">
               <div className="Title">
-              <div className="team-and-score">
-                <b className="TeamKey">{gameDetails.awayTeam.key}</b>
-                <span className="game-card-score-indicator">{awayScore}</span>
-              </div>
+                <div className="team-and-score">
+                  <b className="TeamKey">{gameDetails.awayTeam.key}</b>
+                  <span className="game-card-score-indicator">{awayScore}</span>
+                </div>
                 <b className="Versus">AT</b>
                 <div className="team-and-score">
                   <b className="TeamKey">{gameDetails.homeTeam.key}</b>
@@ -72,9 +85,7 @@ class GameCard extends React.Component {
               </div>
               {/* TODO: Create date parse for below Ex.2019-09-05T20:20:00 */}
               <div className="date">
-                <span>
-                  {convertToDate(gameDetails.dateTime, 'est')}
-                </span>
+                <span>{convertToDate(gameDetails.dateTime, "est")}</span>
               </div>
             </div>
           </div>

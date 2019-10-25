@@ -1,0 +1,480 @@
+.splashContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.firstSplash {
+  width: 100%;
+  height: 95vh;
+  background-image: url("../images/main-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#mainSplash {
+  width: 100%;
+  z-index: 0;
+}
+
+.infoBox {
+  z-index: 1;
+  position: absolute;
+  margin-top: 4rem;
+  margin-left: 4rem;
+  top: 0;
+  width: 30vw;
+  padding: 1rem;
+  background-color: rgba(100%, 100%, 100%, 0.9);
+  border-radius: 3px;
+}
+
+#fullHomeList {
+  list-style: none;
+  padding-inline-start: 0;
+  font-size: 30px;
+  margin-bottom: 0.5rem;
+  font-family: "Roboto", sans-serif;
+  margin-left: 1rem;
+}
+
+.listText {
+  margin-top: 0;
+  margin-left: 0.5rem;
+  margin-bottom: 0;
+}
+
+.runOn {
+  margin-top: 0.2rem;
+  margin-bottom: 0;
+}
+
+.homeList {
+  margin-bottom: 2rem;
+  font-size: 20px;
+  align-items: center;
+  display: grid;
+  grid-template-columns: 9% 81%;
+}
+
+.numberList {
+  background: var(--black);
+  border-radius: 100%;
+
+  color: var(--white);
+  width: 2.5rem;
+  height: 2.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  text-align: center;
+  display: inline-block;
+}
+
+#joinCommunity {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+#buttonContainer {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+
+#signUpButton {
+  background-color: var(--red);
+  padding: 1rem 2.5rem 1rem 2.5rem;
+  color: var(--white);
+  border: none;
+  border-radius: 3px;
+  bottom: 0;
+  margin-bottom: 2.5rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: all 1s;
+}
+
+#signUpButton:hover {
+  background-color: rgba(177, 2, 22, 1);
+  transition: all 1s;
+}
+
+#blackboxSplash {
+  width: 100%;
+  margin-top: -14rem;
+  margin-bottom: -5rem;
+  position: relative;
+  height: 100vh;
+  z-index: 1;
+  background-image: url("../images/Divider_background.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.secondSplash {
+  height: 100vh;
+  background-image: url("../images/bottom-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.secondSplash::after {
+  content: "";
+  display: block;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#overlayAbout {
+  width: 100%;
+  height: 100vh;
+
+  z-index: 1;
+  bottom: 0;
+  top: 5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#gameSquareTitle {
+  color: white;
+  text-align: center;
+  margin-top: 7rem;
+  font-size: 40px;
+}
+
+#gameSquaresContainer {
+  z-index: 2;
+  width: 100%;
+}
+
+#smallSliceContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-right: 18rem;
+  padding-left: 18rem;
+}
+
+#smallSlice {
+  color: var(--white);
+  font-size: 20px;
+  text-align: center;
+  line-height: 2rem;
+}
+
+.gameSquare {
+  width: 15.5vw;
+  height: 40vh;
+  cursor: default;
+}
+
+#squareContainer {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 1rem;
+}
+
+#gamesListButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+#gamesListButton {
+  outline: none;
+  background-color: transparent;
+  border: solid;
+  border-color: var(--grey);
+  color: var(--white);
+  padding: 1rem 2rem 1rem 2rem;
+  text-decoration: none;
+  font-size: 20px;
+  cursor: button;
+  transition: all 1s;
+}
+
+#aboutLandingContainer {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+#aboutContainer {
+  position: absolute;
+  margin-top: 8rem;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+#aboutHeader {
+  color: var(--white);
+  font-size: 40px;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.aboutLanding {
+  width: 22.5%;
+  background-color: var(--white);
+  z-index: 2;
+  word-wrap: break-word;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 3px;
+}
+
+.aboutTitle {
+  border-radius: 3px 3px 0px 0px;
+  background-color: var(--black);
+  color: var(--white);
+  margin: 0;
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+  height: 4rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.aboutWords {
+  padding-top: 1rem;
+  padding-bottom: 5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  line-height: 2rem;
+  text-align: justify;
+}
+
+.aboutIcon {
+  margin-right: 0.5rem;
+  height: 100%;
+}
+
+#gamesListButton:hover {
+  background-color: var(--white);
+  color: var(--black);
+  border: none;
+  transition: all 1s;
+}
+
+@media all and (max-width: 2217px) {
+  .gameSquare {
+    width: 18.5vw;
+    height: 37vh;
+  }
+}
+
+@media all and (max-width: 2075px) {
+  #blackboxSplash {
+    margin-bottom: -10rem;
+  }
+
+  .gameSquare {
+    width: 18.5vw;
+    height: 35vh;
+  }
+}
+
+@media all and (max-width: 2000px) {
+  #gamesListButtonContainer {
+    margin-top: 1rem;
+  }
+  .gameSquare {
+    width: 18.5vw;
+    height: 35vh;
+  }
+
+  #gameSquareTitle {
+    margin-top: 6rem;
+  }
+}
+
+@media all and (max-width: 1750px) {
+  .gameSquare {
+    width: 17.5vw;
+    height: 40.5vh;
+  }
+
+  #blackboxSplash {
+    height: 100vh;
+    margin-top: -8.5rem;
+  }
+
+  #gameSquareTitle {
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+  }
+
+  .infoBox {
+    margin-top: 7.5rem;
+    margin-left: 6.5rem;
+  }
+
+  #squareContainer {
+    padding-top: 0;
+  }
+}
+
+@media all and (max-width: 1460px) {
+  #blackboxSplash {
+    margin-top: -10rem;
+    height: 100vh;
+    margin-bottom: -8rem;
+  }
+
+  #gameSquareTitle {
+    margin-top: 6.5rem;
+  }
+
+  .infoBox {
+    width: 32.5vw;
+    margin-top: 6rem;
+  }
+
+  #signUpButton {
+    margin-bottom: 1rem;
+  }
+
+  .gameSquare {
+    width: 20vw;
+    height: 36.5vh;
+  }
+
+  #squareContainer {
+    padding-top: 0;
+  }
+
+  #aboutContainer {
+    margin-top: 5rem;
+  }
+}
+
+@media all and (max-width: 1240px) {
+  .homeList {
+    margin-bottom: 1rem;
+    grid-template-columns: 10% 82%;
+  }
+
+  .infoBox {
+    width: 35vw;
+    margin-top: 2rem;
+  }
+
+  #signUpButton {
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  }
+
+  .homeList {
+    margin-bottom: 1.5rem;
+  }
+
+  #smallSliceContainer {
+    padding-right: 10rem;
+    padding-left: 10rem;
+  }
+
+  #gameSquareTitle {
+    font-size: 30px;
+  }
+
+  .gameSquare {
+    width: 16.5vw;
+    height: 40vh;
+  }
+
+  #gamesListButtonContainer {
+    margin-top: 0rem;
+  }
+
+  #gamesListButton {
+    padding: 1rem 1.5rem 1rem 1.5rem;
+  }
+}
+
+@media all and (max-width: 1130px) {
+  .infoBox {
+    width: 40vw;
+  }
+
+  #joinCommunity {
+    font-size: 30px;
+  }
+
+  .gameSquare {
+    width: 16.5vw;
+    height: 37vh;
+  }
+
+  #smallSlice {
+    margin-top: 0;
+  }
+
+  #gameSquareTitle {
+    margin-bottom: 1rem;
+  }
+
+  #aboutHeader {
+    margin-top: 0;
+  }
+
+  #aboutContainer {
+    margin-top: 4rem;
+  }
+
+  .aboutLanding {
+    width: 27.5vw;
+  }
+}
+
+@media all and (max-width: 1000px) {
+  .gameSquare {
+    width: 21vw;
+    height: 38vh;
+  }
+
+  #gameSquareTitle {
+    margin-top: 4.5rem;
+  }
+
+  #aboutContainer {
+    margin-top: 2rem;
+  }
+
+  .aboutLanding {
+    width: 22.5%;
+  }
+}
+
+@media all and (max-width: 990px) {
+  .infoBox {
+    width: 50vw;
+  }
+  #joinCommunity {
+    font-size: 30px;
+    margin-bottom: 1.5rem;
+  }
+
+  .homeList {
+    grid-template-columns: 11% 85%;
+  }
+}
+
+@media all and (max-width: 770px) {
+  .infoBox {
+    margin-left: 3.5rem;
+  }
+}

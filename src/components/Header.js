@@ -3,8 +3,7 @@ import "../styles/Header.css";
 import logo from "../images/slice-it-logo.svg";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import PizzaSlice from "../images/logo.svg"
-
+import PizzaSlice from "../images/logo.svg";
 
 class Header extends React.Component {
   render() {
@@ -20,7 +19,7 @@ class Header extends React.Component {
             <nav>
               <ul className="links">
                 <li className="linkNames">
-                  <NavLink exact to="/" className="specificLinks">
+                  <NavLink exact to="/games" className="specificLinks">
                     Games
                   </NavLink>
                 </li>
