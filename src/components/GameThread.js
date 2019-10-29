@@ -359,6 +359,7 @@ class GameThread extends React.Component {
                 <BetForm 
                 makeGameBet={this.makeGameBet} 
                 gameDetails={this.props.gameDetails}
+                percentages={this.state.percentages}
                 handleBetChanges={this.handleBetChanges}
                 handleSliceChanges={this.handleSliceChanges}
                 userDidBet={userDidBet}

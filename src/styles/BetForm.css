@@ -1,24 +1,41 @@
 .bettingContainer {
+  border-radius: 3px;
+  box-shadow: 0px 1px 7px 1px rgba(0, 0, 0, 0.19);
+}
+
+.bettingContainerInner {
+  /* height: 35px; */
   display: flex;
-  flex-direction: column;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: var(--spacing);
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: var(--spacing);
+  flex-wrap: wrap;
+  /* border-radius: 3px;
+  box-shadow: 0px 1px 7px 1px rgba(0, 0, 0, 0.19); */
 }
 
-.betForm {
-  padding: 15px 25px;
-  margin-top: 15px;
+/* .bettingContainerInner :nth-child(n + 2) {
+  margin-left: var(--spacing);
+} */
+
+.betFormContent {
+  padding: var(--spacing);
 }
 
-.betTopContainer {
+/* .betTopContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 20px;
+  padding: var(--spacing);
   border-radius: 3px;
   box-shadow: 0px 1px 7px 1px rgba(0, 0, 0, 0.19);
-
-}
+} */
 
 .betFormButton {
   background: var(--red);
@@ -26,17 +43,22 @@
   border: none;
   border-radius: 3px;
   font-size: 15px;
-  width: 25%;
+  width: 100%;
   height: 40px;
   cursor: pointer;
   font-weight: 500;
+  /* margin-left: var(--spacing); */
+  /* padding-left: var(--spacing); */
 }
 
 .divider {
   background-color: rgba(72, 72, 72, 0.21);
   width: 1px;
-  margin: 0 15px;
+  /* margin: 0 15px; */
   height: 50px;
+  /* margin-left: var(--spacing); */
+  /* padding-left: var(--spacing); */
+  display: none;
 }
 
 .verticalLine {
@@ -56,4 +78,74 @@
 
 .bet-message img {
   height: 23px;
+}
+
+/* ============== TABS ============== */
+
+.tabContainer {
+  background: var(--black);
+  border-radius: 3px 3px 0 0;
+  width: 100%;
+  padding: var(--spacing);
+}
+
+.tabToggle {
+  color: var(--white);
+  font-size: 15px;
+  margin-right: 15px;
+  cursor: pointer;
+  position: relative;
+}
+/* 
+.tabToggle.active {
+  text-decoration: underline;
+  text-decoration-color: var(--white);
+} */
+
+.tabToggle.active::after {
+  position: absolute;
+  content: "";
+  border: 1px solid var(--white);
+  width: 100%;
+  margin-top: ;
+  bottom: 0;
+  left: 0;
+}
+
+.pie-chart {
+  width: 70%;
+}
+
+/* ==============  Responsive Changes  ================ */
+/* Extra small devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .pie-chart {
+    width: 35%;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  .bettingContainerInner {
+    flex-wrap: nowrap;
+  }
+
+  .divider {
+    display: block;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .tabContainer {
+    display: none;
+  }
+ }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+
 }

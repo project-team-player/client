@@ -10,7 +10,7 @@
   height: 4px;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .c-input--range:active,
@@ -20,8 +20,8 @@
 
 .c-input--range::-webkit-slider-thumb {
   appearance: none;
-  height: 16px;
-  width: 16px;
+  /* height: 16px;
+  width: 16px; */
   display: block;
   background-color: #8d949e;
   border-radius: 100%;
@@ -36,22 +36,26 @@
   height: fit-content;
   display: flex;
   flex-direction: row;
-  width: 25%;
+  width: 100%;
   align-items: center;
   justify-content: space-around;
+  margin-bottom: var(--spacing);
 }
 
 .wheelContainer {
-  display: flex;
-  justify-content: center;
+  display: none;
+}
+
+.betWheel {
+
 }
 
 .button-container {
   border-radius: 3px;
   padding: 2px 0;
   background: var(--black);
-  margin-left: 15px;
   height: 40px;
+  width: 100%;
 }
 
 .button-container-inner {
@@ -64,20 +68,66 @@
 
 .betButton {
   height: 100%;
-  width: 40px;
+  width: 100%;
   border: none;
   color: white;
   background: none;
   font-size: 15px;
   font-family: var(--main-font);
   cursor: pointer;
+  margin-bottom: var(--spacing);
 }
 
 #betIndicator {
   display: flex;
+  height: 100%;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: white;
   color: black;
+}
+
+
+
+/* ==============  Responsive Changes  ================ */
+/* Extra small devices (portrait phones, less than 576px) are accounted for above this line. No media query needed for phones since this is the default */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  .wheelContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .betButton {
+    margin-bottom: 0;
+  }
+
+  .betContainer {
+    margin-bottom: 0;
+  }
+
+  /* .button-container {
+    border-radius: 3px;
+    padding: 2px 0;
+    background: var(--black);
+    height: 40px;
+  } */
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+ }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+
 }

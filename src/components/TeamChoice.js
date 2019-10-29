@@ -28,7 +28,8 @@ class TeamChoice extends React.Component {
     const { context: { state: { isLoggedIn }, showModal } } = this.props;
 
     return (
-      <div className='selectionContainer'>
+      // <div className='selectionContainer'>
+      <>
         <button
           type='radio'
           name='winning-team-away'
@@ -58,7 +59,8 @@ class TeamChoice extends React.Component {
         >
           {this.props.gameDetails.homeTeam.key}
         </button>
-      </div>
+      {/* </div> */}
+      </>
     );
   }
 }

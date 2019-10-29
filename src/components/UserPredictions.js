@@ -20,7 +20,6 @@ const UserPredictions = ({ percentages, gameDetails }) => {
    * In this case UseEffect works similar to ComponentDidMount and ComponentDidUpdate
    */
   useEffect(() => {
-    console.log(gameDetails);
     setAwayPercentage(percentages.awayTeam);
     setHomePercentage(percentages.homeTeam);
     setWinByPercentage(getWinByPercentage());
@@ -59,6 +58,7 @@ const UserPredictions = ({ percentages, gameDetails }) => {
     return winPercent;
   }
 
+  console.log(gameDetails);
   return (
     <div className="predictions card">
       <h2 className="predictionsTitle">Who's Got Sauce?</h2>

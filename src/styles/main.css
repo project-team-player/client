@@ -36,3 +36,15 @@ body {
   color: blue;
   cursor: pointer;
 }
+
+/* TODO: REMOVE */
+
+header {
+  display: none;
+}
+
+@media (min-width: 768px) { 
+  header {
+    display: flex;
+  }
+}

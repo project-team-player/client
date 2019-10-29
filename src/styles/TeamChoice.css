@@ -6,15 +6,16 @@
   width: 50%;
 }
 
-.bet-selector-btn:nth-child(2) {
+/* .bet-selector-btn:nth-child(2) {
   margin-left: 15px;
-}
+} */
 
 .bet-selector-btn {
   display: block;
   color: var(--black);
   cursor: pointer;
-  width: 50%;
+  width: 100%;
+  height: 40px;
   border: none;
   border-radius: 5px;
   background: var(--white);
@@ -22,9 +23,38 @@
   text-shadow: 0.5px 0.5px var(--black);
   font-size: 15px;
   font-weight: 300;
+  margin-bottom: var(--spacing);
+  /* margin-left: var(--spacing); */
+  /* padding-right: var(--spacing); */
 }
 
 .active-btn {
   background: var(--black);
   color: var(--white);
+}
+
+/* ==============  Responsive Changes  ================ */
+/* Extra small devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  .bet-selector-btn {
+    margin-bottom: 0;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+ }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+
 }

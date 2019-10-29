@@ -63,14 +63,14 @@ class Slider extends React.Component {
     return (
       <div className='betContainer'>
         <div className='wheelContainer'>
-          <img src={this.state.pizzaSrc} alt={this.state.name} />
+          <img src={this.state.pizzaSrc} alt={this.state.name} className="betWheel" />
         </div>
         <div className='button-container'>
           <div className="button-container-inner">
             <button className='betButton' onClick={ () => isLoggedIn ? this.minusAction() : showModal('Please login to make a bet') }>
               -
             </button>
-            <label className='betButton' id='betIndicator'>
+            <label className='' id='betIndicator'>
               {this.state.value}
             </label>
             <button className='betButton' onClick={() => isLoggedIn ? this.plusAction() : showModal('Please login to make a bet') }
