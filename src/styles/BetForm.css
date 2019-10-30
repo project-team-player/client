@@ -133,6 +133,10 @@ No media query since this is the default in Bootstrap */
     flex-wrap: nowrap;
   }
 
+  .tabContainer {
+    display: none;
+  }
+
   .divider {
     display: block;
   }
@@ -142,6 +146,10 @@ No media query since this is the default in Bootstrap */
 @media (min-width: 992px) {
   .tabContainer {
     display: none;
+  }
+
+  .bettingContainerInner:nth-child(2) > * {
+    margin-left: 5px;
   }
  }
 

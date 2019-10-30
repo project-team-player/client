@@ -263,6 +263,10 @@ No media query since this is the default in Bootstrap */
   .game-thread-aside {
     display: block;
   }
+
+  .game-thread-aside .pie-chart {
+    width: 90%;
+  }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -272,6 +276,10 @@ No media query since this is the default in Bootstrap */
     grid-gap: var(--spacing);
     padding: var(--spacing);
     grid-template-columns: 6fr 2fr;
+  }
+
+  .game-thread-aside .pie-chart {
+    width: 80%;
   }
  }
 

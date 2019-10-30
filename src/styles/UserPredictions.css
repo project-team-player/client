@@ -222,6 +222,10 @@ No media query since this is the default in Bootstrap */
   .homeTeamPercentage {
     flex-wrap: nowrap;
   }
+
+  .pie-chart {
+    width: 80%;
+  }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */

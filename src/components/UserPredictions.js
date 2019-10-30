@@ -7,7 +7,7 @@ import '../styles/UserPredictions.css';
  * @param {object} percentages How many percent of users voted on each team
  * @param {object} gameDetails Game specific information like teams, scores etc. 
  */
-const UserPredictions = ({ percentages, gameDetails }) => {
+const UserPredictions = ({ percentages, gameDetails, classes = '' }) => {
   // See React docs on hooks if this looks unfamiliar https://reactjs.org/docs/hooks-intro.html  
   const [awayPercentage, setAwayPercentage] = useState(50.00);
   const [homePercentage, setHomePercentage] = useState(50.00);
@@ -60,7 +60,7 @@ const UserPredictions = ({ percentages, gameDetails }) => {
 
   console.log(gameDetails);
   return (
-    <div className="predictions card">
+    <div className={`predictions card ${classes}`}>
       <h2 className="predictionsTitle">Who's Got Sauce?</h2>
 
       <PieChart 
