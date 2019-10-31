@@ -187,8 +187,30 @@ input:focus {
     margin-top: 1.5rem;
 }
 
+@media only all and (max-width: 400px) {
+    .Searchform {
+        margin-left: -7.3rem;
+        margin-right: 0.1rem;
+    }
 
-@media only screen and (max-width: 575px) {
+    .table-items {
+        font-size: 0.7rem;
+    }
+
+    .filterbuttons {
+        margin-left: 1rem;
+    }
+
+    input[type=search] {
+        padding: 0;
+    }
+
+    .rightside {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 575px) {
 
     input[type=search] {
         padding: 0;

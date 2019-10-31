@@ -133,7 +133,19 @@ button.login-button {
   border: none;
 }
 
-@media only all and (max-width: 575px) {
+@media only all and (max-width: 400px) {
+  .logo {
+    margin-right: 1rem;
+    width: 6rem;
+  }
+
+  #users {
+    width: 80%;
+  }
+}
+
+@media only all and (min-width:400px) and (max-width: 575px) {
+
   .logo {
     width: 7rem;
     margin-right: 3rem;
