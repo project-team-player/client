@@ -526,6 +526,16 @@
     margin-left: 4rem;
     width: 75vw;
   }
+
+  #blackboxSplash {
+    margin-top: -18rem;
+    height: 195vh;
+    margin-bottom: -17rem;
+  }
+
+  #gameSquaresContainer {
+    margin-top: 14rem;
+  }
 }
 
 @media all and (max-width: 500px) {
@@ -533,6 +543,21 @@
     margin-left: 2rem;
     width: 85vw;
   }
+
+  #blackboxSplash {
+    margin-top: -18rem;
+    height: 200vh;
+    margin-bottom: -17rem;
+  }
+
+  .secondSplash {
+    height: 160vh;
+  }
+
+  #smallSliceContainer {
+    padding-right: 5rem;
+    padding-left: 5rem;
+  }
 }
 
 @media all and (max-width: 420px) {
@@ -546,29 +571,49 @@
   }
 
   #blackboxSplash {
-    margin-top: -10.6rem;
+    margin-top: -18.6rem;
   }
 
   .homeList {
     grid-template-columns: 15% 85%;
+  }
+
+  #gameSquaresContainer {
+    margin-top: 15rem;
+  }
+
+  .aboutLanding {
+    width: 72.5%;
+    margin-bottom: 2rem;
+  }
+
+  #smallSliceContainer {
+    padding-right: 2.5rem;
+    padding-left: 2.5rem;
   }
 }
 
-@media all and (max-width: 420px) {
-  .infoBox {
-    margin-left: 0.5rem;
-    width: 95vw;
+@media all and (max-width: 380px) {
+  .secondSplash {
+    height: 210vh;
   }
 
-  #fullHomeList {
-    margin-left: 0;
+  #smallSliceContainer {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+@media all and (max-width: 300px) {
+  .aboutLanding {
+    width: 80%;
   }
 
   #blackboxSplash {
-    margin-top: -10.6rem;
+    height: 210vh;
   }
 
-  .homeList {
-    grid-template-columns: 15% 85%;
+  #gameSquareTitle {
+    margin-top: 18.5rem;
   }
 }
