@@ -6,3 +6,8 @@ body {
 * {
   box-sizing: border-box;
 }
+
+input, textarea {
+  -webkit-appearance: none;
+  border-radius: 0;
+}

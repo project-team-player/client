@@ -67,6 +67,7 @@
 }
 
 .betButton {
+  -webkit-appearance: none;
   height: 100%;
   width: 100%;
   border: none;
@@ -75,7 +76,6 @@
   font-size: 15px;
   font-family: var(--main-font);
   cursor: pointer;
-  margin-bottom: var(--spacing);
 }
 
 #betIndicator {
@@ -87,6 +87,14 @@
   align-items: center;
   background-color: white;
   color: black;
+}
+
+.buttonContainer {
+  margin-bottom: var(--spacing);
+}
+
+.button-container {
+  margin-bottom: var(--spacing);
 }
 
 
@@ -120,12 +128,15 @@
     background: var(--black);
     height: 40px;
   } */
+  .button-container {
+    margin-bottom: 0;
+  }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
 
- }
+}
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { 

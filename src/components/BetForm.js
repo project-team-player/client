@@ -45,13 +45,20 @@ class BetForm extends React.Component {
     const { showPredictions } = this.state;
     return (
       <div className='betForm card'>
-          <div className="tabContainer">
-            <span onClick={() => this.setState({ showPredictions: false }) } className={`tabToggle ${!showPredictions ? 'active' : ''}`}>Bet</span>
-            <span onClick={() => this.setState({ showPredictions: true }) } className={`tabToggle ${showPredictions ? 'active' : ''}`}>Predictions</span>
+        <div className="cardHeader">
+            <h2 className="cardTitle">{showPredictions ? "Who's got sauce?" : 'Bet slices on your winner'}</h2>
+        </div>
+        <div className="tabContainer">
+          <div className="tabToggleContainer" onClick={() => this.setState({ showPredictions: false }) }>
+            <span className={`tabToggle ${!showPredictions ? 'active' : ''}`}>Bet</span>
           </div>
-        <div className="betFormContent">
-          {showPredictions ?
-            <UserPredictions percentages={percentages} gameDetails={gameDetails} />
+          <div className="tabToggleContainer" onClick={() => this.setState({ showPredictions: true }) }>
+            <span className={`tabToggle ${showPredictions ? 'active' : ''}`}>Predictions</span>
+          </div>
+        </div>
+        <div className="cardContent">
+        {showPredictions ?
+          <UserPredictions percentages={percentages} gameDetails={gameDetails} />
             :
             <>
           {
@@ -59,9 +66,8 @@ class BetForm extends React.Component {
             <BetIndicator bet={userBet} gameHasFinished={gameHasFinished} />
           : 
             <>
-              <h2>Bet slices on your winner</h2>
               { errorMessage && <p className="bet-error-message">{errorMessage}</p> }
-              <div className='bettingContainer'>
+              <form className='bettingContainer'>
                 <div className='bettingContainerInner'>
                   <Slider
                     handleBetChanges={handleBetChanges}
@@ -73,13 +79,12 @@ class BetForm extends React.Component {
                     handleBetChanges={handleBetChanges}
                   />
                   <div className='divider'></div>
-                  <button className='betFormButton' onClick={() => { 
+                  <input type="button" className='betFormButton' onClick={() => { 
                     isLoggedIn ? makeGameBet() : showModal('Please login to make a bet') 
-                    }}>
-                    Slice It
-                  </button>
+                    }} value="Slice It" />
                 </div>
-              </div>
+              </form>
+
               </>
             }
           </>

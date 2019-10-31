@@ -1,9 +1,5 @@
 .predictions {
-  padding: 25px;
-}
-
-.predictionsTitle {
-  margin-top: 0;
+  text-align: center;
 }
 
 .pie {

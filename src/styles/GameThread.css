@@ -29,9 +29,29 @@
   min-height: 100vh;
 }
 
+/* ================ CARD ================= */
+
 .card {
   background: var(--white);
   border-radius: 3px;
+  box-shadow: 0px 1px 9px 0px rgba(35, 35, 35, 0.22);
+}
+
+.cardHeader {
+  background-color: var(--grey);
+  padding: calc(var(--spacing) / 2);
+  border-radius: var(--borderRadius) var(--borderRadius) 0 0;
+  text-align: center;
+}
+
+.cardTitle {
+  font-size: 16px;
+  margin: 0;
+  color: var(--white);
+}
+
+.cardContent {
+  padding: var(--spacing);
 }
 
 .game-thread-content {
@@ -151,7 +171,7 @@
 .discussion-container {
   border: 1px solid #e4e4e4;
   border-radius: 5px;
-  padding: var(--spacing);
+  /* padding: var(--spacing); */
 }
 
 /*
@@ -254,19 +274,11 @@ No media query since this is the default in Bootstrap */
     padding: 0 40px;
   }
 
-  .game-thread-content {
+  /* .game-thread-content {
     grid-gap: var(--spacing);
     padding: var(--spacing);
-    grid-template-columns: 6fr 200px;
-  }
-
-  .game-thread-aside {
-    display: block;
-  }
-
-  .game-thread-aside .pie-chart {
-    width: 90%;
-  }
+    grid-template-columns: 6fr 1fr;
+  } */
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -280,6 +292,10 @@ No media query since this is the default in Bootstrap */
 
   .game-thread-aside .pie-chart {
     width: 80%;
+  }
+
+  .game-thread-aside {
+    display: block;
   }
  }
 

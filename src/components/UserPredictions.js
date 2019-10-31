@@ -7,7 +7,7 @@ import '../styles/UserPredictions.css';
  * @param {object} percentages How many percent of users voted on each team
  * @param {object} gameDetails Game specific information like teams, scores etc. 
  */
-const UserPredictions = ({ percentages, gameDetails, classes = '' }) => {
+const UserPredictions = ({ percentages, gameDetails, classes = '', withHeader, isCard }) => {
   // See React docs on hooks if this looks unfamiliar https://reactjs.org/docs/hooks-intro.html  
   const [awayPercentage, setAwayPercentage] = useState(50.00);
   const [homePercentage, setHomePercentage] = useState(50.00);
@@ -57,12 +57,14 @@ const UserPredictions = ({ percentages, gameDetails, classes = '' }) => {
     }
     return winPercent;
   }
-
-  console.log(gameDetails);
   return (
-    <div className={`predictions card ${classes}`}>
-      <h2 className="predictionsTitle">Who's Got Sauce?</h2>
-
+    <div className={`${isCard ? 'card' : ''} ${classes}`}>
+    {withHeader &&
+      <div className="cardHeader">
+        <h2 className="cardTitle">Who's Got Sauce?</h2>
+      </div>
+    }
+      <div className='cardContent predictions'>
       <PieChart 
         homePercentage={homePercentage} 
         homeColor={`#${gameDetails.homeTeam.primaryColor}`} 
@@ -90,6 +92,8 @@ const UserPredictions = ({ percentages, gameDetails, classes = '' }) => {
       </div>
 
       <p>* Based on user bets</p>
+
+      </div>
     </div>
   );
 };

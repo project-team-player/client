@@ -6,31 +6,46 @@
   width: 50%;
 }
 
-/* .bet-selector-btn:nth-child(2) {
+.bet-selector-btn:nth-child(2) {
   margin-left: 15px;
-} */
+}
 
 .bet-selector-btn {
   display: block;
-  color: var(--black);
+  color: var(--teamColor);
   cursor: pointer;
-  width: 100%;
+  width: calc(50% - var(--spacing));
   height: 40px;
   border: none;
   border-radius: 5px;
-  background: var(--white);
-  border: 1px solid var(--black);
+  background-color: var(--white);
   text-shadow: 0.5px 0.5px var(--black);
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: var(--spacing);
-  /* margin-left: var(--spacing); */
-  /* padding-right: var(--spacing); */
+  transition: all .15s;
+  border: 2px solid var(--teamColor);
+}
+
+.bet-selector-btn:hover {
+  background-color: var(--teamColor);
+  color: var(--white);
+  border: none;
+  transition: all .15s;
 }
 
 .active-btn {
-  background: var(--black);
+  background-color: var(--teamColor);
   color: var(--white);
+  border: none;
+}
+
+#home-team-selector {
+  margin-left: calc(var(--spacing) / 2);
+}
+
+#away-team-selector {
+  margin-right: calc(var(--spacing) / 2);
 }
 
 /* ==============  Responsive Changes  ================ */
@@ -46,6 +61,7 @@ No media query since this is the default in Bootstrap */
 @media (min-width: 768px) { 
   .bet-selector-btn {
     margin-bottom: 0;
+    width: 100%;
   }
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useMediaQuery } from 'react-responsive'
 import '../styles/GameThread.css';
 import axios from 'axios';
 import Comment from './Comment';
@@ -8,6 +9,8 @@ import { getUserToken } from '../utils/auth';
 import GameHeader from '../components/GameHeader'
 import UserPredictions from './UserPredictions';
 import CommentInput from './CommentInput';
+import Media from 'react-media';
+
 
 class GameThread extends React.Component {
   constructor(props) {
@@ -32,6 +35,7 @@ class GameThread extends React.Component {
       gameHasFinished: false,
       userDidBet: false,
       userBet: '',
+      showPredictions: false,
     };
   }
 
@@ -311,6 +315,7 @@ class GameThread extends React.Component {
       userDidBet,
       userBet,
       gameHasFinished,
+      showPredictions,
     } = this.state;
     if (!showModal) {
       return <></>;
@@ -318,6 +323,10 @@ class GameThread extends React.Component {
     return (
       <UserContext.Consumer>
       {context => (
+        <Media queries={{
+          mobile: "(max-width: 767px)",
+        }}>
+          {device => (
         <div className="gameThreadContainer">
           <div className="game-thread">
           
@@ -355,20 +364,26 @@ class GameThread extends React.Component {
             <div className='game-thread-content'>
 
               <section className='game-thread-main'>
-                <GameHeader gameDetails={this.props.gameDetails} />  
-                <BetForm 
-                makeGameBet={this.makeGameBet} 
-                gameDetails={this.props.gameDetails}
-                percentages={this.state.percentages}
-                handleBetChanges={this.handleBetChanges}
-                handleSliceChanges={this.handleSliceChanges}
-                userDidBet={userDidBet}
-                userBet={userBet}
-                gameHasFinished={gameHasFinished}
-                errorMessage={betErrorMessage}
-                /> 
+                <GameHeader gameDetails={this.props.gameDetails} device={device} />  
+                
+
+                  <BetForm 
+                  makeGameBet={this.makeGameBet} 
+                  gameDetails={this.props.gameDetails}
+                  percentages={this.state.percentages}
+                  handleBetChanges={this.handleBetChanges}
+                  handleSliceChanges={this.handleSliceChanges}
+                  userDidBet={userDidBet}
+                  userBet={userBet}
+                  gameHasFinished={gameHasFinished}
+                  errorMessage={betErrorMessage}
+                  /> 
+    
                 <div className="discussion-container card">
-                <h2>Trash talk</h2>
+                  <div className="cardHeader">
+                    <h2 className="cardTitle">Trash talk</h2>
+                  </div>
+                  <div className="cardContent">
                     <CommentInput gamethreadSlug={gameDetails.slug} gamethreadId={gameDetails.gameThreadReference.gameThreadID}
                     fetchNewComments={() => this.setState({fetchNewComment: true})}
                      />
@@ -378,17 +393,20 @@ class GameThread extends React.Component {
                         .map((comment, i) => <Comment currentComment={comment} gameDetails={gameDetails} key={i} postReplyHandler={this.postReply} replies={comment.replies} getUpdatedComments={this.getListOfComments} gameThreadBets={bets}/>)
                         }
                     </div>
+                    </div>
                   </div>
               </section>
 
               <aside className="game-thread-aside">
-                <UserPredictions gameDetails={this.props.gameDetails} percentages={this.state.percentages} />
+                <UserPredictions gameDetails={this.props.gameDetails} percentages={this.state.percentages} withHeader="true" isCard="true" />
               </aside>
 
             </div>
           </div>
           <div className="clickableBackground" onClick={this.props.closeGameThread}/>
         </div>
+          )}
+        </Media>
       )}
       </UserContext.Consumer>
     );
