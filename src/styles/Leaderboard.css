@@ -234,7 +234,7 @@ input:focus {
     }
 
     #weekform {
-        margin-left: 0.5rem;
+        margin-left: 0;
     }
 
     #users {
@@ -242,7 +242,7 @@ input:focus {
     }
 
     #season {
-        margin-left: 7.2rem;
+        margin-left: 7.5rem;
     }
 
     .LeaderboardSearchIcon {
@@ -251,8 +251,8 @@ input:focus {
 
 
     select {
+        margin-left: 0.3rem;
         padding: 0.2rem 0.1rem 0.2rem 0.1rem;
-        /* font-size: 1rem; */
     }
 
 }
