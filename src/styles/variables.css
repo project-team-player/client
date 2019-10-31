@@ -7,4 +7,50 @@
   --yellow: #F3A82E;
   --main-font: "Roboto", sans-serif;
   --borderRadius: 3px;
+  --navPadding: 0 15px;
+}
+
+/* ==============  Responsive Changes  ================ */
+/* Extra small devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  :root {
+    --navPadding: 0 20px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  :root {
+    --navPadding: 0 30px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  :root {
+    --navPadding: 0 40px;
+  }
+ }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+}
+
+@media (min-width: 1400px) { 
+
+}
+
+@media (min-width: 1800px) { 
+  :root {
+    --navPadding: 0 100px;
+  }
+}
+
+@media (min-width: 2200px) { 
+  :root {
+    --navPadding: 0 200px;
+  }
 }

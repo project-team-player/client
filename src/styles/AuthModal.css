@@ -81,15 +81,15 @@
 @media all and (max-width: 709px) {
 
   .signupForm {
-      margin: 1rem;
-      min-width: 12rem;
-      max-width: 16rem;
+    margin: 1rem;
+    min-width: 12rem;
+    max-width: 16rem;
   }
 }
 
 @media all and (max-width: 610px) {
   .credentialForm {
-      width: 75%;
+    width: 65%;
   }
 
 }

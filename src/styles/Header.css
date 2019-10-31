@@ -2,9 +2,18 @@
 
 header {
   display: flex;
+  width: 100vw;
   background-color: #232323;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding: var(--navPadding);
+}
+
+
+.slicepiece {
+  margin-top: 1.5vw;
+}
+
+ul {
+  padding-inline-start: 0px;
 }
 
 nav {
@@ -13,11 +22,13 @@ nav {
 
 .sliceLogo {
   height: 75px;
+  /* margin-left: 4%; */
 }
 
 .logo {
+  /* margin-left: 3%; */
   height: 100%;
-  width: 150px;
+  width: 10rem;
   cursor: pointer;
 }
 
@@ -33,14 +44,11 @@ nav {
 
 .linkNames {
   margin-left: 0rem;
-  /* color: #a8a8a8; */
-
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
   height: 100%;
   display: flex;
   align-items: center;
-  padding-left: 1rem;
   padding-right: 1rem;
 }
 
@@ -61,7 +69,7 @@ nav {
   font-size: 20px;
   color: #f9f8f7;
   margin-left: 0.5rem;
-  background-color: rgba(208, 2, 27, 1);
+  background-color: #F3A82E;
   padding: 0.5rem;
   padding-left: 0.8rem;
   padding-right: 0.8rem;
@@ -70,12 +78,13 @@ nav {
   outline: none;
 }
 
-.loginButton:hover {
-  background-color: rgba(208, 2, 27, 0.9);
+.logintext {
+  font-size: 16px;
 }
 
 .logoutPizzaCount {
   display: flex;
+  background-color: #F3A82E;
 }
 
 .slices {
@@ -88,7 +97,96 @@ nav {
   align-items: center;
 }
 
-.pizzalogo {
-  height: 60%;
-  padding-left: 0.5rem;
+.container {
+  width: 100vw;
 }
+
+.pizzalogo {
+  width: 0.3rem;
+}
+
+.profile {
+  width: 2rem;
+  display: none;
+}
+
+button.login-button {
+  background: #F3A82E;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.logoutPizzaCount {
+  display: block;
+}
+
+.profileimg {
+  width: 2rem;
+  padding: 0;
+}
+
+.pizzaContainer {
+  background: #232323;
+  border: none;
+}
+
+@media only all and (max-width: 400px) {
+  .logo {
+    margin-right: 1rem;
+    width: 6rem;
+  }
+
+  #users {
+    width: 80%;
+  }
+}
+
+@media only all and (min-width:400px) and (max-width: 575px) {
+
+  .logo {
+    width: 7rem;
+    margin-right: 3rem;
+  }
+
+  .linkNames {
+    font-size: 1rem;
+  }
+
+
+  .specificLinks active {
+    padding: 0;
+  }
+
+  .profileimg {
+    width: 1.5rem;
+    padding: 0;
+  }
+
+  .pizzaContainer {
+    background: #232323;
+    border: none;
+  }
+
+  .pizzalogo {
+    width: 0.7rem;
+  }
+
+  .slices {
+    font-size: 1rem;
+  }
+}
+
+/*Small devices (landscape phones, 576px and up) */
+@media only all and (min-width: 576px) {
+
+}
+
+/*Medium devices (tablets, 768px and up) */
+@media only all and (min-width: 768px) {
+  .linkNames, .logintext {
+    font-size: 18px;
+  }
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media only screen and (min-width: 992px) {}

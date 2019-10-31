@@ -251,7 +251,7 @@ No media query since this is the default in Bootstrap */
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   .gameThreadContainer {
-    padding: 0 20px;
+    padding: var(--navPadding);
   }
 
   :root {
@@ -268,17 +268,6 @@ No media query since this is the default in Bootstrap */
   :root {
     --spacing: 15px;
   }
-
-
-  .gameThreadContainer {
-    padding: 0 40px;
-  }
-
-  /* .game-thread-content {
-    grid-gap: var(--spacing);
-    padding: var(--spacing);
-    grid-template-columns: 6fr 1fr;
-  } */
 }
 
 /* Large devices (desktops, 992px and up) */

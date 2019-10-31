@@ -19,17 +19,6 @@ nav {
   cursor: pointer;
 }
 
-.links {
-  list-style: none;
-  display: flex;
-  height: 100%;
-  align-items: center;
-  margin-right: 2rem;
-  justify-content: flex-end;
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
 .linkNames {
   margin-left: 0rem;
   color: white;
