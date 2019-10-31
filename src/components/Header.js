@@ -18,11 +18,7 @@ class Header extends React.Component {
             <NavLink to="/" id="logo">
               <div className="sliceLogo">
                 <img className="logo" src={logo} alt="Slice-it Logo" />
-              </div>
-              <div className="mobilelogo">
-                <img className="slicepiece" src={slice} alt="Slice Icon"></img>
-                {/* <img className="" src={logotext} alt="Small Logo Text"></img> */}
-              </div>
+              </div>         
             </NavLink>
             <nav>
               <ul className="links">

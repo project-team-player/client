@@ -4,16 +4,8 @@ header {
   display: flex;
   width: 100vw;
   background-color: #232323;
-  padding-left: 2vw;
-  padding-right: 2vw;
 }
 
-.mobilelogo {
-
-  width: 5vw;
-  margin-left: 3vw;
-  display: none;
-}
 
 .slicepiece {
   margin-top: 1.5vw;
@@ -27,13 +19,19 @@ nav {
   width: 100%;
 }
 
+#logo {
+  margin-left: 2%;
+}
+
 .sliceLogo {
   height: 75px;
+  /* margin-left: 4%; */
 }
 
 .logo {
+  /* margin-left: 3%; */
   height: 100%;
-  width: 150px;
+  width: 10rem;
   cursor: pointer;
 }
 
@@ -45,6 +43,8 @@ nav {
   justify-content: flex-end;
   margin-bottom: 0;
   margin-top: 0;
+  margin-right: 2%;
+
 }
 
 .linkNames {
@@ -83,10 +83,6 @@ nav {
   outline: none;
 }
 
-/* .loginButton:hover {
-  background-color: rgba(208, 2, 27, 0.9);
-} */
-
 .logoutPizzaCount {
   display: flex;
   background-color: #F3A82E;
@@ -107,7 +103,7 @@ nav {
 }
 
 .pizzalogo {
-  height: 60%;
+  width: 0.3rem;
 }
 
 .profile {
@@ -115,11 +111,31 @@ nav {
   display: none;
 }
 
+button.login-button {
+  background: #F3A82E;
+  padding: 5px;
+  padding-left: 0;
+  padding-right: 0;
+
+}
+
+.logoutPizzaCount {
+  display: block;
+}
+
+.profileimg {
+  width: 2rem;
+  padding: 0;
+}
+
+.pizzaContainer {
+  background: #232323;
+  border: none;
+}
 
 @media only all and (max-width: 575px) {
   .logo {
     width: 7rem;
-    padding-left: 3%;
     margin-right: 3rem;
   }
 
@@ -127,23 +143,20 @@ nav {
     font-size: 1rem;
   }
 
+
   .specificLinks active {
     padding: 0;
   }
 
-  .logoutPizzaCount {
-    display: block;
-  }
-
   .profileimg {
-    width: 2rem;
-    padding: 1px;
+    width: 1.5rem;
+    padding: 0;
   }
 
-  button.login-button {
-    background: #F3A82E;
-    padding-left: 0;
-    padding-right: 0;
+
+  .logintext {
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   .pizzaContainer {
@@ -151,50 +164,20 @@ nav {
     border: none;
   }
 
+  .pizzalogo {
+    width: 0.7rem;
+  }
 
-
-
+  .slices {
+    font-size: 1rem;
+  }
 }
 
 /*Small devices (landscape phones, 576px and up) */
 @media only all and (min-width: 576px) {}
 
 /*Medium devices (tablets, 768px and up) */
-@media only all and (max-width: 600px) {
-  .links {
-    justify-content: left;
-
-  }
-}
+@media only all and (max-width: 600px) {}
 
 /*Large devices (desktops, 992px and up)*/
-@media only screen and (min-width: 992px) {
-
-  .profile {
-    display: inline;
-  }
-
-  header {
-    padding-left: 0;
-    padding-right: 0;
-    width: 100vw;
-  }
-
-  .links {
-    padding-left: 0;
-    width: 100%;
-  }
-
-  .logo {
-    margin-left: 2vw;
-    margin-right: 2vw;
-  }
-
-  select {
-    margin-left: 0;
-  }
-
-  .login-button span {
-    display: none;
-  }
-}
+@media only screen and (min-width: 992px) {}

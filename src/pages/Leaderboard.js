@@ -94,7 +94,10 @@ class Leaderboard extends React.Component {
                 <option selected>9</option>
               </select>
             </div>
-            <div className="filterbuttons">
+            
+          </div>
+          <div className="rightside">
+          <div className="filterbuttons">
               <button
                 class="btn active"
                 id="season"
@@ -117,8 +120,7 @@ class Leaderboard extends React.Component {
                 Weekly
               </button>
             </div>
-          </div>
-          <div className="Searchform">
+            <div className="Searchform">
             <span className="LeaderboardSearchIcon" role="img" aria-label="glass">
               🔍
             </span>
@@ -129,6 +131,8 @@ class Leaderboard extends React.Component {
               onChange={this.handleSearch}
             />
           </div>
+          </div>
+          
         </div>
         <div className="boards">
           {weekly === true ? (

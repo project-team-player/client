@@ -1,31 +1,35 @@
 .top {
     display: flex;
-    /* margin: 0rem 2rem 0rem 2rem; */
     justify-content: space-between;
+    margin-left: 2%;
+    margin-right: 2%;
+
 }
 
 .boards {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+    margin-left: 2%;
+    margin-right: 2%;
 
 }
 
 .leftside {
     display: flex;
-    padding-left: 3%;
-    padding-right: 3%;
-    /* margin: auto; */
+}
+
+.rightside {
+    display: flex;
 }
 
 .Searchform {
-
+    margin-left: 2rem;
     margin-top: 1rem;
     display: flex;
-    margin-right: 3%;
     border: none;
     border: 2px;
     border-radius: 2px;
-    box-shadow: 1px 1px 2px 0.5px;
+    box-shadow: 1px 1px 1px 0.5px;
     background-color: white;
     /* justify-content: right; */
 
@@ -38,6 +42,7 @@
 
 select {
     margin-left: 1rem;
+    margin-top: 0.5rem;
     width: 3rem;
     padding: 0.2rem 0.1rem 0.2rem 0.1rem;
     border: none;
@@ -73,9 +78,9 @@ select {
 }
 
 .leader-table {
+    width: 100%;
     display: flex;
-    padding-left: 3%;
-    padding-right: 3%;
+
 }
 
 #users tr:nth-child(even) {
@@ -88,11 +93,11 @@ select {
 }
 
 #users th {
-    padding-top: 12px;
-    padding-bottom: 12px;
     text-align: center;
     background-color: var(--red);
     color: white;
+    border-color: transparent;
+    font-weight: 500;
 }
 
 #users {
@@ -101,7 +106,8 @@ select {
     font-size: 0.75rem;
     border: 1px solid #ddd;
     border-radius: 4px;
-    width: 93vw;
+    width: 100%;
+    /* width: 1vw; */
     margin-top: 1rem;
 }
 
@@ -109,13 +115,7 @@ select {
 #users th {
     border: 1px solid #ddd;
     border-radius: 3px;
-    padding: 10px;
-}
-
-#users th {
-    border-color: transparent;
-    font-weight: 500;
-    /*Working font-weight for headers*/
+    padding: 0.8rem;
 }
 
 #users td {
@@ -125,15 +125,13 @@ select {
 #season,
 #weekly {
     padding: 0.5rem 0rem 0.5rem 0rem;
-    margin-top: 1rem;
-    margin-left: 5rem;
+    margin-top: 1.4rem;
+    /* margin-left: 5rem; */
     font-size: 1rem;
     border: none;
-    /* border-radius: 2px 2px 2px 2px; */
     text-decoration: none;
     background-color: transparent;
     color: black;
-    /* box-shadow: 1px 1px 2px; */
     cursor: pointer;
 }
 
@@ -152,7 +150,6 @@ select {
 }
 
 #season {
-    margin-left: 40rem;
     border-bottom: 1px solid;
 }
 
@@ -162,14 +159,15 @@ h2 {
 
 
 .LeaderboardSearchIcon {
-    margin: auto 1rem auto 1rem;
+    margin: 0.8rem 1rem 0.5rem 1rem;
 }
 
 input[type=search] {
-    padding: 10px;
+    padding: 5px;
     padding-left: 0;
     border-style: none;
     background: transparent;
+    font-size: 1rem;
 }
 
 input:focus {
@@ -186,16 +184,11 @@ input:focus {
 }
 
 .leaderboardtext {
-    margin-top: 1.4rem;
+    margin-top: 1.5rem;
 }
 
 
 @media only screen and (max-width: 575px) {
-
-    .leaderboardtext {
-        margin-top: 1rem;
-        /* margin-bottom: 0; */
-    }
 
     input[type=search] {
         padding: 0;
@@ -208,11 +201,9 @@ input:focus {
     .Searchform {
         margin-top: 0;
         margin-bottom: 3vw;
-        margin-left: 3%;
-    }
-
-    .top {
-        display: block;
+        margin-left: -7.3rem;
+        margin-right: 0.1rem;
+        /* margin-right: 8rem; */
     }
 
     .leftside {
@@ -220,10 +211,16 @@ input:focus {
         /* justify-content: space-between; */
     }
 
+    .rightside {
+        display: block;
+    }
+
     .filterbuttons {
+        margin-left: 7.5rem;
+        margin-top: 0;
         display: flex;
         align-content: flex-end;
-        float: right;
+
     }
 
     #season,
@@ -241,16 +238,21 @@ input:focus {
         margin-top: 0;
     }
 
-    #season {
-        margin-left: 7.5rem;
-    }
+
 
     .LeaderboardSearchIcon {
         margin: 0.3rem 0.5rem 0.3rem 0.5rem;
     }
 
+    .leaderboardtext {
+        /* height: 2rem; */
+        margin-top: 1rem;
+        white-space: nowrap;
+
+    }
 
     select {
+        margin-top: 0;
         margin-left: 0.3rem;
         padding: 0.2rem 0.1rem 0.2rem 0.1rem;
     }
@@ -259,7 +261,12 @@ input:focus {
 
 /*small devices (landscape phones, 576px and up) */
 
-@media only screen and (min-width: 576px) and (max-width: 767px) {}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    .Searchform {
+        margin-top: 1rem;
+        margin-bottom: 3vw;
+    }
+}
 
 
 /*medium devices (tablets, 768px and up)*/
@@ -318,12 +325,3 @@ input:focus {
 
 /*Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {}
-
-
-/* @media only screen and (max-width: 1000px) {
-    .leaderboardtext {
-        width: auto;
-    }
-
-
-} */
