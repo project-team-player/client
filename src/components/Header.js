@@ -40,9 +40,9 @@ class Header extends React.Component {
                 {context.state.isLoggedIn ? (
                   <div className="logoutPizzaCount">
                     <button className="login-button" onClick={context.logOut}>
-                      <span className="logouttext">Log Out</span>
-                    </button>
-                    <div className="pizzaContainer">
+                      <img className="profileimg" src={loginprofile}></img>
+                      {/* <span className="logouttext">Log Out</span> */}
+                      <div className="pizzaContainer">
                       <img
                         className="pizzalogo"
                         src={PizzaSlice}
@@ -51,7 +51,8 @@ class Header extends React.Component {
                       <span className="slices">
                         {context.state.user.pizzaSlicesWeekly}
                       </span>
-                    </div>
+                        </div>
+                    </button>
                   </div>
                 ) : (
                   <button className="login-button" onClick={context.showModal}>

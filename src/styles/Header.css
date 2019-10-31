@@ -74,7 +74,7 @@ nav {
   font-size: 20px;
   color: #f9f8f7;
   margin-left: 0.5rem;
-  background-color: rgba(208, 2, 27, 1);
+  background-color: #F3A82E;
   padding: 0.5rem;
   padding-left: 0.8rem;
   padding-right: 0.8rem;
@@ -83,12 +83,13 @@ nav {
   outline: none;
 }
 
-.loginButton:hover {
+/* .loginButton:hover {
   background-color: rgba(208, 2, 27, 0.9);
-}
+} */
 
 .logoutPizzaCount {
   display: flex;
+  background-color: #F3A82E;
 }
 
 .slices {
@@ -107,7 +108,6 @@ nav {
 
 .pizzalogo {
   height: 60%;
-  padding-left: 0.5rem;
 }
 
 .profile {
@@ -130,6 +130,30 @@ nav {
   .specificLinks active {
     padding: 0;
   }
+
+  .logoutPizzaCount {
+    display: block;
+  }
+
+  .profileimg {
+    width: 2rem;
+    padding: 1px;
+  }
+
+  button.login-button {
+    background: #F3A82E;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .pizzaContainer {
+    background: #232323;
+    border: none;
+  }
+
+
+
+
 }
 
 /*Small devices (landscape phones, 576px and up) */
