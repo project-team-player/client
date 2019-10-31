@@ -8,7 +8,7 @@ class Slider extends React.Component {
     super();
     this.state = {
       value: 0,
-      pizzaSrc: pizzaWheelFormat[0].src
+      pizzaSrc: pizzaWheelFormat[0].src,
     };
   }
   
@@ -34,9 +34,6 @@ class Slider extends React.Component {
 
   //**Decreases pizza counter by 1 */
   minusAction = () => {
-    // if (this.state.value === 0) {
-    //   alert('Bet is already at 0!');
-    // } else {
       if (this.state.value !== 0) {
         let tempValue = this.state.value;
         tempValue--;
@@ -47,39 +44,31 @@ class Slider extends React.Component {
 
   //**Increases pizza counter by 1 */
   plusAction = () => {
-    // if (this.state.value === 8) {
-    //   alert('Bet is already at 8!');
-    // } else {
       if (this.state.value !== 8) {
         let tempValue = this.state.value;
         tempValue++;
         this.updatePizzaCounter(tempValue);
       }
-    // }
   };
 
   render() {
     const { context: { state: { isLoggedIn }, showModal } } = this.props;
+    const { homeColor, awayColor } = this.state;
     return (
-      <div className='betContainer'>
+      <>
         <div className='wheelContainer'>
-          <img src={this.state.pizzaSrc} alt={this.state.name} />
+          <img src={this.state.pizzaSrc} alt={this.state.name} className="betWheel" />
         </div>
         <div className='button-container'>
           <div className="button-container-inner">
-            <button className='betButton' onClick={ () => isLoggedIn ? this.minusAction() : showModal('Please login to make a bet') }>
-              -
-            </button>
-            <label className='betButton' id='betIndicator'>
+            <input type="button" className='betButton' onClick={ () => isLoggedIn ? this.minusAction() : showModal('Please login to make a bet') } value="-" />
+            <span className='' id='betIndicator'>
               {this.state.value}
-            </label>
-            <button className='betButton' onClick={() => isLoggedIn ? this.plusAction() : showModal('Please login to make a bet') }
-            >
-              +
-            </button>
+            </span>
+            <input type="button" value="+" className='betButton' onClick={() => isLoggedIn ? this.plusAction() : showModal('Please login to make a bet') } />
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

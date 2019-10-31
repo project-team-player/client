@@ -25,27 +25,28 @@ class TeamChoice extends React.Component {
   }
 
   render() {
-    const { context: { state: { isLoggedIn }, showModal } } = this.props;
-
+    const { 
+      context: { state: { isLoggedIn }, showModal }, 
+      gameDetails: { awayTeam: { primaryColor: awayColor }, homeTeam: { primaryColor: homeColor } }
+    } = this.props;
     return (
-      <div className='selectionContainer'>
-        <button
-          type='radio'
+      <>
+        <input
+          type='button'
           name='winning-team-away'
-          value='away-team'
+          value={this.props.gameDetails.awayTeam.key}
           id='away-team-selector'
           className={
             this.state.activeName === 'winning-team-away'
               ? 'bet-selector-btn active-btn'
               : 'bet-selector-btn'
           }
+          style={{ '--teamColor': `#${awayColor}` }}
           onClick={(e) => isLoggedIn ? this.handleChange(e) : showModal('Please login to make a bet') }
-        >
-          {this.props.gameDetails.awayTeam.key}
-        </button>
+        />
 
-        <button
-          type='radio'
+        <input
+          type='button'
           name='winning-team-home'
           value='home-team'
           id='home-team-selector'
@@ -54,11 +55,11 @@ class TeamChoice extends React.Component {
               ? 'bet-selector-btn active-btn'
               : 'bet-selector-btn'
           }
+          style={{ '--teamColor': `#${homeColor}` }}
           onClick={(e) => isLoggedIn ? this.handleChange(e) : showModal('Please login to make a bet') }
-        >
-          {this.props.gameDetails.homeTeam.key}
-        </button>
-      </div>
+          value={this.props.gameDetails.homeTeam.key}
+        />
+      </>
     );
   }
 }

@@ -77,27 +77,28 @@ class Leaderboard extends React.Component {
     const { weekly, weeklytext } = this.state;
     return (
       <div className="page">
+
         <div className="top">
+
           <div className="leftside">
-            <h2 className="leaderboardtext">{`${weeklytext}`}</h2>
-            <div id="weekform">
-              <form />
-              <select onChange={e => this.setState({ week: e.target.value })}>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option selected>9</option>
-              </select>
-            </div>
-            
-          </div>
-          <div className="rightside">
-          <div className="filterbuttons">
+            <div className="titleAndWeek">
+              <h2 className="leaderboardtext">{`${weeklytext}`}</h2>
+              <div id="weekform">
+                <select onChange={e => this.setState({ week: e.target.value })}>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option selected>9</option>
+                </select>
+              </div> 
+              </div>
+
+            <div className="filterbuttons">
               <button
                 class="btn active"
                 id="season"
@@ -119,18 +120,20 @@ class Leaderboard extends React.Component {
               >
                 Weekly
               </button>
-            </div>
-            <div className="Searchform">
-            <span className="LeaderboardSearchIcon" role="img" aria-label="glass">
-              🔍
-            </span>
-            <input
-              type="search"
-              placeholder="Search players here"
-              value={this.state.query}
-              onChange={this.handleSearch}
-            />
+            </div> 
           </div>
+
+
+            <div className="Searchform">
+              <span className="LeaderboardSearchIcon" role="img" aria-label="glass">
+                🔍
+              </span>
+              <input
+                type="search"
+                placeholder="Search players"
+                value={this.state.query}
+                onChange={this.handleSearch}
+              />
           </div>
           
         </div>

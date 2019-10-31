@@ -1,3 +1,7 @@
+/* :root {
+
+} */
+
 .button {
   background: var(--red);
   color: var(--white);
@@ -9,9 +13,12 @@
   float: right;
 }
 
+.predictionsTitle {
+  text-align: center;
+}
+
 .gameThreadContainer {
   position: relative;
-  padding: 0 40px;
   min-height: 100%;
 }
 
@@ -22,16 +29,36 @@
   min-height: 100vh;
 }
 
+/* ================ CARD ================= */
+
 .card {
   background: var(--white);
   border-radius: 3px;
+  box-shadow: 0px 1px 9px 0px rgba(35, 35, 35, 0.22);
+}
+
+.cardHeader {
+  background-color: var(--grey);
+  padding: calc(var(--spacing) / 2);
+  border-radius: var(--borderRadius) var(--borderRadius) 0 0;
+  text-align: center;
+}
+
+.cardTitle {
+  font-size: 16px;
+  margin: 0;
+  color: var(--white);
+}
+
+.cardContent {
+  padding: var(--spacing);
 }
 
 .game-thread-content {
   display: grid;
-  grid-template-columns: 5fr 2fr;
-  grid-gap: 15px;
-  padding: 15px;
+  grid-template-columns: 1fr;
+  grid-gap: var(--spacing);
+  padding: var(--spacing);
   width: 100%;
 }
 
@@ -122,6 +149,8 @@
 
 .game-thread-main {
   min-width: 0;
+  display: grid;
+  grid-gap: var(--spacing);
 }
 
 .game-thread-close-btn {
@@ -142,18 +171,17 @@
 .discussion-container {
   border: 1px solid #e4e4e4;
   border-radius: 5px;
-  padding: 15px 25px;
-  margin-top: 15px;
+  /* padding: var(--spacing); */
 }
 
 /*
 ================= Betting section ===========
 */
 
-.bettingContainer {
+/* .bettingContainer {
   display: grid;
   grid-template-columns: 1.2fr 1.5fr 2fr;
-}
+} */
 
 /* .bet-selector-btn:focus {
   outline: 0;
@@ -203,4 +231,64 @@
   margin: 0;
   border: none;
   cursor: pointer;
+}
+
+.game-thread-aside {
+  display: none;
+}
+
+/* ======== Variables ========= */
+
+:root {
+  --spacing: 10px;
+}
+
+
+/* ==============  Responsive Changes  ================ */
+/* Extra small devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .gameThreadContainer {
+    padding: var(--navPadding);
+  }
+
+  :root {
+    --spacing: 10px;
+  }
+
+  .game-thread-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  :root {
+    --spacing: 15px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+  .game-thread-content {
+    grid-gap: var(--spacing);
+    padding: var(--spacing);
+    grid-template-columns: 6fr 2fr;
+  }
+
+  .game-thread-aside .pie-chart {
+    width: 80%;
+  }
+
+  .game-thread-aside {
+    display: block;
+  }
+ }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+
 }
