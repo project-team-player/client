@@ -1,32 +1,33 @@
 .top {
     display: flex;
-    /* min-width: 1100; */
-    margin: auto;
+    /* margin: 0rem 2rem 0rem 2rem; */
+    justify-content: space-between;
 }
 
 .boards {
     display: flex;
+    justify-content: center;
+
 }
 
 .leftside {
     display: flex;
-    /* min-width: 400px; */
-    margin: auto;
+    padding-left: 3%;
+    padding-right: 3%;
+    /* margin: auto; */
 }
 
-
-
 .Searchform {
-    min-width: 200px;
-    /* max-width: 800px; */
-    margin: auto;
+
     margin-top: 1rem;
     display: flex;
+    margin-right: 3%;
     border: none;
     border: 2px;
     border-radius: 2px;
     box-shadow: 1px 1px 2px 0.5px;
     background-color: white;
+    /* justify-content: right; */
 
 }
 
@@ -37,8 +38,8 @@
 
 select {
     margin-left: 1rem;
-    width: 100%;
-    padding: 7px 2px;
+    width: 3rem;
+    padding: 0.2rem 0.1rem 0.2rem 0.1rem;
     border: none;
     border-radius: 4px;
     color: black;
@@ -65,16 +66,16 @@ select {
 .table-items {
     color: rgba(0, 0, 0, 0.87);
     font-weight: 400;
-    padding: 14px 40px 14px 16px;
     font-size: 1rem;
-    line-height: 1.43;
-    letter-spacing: 0.01071em;
+    line-height: 1.5;
     vertical-align: inherit;
     text-align: center;
 }
 
 .leader-table {
-    margin: auto;
+    display: flex;
+    padding-left: 3%;
+    padding-right: 3%;
 }
 
 #users tr:nth-child(even) {
@@ -123,16 +124,16 @@ select {
 
 #season,
 #weekly {
-    padding: 0.5rem 2rem 0.5rem 2rem;
+    padding: 0.5rem 0rem 0.5rem 0rem;
     margin-top: 1rem;
-    margin-left: 3.85rem;
+    margin-left: 5rem;
     font-size: 1rem;
     border: none;
-    border-radius: 2px 2px 2px 2px;
+    /* border-radius: 2px 2px 2px 2px; */
     text-decoration: none;
-    background-color: white;
+    background-color: transparent;
     color: black;
-    box-shadow: 1px 1px 2px;
+    /* box-shadow: 1px 1px 2px; */
     cursor: pointer;
 }
 
@@ -142,25 +143,23 @@ select {
 
 #season:hover,
 #weekly:hover {
-    /* box-shadow: 1px 1px 5px; */
-    background-color: var(--red);
-    color: white;
+    border-bottom: 1px solid;
+}
+
+#season:focus,
+#weekly:focus {
+    outline: 0;
+}
+
+#season {
+    margin-left: 40rem;
+    border-bottom: 1px solid;
 }
 
 h2 {
     font-size: 1.3rem;
 }
 
-#season:focus,
-#weekly:focus {
-    background-color: var(--red);
-    color: white;
-}
-
-.filterbuttons {
-    margin-left: 20rem;
-    /* display: flex; */
-}
 
 .LeaderboardSearchIcon {
     margin: auto 1rem auto 1rem;
@@ -168,8 +167,7 @@ h2 {
 
 input[type=search] {
     padding: 10px;
-    justify-content: center;
-    width: 16rem;
+    padding-left: 0;
     border-style: none;
     background: transparent;
 }
@@ -179,76 +177,100 @@ input:focus {
 }
 
 ::placeholder {
-    text-align: center;
-}
-
-input[type=search] {
-    border-style: none;
-    background: transparent;
-
+    text-align: left;
 }
 
 .leaderboard>span {
     padding: 0.2rem 0.5rem;
     text-align: bottom;
-    /* border-bottom: 1px solid black; */
 }
 
 .leaderboardtext {
-    margin-top: 1rem;
-}
-
-@media only screen and (max-width: 1150px) {
-    .filteredbuttons {
-        margin: 0;
-    }
-
-    .leftside {
-        margin: auto;
-    }
+    margin-top: 1.4rem;
 }
 
 
-@media only screen and (max-width: 1000px) {
-    .filterbuttons {
-        margin-left: 0;
+@media only screen and (max-width: 575px) {
+
+    .leaderboardtext {
+        margin-top: 1rem;
+        /* margin-bottom: 0; */
+    }
+
+    input[type=search] {
+        padding: 0;
+    }
+
+    h2 {
+        font-size: 0.9rem;
+    }
+
+    .Searchform {
+        margin-top: 0;
+        margin-bottom: 3vw;
+        margin-left: 3%;
     }
 
     .top {
         display: block;
     }
 
+    .leftside {
+        display: flex;
+        /* justify-content: space-between; */
+    }
+
+    .filterbuttons {
+        display: flex;
+        align-content: flex-end;
+        float: right;
+    }
+
     #season,
     #weekly {
-        padding: 0.5rem 1rem 0.5rem 1rem;
-    }
-}
-
-@media only screen and (min-width: 700px) {
-    #season {
-        margin-left: 5vw;
-    }
-}
-
-@media only screen and (max-width: 1000px) {
-    .leaderboardtext {
-        width: auto;
-        margin-left: 4vw;
+        padding: 0.4rem 0rem 0.4rem 0rem;
+        margin-bottom: 3vw;
+        margin-top: 0.5rem;
     }
 
     #weekform {
-        margin-left: 3vw;
-        margin-top: 3vw;
+        margin-left: 0.5rem;
     }
 
-    #season {
-        margin-left: 18vw;
+    #users {
         margin-top: 0;
     }
 
-    #weekly {
-        margin-top: 2vw;
+    #season {
+        margin-left: 7.2rem;
+    }
+
+    .LeaderboardSearchIcon {
+        margin: 0.3rem 0.5rem 0.3rem 0.5rem;
+    }
+
+
+    select {
+        padding: 0.2rem 0.1rem 0.2rem 0.1rem;
+        /* font-size: 1rem; */
+    }
+
+}
+
+/*small devices (landscape phones, 576px and up) */
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {}
+
+
+/*medium devices (tablets, 768px and up)*/
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .Searchform {
+        margin-top: 1rem;
         margin-bottom: 3vw;
+    }
+
+    input[type=search] {
+        padding: 0;
     }
 
     h2 {
@@ -256,22 +278,52 @@ input[type=search] {
     }
 
     .Searchform {
-        width: 60vw;
-        margin: auto;
-    }
-
-    #users td,
-    users th {
-        padding: 0;
+        margin-top: 1rem;
+        margin-bottom: 3vw;
     }
 
     .leftside {
-        width: 500px;
+        display: flex;
+        justify-content: space-between;
     }
+
+    .filterbuttons {
+        display: flex;
+        align-content: flex-end;
+        float: right;
+    }
+
+    #season,
+    #weekly {
+        padding: 0.4rem 0rem 0.4rem 0rem;
+        margin-top: 1rem;
+        margin-bottom: 3vw;
+    }
+
+    #weekform {
+        margin-left: 1rem;
+    }
+
+    #users {
+        margin-top: 0;
+    }
+
+    #season {
+        margin-left: 1rem;
+    }
+
 }
 
-@media only screen and (min-width: 2000px) {
-    header {
-        padding: 0;
+@media only screen and (min-width: 992px) and (max-width: 1199px) {}
+
+/*Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}
+
+
+/* @media only screen and (max-width: 1000px) {
+    .leaderboardtext {
+        width: auto;
     }
-}
+
+
+} */
