@@ -42,7 +42,6 @@ class WeeklyTable extends Component {
         <tr>
           <td className="index">{index + 1}</td>
           <td className="table-items">{name}</td>
-          {/* <td className="table-items">{wins}</td> */}
           <td className="table-items">{user[slicesForWeek]}</td>
           <td>{pizzaSlicesWeekly}</td>
         </tr>

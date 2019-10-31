@@ -93,7 +93,7 @@ class GamesList extends React.Component {
         {!this.state.showGameThread ? (
           <div className="gamesListHeader">
             <div className="gamesListTitle">
-              <h2>NFL Games 2019 -</h2>
+              <h2>2019 NFL Season -</h2>
               <form id="weekSelection">
                 <select
                   id="weeks"

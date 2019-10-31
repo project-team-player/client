@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: 0 2rem;
 }
 
 .gamesListTitle {
@@ -64,7 +64,7 @@
   align-items: center;
   justify-items: center;
   grid-gap: 2rem;
-  padding: 0 40px;
+  padding: 0 2rem;
 }
 
 #columnButton {
@@ -95,3 +95,10 @@
   width: 75px;
   border-radius: 5px;
 }
+
+
+/* @media only screen and (max-width: 1000px) {
+  .gamesListGrid {
+    padding: 0 4rem;
+  }
+} */

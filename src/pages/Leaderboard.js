@@ -19,6 +19,26 @@ function formCloser() {
   x.style.display = 'none';
 }
 
+function activeSetter() {
+  if (document.getElementById('season')) {
+    const activeButton = document.getElementById('season')
+    activeButton.style='border-bottom: 1px solid;';
+    document.getElementById('weekly').style='color: black; border: none;';
+  }
+ 
+}
+
+function activeSetter2() {
+  if (document.getElementById('weekly')) {
+    const activeButton = document.getElementById('weekly');
+    activeButton.style='border-bottom: 1px solid;';
+    document.getElementById('season').style='color: black; border: none;';
+
+  }
+}
+// background-color: var(--red);
+//     color: white;
+
 class Leaderboard extends React.Component {
   constructor(props) {
     super(props);
@@ -56,7 +76,7 @@ class Leaderboard extends React.Component {
   render() {
     const { weekly, weeklytext } = this.state;
     return (
-      <div>
+      <div className="page">
         <div className="top">
           <div className="leftside">
             <h2 className="leaderboardtext">{`${weeklytext}`}</h2>
@@ -68,15 +88,23 @@ class Leaderboard extends React.Component {
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
-                <option selected>Current</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option selected>9</option>
               </select>
             </div>
-            <div className="filterbuttons">
+            
+          </div>
+          <div className="rightside">
+          <div className="filterbuttons">
               <button
+                class="btn active"
                 id="season"
                 onClick={() => {
                   this.handleSwitch(false, '2019 NFL Season');
                   formCloser();
+                  activeSetter();
                 }}
               >
                 Season
@@ -84,15 +112,15 @@ class Leaderboard extends React.Component {
               <button
                 id="weekly"
                 onClick={() => {
-                  this.handleSwitch(true, 'Week');
+                  this.handleSwitch(true, 'NFL Week');
                   formLoader();
+                  activeSetter2();
                 }}
               >
                 Weekly
               </button>
             </div>
-          </div>
-          <div className="Searchform">
+            <div className="Searchform">
             <span className="LeaderboardSearchIcon" role="img" aria-label="glass">
               🔍
             </span>
@@ -103,6 +131,8 @@ class Leaderboard extends React.Component {
               onChange={this.handleSearch}
             />
           </div>
+          </div>
+          
         </div>
         <div className="boards">
           {weekly === true ? (
