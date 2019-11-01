@@ -20,13 +20,6 @@ import GamesList from "./pages/GamesList";
 import "./styles/main.css";
 import AuthModal from "./components/AuthModal";
 
-// ReactGA.set({
-// userId: this.props.context.state.user.name,
-// userEmail: this.props.context.state.user.email
-// any data that is relevant to the user session
-// that you would like to track with google analytics
-// });
-
 // Google Analytics Setup
 ReactGA.initialize("UA-151338746-1");
 ReactGA.pageview(window.location.pathname + window.location.search);
@@ -39,6 +32,20 @@ history.listen(location => {
   ReactGA.set({ page: location.pathname }); // Update the user's current page
   ReactGA.pageview(location.pathname); // Record a pageview for the given page
 });
+
+// Could not figure out where this callback gets sent in GA, but was in a tutorial
+// // Load Performance tracking
+// const callback = list => {
+//   list.getEntries().forEach(entry => {
+//     ReactGA.timing({
+//       category: "Load Performace",
+//       variable: "Server latency",
+//       value: entry.responseStart - entry.requestStart
+//     });
+//   });
+// };
+// var observer = new PerformanceObserver(callback);
+// observer.observe({ entryTypes: ["navigation"] });
 
 const App = () => {
   return (
