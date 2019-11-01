@@ -165,6 +165,7 @@ select {
 #season:hover,
 #weekly:hover {
     border-bottom: 1px solid;
+    padding-bottom: 1px;
 }
 
 #season:focus,
@@ -174,6 +175,7 @@ select {
 
 #season {
     border-bottom: 1px solid;
+    padding-bottom: 1px;
 }
 
 h2 {
