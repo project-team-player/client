@@ -20,6 +20,24 @@ function formCloser() {
   x.style.display = "none";
 }
 
+function activeSetter() {
+  if (document.getElementById("season")) {
+    const activeButton = document.getElementById("season");
+    activeButton.style = "border-bottom: 1px solid; padding-bottom: 1px";
+    document.getElementById("weekly").style = "color: black; border: none;";
+  }
+}
+
+function activeSetter2() {
+  if (document.getElementById("weekly")) {
+    const activeButton = document.getElementById("weekly");
+    activeButton.style = "border-bottom: 1px solid; padding-bottom: 1px";
+    document.getElementById("season").style = "color: black; border: none;";
+  }
+}
+// background-color: var(--red);
+//     color: white;
+
 class Leaderboard extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +45,7 @@ class Leaderboard extends React.Component {
       week: "",
       users: [],
       weekly: false,
-      weeklytext: "2019 NFL Season",
+      weeklytext: "NFL Season",
       query: ""
     };
     this.handleSwitch = this.handleSwitch.bind(this);
@@ -58,27 +76,34 @@ class Leaderboard extends React.Component {
   render() {
     const { weekly, weeklytext } = this.state;
     return (
-      <div>
+      <div className="page">
         <div className="top">
           <div className="leftside">
-            <h2 className="leaderboardtext">{`${weeklytext}`}</h2>
-            <div id="weekform">
-              <form />
-              <select onChange={e => this.setState({ week: e.target.value })}>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option selected>Current</option>
-              </select>
+            <div className="titleAndWeek">
+              <h2 className="leaderboardtext">{`${weeklytext}`}</h2>
+              <div id="weekform">
+                <select onChange={e => this.setState({ week: e.target.value })}>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option selected>9</option>
+                </select>
+              </div>
             </div>
+
             <div className="filterbuttons">
               <button
+                class="btn active"
                 id="season"
                 onClick={() => {
-                  this.handleSwitch(false, "2019 NFL Season");
+                  this.handleSwitch(false, "NFL Season");
                   formCloser();
+                  activeSetter();
                 }}
               >
                 Season
@@ -86,14 +111,16 @@ class Leaderboard extends React.Component {
               <button
                 id="weekly"
                 onClick={() => {
-                  this.handleSwitch(true, "Week");
+                  this.handleSwitch(true, "NFL Week");
                   formLoader();
+                  activeSetter2();
                 }}
               >
                 Weekly
               </button>
             </div>
           </div>
+
           <div className="Searchform">
             <span
               className="LeaderboardSearchIcon"
@@ -104,7 +131,7 @@ class Leaderboard extends React.Component {
             </span>
             <input
               type="search"
-              placeholder="Search players here"
+              placeholder="Search players"
               value={this.state.query}
               onChange={this.handleSearch}
             />

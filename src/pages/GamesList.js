@@ -68,7 +68,8 @@ class GamesList extends React.Component {
 
   generateOptions = () => {
     const optionsList = [];
-    const currentGameWeek = getCurrentGameWeek();
+    const currentGameWeek = this.state.currentWeek;
+    console.log(currentGameWeek);
     for (let i = 1; i < this.state.totalWeeks + 1; i++) {
       optionsList.push(
         <OptionsButton
@@ -94,9 +95,8 @@ class GamesList extends React.Component {
       <main className="gameListContainer">
         {!this.state.showGameThread ? (
           <div className="gamesListHeader">
-            <div className="gamesListTitle">
-              <h2>NFL Games 2019 -</h2>
-              <form id="weekSelection">
+            <h2 className="gamesListTitle">NFL Games - 2019</h2>
+            <form id="weekSelection">
                 <select
                   id="weeks"
                   onChange={event => this.getGamesForWeek(event)}
@@ -104,18 +104,6 @@ class GamesList extends React.Component {
                   {this.generateOptions()}
                 </select>
               </form>
-            </div>
-            {/* <div className="gamesListHeaderRight">
-              <div className="sliceNumberHeader">
-                <img src={require('../images/logo.svg')} alt="slice-it-logo" />
-                <p className="sliceNumber">200</p>
-              </div>
-
-              <div>
-                <button className="changeViewButton" id="listButton" />
-                <button className="changeViewButton" id="columnButton" />
-              </div>
-            </div> */}
           </div>
         ) : (
           <></>

@@ -1,40 +1,74 @@
+.titleAndWeek {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.leaderboardtext {
+    font-size: 16px;
+}
+
+.filterbuttons {
+    /* margin-left: 7.5rem; */
+    margin-top: 0;
+    display: flex;
+    align-content: flex-end;
+}
+
+#weekform {
+    margin-left: 15px;
+}
+
 .top {
     display: flex;
-    min-width: 1100;
+    padding: var(--navPadding);
+    margin-top: 15px;
+    flex-direction: column;
 }
 
 .boards {
     display: flex;
+    padding: var(--navPadding);
 }
 
 .leftside {
     display: flex;
-    min-width: 400px;
-    margin: auto;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.rightside {
+    display: flex;
+    align-items: center;
 }
 
 .Searchform {
-    max-width: 600px;
-    margin: auto;
-    margin-top: 2rem;
+    padding: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     display: flex;
     border: none;
     border: 2px;
     border-radius: 2px;
-    box-shadow: 1px 1px 2px 0.5px;
+    box-shadow: 0px 1px 9px 0px rgba(35, 35, 35, 0.22);
     background-color: white;
+    width: 100%;
+    font-size: 14px;
+    /* justify-content: right; */
+}
 
+.Searchform input {
+    width: 100%;
 }
 
 #weekform {
-    margin-top: 2rem;
     display: none;
 }
 
 select {
-    margin-left: 1rem;
-    width: 100%;
-    padding: 7px 2px;
+    width: 3rem;
+    padding: 0.2rem 0.1rem 0.2rem 0.1rem;
     border: none;
     border-radius: 4px;
     color: black;
@@ -51,7 +85,7 @@ select {
 .table-header {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .index {
@@ -61,16 +95,16 @@ select {
 .table-items {
     color: rgba(0, 0, 0, 0.87);
     font-weight: 400;
-    padding: 14px 40px 14px 16px;
     font-size: 1rem;
-    line-height: 1.43;
-    letter-spacing: 0.01071em;
+    line-height: 1.5;
     vertical-align: inherit;
     text-align: center;
 }
 
 .leader-table {
-    margin: auto;
+    width: 100%;
+    display: flex;
+
 }
 
 #users tr:nth-child(even) {
@@ -78,16 +112,16 @@ select {
     background-color: rgba(240, 194, 29, 0.05);
 }
 
-#users tr:hover {
+/* #users tr:hover {
     background-color: #ddd;
-}
+} */
 
 #users th {
-    padding-top: 12px;
-    padding-bottom: 12px;
     text-align: center;
     background-color: var(--red);
     color: white;
+    border-color: transparent;
+    font-weight: 500;
 }
 
 #users {
@@ -96,21 +130,15 @@ select {
     font-size: 0.75rem;
     border: 1px solid #ddd;
     border-radius: 4px;
-    width: 93vw;
-    margin-top: 2rem;
+    width: 100%;
+    /* width: 1vw; */
 }
 
 #users td,
 #users th {
     border: 1px solid #ddd;
     border-radius: 3px;
-    padding: 10px;
-}
-
-#users th {
-    border-color: transparent;
-    font-weight: 500;
-    /*Working font-weight for headers*/
+    padding: 0.8rem;
 }
 
 #users td {
@@ -119,16 +147,14 @@ select {
 
 #season,
 #weekly {
-    padding: 0.5rem 2rem 0.5rem 2rem;
-    margin-top: 2rem;
-    margin-left: 3.85rem;
+    /* padding: 0.5rem 0rem 0.5rem 0rem; */
+    /* margin-top: 1.4rem; */
+    /* margin-left: 5rem; */
     font-size: 1rem;
     border: none;
-    border-radius: 2px 2px 2px 2px;
     text-decoration: none;
-    background-color: white;
+    background-color: transparent;
     color: black;
-    box-shadow: 1px 1px 2px;
     cursor: pointer;
 }
 
@@ -138,36 +164,39 @@ select {
 
 #season:hover,
 #weekly:hover {
-    /* box-shadow: 1px 1px 5px; */
-    background-color: var(--red);
-    color: white;
+    border-bottom: 1px solid;
+    padding-bottom: 1px;
+}
+
+#season:focus,
+#weekly:focus {
+    outline: 0;
+}
+
+#season {
+    border-bottom: 1px solid;
+    padding-bottom: 1px;
 }
 
 h2 {
     font-size: 1.3rem;
 }
 
-#season:focus,
-#weekly:focus {
-    background-color: var(--red);
-    color: white;
-}
-
-.filterbuttons {
-    margin-left: 20rem;
-    /* display: flex; */
-}
 
 .LeaderboardSearchIcon {
-    margin: auto 1rem auto 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 10px;
 }
 
 input[type=search] {
-    padding: 10px;
-    justify-content: center;
-    width: 20rem;
+    padding: 5px;
+    padding-left: 0;
     border-style: none;
     background: transparent;
+    font-size: 1rem;
 }
 
 input:focus {
@@ -175,47 +204,145 @@ input:focus {
 }
 
 ::placeholder {
-    text-align: center;
-}
-
-input[type=search] {
-    border-style: none;
-    background: transparent;
-
+    text-align: left;
 }
 
 .leaderboard>span {
     padding: 0.2rem 0.5rem;
     text-align: bottom;
-    /* border-bottom: 1px solid black; */
 }
 
 .leaderboardtext {
-    margin-top: 2rem;
+    margin: 0;
 }
 
-@media only screen and (max-width: 1150px) {
-    .filteredbuttons {
-        margin: 0;
+@media only all and (max-width: 400px) {
+
+    .table-items {
+        font-size: 0.7rem;
+    }
+
+    /* .filterbuttons {
+        margin-left: 1rem;
+        margin-right: auto;
+    } */
+
+    input[type=search] {
+        padding: 0;
+    }
+
+    .rightside {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 575px) {
+
+    input[type=search] {
+        padding: 0;
+    }
+
+    h2 {
+        font-size: 0.9rem;
     }
 
     .leftside {
-        margin: auto;
-    }
-}
-
-
-@media only screen and (max-width: 1000px) {
-    .filteredbuttons {
-        margin: 0;
+        display: flex;
+        /* justify-content: space-between; */
     }
 
-    .top {
+    .rightside {
         display: block;
     }
 
-    #season,
+    /* #season,
     #weekly {
-        padding: 0.5rem 1rem 0.5rem 1rem;
+        padding: 0.4rem 0rem 0.4rem 0rem;
+        /* margin-bottom: 3vw; */
+        /* margin-top: 0.5rem; */
+    /* } */
+
+    #users {
+        margin-top: 0;
+    }
+
+
+
+    .LeaderboardSearchIcon {
+        margin: 0.3rem 0.5rem 0.3rem 0.5rem;
+    }
+
+    /* select {
+        margin-top: 0;
+        margin-left: 0.3rem;
+        padding: 0.2rem 0.1rem 0.2rem 0.1rem;
+    } */
+
+}
+
+/*small devices (landscape phones, 576px and up) */
+
+@media only screen and (min-width: 576px) {
+    .top {
+        align-items: center;
+        flex-direction: row;
+        margin-bottom: 15px;
+    }
+
+    .Searchform {
+        margin-left: 1rem;
+        margin-top: 0;
+        margin-bottom: 0;
+        max-width: 200px;
+        font-size: 16px;
+    }
+
+    .leaderboardtext {
+        font-size: 18px;
     }
 }
+
+
+/*medium devices (tablets, 768px and up)*/
+@media only screen and (min-width: 768px) {
+    .Searchform {
+        max-width: 200px;
+        font-size: 18px;
+    }
+
+    input[type=search] {
+        padding: 0;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    .leftside {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .filterbuttons {
+        display: flex;
+        align-content: flex-end;
+        float: right;
+    }
+
+    /* #season,
+    #weekly {
+        padding: 0.4rem 0rem 0.4rem 0rem;
+        margin-top: 1rem;
+        margin-bottom: 3vw;
+    } */
+
+    #season {
+        margin-left: 1rem;
+    }
+
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {}
+
+/*Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

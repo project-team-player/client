@@ -1,17 +1,30 @@
-.gameHeader {
-  padding: 25px;
+.gameHeaderContent {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameInfoHeader {
+  background-color: var(--grey);
+  color: var(--white);
+  padding: calc(var(--spacing) / 2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--borderRadius) var(--borderRadius) 0 0;
+}
+
+.gameDate {
+  text-align: center;
+  font-weight: 800;
+  font-size: 16px;
+  margin: 0;
 }
 
 .logoContainer {
   display: flex;
   align-items: center;
-  width: 30%;
-}
-
-.gameDate {
-  text-align: center;
-  font-weight: 400;
-  margin-top: 0;
 }
 
 .game-score-container {
@@ -27,16 +40,16 @@
 
 .teamName {
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .away {
- margin-left: 15px;
+ margin-left: 10px;
  text-align: left;
 }
 
 .home {
-  margin-right: 15px;
+  margin-right: 10px;
   text-align: right;
 }
 
@@ -44,38 +57,73 @@
   font-weight: 200;
 }
 
-.teams {
-  width: 100%;
+.score-container {
   display: flex;
-  align-items: center;
-}
-
-.vs-container {
-  display: flex;
-  flex: .3;
+  flex: .5;
   justify-content: center;
+  padding: var(--spacing);
+  white-space: nowrap;
 }
 
-.vs-text {
+.score-text {
   font-size: 30px;
-  font-weight: 100;
+  font-weight: 200;
 }
 
 .teamLogo {
-  width: 100%;
-  max-height: 50px;
+  /* width: 100%; */
+  max-height: 40px;
 }
 
 .team-container {
   display: flex;
-  flex: 1;
+  justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-.team-container-away {
+/* .team-container-away {
   justify-content: flex-start;
 }
 
 .team-container-home {
   justify-content: flex-end;
+} */
+
+/* ==============  Responsive Changes  ================ */
+/* Extra small devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  .away {
+    margin-left: 15px;
+   }
+   
+   .home {
+     margin-right: 15px;
+   }
+
+  .teamName {
+    font-size: 1.2rem;
+  }
+
+  .score-text {
+    font-size: 35px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+ }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+
 }

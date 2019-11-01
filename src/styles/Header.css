@@ -2,9 +2,18 @@
 
 header {
   display: flex;
+  width: 100vw;
   background-color: #232323;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding: var(--navPadding);
+}
+
+
+.slicepiece {
+  margin-top: 1.5vw;
+}
+
+ul {
+  padding-inline-start: 0px;
 }
 
 nav {
@@ -13,11 +22,13 @@ nav {
 
 .sliceLogo {
   height: 75px;
+  /* margin-left: 4%; */
 }
 
 .logo {
+  /* margin-left: 3%; */
   height: 100%;
-  width: 150px;
+  width: 10rem;
   cursor: pointer;
 }
 
@@ -33,14 +44,11 @@ nav {
 
 .linkNames {
   margin-left: 0rem;
-  /* color: #a8a8a8; */
-
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
   height: 100%;
   display: flex;
   align-items: center;
-  padding-left: 1rem;
   padding-right: 1rem;
 }
 
@@ -58,37 +66,193 @@ nav {
 }
 
 .loginButton {
-  font-size: 20px;
+  /* font-size: 20px; */
   color: #f9f8f7;
   margin-left: 0.5rem;
-  background-color: rgba(208, 2, 27, 1);
-  padding: 0.5rem;
-  padding-left: 0.8rem;
-  padding-right: 0.8rem;
-  border-radius: 0.3rem;
+  background-color: var(--red);
+  padding: 5px 10px;
+  border-radius: var(--borderRadius);
+  border: none;
   cursor: pointer;
-  outline: none;
 }
 
-.loginButton:hover {
-  background-color: rgba(208, 2, 27, 0.9);
+.logintext {
+  font-size: 16px;
 }
 
 .logoutPizzaCount {
   display: flex;
+  background-color: #F3A82E;
 }
 
 .slices {
-  padding-left: 0.2rem;
   color: var(--white);
+  font-size: 16px;
 }
 
 .pizzaContainer {
   display: flex;
   align-items: center;
+  margin-left: 5px;
+}
+
+.container {
+  width: 100vw;
+}
+
+.profile {
+  width: 2rem;
+  display: none;
+}
+
+button.login-button {
+  background: var(--red);
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.logoutPizzaCount {
+  display: block;
+}
+
+.profileimg {
+  width: 2rem;
+  padding: 0;
+}
+
+.pizzaContainer {
+  /* background: #232323; */
+  border: none;
+}
+
+/* ==================== USER BUTTON ==================== */
+
+.accountButtonContainer {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.accountDropdown::before {
+
+}
+
+.accountDropdown {
+  position: relative;
+  height: 100%;
+  /* display: flex; */
+  /* align-items: center; */
+}
+
+.accountDropdownContent {
+  position: absolute;
+  display: block;
+}
+
+.accountButton {
+  padding: 5px 12px;
+  background: var(--red);
+  /* border: var(--white) 2px solid; */
+  border: none;
+  border-radius: var(--borderRadius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.accountIcon {
+  height: 20px;
 }
 
 .pizzalogo {
-  height: 60%;
-  padding-left: 0.5rem;
+  height: 15px;
+  margin-right: 2px;
 }
+
+.accountDropdownContentInner {
+  position: relative;
+  padding: 25px 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.accountDropdownContentInner:before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 10px 5px 10px;
+  border-color: transparent transparent var(--white) transparent;
+  /* background: var(--white); */
+  top: -5px;
+  right: 0;
+}
+
+.accountDropdownContent {
+  z-index: 1;
+  background: var(--white);
+  color: var(--black);
+  border-radius: 0px 0px var(--borderRadius) var(--borderRadius);
+  right: 0;
+  width: 125px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logOutButton {
+  background: var(--red);
+  border: none;
+  border-radius: var(--borderRadius);
+  color: var(--white);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 3px 10px;
+}
+
+@media only all and (max-width: 400px) {
+  .logo {
+    margin-right: 1rem;
+    width: 6rem;
+  }
+}
+
+@media only all and (min-width:400px) and (max-width: 575px) {
+
+  .logo {
+    width: 7rem;
+    margin-right: 3rem;
+  }
+
+  .linkNames {
+    font-size: 1rem;
+  }
+
+
+  .specificLinks active {
+    padding: 0;
+  }
+
+  .profileimg {
+    width: 1.5rem;
+    padding: 0;
+  }
+}
+
+/*Small devices (landscape phones, 576px and up) */
+@media only all and (min-width: 576px) {
+
+}
+
+/*Medium devices (tablets, 768px and up) */
+@media only all and (min-width: 768px) {
+  .linkNames, .logintext {
+    font-size: 18px;
+  }
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media only screen and (min-width: 992px) {}

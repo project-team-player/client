@@ -18,7 +18,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: var(--navPadding);
+  align-items: center;
 }
 
 .gamesListTitle {
@@ -26,6 +27,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-size: 18px;
 }
 
 .sliceNumberHeader {
@@ -49,8 +51,9 @@
   padding: 0rem 0rem 0rem 1rem;
   border-radius: 10px;
   height: 30px;
+  width: 100%;
   margin: initial;
-  background-color: #ebebeb;
+  background-color: var(--white);
 }
 
 .changeViewButton {
@@ -64,7 +67,7 @@
   align-items: center;
   justify-items: center;
   grid-gap: 2rem;
-  padding: 0 40px;
+  padding: var(--navPadding);
 }
 
 #columnButton {
@@ -94,4 +97,70 @@
   height: 25px;
   width: 75px;
   border-radius: 5px;
+}
+
+/* ==============  Responsive Changes  ================ */
+/* Extra small devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .gamesListTitle {
+    font-size: 18px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  .gamesListTitle {
+    font-size: 18px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .gamesListTitle {
+    font-size: 20px;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1400px) { 
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1900px) { 
+  .gamesListGrid {
+    grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
+  }
+
+  .gamesListTitle {
+    font-size: 25px;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 2200px) { 
+  .gamesListGrid {
+    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+  }
+
+  .gamesListTitle {
+    font-size: 35px;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 2500) { 
+  .gamesListGrid {
+    grid-template-columns: repeat(auto-fill, minmax(32rem, 1fr));
+  }
+
+  .gamesListTitle {
+    font-size: 18px;
+  }
 }

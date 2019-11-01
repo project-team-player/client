@@ -120,7 +120,7 @@ class Comment extends React.Component {
       <UserContext.Consumer>
         {context => (
           <div className="comment-container">
-            <div className="comment-card">
+            <div className="comment-card card">
               <CommentHeader currentComment={currentComment} awayColor={awayColor} homeColor={homeColor} awayTeamKey={awayTeamKey} userBet={gameThreadBets[currentComment.owner]} awayLogo={awayLogo} homeLogo={homeLogo} />
               <div className="comment-body">
                 <p className="comment-text">

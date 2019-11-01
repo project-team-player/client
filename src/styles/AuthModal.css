@@ -19,8 +19,8 @@
   flex-direction: column;
   border-radius: 6px;
   text-align: left;
-  width: 27rem;
-  padding: 25px;
+  width: 97vw;
+  padding: 35px 25px;
   box-shadow: 0px 2px 5px 0px rgba(35, 35, 35, 0.5);
   position: fixed;
 }
@@ -81,15 +81,15 @@
 @media all and (max-width: 709px) {
 
   .signupForm {
-      margin: 1rem;
-      min-width: 12rem;
-      max-width: 16rem;
+    margin: 1rem;
+    min-width: 12rem;
+    max-width: 16rem;
   }
 }
 
 @media all and (max-width: 610px) {
   .credentialForm {
-      width: 75%;
+    width: 65%;
   }
 
 }
@@ -138,4 +138,43 @@
 
 .login-message {
   color: red;
+}
+
+/* ==============  Responsive Changes  ================ */
+/* Extra small devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .auth-form {
+    width: 65vw;
+    padding: 20px 25px;
+  }
+
+  .auth-modal { 
+    padding: 10px 0;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  .auth-form {
+    width: 40vw;
+    padding: 30px 25px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .auth-form {
+    width: 35vw;
+    padding: 25px;
+  }
+ }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+  .auth-form {
+    width: 30vw;
+  }
 }

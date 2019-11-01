@@ -1,23 +1,25 @@
 .bettingContainer {
-  display: flex;
-  flex-direction: column;
+  border-radius: 3px;
 }
 
-.betForm {
-  padding: 15px 25px;
-  margin-top: 15px;
+.pie-chart {
+  width: 25%;
 }
 
-.betTopContainer {
+.bettingContainerInner {
   display: flex;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: var(--spacing);
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 20px;
-  border-radius: 3px;
-  box-shadow: 0px 1px 7px 1px rgba(0, 0, 0, 0.19);
+  padding: var(--spacing);
+  flex-wrap: wrap;
+}
 
+.betFormContent {
+  padding: var(--spacing);
 }
 
 .betFormButton {
@@ -26,17 +28,17 @@
   border: none;
   border-radius: 3px;
   font-size: 15px;
-  width: 25%;
+  width: 100%;
   height: 40px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .divider {
-  background-color: rgba(72, 72, 72, 0.21);
-  width: 1px;
-  margin: 0 15px;
+  background-color: rgba(0, 0, 0, 0.18);
+  width: .6rem;
   height: 50px;
+  display: none;
 }
 
 .verticalLine {
@@ -52,8 +54,134 @@
   font-family: var(--main-font);
   text-align: center;
   font-weight: 500;
+  font-size: 16px;
 }
 
 .bet-message img {
   height: 23px;
+}
+
+/* ============== TABS ============== */
+
+.tabContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  border-bottom: 1px solid #ababab59;
+  cursor: pointer;
+}
+
+.tabToggle {
+  color: var(--black);
+  opacity: .5;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+  margin-right: 15px;
+  position: relative;
+}
+
+.tabToggleContainer {
+  width: 100%;
+  color: var(--grey);
+  text-align: center;
+  padding: 5px 0;
+  /* border-radius: 0 0 var(--borderRadius) var(--borderRadius); */
+}
+
+.tabToggleContainer:nth-child(2) {
+  border-left: 1px solid #ababab59;
+}
+
+.tabToggle.active {
+  color: var(--black);
+  opacity: 1;
+}
+
+.tabToggle.active::after {
+  position: absolute;
+  content: "";
+  border: 1px solid var(--white);
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+.pie-chart {
+  width: 70%;
+}
+
+/* Ordering betForm buttons */
+.button-container {
+  order: 3;
+}
+
+#home-team-selector {
+  order: 2
+}
+
+.betFormButton {
+  order: 4;
+}
+
+/* ==============  Responsive Changes  ================ */
+/* Extra small devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .pie-chart {
+    width: 35%;
+  }
+
+  .bettingContainer {
+    padding-left: 75px;
+    padding-right: 75px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  .bettingContainerInner {
+    flex-wrap: nowrap;
+  }
+
+  .divider {
+    display: inline-block;
+  }
+
+  .bet-message {
+    font-size: 1.3rem;
+  }
+
+  .button-container, .bet-selector-btn, .divider, .betFormButton {
+    margin-left: var(--spacing);
+  }
+
+  /* Ordering betForm buttons */
+  .button-container, #home-team-selector, .betFormButton {
+    order: unset;
+  }
+
+  .bettingContainer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .tabContainer {
+    display: none;
+  }
+
+  .divider {
+    width: .4rem;
+  }
+ }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+
 }

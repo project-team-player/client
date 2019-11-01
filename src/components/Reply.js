@@ -26,7 +26,7 @@ class Reply extends React.Component {
       <div className="reply-container" ref={this.replyContainer}>
         <div className="reply-horizontal-line"></div>
         <div className="comment-container">
-          <div className="reply-card">
+          <div className="reply-card card">
             <CommentHeader 
             currentComment={currentReply} 
             awayColor={awayColor} 
