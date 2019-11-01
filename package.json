@@ -11,14 +11,10 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-<<<<<<< HEAD
     "react-ga": "^2.7.0",
     "react-router-dom": "^5.1.2",
-=======
     "react-media": "^1.10.0",
     "react-responsive": "^8.0.1",
-    "react-router-dom": "^5.0.1",
->>>>>>> development
     "react-scripts": "3.0.1",
     "sweetalert2": "^8.16.0",
     "universal-cookie": "^4.0.2"
