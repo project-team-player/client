@@ -2,6 +2,7 @@ import React from "react";
 // import GameThread from "../components/GameThread";
 // Import Axios Library
 import axios from "axios";
+import ReactGA from "react-ga";
 
 // CSS
 import "../styles/GamesList.css";
@@ -30,6 +31,7 @@ class GamesList extends React.Component {
   }
 
   componentDidMount() {
+    ReactGA.pageview(window.location.pathname + window.location.search);
     this.getListOfGames(getCurrentGameWeek());
     this.getTotalWeeks();
   }

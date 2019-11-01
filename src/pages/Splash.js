@@ -10,6 +10,7 @@ import "../styles/Splash.css";
 import GameCard from "../components/GameCard";
 import { UserContext } from "../contexts/UserContext";
 import { NavLink } from "react-router-dom";
+import ReactGA from "react-ga";
 
 // Helpers
 import { getCurrentGameWeek } from "../utils/nfl";
@@ -25,6 +26,7 @@ class Splash extends React.Component {
   }
 
   componentDidMount() {
+    ReactGA.pageview(window.location.pathname + window.location.search);
     this.getListOfGames(getCurrentGameWeek());
   }
 

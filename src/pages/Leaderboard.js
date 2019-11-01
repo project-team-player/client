@@ -1,46 +1,48 @@
-import React from 'react';
-import axios from 'axios';
-import { getCurrentGameWeek } from '../utils/nfl';
-import LeaderboardTable from '../components/LeaderboardTable';
-import WeeklyTable from '../components/WeeklyTable';
-import '../styles/Leaderboard.css';
+import React from "react";
+import axios from "axios";
+import { getCurrentGameWeek } from "../utils/nfl";
+import LeaderboardTable from "../components/LeaderboardTable";
+import WeeklyTable from "../components/WeeklyTable";
+import "../styles/Leaderboard.css";
+import ReactGA from "react-ga";
 
 function formLoader() {
-  const x = document.getElementById('weekform');
-  if (x.style.display === 'none') {
-    x.style.display = 'block';
+  const x = document.getElementById("weekform");
+  if (x.style.display === "none") {
+    x.style.display = "block";
   } else {
-    x.style.display = 'block';
+    x.style.display = "block";
   }
 }
 
 function formCloser() {
-  const x = document.getElementById('weekform');
-  x.style.display = 'none';
+  const x = document.getElementById("weekform");
+  x.style.display = "none";
 }
 
 class Leaderboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      week: '',
+      week: "",
       users: [],
       weekly: false,
-      weeklytext: '2019 NFL Season',
-      query: '',
+      weeklytext: "2019 NFL Season",
+      query: ""
     };
     this.handleSwitch = this.handleSwitch.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
+    ReactGA.pageview(window.location.pathname + window.location.search);
     this.setState({ week: getCurrentGameWeek() });
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/users/leaderboard/global`)
-      .then((response) => {
+      .then(response => {
         this.setState({ users: response.data.users });
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -50,7 +52,7 @@ class Leaderboard extends React.Component {
   }
 
   handleSearch(event) {
-    this.setState({ query: [...event.currentTarget.value].join('') });
+    this.setState({ query: [...event.currentTarget.value].join("") });
   }
 
   render() {
@@ -75,7 +77,7 @@ class Leaderboard extends React.Component {
               <button
                 id="season"
                 onClick={() => {
-                  this.handleSwitch(false, '2019 NFL Season');
+                  this.handleSwitch(false, "2019 NFL Season");
                   formCloser();
                 }}
               >
@@ -84,7 +86,7 @@ class Leaderboard extends React.Component {
               <button
                 id="weekly"
                 onClick={() => {
-                  this.handleSwitch(true, 'Week');
+                  this.handleSwitch(true, "Week");
                   formLoader();
                 }}
               >
@@ -93,7 +95,11 @@ class Leaderboard extends React.Component {
             </div>
           </div>
           <div className="Searchform">
-            <span className="LeaderboardSearchIcon" role="img" aria-label="glass">
+            <span
+              className="LeaderboardSearchIcon"
+              role="img"
+              aria-label="glass"
+            >
               🔍
             </span>
             <input
@@ -108,7 +114,10 @@ class Leaderboard extends React.Component {
           {weekly === true ? (
             <WeeklyTable query={this.state.query} week={this.state.week} />
           ) : (
-            <LeaderboardTable users={this.state.users} query={this.state.query} />
+            <LeaderboardTable
+              users={this.state.users}
+              query={this.state.query}
+            />
           )}
         </div>
       </div>

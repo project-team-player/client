@@ -30,6 +30,7 @@ import AuthModal from "./components/AuthModal";
 // Google Analytics Setup
 ReactGA.initialize("UA-151338746-1");
 ReactGA.pageview(window.location.pathname + window.location.search);
+// ReactGA.modalview("./components/AuthModal");
 
 // Initialize google analytics page view tracking
 const history = createBrowserHistory();
@@ -58,6 +59,7 @@ const App = () => {
                   <div
                     className={`${context.state.showAuthModal ? "faded" : ""}`}
                     id="fadeable-section"
+                    type="User"
                     onClick={
                       context.state.showAuthModal ? context.hideModal : false
                     }
