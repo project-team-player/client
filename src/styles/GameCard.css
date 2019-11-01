@@ -2,11 +2,11 @@
   border: solid 1px black;
   border-radius: 5px;
   width: 100%;
-  margin: auto;
   position: relative;
   display: flex;
   align-items: center;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .GameCard:before {
@@ -21,12 +21,19 @@
   background-color: #0b162a;
   clip-path: polygon(0 0, 0% 100%, 100% 0);
   position: absolute;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .AwayImg {
-  margin-top: 0%;
-  height: 55%;
+  margin-top: 5%;
+  width: 50%;
   opacity: 0.5;
+}
+
+.HomeImg {
+  width: 50%;
 }
 
 .Home {
@@ -34,6 +41,9 @@
   width: 100%;
   clip-path: polygon(100% 100%, 0% 100%, 100% 0);
   position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .HomeImg {

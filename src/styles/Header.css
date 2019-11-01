@@ -135,10 +135,6 @@ button.login-button {
     margin-right: 1rem;
     width: 6rem;
   }
-
-  #users {
-    width: 80%;
-  }
 }
 
 @media only all and (min-width:400px) and (max-width: 575px) {

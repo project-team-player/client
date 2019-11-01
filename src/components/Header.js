@@ -33,11 +33,12 @@ class Header extends React.Component {
                 </li>
                 {/* will be NavLinks when routes are set */}
                 {context.state.isLoggedIn ? (
-                  <div className="logoutPizzaCount">
+                  <>
+                  {/* <div className="logoutPizzaCount"> */}
                     <button className="login-button" onClick={context.logOut}>
-                      <img className="profileimg" src={loginprofile}></img>
-                      {/* <span className="logouttext">Log Out</span> */}
-                      <div className="pizzaContainer">
+                      {/* <img className="profileimg" src={loginprofile}></img> */}
+                      <span className="logouttext">Log Out</span>
+                      {/* <div className="pizzaContainer">
                       <img
                         className="pizzalogo"
                         src={PizzaSlice}
@@ -46,9 +47,11 @@ class Header extends React.Component {
                       <span className="slices">
                         {context.state.user.pizzaSlicesWeekly}
                       </span>
-                        </div>
+                        </div> */}
                     </button>
-                  </div>
+                    
+                  {/* </div> */}
+                  </>
                 ) : (
                   <button className="login-button" onClick={context.showModal}>
                     <span className="logintext">Log In</span>

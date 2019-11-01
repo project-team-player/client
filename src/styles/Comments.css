@@ -56,8 +56,6 @@
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-  border-bottom: solid;
-  border-color: #ebebeb;
   padding: 15px;
 }
 
@@ -192,7 +190,7 @@
 }
 
 .reply-submit-button {
-  background: var(--yellow);
+  background: var(--red);
   color: white;
   border: none;
   font-weight: 500;

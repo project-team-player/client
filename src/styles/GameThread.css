@@ -51,14 +51,15 @@
 }
 
 .cardContent {
-  padding: var(--spacing);
+  /* padding: var(--spacing); */
+  padding: 15px 10px;
 }
 
 .game-thread-content {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: var(--spacing);
-  padding: var(--spacing);
+  padding: 5px;
   width: 100%;
 }
 
@@ -260,6 +261,11 @@ No media query since this is the default in Bootstrap */
 
   .game-thread-content {
     grid-template-columns: 1fr;
+    padding: var(--spacing);
+  }
+
+  .cardContent {
+    padding: var(--spacing);
   }
 }
 
