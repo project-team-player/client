@@ -66,16 +66,14 @@ nav {
 }
 
 .loginButton {
-  font-size: 20px;
+  /* font-size: 20px; */
   color: #f9f8f7;
   margin-left: 0.5rem;
-  background-color: #F3A82E;
-  padding: 0.5rem;
-  padding-left: 0.8rem;
-  padding-right: 0.8rem;
-  border-radius: 0.3rem;
+  background-color: var(--red);
+  padding: 5px 10px;
+  border-radius: var(--borderRadius);
+  border: none;
   cursor: pointer;
-  outline: none;
 }
 
 .logintext {
@@ -88,21 +86,18 @@ nav {
 }
 
 .slices {
-  padding-left: 0.2rem;
   color: var(--white);
+  font-size: 16px;
 }
 
 .pizzaContainer {
   display: flex;
   align-items: center;
+  margin-left: 5px;
 }
 
 .container {
   width: 100vw;
-}
-
-.pizzalogo {
-  width: 0.3rem;
 }
 
 .profile {
@@ -111,7 +106,7 @@ nav {
 }
 
 button.login-button {
-  background: #F3A82E;
+  background: var(--red);
   padding: 5px 10px;
   font-size: 16px;
 }
@@ -126,18 +121,102 @@ button.login-button {
 }
 
 .pizzaContainer {
-  background: #232323;
+  /* background: #232323; */
   border: none;
+}
+
+/* ==================== USER BUTTON ==================== */
+
+.accountButtonContainer {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.accountDropdown::before {
+
+}
+
+.accountDropdown {
+  position: relative;
+  height: 100%;
+  /* display: flex; */
+  /* align-items: center; */
+}
+
+.accountDropdownContent {
+  position: absolute;
+  display: block;
+}
+
+.accountButton {
+  padding: 5px 12px;
+  background: var(--red);
+  /* border: var(--white) 2px solid; */
+  border: none;
+  border-radius: var(--borderRadius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.accountIcon {
+  height: 20px;
+}
+
+.pizzalogo {
+  height: 15px;
+  margin-right: 2px;
+}
+
+.accountDropdownContentInner {
+  position: relative;
+  padding: 25px 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.accountDropdownContentInner:before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 10px 5px 10px;
+  border-color: transparent transparent var(--white) transparent;
+  /* background: var(--white); */
+  top: -5px;
+  right: 0;
+}
+
+.accountDropdownContent {
+  z-index: 1;
+  background: var(--white);
+  color: var(--black);
+  border-radius: 0px 0px var(--borderRadius) var(--borderRadius);
+  right: 0;
+  width: 125px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logOutButton {
+  background: var(--red);
+  border: none;
+  border-radius: var(--borderRadius);
+  color: var(--white);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 3px 10px;
 }
 
 @media only all and (max-width: 400px) {
   .logo {
     margin-right: 1rem;
     width: 6rem;
-  }
-
-  #users {
-    width: 80%;
   }
 }
 
@@ -160,19 +239,6 @@ button.login-button {
   .profileimg {
     width: 1.5rem;
     padding: 0;
-  }
-
-  .pizzaContainer {
-    background: #232323;
-    border: none;
-  }
-
-  .pizzalogo {
-    width: 0.7rem;
-  }
-
-  .slices {
-    font-size: 1rem;
   }
 }
 

@@ -22,7 +22,7 @@ function formCloser() {
 function activeSetter() {
   if (document.getElementById('season')) {
     const activeButton = document.getElementById('season')
-    activeButton.style='border-bottom: 1px solid;';
+    activeButton.style='border-bottom: 1px solid; padding-bottom: 1px';
     document.getElementById('weekly').style='color: black; border: none;';
   }
  
@@ -31,7 +31,7 @@ function activeSetter() {
 function activeSetter2() {
   if (document.getElementById('weekly')) {
     const activeButton = document.getElementById('weekly');
-    activeButton.style='border-bottom: 1px solid;';
+    activeButton.style='border-bottom: 1px solid; padding-bottom: 1px';
     document.getElementById('season').style='color: black; border: none;';
 
   }
@@ -46,7 +46,7 @@ class Leaderboard extends React.Component {
       week: '',
       users: [],
       weekly: false,
-      weeklytext: '2019 NFL Season',
+      weeklytext: 'NFL Season',
       query: '',
     };
     this.handleSwitch = this.handleSwitch.bind(this);
@@ -103,7 +103,7 @@ class Leaderboard extends React.Component {
                 class="btn active"
                 id="season"
                 onClick={() => {
-                  this.handleSwitch(false, '2019 NFL Season');
+                  this.handleSwitch(false, 'NFL Season');
                   formCloser();
                   activeSetter();
                 }}
