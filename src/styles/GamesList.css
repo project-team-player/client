@@ -68,6 +68,7 @@
   justify-items: center;
   grid-gap: 2rem;
   padding: var(--navPadding);
+  padding-bottom: 25px;
 }
 
 #columnButton {

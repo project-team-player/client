@@ -28,7 +28,7 @@ nav {
 .logo {
   /* margin-left: 3%; */
   height: 100%;
-  width: 10rem;
+  width: 9rem;
   cursor: pointer;
 }
 
@@ -176,7 +176,8 @@ button.login-button {
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .accountDropdownContentInner:before {
@@ -193,8 +194,8 @@ button.login-button {
 }
 
 .accountDropdownContent {
-  z-index: 1;
-  background: var(--white);
+  z-index: 10;
+  background: #f9f8f7bd;
   color: var(--black);
   border-radius: 0px 0px var(--borderRadius) var(--borderRadius);
   right: 0;
@@ -211,6 +212,10 @@ button.login-button {
   font-size: 16px;
   cursor: pointer;
   padding: 3px 10px;
+}
+
+.accountDropdownHeadline {
+  text-align: center;
 }
 
 @media only all and (max-width: 400px) {

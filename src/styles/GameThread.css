@@ -21,7 +21,7 @@
   position: relative;
   min-height: 100%;
 }
-
+ 
 .game-thread {
   background: #EAEAEA;
   position: relative;
@@ -120,11 +120,11 @@
   width: 95%;
   position: absolute;
   text-align: center;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 .backbuttonDude {
-  z-index: 3;
+  /* z-index: 3; */
 }
 
 #timeAgo {
