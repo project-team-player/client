@@ -1,5 +1,4 @@
 .gameHeaderContent {
-  padding: var(--spacing);
   width: 100%;
   display: flex;
   justify-content: center;
@@ -45,12 +44,12 @@
 }
 
 .away {
- margin-left: 15px;
+ margin-left: 10px;
  text-align: left;
 }
 
 .home {
-  margin-right: 15px;
+  margin-right: 10px;
   text-align: right;
 }
 
@@ -63,6 +62,7 @@
   flex: .5;
   justify-content: center;
   padding: var(--spacing);
+  white-space: nowrap;
 }
 
 .score-text {
@@ -79,15 +79,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-.team-container-away {
+/* .team-container-away {
   justify-content: flex-start;
 }
 
 .team-container-home {
   justify-content: flex-end;
-}
+} */
 
 /* ==============  Responsive Changes  ================ */
 /* Extra small devices (portrait phones, less than 576px)
@@ -95,11 +96,19 @@ No media query since this is the default in Bootstrap */
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-  
+
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) { 
+  .away {
+    margin-left: 15px;
+   }
+   
+   .home {
+     margin-right: 15px;
+   }
+
   .teamName {
     font-size: 1.2rem;
   }

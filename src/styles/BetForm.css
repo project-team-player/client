@@ -23,7 +23,7 @@
 }
 
 .betFormButton {
-  background: var(--yellow);
+  background: var(--red);
   color: var(--white);
   border: none;
   border-radius: 3px;

@@ -7,6 +7,7 @@ import {
   authenticateUser
 } from "../utils/auth";
 import PropTypes from "prop-types";
+import ReactGA from "react-ga";
 
 // Create global contexts
 export const UserContext = React.createContext();
@@ -59,10 +60,18 @@ class UserProvider extends React.Component {
             // }
             setUserToken(token);
             this.setState({ isLoggedIn: true, user });
+            ReactGA.event({
+              category: "LogIn",
+              action: "User Logged into his/her account."
+            });
           },
           logOut: () => {
             removeUserToken();
             this.setState({ isLoggedIn: false, user: { comments: [] } });
+            ReactGA.event({
+              category: "LogOut",
+              action: "User Logged out of his/her account."
+            });
           },
           isUserLoggedIn: () => {
             this.isUserLoggedIn();
@@ -73,11 +82,27 @@ class UserProvider extends React.Component {
               loginView: login,
               modalLoginMessage: message.length ? message : ""
             });
+            ReactGA.event({
+              category: "ShowModal",
+              action: "User opened the authentication modal."
+            });
           },
           hideModal: () =>
             this.setState({ showAuthModal: false, modalLoginMessage: "" }),
-          showLogin: () => this.setState({ loginView: true }),
-          showSignup: () => this.setState({ loginView: false }),
+          showLogin: () => {
+            this.setState({ loginView: true });
+            ReactGA.event({
+              category: "ShowLogIn",
+              action: "User opened the Login modal."
+            });
+          },
+          showSignup: () => {
+            this.setState({ loginView: false });
+            ReactGA.event({
+              category: "ShowSignUp",
+              action: "User opened the Sign Up modal."
+            });
+          },
 
           /**
            * Adds or removes slices from user

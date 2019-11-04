@@ -1,39 +1,38 @@
-import React from 'react';
-import axios from 'axios';
-import { getCurrentGameWeek } from '../utils/nfl';
-import LeaderboardTable from '../components/LeaderboardTable';
-import WeeklyTable from '../components/WeeklyTable';
-import '../styles/Leaderboard.css';
+import React from "react";
+import axios from "axios";
+import { getCurrentGameWeek } from "../utils/nfl";
+import LeaderboardTable from "../components/LeaderboardTable";
+import WeeklyTable from "../components/WeeklyTable";
+import "../styles/Leaderboard.css";
+import ReactGA from "react-ga";
 
 function formLoader() {
-  const x = document.getElementById('weekform');
-  if (x.style.display === 'none') {
-    x.style.display = 'block';
+  const x = document.getElementById("weekform");
+  if (x.style.display === "none") {
+    x.style.display = "block";
   } else {
-    x.style.display = 'block';
+    x.style.display = "block";
   }
 }
 
 function formCloser() {
-  const x = document.getElementById('weekform');
-  x.style.display = 'none';
+  const x = document.getElementById("weekform");
+  x.style.display = "none";
 }
 
 function activeSetter() {
-  if (document.getElementById('season')) {
-    const activeButton = document.getElementById('season')
-    activeButton.style='border-bottom: 1px solid;';
-    document.getElementById('weekly').style='color: black; border: none;';
+  if (document.getElementById("season")) {
+    const activeButton = document.getElementById("season");
+    activeButton.style = "border-bottom: 1px solid; padding-bottom: 1px";
+    document.getElementById("weekly").style = "color: black; border: none;";
   }
- 
 }
 
 function activeSetter2() {
-  if (document.getElementById('weekly')) {
-    const activeButton = document.getElementById('weekly');
-    activeButton.style='border-bottom: 1px solid;';
-    document.getElementById('season').style='color: black; border: none;';
-
+  if (document.getElementById("weekly")) {
+    const activeButton = document.getElementById("weekly");
+    activeButton.style = "border-bottom: 1px solid; padding-bottom: 1px";
+    document.getElementById("season").style = "color: black; border: none;";
   }
 }
 // background-color: var(--red);
@@ -43,24 +42,25 @@ class Leaderboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      week: '',
+      week: "",
       users: [],
       weekly: false,
-      weeklytext: '2019 NFL Season',
-      query: '',
+      weeklytext: "NFL Season",
+      query: ""
     };
     this.handleSwitch = this.handleSwitch.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
+    ReactGA.pageview(window.location.pathname + window.location.search);
     this.setState({ week: getCurrentGameWeek() });
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/users/leaderboard/global`)
-      .then((response) => {
+      .then(response => {
         this.setState({ users: response.data.users });
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -70,16 +70,14 @@ class Leaderboard extends React.Component {
   }
 
   handleSearch(event) {
-    this.setState({ query: [...event.currentTarget.value].join('') });
+    this.setState({ query: [...event.currentTarget.value].join("") });
   }
 
   render() {
     const { weekly, weeklytext } = this.state;
     return (
       <div className="page">
-
         <div className="top">
-
           <div className="leftside">
             <div className="titleAndWeek">
               <h2 className="leaderboardtext">{`${weeklytext}`}</h2>
@@ -95,15 +93,15 @@ class Leaderboard extends React.Component {
                   <option>8</option>
                   <option selected>9</option>
                 </select>
-              </div> 
               </div>
+            </div>
 
             <div className="filterbuttons">
               <button
                 class="btn active"
                 id="season"
                 onClick={() => {
-                  this.handleSwitch(false, '2019 NFL Season');
+                  this.handleSwitch(false, "NFL Season");
                   formCloser();
                   activeSetter();
                 }}
@@ -113,35 +111,40 @@ class Leaderboard extends React.Component {
               <button
                 id="weekly"
                 onClick={() => {
-                  this.handleSwitch(true, 'NFL Week');
+                  this.handleSwitch(true, "NFL Week");
                   formLoader();
                   activeSetter2();
                 }}
               >
                 Weekly
               </button>
-            </div> 
+            </div>
           </div>
 
-
-            <div className="Searchform">
-              <span className="LeaderboardSearchIcon" role="img" aria-label="glass">
-                🔍
-              </span>
-              <input
-                type="search"
-                placeholder="Search players"
-                value={this.state.query}
-                onChange={this.handleSearch}
-              />
+          <div className="Searchform">
+            <span
+              className="LeaderboardSearchIcon"
+              role="img"
+              aria-label="glass"
+            >
+              🔍
+            </span>
+            <input
+              type="search"
+              placeholder="Search players"
+              value={this.state.query}
+              onChange={this.handleSearch}
+            />
           </div>
-          
         </div>
         <div className="boards">
           {weekly === true ? (
             <WeeklyTable query={this.state.query} week={this.state.week} />
           ) : (
-            <LeaderboardTable users={this.state.users} query={this.state.query} />
+            <LeaderboardTable
+              users={this.state.users}
+              query={this.state.query}
+            />
           )}
         </div>
       </div>

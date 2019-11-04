@@ -6,7 +6,7 @@
 
 .firstSplash {
   width: 100%;
-  height: 95vh;
+  height: 60rem;
   background-image: url("../images/main-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -107,7 +107,7 @@
   margin-top: -14rem;
   margin-bottom: -5rem;
   position: relative;
-  height: 100vh;
+  height: 52rem;
   z-index: 1;
   background-image: url("../images/Divider_background.svg");
   background-repeat: no-repeat;
@@ -115,7 +115,7 @@
 }
 
 .secondSplash {
-  height: 100vh;
+  height: 90rem;
   background-image: url("../images/bottom-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -294,8 +294,8 @@
     margin-top: 1rem;
   }
   .gameSquare {
-    width: 18.5vw;
-    height: 35vh;
+    width: 20rem;
+    height: 20rem;
   }
 
   #gameSquareTitle {
@@ -304,13 +304,10 @@
 }
 
 @media all and (max-width: 1750px) {
-  .gameSquare {
-    width: 17.5vw;
-    height: 40.5vh;
+  .firstSplash {
+    height: 55rem;
   }
-
   #blackboxSplash {
-    height: 100vh;
     margin-top: -8.5rem;
   }
 
@@ -327,12 +324,19 @@
   #squareContainer {
     padding-top: 0;
   }
+
+  #smallSliceContainer {
+    margin-top: 0;
+  }
+
+  .firstSplash {
+    height: 50rem;
+  }
 }
 
 @media all and (max-width: 1460px) {
   #blackboxSplash {
     margin-top: -10rem;
-    height: 100vh;
     margin-bottom: -8rem;
   }
 
@@ -347,11 +351,6 @@
 
   #signUpButton {
     margin-bottom: 1rem;
-  }
-
-  .gameSquare {
-    width: 20vw;
-    height: 36.5vh;
   }
 
   #squareContainer {
@@ -391,11 +390,6 @@
     font-size: 30px;
   }
 
-  .gameSquare {
-    width: 16.5vw;
-    height: 40vh;
-  }
-
   #gamesListButtonContainer {
     margin-top: 0rem;
   }
@@ -412,15 +406,6 @@
 
   #joinCommunity {
     font-size: 30px;
-  }
-
-  .gameSquare {
-    width: 16.5vw;
-    height: 37vh;
-  }
-
-  #smallSlice {
-    margin-top: 0;
   }
 
   #gameSquareTitle {
@@ -441,31 +426,36 @@
 }
 
 @media all and (max-width: 1000px) {
-  .gameSquare {
-    width: 21vw;
-    height: 38vh;
-  }
-
-  #gameSquareTitle {
-    margin-top: 4.5rem;
-  }
-
   #aboutContainer {
-    margin-top: 2rem;
+    margin-top: 4rem;
+  }
+
+  #aboutLandingContainer {
+    flex-direction: column;
+    align-items: center;
   }
 
   .aboutLanding {
-    width: 22.5%;
+    width: 40vw;
+    margin-bottom: 1rem;
   }
-}
 
-@media all and (max-width: 990px) {
+  .gameSquare {
+    width: 17rem;
+    height: 17rem;
+  }
+
   .infoBox {
     width: 50vw;
   }
+
   #joinCommunity {
     font-size: 30px;
     margin-bottom: 1.5rem;
+  }
+
+  #blackboxSplash {
+    height: 90vh;
   }
 
   .homeList {
@@ -473,8 +463,137 @@
   }
 }
 
+@media all and (max-width: 850px) {
+  .infoBox {
+    width: 65vw;
+  }
+
+  #smallSliceContainer {
+    padding-right: 5rem;
+    padding-left: 5rem;
+  }
+
+  #squareContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #blackboxSplash {
+    margin-top: -16rem;
+    height: 95rem;
+    margin-bottom: -13rem;
+  }
+
+  .gameSquare {
+    width: 17rem;
+    height: 18rem;
+  }
+
+  #gameSquareTitle {
+    margin-top: 8.5rem;
+  }
+
+  .aboutLanding {
+    width: 57.5%;
+    margin-bottom: 1rem;
+  }
+
+  #aboutHeader {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+  }
+}
+
 @media all and (max-width: 770px) {
   .infoBox {
-    margin-left: 3.5rem;
+    margin-left: 6rem;
+  }
+
+  #squareContainer {
+    flex-direction: column;
+  }
+
+  #aboutLandingContainer {
+    flex-direction: column;
+  }
+}
+
+@media all and (max-width: 585px) {
+  .infoBox {
+    margin-left: 4rem;
+    width: 75vw;
+  }
+
+  #blackboxSplash {
+    margin-top: -17rem;
+    margin-bottom: -16rem;
+    height: 100rem;
+  }
+
+  #gameSquaresContainer {
+    margin-top: 14rem;
+  }
+}
+
+@media all and (max-width: 500px) {
+  .infoBox {
+    margin-left: 2rem;
+    width: 85vw;
+  }
+
+  #blackboxSplash {
+    margin-top: -18rem;
+    margin-bottom: -17rem;
+    height: 105rem;
+  }
+}
+
+@media all and (max-width: 420px) {
+  .infoBox {
+    margin-left: 0.5rem;
+    width: 95vw;
+  }
+
+  #fullHomeList {
+    margin-left: 0;
+  }
+
+  #blackboxSplash {
+    margin-top: -18.6rem;
+  }
+
+  .homeList {
+    grid-template-columns: 15% 85%;
+  }
+
+  #gameSquaresContainer {
+    margin-top: 15rem;
+  }
+
+  .aboutLanding {
+    width: 72.5%;
+    margin-bottom: 2rem;
+  }
+
+  #smallSliceContainer {
+    padding-right: 2.5rem;
+    padding-left: 2.5rem;
+  }
+}
+
+@media all and (max-width: 380px) {
+  #smallSliceContainer {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+@media all and (max-width: 300px) {
+  .aboutLanding {
+    width: 80%;
+  }
+
+  #gameSquareTitle {
+    margin-top: 18.5rem;
   }
 }
