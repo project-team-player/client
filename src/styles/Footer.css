@@ -1,0 +1,38 @@
+.footer {
+  background: var(--black);
+  padding: var(--navPadding);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  flex-wrap: wrap;
+  height: 200px;
+}
+
+.footerInner {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tpLink {
+  color: var(--white);
+}
+
+.logoTrademark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trademark {
+  margin-top: 10px;
+}
+
+.feedbackLink {
+  color: var(--white);
+}

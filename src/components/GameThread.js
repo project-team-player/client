@@ -460,10 +460,6 @@ class GameThread extends React.Component {
                       />
                     </aside>
                   </div>
-                  <div
-                    className="clickableBackground"
-                    onClick={this.props.closeGameThread}
-                  />
                 </div>
                 <div
                   className="clickableBackground"

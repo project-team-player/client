@@ -29,6 +29,7 @@
 .boards {
     display: flex;
     padding: var(--navPadding);
+    padding-bottom: 25px;
 }
 
 .leftside {

@@ -24,7 +24,7 @@ class Header extends React.Component {
     return (
       <UserContext.Consumer>
         {context => (
-          <header>
+          <header ref={this.props.refName}>
             <NavLink to="/" id="logo">
               <div className="sliceLogo">
                 <img className="logo" src={logo} alt="Slice-it Logo" />
@@ -65,7 +65,8 @@ class Header extends React.Component {
                         this.state.showDropdown ?
                         <div className="accountDropdownContent">
                           <div className="accountDropdownContentInner">
-                          <button className="logOutButton" onClick={context.logOut}>Log Out</button>
+                            <h3 className="accountDropdownHeadline">Please stay!</h3>
+                            <button className="logOutButton" onClick={context.logOut}>Log Out</button>
                           </div>
                         </div> 
                         :

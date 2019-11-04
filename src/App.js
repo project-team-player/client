@@ -1,5 +1,5 @@
 // Libraries imports here
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ReactGA from "react-ga";
 import { createBrowserHistory } from "history";
@@ -15,6 +15,7 @@ import Splash from "./pages/Splash";
 // Component Imports Here
 import Header from "./components/Header";
 import GamesList from "./pages/GamesList";
+import Footer from './components/Footer';
 
 // CSS Imports Here
 import "./styles/main.css";
@@ -48,6 +49,14 @@ history.listen(location => {
 // observer.observe({ entryTypes: ["navigation"] });
 
 const App = () => {
+  const headerRef = useRef(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
+
+
+  useEffect(() => {
+    setHeaderHeight(headerRef.current.offsetHeight);
+  });
+
   return (
     <div className="container">
       <BrowserRouter>
@@ -55,8 +64,8 @@ const App = () => {
           <UserContext.Consumer>
             {context => (
               <>
-                <Header />
-                <div className="page-content">
+                <Header refName={headerRef} />
+                <div className="page-content" style={{ minHeight: `calc(100vh - ${headerHeight}px)`}}>
                   {context.state.showAuthModal && (
                     <AuthModal
                       loginView={context.state.showLogin}
@@ -102,6 +111,7 @@ const App = () => {
                     </Switch>
                   </div>
                 </div>
+                <Footer />
               </>
             )}
           </UserContext.Consumer>
