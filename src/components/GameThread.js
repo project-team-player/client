@@ -46,6 +46,13 @@ class GameThread extends React.Component {
       if (showModal) {
         this.setState({ isVisible: true });
       }
+
+      const awayRecord = await axios.get(`${process.env.REACT_APP_SERVER_URL}/teams/${this.props.gameDetails.awayTeam.key}`);
+      const homeRecord = await axios.get(`${process.env.REACT_APP_SERVER_URL}/teams/${this.props.gameDetails.homeTeam.key}`);
+
+      console.log(this.props.gameDetails);
+      console.log(awayRecord);
+
       // API call to get gamethread data like comments, bets etc.
       const gameThreadRequest = await axios.get(
         `${process.env.REACT_APP_SERVER_URL}/gamethreads/${this.props.gameDetails.gameThreadReference.gameThreadID}`
@@ -54,6 +61,10 @@ class GameThread extends React.Component {
       const { comments, bets, dateTime } = gamethread;
 
       const betsWithKeys = this.getBetsObjWithKeys(bets);
+
+      console.log(awayRecord);
+      console.log(homeRecord);
+
 
       let userDidBet = false;
       let userBet = {};

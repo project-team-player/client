@@ -23,6 +23,7 @@ const GameHeader = ({ device, gameDetails, gameDetails: { awayScore, homeScore, 
         <span className="teamName away">
           {device.mobile ? gameDetails.awayTeam.name.split(' ').slice(-1) : gameDetails.awayTeam.name}
         </span>
+        {/* <span>{awayRecord}</span> */}
 
       </div>
 
