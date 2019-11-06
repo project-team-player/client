@@ -1,8 +1,6 @@
 import React from "react";
 import "../styles/Header.css";
 import logo from "../images/slice-it-logo.svg";
-import slice from "../images/logo-slice.svg";
-// import logotext from "../images/logo-text.svg";
 import User from "../images/user.svg";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
