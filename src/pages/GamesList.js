@@ -111,7 +111,9 @@ class GamesList extends React.Component {
 
         {!this.state.showGameThread ? (
           <div className="gamesListGrid">
-            {this.state.games.map(game => (
+            {this.state.games.sort((a, b) => {
+              return new Date(a.date) - new Date(b.date);
+            }).map(game => (
               <GameCard
                 key={game._id}
                 gameDetails={game}

@@ -24,4 +24,5 @@ yarn-error.log*
 
 .env
 
+# VS Code related
 .vscode
