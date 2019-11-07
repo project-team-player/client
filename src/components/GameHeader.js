@@ -19,12 +19,13 @@ const GameHeader = ({ device, awayWins, awayLosses, awayDraws, homeWins, homeLos
             alt="logo"
           />
         </div>
-
+        <div className="nameNrecord away">
         <span className="teamName away">
           {device.mobile ? gameDetails.awayTeam.name.split(' ').slice(-1) : gameDetails.awayTeam.name}
         </span>
         <span className="awayrecord">({awayWins} - {awayLosses} - {awayDraws})</span>
-
+        </div>
+       
       </div>
 
       <div className="score-container">
@@ -34,10 +35,12 @@ const GameHeader = ({ device, awayWins, awayLosses, awayDraws, homeWins, homeLos
       </div>
 
       <div className="team-container team-container-home">
+        <div className="nameNrecord home">
         <span className="teamName home">
         {device.mobile ? gameDetails.homeTeam.name.split(' ').slice(-1) : gameDetails.homeTeam.name}
         </span>
         <span className="homerecord">({homeWins} - {homeLosses} - {homeDraws})</span>
+        </div>
         <div className="logoContainer">
           <img
             className="teamLogo"
