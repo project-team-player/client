@@ -44,8 +44,8 @@
 }
 
 .away {
- margin-left: 10px;
- text-align: left;
+  margin-left: 0.5rem;
+  text-align: left;
 }
 
 .home {
@@ -82,6 +82,31 @@
   width: 100%;
 }
 
+/* .awayrecord {
+  margin-left: 5vw;
+}
+
+.homerecord {
+  margin-left: 5vw;
+} */
+
+.nameNrecord away {
+  display: inline-block;
+}
+
+.nameNrecord home {
+  display: inline-block;
+}
+
+span {
+  float: left;
+  clear: left;
+}
+
+.awayrecord {
+  margin-left: 0.5rem;
+}
+
 /* .team-container-away {
   justify-content: flex-start;
 }
@@ -94,20 +119,36 @@
 /* Extra small devices (portrait phones, less than 576px)
 No media query since this is the default in Bootstrap */
 
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
 
+@media only all and (min-width: 300px) and (max-width: 576px) {
+  .homerecord {
+    margin-left: 0;
+    font-size: 0.7rem;
+  }
+
+  .awayrecord {
+    margin-left: 0.5rem;
+    font-size: 0.7rem;
+  }
 }
 
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) { 
-  .away {
-    margin-left: 15px;
-   }
-   
-   .home {
-     margin-right: 15px;
-   }
+
+/* Small devices (landscape phones, 576px and up) */
+@media only all and (min-width: 577px) and (max-width: 768px) {
+
+  .awayrecord {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .homerecord {
+    margin-left: 0;
+    font-size: 0.8rem;
+  }
+
+  .home {
+    margin-right: 15px;
+  }
 
   .teamName {
     font-size: 1.2rem;
@@ -118,12 +159,27 @@ No media query since this is the default in Bootstrap */
   }
 }
 
+/* Medium devices (tablets, 768px and up) */
+@media only all and (min-width: 768px) and (max-width: 992px) {
+  .teamName {
+    font-size: 1.3rem;
+  }
+}
+
+
 /* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
+@media only all and (min-width: 993px) and (max-width: 1150px) {
+  .awayrecord {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+  }
 
- }
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) { 
+  .homerecord {
+    margin-left: 0;
+    font-size: 0.8rem;
+  }
 
 }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

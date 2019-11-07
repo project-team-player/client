@@ -69,7 +69,7 @@ class GamesList extends React.Component {
   generateOptions = () => {
     const optionsList = [];
     const currentGameWeek = this.state.currentWeek;
-    console.log(currentGameWeek);
+    // console.log(currentGameWeek);
     for (let i = 1; i < this.state.totalWeeks + 1; i++) {
       optionsList.push(
         <OptionsButton
