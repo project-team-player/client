@@ -44,8 +44,8 @@
 }
 
 .away {
- margin-left: 10px;
- text-align: left;
+  margin-left: 10px;
+  text-align: left;
 }
 
 .home {
@@ -82,6 +82,14 @@
   width: 100%;
 }
 
+.awayrecord {
+  margin-left: 0.5rem;
+}
+
+.homerecord {
+  margin-right: 0.5rem;
+}
+
 /* .team-container-away {
   justify-content: flex-start;
 }
@@ -95,19 +103,17 @@
 No media query since this is the default in Bootstrap */
 
 /* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-
-}
+@media (min-width: 576px) {}
 
 /* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
   .away {
     margin-left: 15px;
-   }
-   
-   .home {
-     margin-right: 15px;
-   }
+  }
+
+  .home {
+    margin-right: 15px;
+  }
 
   .teamName {
     font-size: 1.2rem;
@@ -119,11 +125,7 @@ No media query since this is the default in Bootstrap */
 }
 
 /* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-
- }
+@media (min-width: 992px) {}
 
 /* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) { 
-
-}
+@media (min-width: 1200px) {}

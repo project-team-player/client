@@ -57,7 +57,6 @@ class GameCard extends React.Component {
                 src={gameDetails.awayTeam.logo}
                 alt="Logo"
               />
-              ;
             </div>
             <div
               className="Home"

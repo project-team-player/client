@@ -47,11 +47,17 @@ class GameThread extends React.Component {
         this.setState({ isVisible: true });
       }
 
-      const awayRecord = await axios.get(`${process.env.REACT_APP_SERVER_URL}/teams/${this.props.gameDetails.awayTeam.key}`);
-      const homeRecord = await axios.get(`${process.env.REACT_APP_SERVER_URL}/teams/${this.props.gameDetails.homeTeam.key}`);
+      const record1 = await axios.get(`${process.env.REACT_APP_SERVER_URL}/teams/${this.props.gameDetails.awayTeam.key}`);
 
-      console.log(this.props.gameDetails);
-      console.log(awayRecord);
+      const awayWins = record1.data.team.wins;
+      const awayLosses = record1.data.team.losses;
+      const awayDraws = record1.data.team.draws;
+      
+      const record2 = await axios.get(`${process.env.REACT_APP_SERVER_URL}/teams/${this.props.gameDetails.homeTeam.key}`);
+      const homeWins = record2.data.team.wins;
+      const homeLosses = record2.data.team.losses;
+      const homeDraws = record2.data.team.draws;
+
 
       // API call to get gamethread data like comments, bets etc.
       const gameThreadRequest = await axios.get(
@@ -61,9 +67,6 @@ class GameThread extends React.Component {
       const { comments, bets, dateTime } = gamethread;
 
       const betsWithKeys = this.getBetsObjWithKeys(bets);
-
-      console.log(awayRecord);
-      console.log(homeRecord);
 
 
       let userDidBet = false;
@@ -87,6 +90,12 @@ class GameThread extends React.Component {
         userDidBet,
         userBet,
         bets: betsWithKeys,
+        awayWins,
+        awayLosses,
+        awayDraws,
+        homeWins,
+        homeLosses,
+        homeDraws,
         percentages: {
           awayTeam: percentages[this.props.gameDetails.awayTeam.key].toFixed(2),
           homeTeam: percentages[this.props.gameDetails.homeTeam.key].toFixed(2)
@@ -415,6 +424,12 @@ class GameThread extends React.Component {
                     <section className="game-thread-main">
                       <GameHeader
                         gameDetails={this.props.gameDetails}
+                        awayWins={this.state.awayWins}
+                        awayLosses={this.state.awayLosses}
+                        awayDraws={this.state.awayDraws}
+                        homeWins={this.state.homeWins}
+                        homeLosses={this.state.homeLosses}
+                        homeDraws={this.state.homeDraws}
                         device={device}
                       />
 
