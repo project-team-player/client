@@ -94,6 +94,7 @@ select {
 }
 
 .table-items {
+    font-family: "Roboto", sans-serif;
     color: rgba(0, 0, 0, 0.87);
     font-weight: 400;
     font-size: 1rem;
@@ -260,7 +261,7 @@ input:focus {
     #weekly {
         padding: 0.4rem 0rem 0.4rem 0rem;
         /* margin-bottom: 3vw; */
-        /* margin-top: 0.5rem; */
+    /* margin-top: 0.5rem; */
     /* } */
 
     #users {
