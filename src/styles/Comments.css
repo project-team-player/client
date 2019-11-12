@@ -253,23 +253,6 @@ font-size: 15px;
   display: flex;
 }
 
-.comment-vote-btn {
-  cursor: pointer;
-  margin-left: 10px;
-  display: flex;
-  align-items: center;
-}
-
-.upvote-icon {
-  color: transparent;  
-  text-shadow: 0 0 0 var(--yellow);
-}
-
-.downvote-icon {
-  color: transparent;  
-  text-shadow: 0 0 0 var(--yellow);
-}
-
 .divider-circle {
   height: 4px;
   width: 4px;
@@ -278,7 +261,26 @@ font-size: 15px;
   background: var(--grey);
 }
 
-.active-vote {
-  color: transparent; 
-  text-shadow: 0 0 0 var(--red);
+.comment-vote-btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
+
+.comment-vote-icon {
+  color: transparent;  
+  text-shadow: 0 0 0 var(--yellow);
+  opacity: .5;
+}
+
+.active-vote {
+  color: transparent;  
+  text-shadow: 0 0 0 var(--yellow);
+  opacity: 1;
+}
+
+.comment-footer-item {
+  margin-right: var(--spacing);
+  font-size: 14px;
+}
+

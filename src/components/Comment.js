@@ -62,8 +62,25 @@ class Comment extends React.Component {
     this.toggleReplies = this.toggleReplies.bind(this);
   }
 
+  /**
+  * If current logged in user has voted on comment, it sets state respective to which vote the user gave (down/up)
+   * @param [String] UserId 
+   * @augments Comment.userUpvoted through setState
+   * @augments Comment.userDownvoted through setState
+   */
+  setActiveVote = (userId) => {
+    const { currentComment: { votes: { up, down } } } = this.props;
+    if (up.includes(userId)) {
+      this.setState({ userUpvoted: true });
+    } else if (down.includes(userId)) {
+      this.setState({ userDownvoted: true });
+    }
+  }
+
   componentDidMount() {
-    this.setState({ replies: this.props.currentComment.replies , votes: this.props.currentComment.votes });
+    const { currentComment: { votes, replies }, context } = this.props;
+    this.setState({ replies: replies , votes: votes });
+    this.setActiveVote(context.getUserData('_id'));
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -124,8 +141,6 @@ class Comment extends React.Component {
     this.setState({ lastReplyHeight: height });
   }
 
-
-
   downVote = (commentId) => {
     // Register upvote in DB or remove upvote if user clicks upvote again
     if (this.state.votes.down.includes(this.props.context.state.user._id)) {
@@ -162,13 +177,13 @@ class Comment extends React.Component {
               </div>
               <div className="comment-footer">
                 <div className="comment-footer-actions">
-                  <button type="button" className="comment-reply-button" onClick={this.showReplyInputField}><img src={replyIcon} className="comment-reply-icon"/>Reply</button>
-                  <span className='comment-vote-btn' onClick={() => isLoggedIn ? this.upVote(currentComment._id) : showModal('Please log in to upvote this comment') }>
-                    <span className={`upvote-icon ${userUpvoted ? 'active-vote' : ''}`}>👍</span>
+                  <button type="button" className="comment-reply-button comment-footer-item" onClick={this.showReplyInputField}><img src={replyIcon} className="comment-reply-icon"/>Reply</button>
+                  <span className='comment-vote-btn comment-footer-item' onClick={() => isLoggedIn ? this.upVote(currentComment._id) : showModal('Please log in to upvote this comment') }>
+                    <span className={`comment-vote-icon ${userUpvoted ? 'active-vote' : ''}`}>👍</span>
                     {upVotes.length}
                   </span>
-                  <span className='comment-vote-btn' onClick={() => isLoggedIn ? this.downVote(currentComment._id) : showModal('Please log in to downvote this comment') }>
-                    <span className={`downvote-icon ${userDownvoted ? 'active-vote' : ''}`}>👎</span>
+                  <span className='comment-vote-btn comment-footer-item' onClick={() => isLoggedIn ? this.downVote(currentComment._id) : showModal('Please log in to downvote this comment') }>
+                    <span className={`comment-vote-icon ${userDownvoted ? 'active-vote' : ''}`}>👎</span>
                     {downVotes.length}
                   </span>
                 </div>

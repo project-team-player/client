@@ -103,7 +103,9 @@ class UserProvider extends React.Component {
               action: "User opened the Sign Up modal."
             });
           },
-
+          getUserData: (key) => {
+            return this.state.user[key];
+          },
           /**
            * Adds or removes slices from user
            * @param  {number} sliceAmount The amount of slices to remove or add
