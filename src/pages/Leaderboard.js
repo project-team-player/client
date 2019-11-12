@@ -92,8 +92,8 @@ class Leaderboard extends React.Component {
                   <option>7</option>
                   <option>8</option>
                   <option>9</option>
-                  <option selected>10</option>
-                  <option>11</option>
+                  <option>10</option>
+                  <option selected >11</option>
                   <option>12</option>
                   <option>13</option>
                   <option>14</option>

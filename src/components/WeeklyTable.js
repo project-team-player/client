@@ -35,21 +35,23 @@ class WeeklyTable extends Component {
   }
   renderTableData() {
     const slicesForWeek = `slicesWeek${this.props.week}`;
+    const winsWeekly = `winsWeek${this.props.week}`;
     const filteredUsers = this.state.users.filter(user => user.name.includes(this.props.query));
     return filteredUsers.map((user, index) => {
-      const { name, pizzaSlicesWeekly } = user; // destructuring // {user[slicesForWeek]}
+      const { name } = user; // destructuring // {user[slicesForWeek]}
+      console.log(user);
       return (
         <tr>
           <td className="index">{index + 1}</td>
           <td className="table-items">{name}</td>
           <td className="table-items">{user[slicesForWeek]}</td>
-          <td>{pizzaSlicesWeekly}</td>
+          <td className="table-items">{user[winsWeekly]}</td>
         </tr>
       );
     });
   }
   renderTableHeader() {
-    const header = ['Rank 🏅', 'Username 👻', 'Slices Won 🎉', 'Slices Left 🍕'];
+    const header = ['Rank 🏅', 'Username 👻', 'Slices Won 🎉', 'Wins 🍕'];
     return header.map((key, index) => <th key={index}>{key}</th>);
   }
 
