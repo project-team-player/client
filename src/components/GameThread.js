@@ -1,5 +1,4 @@
 import React from "react";
-import { useMediaQuery } from "react-responsive";
 import "../styles/GameThread.css";
 import axios from "axios";
 import Comment from "./Comment";
@@ -65,6 +64,8 @@ class GameThread extends React.Component {
       );
       const { gamethread, percentages } = gameThreadRequest.data;
       const { comments, bets, dateTime } = gamethread;
+
+      console.log(comments);
 
       const betsWithKeys = this.getBetsObjWithKeys(bets);
 

@@ -18,6 +18,11 @@ export const CommentHeader = ({currentComment, userBet, awayColor, homeColor, aw
       <span className="username">
         {currentComment.owner || currentComment.username }
       </span>
+      
+      <span className="comment-time-ago">
+        <span className="divider-circle" />
+        {timeAgo(currentComment.createdAt)} ago
+        </span>
     </div>
       { userBet && 
         <div className="comment-user-bet-container" style={{ '--comment-bet-background': userBet.key === awayTeamKey ? `#${awayColor}` : `#${homeColor}` }}>
@@ -44,6 +49,12 @@ class Comment extends React.Component {
       showReplies: false,
       showReplyInputField: false,
       lastReplyHeight: 0,
+      votes: {
+        up: 0,
+        down: 0,
+      },
+      userUpvoted: false,
+      userDownvoted: false,
     };
     this.replyField = React.createRef();
     this.replyInputContainer = React.createRef();
@@ -51,11 +62,11 @@ class Comment extends React.Component {
     this.toggleReplies = this.toggleReplies.bind(this);
   }
 
-  componentWillMount() {
-    this.setState({ replies: this.props.currentComment.replies });
+  componentDidMount() {
+    this.setState({ replies: this.props.currentComment.replies , votes: this.props.currentComment.votes });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.replies !== this.props.replies) {
       this.setState({ replies: this.props.currentComment.replies });
     }
@@ -113,9 +124,31 @@ class Comment extends React.Component {
     this.setState({ lastReplyHeight: height });
   }
 
+
+
+  downVote = (commentId) => {
+    // Register upvote in DB or remove upvote if user clicks upvote again
+    if (this.state.votes.down.includes(this.props.context.state.user._id)) {
+      axios.delete(`${process.env.REACT_APP_SERVER_URL}/comments/${commentId}/votes/down`, { headers: { authorization: `Bearer ${getUserToken()}`}}).then(response => this.setState({ votes: response.data.updatedComment.votes, userDownvoted: false }));
+    } else {
+      axios.post(`${process.env.REACT_APP_SERVER_URL}/comments/${commentId}/votes/down`, null, { headers: { authorization: `Bearer ${getUserToken()}`}}).then(response => this.setState({ votes: response.data.updatedComment.votes, userDownvoted: true, userUpvoted: false, }));
+    }
+  }
+
+  upVote = (commentId) => {
+    // Register upvote in DB or remove upvote if user clicks upvote again
+    if (this.state.votes.up.includes(this.props.context.state.user._id)) {
+      axios.delete(`${process.env.REACT_APP_SERVER_URL}/comments/${commentId}/votes/up`, { headers: { authorization: `Bearer ${getUserToken()}`}}).then(response => this.setState({ votes: response.data.updatedComment.votes, userUpvoted: false }));
+    } else {
+      axios.post(`${process.env.REACT_APP_SERVER_URL}/comments/${commentId}/votes/up`, null, { headers: { authorization: `Bearer ${getUserToken()}`}}).then(response => this.setState({ votes: response.data.updatedComment.votes, userUpvoted: true, userDownvoted: false, }));
+    }
+  }
+
   render() {
-    const { currentComment, gameDetails, gameDetails: { awayTeam: {logo: awayLogo, key: awayTeamKey, primaryColor: awayColor }, homeTeam: { logo: homeLogo, primaryColor: homeColor } }, gameThreadBets } = this.props;
-    const { replies, showReplies, showReplyInputField } = this.state;
+    const { currentComment, gameDetails, gameDetails: { awayTeam: {logo: awayLogo, key: awayTeamKey, primaryColor: awayColor }, homeTeam: { logo: homeLogo, primaryColor: homeColor } }, gameThreadBets, context } = this.props;
+    const { replies, showReplies, showReplyInputField, votes: { up: upVotes, down: downVotes }, userDownvoted, userUpvoted} = this.state;
+    const { state: { isLoggedIn }, showModal } = context;
+    console.log(`Did user upvote?`, userUpvoted);
     return (
       <UserContext.Consumer>
         {context => (
@@ -128,9 +161,19 @@ class Comment extends React.Component {
                 </p>
               </div>
               <div className="comment-footer">
-                <span className="comment-time-ago">{timeAgo(currentComment.createdAt)} ago</span>
-                <div className="comment-reply-button-container">
+                <div className="comment-footer-actions">
                   <button type="button" className="comment-reply-button" onClick={this.showReplyInputField}><img src={replyIcon} className="comment-reply-icon"/>Reply</button>
+                  <span className='comment-vote-btn' onClick={() => isLoggedIn ? this.upVote(currentComment._id) : showModal('Please log in to upvote this comment') }>
+                    <span className={`upvote-icon ${userUpvoted ? 'active-vote' : ''}`}>👍</span>
+                    {upVotes.length}
+                  </span>
+                  <span className='comment-vote-btn' onClick={() => isLoggedIn ? this.downVote(currentComment._id) : showModal('Please log in to downvote this comment') }>
+                    <span className={`downvote-icon ${userDownvoted ? 'active-vote' : ''}`}>👎</span>
+                    {downVotes.length}
+                  </span>
+                </div>
+                <div className="comment-reply-button-container">
+
                 </div>
               </div>
             </div>

@@ -6,7 +6,6 @@ import { getCurrentGameWeek } from '../utils/nfl';
 // Components
 
 const OptionsButton = ({ isCurrentWeek, weekNumber }) => {
-  console.log(isCurrentWeek);
   return (
     <option id='weekNumber' value={weekNumber} selected={isCurrentWeek}>
       Week {weekNumber}
