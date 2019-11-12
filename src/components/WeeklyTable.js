@@ -39,7 +39,6 @@ class WeeklyTable extends Component {
     const filteredUsers = this.state.users.filter(user => user.name.includes(this.props.query));
     return filteredUsers.map((user, index) => {
       const { name } = user; // destructuring // {user[slicesForWeek]}
-      console.log(user);
       return (
         <tr>
           <td className="index">{index + 1}</td>
