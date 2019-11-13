@@ -3,7 +3,7 @@ import PizzaSlice from '../images/pizza-slice.svg';
 import UserAvatar from '../images/user-avatar.svg';
 import replyIcon from '../images/reply.svg';
 import '../styles/Comments.css';
-import Reply from './Reply.js';
+// import Reply from './Reply.js';
 import { UserContext } from '../contexts/UserContext';
 import { getUserToken } from '../utils/auth';
 import { timeAgo } from '../utils/time';
@@ -38,13 +38,40 @@ export const CommentHeader = ({currentComment, userBet, awayColor, homeColor, aw
   )
 }
 
+export const CommentFooter = ({ comment, comment: { votes }, commentIsReply, context: { state: { isLoggedIn }, showModal }, showReplyInputField, userUpvoted, userDownvoted, upVote, downVote }) => {
+  return (
+    <div className="comment-footer">
+    <div className="comment-footer-actions">
+      {!commentIsReply &&
+        <button type="button" className="comment-reply-button comment-footer-item" onClick={showReplyInputField}><img src={replyIcon} className="comment-reply-icon"/>Reply</button>
+      }
+      <span className='comment-vote-btn comment-footer-item' onClick={() => isLoggedIn ? upVote(comment._id) : showModal('Please log in to upvote this comment') }>
+        <span className={`comment-vote-icon ${userUpvoted ? 'active-vote' : ''}`}>👍</span>
+        {votes.up.length}
+      </span>
+      <span className='comment-vote-btn comment-footer-item' onClick={() => isLoggedIn ? downVote(comment._id) : showModal('Please log in to downvote this comment') }>
+        <span className={`comment-vote-icon ${userDownvoted ? 'active-vote' : ''}`}>👎</span>
+        {votes.down.length}
+      </span>
+    </div>
+    <div className="comment-reply-button-container">
+    </div>
+  </div>
+  )
+}
+
 
 class Comment extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      replies: [],
+      replies: [{
+        votes: {
+          up: 0,
+          down: 0,
+        }
+      }],
       replyText: '',
       showReplies: false,
       showReplyInputField: false,
@@ -58,6 +85,8 @@ class Comment extends React.Component {
     };
     this.replyField = React.createRef();
     this.replyInputContainer = React.createRef();
+
+    this.replyContainer = React.createRef(); 
 
     this.toggleReplies = this.toggleReplies.bind(this);
   }
@@ -81,6 +110,12 @@ class Comment extends React.Component {
     const { currentComment: { votes, replies }, context } = this.props;
     this.setState({ replies: replies , votes: votes });
     this.setActiveVote(context.getUserData('_id'));
+
+    // For replies
+    if (this.props.isLastReply) {
+      const replyContainerHeight = this.replyContainer.current.offsetHeight;
+      this.props.adjustReplyLineHeight(replyContainerHeight / 2)
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -124,8 +159,6 @@ class Comment extends React.Component {
   replyToComment = (commentId) => {
     const username = this.props.context.state.user.name;
     const { replyText } = this.state;
-    // const gravatar = "https://gravatar.com/avatar/f6a0a196d76723567618b367b80d8375?s=200";
-
      axios({ method: 'PATCH', url: `${process.env.REACT_APP_SERVER_URL}/comments/reply/${commentId}`, 
       headers: { authorization: `Bearer ${getUserToken()}`},
       data: { username, text: replyText }
@@ -150,49 +183,72 @@ class Comment extends React.Component {
     }
   }
 
+  // Register upvote in DB or remove upvote if user clicks upvote again
   upVote = (commentId) => {
-    // Register upvote in DB or remove upvote if user clicks upvote again
-    if (this.state.votes.up.includes(this.props.context.state.user._id)) {
-      axios.delete(`${process.env.REACT_APP_SERVER_URL}/comments/${commentId}/votes/up`, { headers: { authorization: `Bearer ${getUserToken()}`}}).then(response => this.setState({ votes: response.data.updatedComment.votes, userUpvoted: false }));
+    const { rootCommentId, replyId } = this.props;
+
+    // If the comment is a reply
+    if (this.props.commentIsReply) {
+      if (this.state.votes.up.includes(this.props.context.state.user._id)) {
+        axios.delete(`${process.env.REACT_APP_SERVER_URL}/comments/${rootCommentId}/replies/${replyId}/votes/up`, { headers: { authorization: `Bearer ${getUserToken()}`}}).then(response => this.setState({ votes: response.data.updatedComment.votes, userUpvoted: false }));
+      } else {
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/comments/${rootCommentId}/replies/${replyId}/votes/up`, null, { headers: { authorization: `Bearer ${getUserToken()}`}}).then(response => this.setState({ votes: response.data.updatedComment.votes, userUpvoted: true, userDownvoted: false, }));
+      }
+    // If the comment is a root comment
     } else {
-      axios.post(`${process.env.REACT_APP_SERVER_URL}/comments/${commentId}/votes/up`, null, { headers: { authorization: `Bearer ${getUserToken()}`}}).then(response => this.setState({ votes: response.data.updatedComment.votes, userUpvoted: true, userDownvoted: false, }));
+      if (this.state.votes.up.includes(this.props.context.state.user._id)) {
+        axios.delete(`${process.env.REACT_APP_SERVER_URL}/comments/${commentId}/votes/up`, { headers: { authorization: `Bearer ${getUserToken()}`}}).then(response => this.setState({ votes: response.data.updatedComment.votes, userUpvoted: false }));
+      } else {
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/comments/${commentId}/votes/up`, null, { headers: { authorization: `Bearer ${getUserToken()}`}}).then(response => this.setState({ votes: response.data.updatedComment.votes, userUpvoted: true }));
+      }
     }
   }
 
+
+
   render() {
-    const { currentComment, gameDetails, gameDetails: { awayTeam: {logo: awayLogo, key: awayTeamKey, primaryColor: awayColor }, homeTeam: { logo: homeLogo, primaryColor: homeColor } }, gameThreadBets, context } = this.props;
+    const { currentComment, gameDetails, gameDetails: { awayTeam: {logo: awayLogo, key: awayTeamKey, primaryColor: awayColor }, homeTeam: { logo: homeLogo, primaryColor: homeColor } }, gameThreadBets, context, commentIsReply } = this.props;
     const { replies, showReplies, showReplyInputField, votes: { up: upVotes, down: downVotes }, userDownvoted, userUpvoted} = this.state;
-    const { state: { isLoggedIn }, showModal } = context;
-    console.log(`Did user upvote?`, userUpvoted);
+    // const { state: { isLoggedIn }, showModal } = context;
     return (
-      <UserContext.Consumer>
-        {context => (
-          <div className="comment-container">
-            <div className="comment-card card">
-              <CommentHeader currentComment={currentComment} awayColor={awayColor} homeColor={homeColor} awayTeamKey={awayTeamKey} userBet={gameThreadBets[currentComment.owner]} awayLogo={awayLogo} homeLogo={homeLogo} />
+      <div className={`${commentIsReply ? 'reply-container' : ''}`} >
+          <div className={`${commentIsReply ? 'reply-horizontal-line' : ''}`} />
+          <div className="comment-container" >
+            <div className={`${commentIsReply ? 'reply-card' : 'comment-card'} card`} ref={this.props.isLastReply ? this.replyContainer : ''}>
+
+              <CommentHeader 
+                currentComment={currentComment} 
+                awayColor={awayColor} 
+                homeColor={homeColor} 
+                awayTeamKey={awayTeamKey} 
+                userBet={gameThreadBets[currentComment.owner]} 
+                awayLogo={awayLogo} 
+                homeLogo={homeLogo}
+              />
+
               <div className="comment-body">
                 <p className="comment-text">
                   {currentComment.text}
                 </p>
               </div>
-              <div className="comment-footer">
-                <div className="comment-footer-actions">
-                  <button type="button" className="comment-reply-button comment-footer-item" onClick={this.showReplyInputField}><img src={replyIcon} className="comment-reply-icon"/>Reply</button>
-                  <span className='comment-vote-btn comment-footer-item' onClick={() => isLoggedIn ? this.upVote(currentComment._id) : showModal('Please log in to upvote this comment') }>
-                    <span className={`comment-vote-icon ${userUpvoted ? 'active-vote' : ''}`}>👍</span>
-                    {upVotes.length}
-                  </span>
-                  <span className='comment-vote-btn comment-footer-item' onClick={() => isLoggedIn ? this.downVote(currentComment._id) : showModal('Please log in to downvote this comment') }>
-                    <span className={`comment-vote-icon ${userDownvoted ? 'active-vote' : ''}`}>👎</span>
-                    {downVotes.length}
-                  </span>
-                </div>
-                <div className="comment-reply-button-container">
 
-                </div>
-              </div>
+              <CommentFooter 
+                commentIsReply={commentIsReply}
+                isLoggedIn={this.props.context.isLoggedIn}
+                context={this.props.context}
+                comment={currentComment}
+                showReplyInputField={this.showReplyInputField}
+                userUpvoted={userUpvoted}
+                userDownvoted={userDownvoted}
+                context={context}
+                upVotes={upVotes}
+                downVotes={downVotes}
+                upVote={this.upVote}
+                downVote={this.downVote}
+              />
+              
             </div>
-            {replies.length > 0
+            {replies && replies.length > 0
         && (
         <div className="comment-under-section">
           <button type="button" className="comment-replies-toggle" onClick={this.toggleReplies}>
@@ -221,34 +277,33 @@ replies
               </div>
             </form>
           </div>
-
           )
         }
-            {showReplies
+        {!commentIsReply && showReplies
         && 
+        <>
         <div className="comment-replies-container" style={{ '--last-reply-height': this.state.lastReplyHeight }}>
         {replies.map((reply, i) => 
-          <Reply 
-          userBet={gameThreadBets[reply.username]}
-          currentReply={reply} 
-          key={i} 
-          gameDetails={gameDetails} 
-          isLastReply={i === replies.length - 1 ? true : false} 
-          adjustReplyLineHeight={this.adjustReplyLineHeight} 
-          currentComment={reply} 
-          awayColor={awayColor} 
-          homeColor={homeColor} 
-          awayTeamKey={awayTeamKey} 
-          gameThreadBets
-          awayLogo={awayLogo} 
-          homeLogo={homeLogo}
-          />)
-        }
-        </div>
-        }
-          </div>
+          <Comment 
+            commentIsReply={true}
+            currentComment={reply}
+            gameDetails={gameDetails}
+            key={reply._id}
+            getUpdatedComments={this.props.getUpdatedComments}
+            gameThreadBets={gameThreadBets}
+            context={this.props.context}
+            votes={reply.votes}
+            isLastReply={i === replies.length - 1 ? true : false}
+            adjustReplyLineHeight={this.adjustReplyLineHeight}
+            rootCommentId={currentComment._id}
+            replyId={reply._id}
+          />
         )}
-      </UserContext.Consumer>
+        </div>
+        </>
+        }
+      </div>
+      </div>
     );
   }
 }

@@ -65,8 +65,6 @@ class GameThread extends React.Component {
       const { gamethread, percentages } = gameThreadRequest.data;
       const { comments, bets, dateTime } = gamethread;
 
-      console.log(comments);
-
       const betsWithKeys = this.getBetsObjWithKeys(bets);
 
 

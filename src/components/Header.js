@@ -15,7 +15,6 @@ class Header extends React.Component {
   }
 
   toggleDropdown = () => {
-    console.log('I ran!');
     this.setState({ showDropdown: !this.state.showDropdown });
   }
 

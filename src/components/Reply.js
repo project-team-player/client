@@ -2,7 +2,9 @@ import React from 'react';
 import { timeAgo } from '../utils/time';
 import '../styles/Reply.css';
 import '../styles/Comments.css';
-import { CommentHeader } from './Comment';
+import { CommentHeader, CommentFooter } from './Comment';
+import { UserContext } from '../contexts/UserContext';
+
 
 class Reply extends React.Component {
   constructor(props) {
@@ -20,11 +22,10 @@ class Reply extends React.Component {
   }
 
   render() {
-    const { currentReply, gameThreadBets, awayColor, homeColor, awayTeamKey, userBet, awayLogo, homeLogo } = this.props;
-    console.log(currentReply);
+    const { currentReply, gameThreadBets, awayColor, homeColor, awayTeamKey, userBet, awayLogo, homeLogo, context } = this.props;
     return (
       <div className="reply-container" ref={this.replyContainer}>
-        <div className="reply-horizontal-line"></div>
+        <div className="reply-horizontal-line" />
         <div className="comment-container">
           <div className="reply-card card">
             <CommentHeader 
@@ -42,9 +43,21 @@ class Reply extends React.Component {
                 {currentReply.text}
               </p>
             </div>
-            <div className="comment-footer">
+            {/* <div className="comment-footer">
               <span className="comment-time-ago">{timeAgo(currentReply.createdAt)} ago</span>
-            </div>
+            </div> */}
+            <CommentFooter 
+                commentIsReply={true}
+                isLoggedIn={isLoggedIn}
+                comment={currentComment}
+                showReplyInputField={this.showReplyInputField}
+                userUpvoted={userUpvoted}
+                userDownvoted={userDownvoted}
+                context={context}
+                upVotes={upVotes}
+                downVotes={downVotes}
+            />
+            
           </div>
         </div>
       </div>
@@ -52,4 +65,8 @@ class Reply extends React.Component {
   }
 }
 
-export default Reply;
+export default props => (
+  <UserContext.Consumer>
+    {context => <Reply {...props} context={context} />}
+  </UserContext.Consumer>
+);
