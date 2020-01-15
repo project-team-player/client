@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 /**
  * Outpouts the difference on time from given time to today 
  * @param {String} time time used to compare with today
@@ -38,3 +40,8 @@ const formatTime = (number, type) => {
     return `${number} ${type}s`
   }
 }
+
+export const convertToDate = (dateTime, timeZone) => {
+  const date = moment(dateTime.toString()).format('ddd, MMM Do h:mm A');
+  return `${date} ${timeZone ? timeZone.toUpperCase() : ''}`;
+};

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../styles/GameHeader.css';
-import { convertToDate } from '../utils/helpers';
+import { convertToDate } from '../utils/time';
 
 const GameHeader = ({ device, awayWins, awayLosses, awayDraws, homeWins, homeLosses, homeDraws, gameDetails, gameDetails: { awayScore, homeScore, homeTeam: { name: homeTeamName } } }) => {
 

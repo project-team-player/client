@@ -1,6 +1,6 @@
 import React from "react";
 import GameThread from "./GameThread";
-import { convertToDate } from "../utils/helpers";
+import { convertToDate } from "../utils/time";
 
 // CSS
 import "../styles/GameCard.css";
