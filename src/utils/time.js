@@ -21,11 +21,11 @@ export const timeAgo = (time) => {
   // Decides wether to display minutes, hours, days etc. based on how long ago the comparison time is.
   if (minutesAgo === 0) return formatTime(1, 'minute');
   if (minutesAgo > 0 && minutesAgo < 60) return formatTime(minutesAgo, 'minute');
-  if (minutesAgo > 59 && hoursAgo < 24) return formatTime(hoursAgo, 'hour')
-  if (hoursAgo > 24 && daysAgo < 7 ) return formatTime(daysAgo, 'day')
-  if (daysAgo > 6 && weeksAgo < 4 ) return formatTime(weeksAgo, 'week')
-  if (weeksAgo > 3 && monthsAgo < 12) return formatTime(monthsAgo, 'month')
-  if (monthsAgo > 11) return formatTime(yearsAgo, 'year');
+  if (minutesAgo >= 60 && hoursAgo < 24) return formatTime(hoursAgo, 'hour')
+  if (hoursAgo >= 24 && daysAgo < 7 ) return formatTime(daysAgo, 'day')
+  if (daysAgo >= 7 && weeksAgo < 4 ) return formatTime(weeksAgo, 'week')
+  if (weeksAgo >= 4 && monthsAgo < 12) return formatTime(monthsAgo, 'month')
+  if (monthsAgo >= 12) return formatTime(yearsAgo, 'year');
 } 
 
 /**
@@ -33,7 +33,8 @@ export const timeAgo = (time) => {
  * @param {Number} number the amount of given type. For example amount of hours.
  * @param {String} type the type of given number e.g. hour or minute in singular format.
  */
-const formatTime = (number, type) => {
+export const formatTime = (number, type) => {
+  if (number < 1) return undefined;
   if (number === 1) {
     return `${number} ${type}`
   } else {
