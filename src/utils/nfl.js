@@ -29,10 +29,10 @@ export const getCurrentGameWeek = () => {
   const currentWeek = () => {
     for(let week of weeks) {
       if (today <= lastGameOfWeek[week]) {
-        return week;
+        return 'week'; // Return last week if end of season
       }
     }
   }
 
-  return parseInt(currentWeek());
+  return parseInt(currentWeek() || 17); // Return 17 if season is over (last round)
 }
