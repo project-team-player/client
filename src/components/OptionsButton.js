@@ -1,15 +1,9 @@
 import React from 'react';
-import { getCurrentGameWeek } from '../utils/nfl';
 
-// CSS
-
-// Components
-
-const OptionsButton = ({ isCurrentWeek, weekNumber }) => {
-  console.log(isCurrentWeek);
+const OptionsButton = ({ isCurrentWeek, weekNumber, explicitWeek }) => {
   return (
     <option id='weekNumber' value={weekNumber} selected={isCurrentWeek}>
-      Week {weekNumber}
+      {explicitWeek && "Week"} {weekNumber}
     </option>
   );
 };

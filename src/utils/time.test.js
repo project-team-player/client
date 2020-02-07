@@ -17,7 +17,10 @@ describe('timeAgo', () => {
     tenHoursAgo.setHours(tenHoursAgo.getHours() - 10);
     let oneHourAgo = new Date();
     oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+    const now = new Date();
 
+    console.log('Ten hours ago is:', tenHoursAgo.getHours(), 'And now is:', now.getHours());
+    console.log('One hours ago is:', oneHourAgo.getHours());
     expect(timeAgo(tenHoursAgo)).toBe('10 hours');
     expect(timeAgo(oneHourAgo)).toBe('1 hour');
   });
@@ -47,14 +50,18 @@ describe('timeAgo', () => {
     twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
     let oneMonthAgo = new Date();
     oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+    let elevenMonthsAgo = new Date()
+    elevenMonthsAgo.setMonth(elevenMonthsAgo.getMonth() - 11);
 
     expect(timeAgo(twoMonthsAgo)).toBe('2 months');
     expect(timeAgo(oneMonthAgo)).toBe('1 month');
+    expect(timeAgo(elevenMonthsAgo)).toBe('11 months');
   });
 
   it('should return years', () => {
     let twoYearsAgo = new Date();
     twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
+    // twoYearsAgo.setDate(twoYearsAgo.getDate() - 1);
     let oneYearAgo = new Date();
     oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
 

@@ -21,7 +21,6 @@ class Reply extends React.Component {
 
   render() {
     const { currentReply, gameThreadBets, awayColor, homeColor, awayTeamKey, userBet, awayLogo, homeLogo } = this.props;
-    console.log(currentReply);
     return (
       <div className="reply-container" ref={this.replyContainer}>
         <div className="reply-horizontal-line"></div>

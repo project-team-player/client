@@ -111,7 +111,6 @@ class UserProvider extends React.Component {
            * @return {Void}
            */
           updateUserSlices: (sliceAmount, operator = "-") => {
-            console.log("updating user slices");
             // Get current user state
             const user = { ...this.state.user };
 

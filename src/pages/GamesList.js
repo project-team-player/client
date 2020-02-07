@@ -10,7 +10,7 @@ import "../styles/GamesList.css";
 // Components
 import GameCard from "../components/GameCard";
 import GameThread from "../components/GameThread";
-import OptionsButton from "../components/OptionsButton";
+import GameWeekOptions from '../components/GameWeekOptions';
 
 // Helpers
 import { getCurrentGameWeek } from "../utils/nfl";
@@ -65,26 +65,10 @@ class GamesList extends React.Component {
         this.setState({ totalWeeks: response.data.totalWeeksNFL });
       });
   };
-
-  generateOptions = () => {
-    const optionsList = [];
-    const currentGameWeek = this.state.currentWeek;
-    for (let i = 1; i < this.state.totalWeeks + 1; i++) {
-      optionsList.push(
-        <OptionsButton
-          weekNumber={i}
-          key={i}
-          isCurrentWeek={currentGameWeek === i}
-        />
-      );
-    }
-    return optionsList;
-  };
-
   // Functions for options
   getGamesForWeek = e => {
     e.preventDefault();
-    const weekNumber = getCurrentGameWeek();
+    const weekNumber = e.target.value;
     this.getListOfGames(parseInt(weekNumber));
   };
 
@@ -99,7 +83,7 @@ class GamesList extends React.Component {
                   id="weeks"
                   onChange={event => this.getGamesForWeek(event)}
                 >
-                  {this.generateOptions()}
+                  <GameWeekOptions totalWeeks="17" explicitWeek={true} />
                 </select>
               </form>
           </div>

@@ -82,13 +82,12 @@
   width: 100%;
 }
 
-/* .awayrecord {
-  margin-left: 5vw;
+.nameNrecord {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-
-.homerecord {
-  margin-left: 5vw;
-} */
 
 .nameNrecord away {
   display: inline-block;
@@ -106,14 +105,6 @@ span {
 .awayrecord {
   margin-left: 0.5rem;
 }
-
-/* .team-container-away {
-  justify-content: flex-start;
-}
-
-.team-container-home {
-  justify-content: flex-end;
-} */
 
 /* ==============  Responsive Changes  ================ */
 /* Extra small devices (portrait phones, less than 576px)

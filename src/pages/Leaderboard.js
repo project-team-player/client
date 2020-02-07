@@ -3,6 +3,7 @@ import axios from "axios";
 import { getCurrentGameWeek } from "../utils/nfl";
 import LeaderboardTable from "../components/LeaderboardTable";
 import WeeklyTable from "../components/WeeklyTable";
+import GameWeekOptions from '../components/GameWeekOptions';
 import "../styles/Leaderboard.css";
 import ReactGA from "react-ga";
 
@@ -83,22 +84,7 @@ class Leaderboard extends React.Component {
               <h2 className="leaderboardtext">{`${weeklytext}`}</h2>
               <div id="weekform">
                 <select onChange={e => this.setState({ week: e.target.value })}>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option selected >11</option>
-                  <option>12</option>
-                  <option>13</option>
-                  <option>14</option>
-                  <option>15</option>
-                  <option>16</option>
+                  <GameWeekOptions totalWeeks="17" />
                 </select>
               </div>
             </div>
